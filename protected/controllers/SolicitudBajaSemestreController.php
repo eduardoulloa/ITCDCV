@@ -1,0 +1,231 @@
+<?php
+
+class SolicitudBajaSemestreController extends Controller
+{
+	/**
+	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
+	 * using two-column layout. See 'protected/views/layouts/column2.php'.
+	 */
+	public $layout='//layouts/column2';
+
+	/**
+	 * @return array action filters
+	 */
+	public function filters()
+	{
+		return array(
+			'accessControl', // perform access control for CRUD operations
+		);
+	}
+
+	/**
+	 * Especifica las reglas de control de acceso.
+	 * This method is used by the 'accessControl' filter.
+	 * @return array access control rules
+	 */
+	public function accessRules()
+	{
+	
+		//arreglo con las acciones de los directores
+		$adminActions=array('index','admin','delete','view_all','view',
+				'solicitudBajaMateria', 'solicitudBajaSemestre',
+				'solicitudCartaRecomendacion', 
+				'solicitudProblemasInscripcion',
+				'solicitudRevalidacion');
+				
+		
+		$criteria = new CDbCriteria(array(
+						'select'=>'nomina',
+						'condition'=>'puesto=\'Director\''));
+						
+		//obtiene todos los directores de carrera
+		$consulta=Empleado::model()->findAll($criteria);
+		
+		//arreglo con todos los directores de carrera
+		$directores = array();
+		
+		foreach($consulta as &$valor){
+			array_push($directores, ($valor->nomina).'');
+		}
+	
+		return array(
+			/*array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('index','view'),
+				'users'=>array('*'),
+			),*/
+			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+				'actions'=>array('index','create','update','view'),
+				'users'=>array('@'),
+			),
+			array('allow', 
+				'actions'=>$adminActions, //acciones de los directores de carrera
+				'users'=>$directores,
+			),
+			array('deny',  // deny all users
+				'users'=>array('*'),
+			),
+		);
+	}
+
+	/**
+	 * Displays a particular model.
+	 * @param integer $id the ID of the model to be displayed
+	 */
+	public function actionView($id)
+	{
+		$this->render('view',array(
+			'model'=>$this->loadModel($id),
+		));
+	}
+
+	/**
+	 * Creates a new model.
+	 * If creation is successful, the browser will be redirected to the 'view' page.
+	 */
+	public function actionCreate()
+	{
+		$model=new SolicitudBajaSemestre;
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['SolicitudBajaSemestre']))
+		{
+			$model->attributes=$_POST['SolicitudBajaSemestre'];
+			$mat = Yii::app()->user->id;
+			$model->setAttribute('matriculaalumno',$mat);
+			$model->setAttribute('anio',date('Y'));
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id));
+		}
+
+		$this->render('create',array(
+			'model'=>$model,
+		));
+	}
+
+	/**
+	 * Updates a particular model.
+	 * If update is successful, the browser will be redirected to the 'view' page.
+	 * @param integer $id the ID of the model to be updated
+	 */
+	public function actionUpdate($id)
+	{
+		$model=$this->loadModel($id);
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['SolicitudBajaSemestre']))
+		{
+			$model->attributes=$_POST['SolicitudBajaSemestre'];
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id));
+		}
+
+		$this->render('update',array(
+			'model'=>$model,
+		));
+	}
+
+	/**
+	 * Deletes a particular model.
+	 * If deletion is successful, the browser will be redirected to the 'admin' page.
+	 * @param integer $id the ID of the model to be deleted
+	 */
+	public function actionDelete($id)
+	{
+		if(Yii::app()->request->isPostRequest)
+		{
+			// we only allow deletion via POST request
+			$this->loadModel($id)->delete();
+
+			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+			if(!isset($_GET['ajax']))
+				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+		}
+		else
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+	}
+
+	/**
+	 * Enlista todos los modelos, dependiendo del rol del usuario.
+	 */
+	public function actionIndex()
+	{
+		$criteria = NULL;
+	
+		if (Yii::app()->user->rol == 'Alumno'){ //el usuario es un alumno
+		$mat = Yii::app()->user->id;
+			$criteria = new CDbCriteria(array( 
+					'condition'=>'status!=\'Terminada\' AND matriculaalumno ='.$mat));
+		}else if(Yii::app()->user->rol == 'Director'){ //el usuario es un director
+			$criteria = new CDbCriteria(array(
+					'condition'=>'status!=\'Terminada\''));
+		}
+		
+		$solicitudes=array();
+		
+		$solicitudes=SolicitudBajaSemestre::model()->findall($criteria);
+		
+		$dataProvider= new CArrayDataProvider(
+				$solicitudes, array(
+					'sort'=> array(
+						'attributes'=> array(
+							'fechahora',
+							),
+						'defaultOrder'=>'fechahora'
+						),
+					'pagination'=> array(
+						'pageSize'=>100,
+						),
+					));
+	
+		
+		$this->render('index',array(
+			'dataProvider'=>$dataProvider,
+		));
+		
+	}
+
+	/**
+	 * Manages all models.
+	 */
+	public function actionAdmin()
+	{
+		$model=new SolicitudBajaSemestre('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['SolicitudBajaSemestre']))
+			$model->attributes=$_GET['SolicitudBajaSemestre'];
+
+		$this->render('admin',array(
+			'model'=>$model,
+		));
+	}
+
+	/**
+	 * Returns the data model based on the primary key given in the GET variable.
+	 * If the data model is not found, an HTTP exception will be raised.
+	 * @param integer the ID of the model to be loaded
+	 */
+	public function loadModel($id)
+	{
+		$model=SolicitudBajaSemestre::model()->findByPk($id);
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+		return $model;
+	}
+
+	/**
+	 * Performs the AJAX validation.
+	 * @param CModel the model to be validated
+	 */
+	protected function performAjaxValidation($model)
+	{
+		if(isset($_POST['ajax']) && $_POST['ajax']==='solicitud-baja-semestre-form')
+		{
+			echo CActiveForm::validate($model);
+			Yii::app()->end();
+		}
+	}
+}
