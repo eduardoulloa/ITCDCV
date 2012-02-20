@@ -25,10 +25,28 @@ class EmpleadoController extends Controller
 	 */
 	public function accessRules()
 	{
+	
+		//Condiciones para buscar al super admin
+		$criteria_super_admin = new CDbCriteria(array(
+								'select'=>'username'));
+		
+		//Query para encontrar al super admin
+		//$consulta_super_admin = Admin::model()->findAllByPk('admin', $criteria_super_admin);
+		$consulta_super_admin = Admin::model()->findAll($criteria_super_admin);
+		
+		$admin = array();
+		
+		
+		//array_push($admin, $consulta_super_admin);
+		
+		foreach($consulta_super_admin as &$valor){
+			array_push($admin, ($valor->username).'');
+		}
+	
 		return array(
 			array('allow', 
 				'actions'=>array('index','view','admin','delete','create','update'),
-				'users'=>array('admin'),
+				'users'=>$admin,
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),

@@ -159,12 +159,50 @@ class AlumnoController extends Controller
 	public function actionIndex()
 	{
 	
-		$dataProvider=new CActiveDataProvider('Alumno', array(
-			'criteria'=>array(
-				'condition'=>'idcarrera='.Yii::app()->user->carrera,
-			),
-		)
-		);
+		if (Yii::app()->user->rol == 'Alumno'){
+			$dataProvider=new CActiveDataProvider('Alumno', array(
+				'criteria'=>array(
+						'condition'=>'idcarrera='.Yii::app()->user->carrera,
+					),
+				)
+			);
+		}else if(Yii::app()->user->rol == 'Admin'){
+			$dataProvider=new CActiveDataProvider('Alumno');
+			
+		}else if(Yii::app()->user->rol == 'Director'){
+		
+			$nomina = Yii::app()->user->id;
+		
+			
+			$criteria_directores = new CDbCriteria(array(
+					'join'=>'JOIN carrera_tiene_empleado AS c ON t.idcarrera = c.idcarrera AND c.nomina = \''.$nomina.'\'',
+					'select'=>'t.matricula AS id',
+					));
+
+			$alumnos_de_directores = Alumno::model()->findall($criteria_directores);
+			
+			//$dataProvider = new CArrayDataProvider ($alumnos_de_directores);
+		
+			//aqui va
+			$dataProvider = new CArrayDataProvider($alumnos_de_directores, array(
+				
+					'sort'=> array(
+							'attributes'=> array(
+								'matricula',
+								),
+							'defaultOrder'=>'matricula'
+							),
+						'pagination'=> array(
+							'pageSize'=>100,
+							),
+							
+						
+						
+						));
+			
+		
+		}
+	
 		
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,

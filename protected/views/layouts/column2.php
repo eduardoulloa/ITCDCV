@@ -36,7 +36,7 @@
 					array('label'=>'Crear empleado', 'url'=>array('empleado/create')),
 					array('label'=>'Crear carrera', 'url'=>array('carrera/create')),
 					);
-			}else if (Yii::app()->user->rol == 'Director'){
+			}else if (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol){
 				$menu = array(
 					array('label'=>'General'),
 					array('label'=>'Boletin informativo', 'url'=>array('boletinInformativo/create')),

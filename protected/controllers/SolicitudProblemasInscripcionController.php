@@ -50,18 +50,60 @@ class SolicitudProblemasInscripcionController extends Controller
 			array_push($directores, ($valor->nomina).'');
 		}
 		
+		$asistente_criteria = new CDbCriteria(array(
+						'select'=>'nomina',
+						'condition'=>'puesto=\'Asistente\' OR puesto=\'Secretaria\''));
+		
+		//Obtiene a todos los asistentes.
+		$consulta_asistente = Empleado::model()->findAll($asistente_criteria);
+		
+		//Arreglo con todos los directores de carrera.
+		$asistentes = array();
+		
+		foreach($consulta_asistente as &$valor){
+			array_push($asistentes, ($valor->nomina).'');
+		}
+		
+		//Acciones del admin.
+		$admin_acciones = array('index','create','update','view','admin','delete');
+		
+		//Condiciones para buscar al super admin
+		$criteria_super_admin = new CDbCriteria(array(
+								'select'=>'username'));
+		
+		//Query para encontrar al super admin
+		//$consulta_super_admin = Admin::model()->findAllByPk('admin', $criteria_super_admin);
+		$consulta_super_admin = Admin::model()->findAll($criteria_super_admin);
+		
+		$admin = array();
+		
+		
+		foreach($consulta_super_admin as &$valor){
+			array_push($admin, ($valor->username).'');
+		}
+		
+		
 		return array(
 			/*array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),
 				'users'=>array('*'),
 			),*/
+			
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('index','create','update','view'),
+				'actions'=>array('index','create','view'),
 				'users'=>array('@'),
 			),
 			array('allow', // acciones de los directores de carrera
 				'actions'=>$adminActions,
 				'users'=>$directores,
+			),
+			array('allow', // Acciones de los admins.
+				'actions'=>$admin_acciones,
+				'users'=>$admin,
+			),
+			array('allow', // acciones de los asistentes de docencia
+				'actions'=>$adminActions,
+				'users'=>$asistentes,
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -156,7 +198,7 @@ class SolicitudProblemasInscripcionController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$criteria = NULL;
+		/*$criteria = NULL;
 	
 		if (Yii::app()->user->rol == 'Alumno'){ //el usuario es un alumno
 		$mat = Yii::app()->user->id;
@@ -182,8 +224,60 @@ class SolicitudProblemasInscripcionController extends Controller
 					'pagination'=> array(
 						'pageSize'=>100,
 						),
-					));
+					));*/
 	
+		
+		if(Yii::app()->user->rol == 'Alumno'){
+		
+			$mat = Yii::app()->user->id;
+			$criteria = new CDbCriteria(array(
+					'condition'=>'matriculaalumno ='.$mat));
+					
+			$solicitudes=SolicitudProblemasInscripcion::model()->findall($criteria);
+			
+			$dataProvider= new CArrayDataProvider(
+					$solicitudes, array(
+						'sort'=> array(
+							'attributes'=> array(
+								'fechahora',
+								),
+							'defaultOrder'=>'fechahora'
+							),
+						'pagination'=> array(
+							'pageSize'=>100,
+							),
+						));
+						
+		}else if (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Asistente' || Yii::app()->user->rol == 'Secretaria'){
+			
+			$nomina = Yii::app()->user->id;
+		
+			
+			$criteria_directores = new CDbCriteria(array(
+					'join'=>'JOIN alumno AS a ON t.matriculaalumno = a.matricula
+					JOIN carrera_tiene_empleado AS c ON a.idcarrera = c.idcarrera AND c.nomina = \''.$nomina.'\'',
+					'condition'=>'status != \'Terminada\'',
+					));
+
+			$solicitudes_para_directores = SolicitudProblemasInscripcion::model()->findall($criteria_directores);
+			
+			$dataProvider = new CArrayDataProvider ($solicitudes_para_directores, array(
+					'sort'=> array(
+							'attributes'=> array(
+								'fechahora',
+								),
+							'defaultOrder'=>'fechahora'
+							),
+						'pagination'=> array(
+							'pageSize'=>100,
+							),
+						
+						));
+	
+		}else if(Yii::app()->user->rol == 'Admin'){
+		
+			$dataProvider = new CActiveDataProvider('SolicitudProblemasInscripcion');
+		}
 		
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,

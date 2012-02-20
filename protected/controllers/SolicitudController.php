@@ -11,53 +11,103 @@ class SolicitudController extends Controller
 	 */
 
 	public function actionIndex(){
-	
-		$dataProvider = NULL;
+
+		if(Yii::app()->user->rol == 'Alumno'){
 		
-		$criteria = NULL;
-		
-		if (Yii::app()->user->rol == 'Alumno'){ //el usuario es un alumno
 			$mat = Yii::app()->user->id;
 			$criteria = new CDbCriteria(array(
-						'condition'=>'status!=\'Terminada\' AND matriculaalumno ='.$mat));
-		}else if (Yii::app()->user->rol == 'Director'){ //el usuario es un director
-			$criteria = new CDbCriteria(array(
-					'condition'=>'status!=\'Terminada\''));
-		}
-
-		// Arreglos para almacenar las diferentes solicitudes.
-		$solicitud1=array();
-		$solicitud2 = array();
-		$solicitud3=array();
-		$solicitud4=array();
-		$solicitud5=array();
+					'condition'=>'matriculaalumno ='.$mat));
+					
+			$solicitud1=SolicitudBajaMateria::model()->findall($criteria);
+			$solicitud2=SolicitudBajaSemestre::model()->findall($criteria);
+			$solicitud3=SolicitudCartaRecomendacion::model()->findall($criteria);
+			$solicitud4=SolicitudProblemasInscripcion::model()->findall($criteria);
+			$solicitud5=SolicitudRevalidacion::model()->findall($criteria);
 		
-		//Se obtienen las diferentes solicitudes.
-		$solicitud1=SolicitudBajaMateria::model()->findall($criteria);
-		$solicitud2=SolicitudBajaSemestre::model()->findall($criteria);
-		$solicitud3=SolicitudCartaRecomendacion::model()->findall($criteria);
-		$solicitud4=SolicitudProblemasInscripcion::model()->findall($criteria);
-		$solicitud5=SolicitudRevalidacion::model()->findall($criteria);
-		
-		$modelArray = array_merge($solicitud1,$solicitud2,$solicitud3,
-				$solicitud4,$solicitud5);
+			$modelArray = array_merge($solicitud1,$solicitud2,$solicitud3,
+					$solicitud4,$solicitud5);
 
-		$dataProvider= new CArrayDataProvider(
-				$modelArray, array(
-					'sort'=> array(
-						'attributes'=> array(
-							'fechahora',
+			$dataProvider= new CArrayDataProvider(
+					$modelArray, array(
+						'sort'=> array(
+							'attributes'=> array(
+								'fechahora',
+								),
+							'defaultOrder'=>'fechahora'
 							),
-						'defaultOrder'=>'fechahora'
-						),
-					'pagination'=> array(
-						'pageSize'=>100,
-						),
+						'pagination'=> array(
+							'pageSize'=>100,
+							),
+						));
+			
+			
+						
+		}else if (Yii::app()->user->rol == 'Director'){
+			
+			$nomina = Yii::app()->user->id;
+		
+			
+			$criteria = new CDbCriteria(array(
+					'join'=>'JOIN alumno AS a ON t.matriculaalumno = a.matricula
+					JOIN carrera_tiene_empleado AS c ON a.idcarrera = c.idcarrera AND c.nomina = \''.$nomina.'\'',
+					'condition'=>'status != \'Terminada\'',
 					));
+
+			
+			$solicitud1=SolicitudBajaMateria::model()->findall($criteria);
+			$solicitud2=SolicitudBajaSemestre::model()->findall($criteria);
+			$solicitud3=SolicitudCartaRecomendacion::model()->findall($criteria);
+			$solicitud4=SolicitudProblemasInscripcion::model()->findall($criteria);
+			$solicitud5=SolicitudRevalidacion::model()->findall($criteria);
+			
+			$modelArray = array_merge($solicitud1,$solicitud2,$solicitud3,
+					$solicitud4,$solicitud5);
+
+			$dataProvider= new CArrayDataProvider(
+					$modelArray, array(
+						'sort'=> array(
+							'attributes'=> array(
+								'fechahora',
+								),
+							'defaultOrder'=>'fechahora'
+							),
+						'pagination'=> array(
+							'pageSize'=>100,
+							),
+						));
+			
+	
+		}else if(Yii::app()->user->rol == 'Admin'){
+			
+			
+			$solicitud1=SolicitudBajaMateria::model()->findall();
+			$solicitud2=SolicitudBajaSemestre::model()->findall();
+			$solicitud3=SolicitudCartaRecomendacion::model()->findall();
+			$solicitud4=SolicitudProblemasInscripcion::model()->findall();
+			$solicitud5=SolicitudRevalidacion::model()->findall();
+			
+			$modelArray = array_merge($solicitud1,$solicitud2,$solicitud3,
+					$solicitud4,$solicitud5);
+
+			$dataProvider= new CArrayDataProvider(
+					$modelArray, array(
+						'sort'=> array(
+							'attributes'=> array(
+								'fechahora',
+								),
+							'defaultOrder'=>'fechahora'
+							),
+						'pagination'=> array(
+							'pageSize'=>100,
+							),
+						));
+		}
 
 		$this->render('index',array(
 			'model'=>$dataProvider,
 		));
+		
+		
 		
 		
 	}
@@ -211,15 +261,55 @@ class SolicitudController extends Controller
 			array_push($directores, ($valor->nomina).'');
 		}
 		
+		$asistente_criteria = new CDbCriteria(array(
+						'select'=>'nomina',
+						'condition'=>'puesto=\'Asistente\' OR puesto=\'Secretaria\''));
+		
+		//Obtiene a todos los asistentes.
+		$consulta_asistente = Empleado::model()->findAll($asistente_criteria);
+		
+		//Arreglo con todos los directores de carrera.
+		$asistentes = array();
+		
+		foreach($consulta_asistente as &$valor){
+			array_push($asistentes, ($valor->nomina).'');
+		}
+		
+		//Condiciones para buscar al super admin
+		$criteria_super_admin = new CDbCriteria(array(
+								'select'=>'username'));
+		
+		//Query para encontrar al super admin
+		//$consulta_super_admin = Admin::model()->findAllByPk('admin', $criteria_super_admin);
+		$consulta_super_admin = Admin::model()->findAll($criteria_super_admin);
+		
+		$admin = array();
+		
+		
+		//array_push($admin, $consulta_super_admin);
+		
+		foreach($consulta_super_admin as &$valor){
+			array_push($admin, ($valor->username).'');
+		}
+		
 		return array(
 			/*
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),
 				'users'=>array('*'),
 			),*/
+			
+			array('deny',  // Negar acceso a los asistentes.
+				'users'=>$asistentes,
+			),
+			
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('index','create','update','lista','view'), //quite index
 				'users'=>array('@'),
+			),
+			array('allow', // Acciones de los admins.
+				'actions'=>array('index','create','update','admin'), 
+				'users'=>$admin,
 			),
 			array('allow', //acciones de los directores de carrera
 				'actions'=>$adminActions,

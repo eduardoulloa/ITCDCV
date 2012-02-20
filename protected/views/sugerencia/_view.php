@@ -9,7 +9,7 @@
 	<br />
 	
 	<?php
-	if (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin'){ //si el usuario es director de carrera debe ver tambien la matricula del alumno
+	if (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin' || Yii::app()->user->rol == 'Asistente'){ //si el usuario es director de carrera debe ver tambien la matricula del alumno
 		echo "<b>";
 		echo CHtml::encode($data->getAttributeLabel('Matricula del Alumno')); 
 		echo ":</b>";

@@ -381,10 +381,31 @@ class BoletinInformativoController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('BoletinInformativo');
+		
+		if(Yii::app()->user->rol == 'Director'){
+			$nomina = Yii::app()->user->id;
+			
+			$criteria = new CDbCriteria(array(
+						'condition'=>'nomina=\''.$nomina.'\''));
+			
+			$carreraTieneEmpleado = CarreraTieneEmpleado::model()->find($criteria);
+			
+
+			$dataProvider = new CActiveDataProvider('BoletinInformativo', array(
+				'criteria'=>array(
+					'condition'=>'idcarrera='.$carreraTieneEmpleado->idcarrera,
+					),
+				));
+			
+		}else if(Yii::app()->user->rol == 'Admin'){
+			$dataProvider = new CActiveDataProvider('BoletinInformativo');
+		}
+
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+				'dataProvider'=>$dataProvider,
 		));
+		
+		
 	}
 
 	/**
