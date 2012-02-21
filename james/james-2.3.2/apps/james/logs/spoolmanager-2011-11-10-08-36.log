@@ -1,0 +1,74 @@
+10/11/11 08:36:31 INFO  spoolmanager: JamesSpoolManager init...
+10/11/11 08:36:31 INFO  spoolmanager: Matcher All instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Mailet PostmasterAlias instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Matcher RelayLimit=30 instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Mailet Null instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Matcher HasMailAttributeWithValue=org.apache.james.infected, true instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Mailet ToProcessor instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Matcher HasMailAttribute=spamChecked instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Mailet ToProcessor instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Matcher All instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Mailet SetMailAttribute instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Matcher SMTPAuthSuccessful instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Mailet ToProcessor instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Matcher InSpammerBlacklist=query.bondedsender.org. instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Mailet ToProcessor instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Matcher InSpammerBlacklist=dnsbl.njabl.org. instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Mailet ToProcessor instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Matcher All instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Mailet ToProcessor instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Processor root instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Matcher All instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Mailet ToRepository instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Processor error instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Matcher SMTPAuthSuccessful instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Mailet SetMimeHeader instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Matcher HasMailAttribute=org.apache.james.SMIMECheckSignature instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Mailet SetMimeHeader instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Matcher RecipientIsLocal instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Mailet LocalDelivery instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Matcher HostIsLocal instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Mailet ToProcessor instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Matcher All instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Mailet RemoteDelivery instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Processor transport instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Matcher All instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Mailet ToRepository instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Processor spam instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Matcher All instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Mailet SetMailAttribute instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Matcher SMTPAuthSuccessful instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Mailet Bounce instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Matcher All instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Mailet Null instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Processor virus instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Matcher All instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Mailet ToRepository instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Processor local-address-error instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Matcher All instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Mailet ToRepository instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Processor relay-denied instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Matcher All instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Mailet DSNBounce instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Processor bounces instantiated.
+10/11/11 08:36:31 INFO  spoolmanager: Spooler Manager uses 10 Thread(s)
+10/11/11 08:36:31 INFO  spoolmanager: Run JamesSpoolManager: Spool Thread #0
+10/11/11 08:36:31 INFO  spoolmanager: Run JamesSpoolManager: Spool Thread #1
+10/11/11 08:36:31 INFO  spoolmanager: Spool=$Proxy5
+10/11/11 08:36:31 INFO  spoolmanager: Run JamesSpoolManager: Spool Thread #4
+10/11/11 08:36:31 INFO  spoolmanager: Spool=$Proxy5
+10/11/11 08:36:31 INFO  spoolmanager: Run JamesSpoolManager: Spool Thread #2
+10/11/11 08:36:31 INFO  spoolmanager: Spool=$Proxy5
+10/11/11 08:36:31 INFO  spoolmanager: Run JamesSpoolManager: Spool Thread #3
+10/11/11 08:36:31 INFO  spoolmanager: Spool=$Proxy5
+10/11/11 08:36:31 INFO  spoolmanager: Run JamesSpoolManager: Spool Thread #5
+10/11/11 08:36:31 INFO  spoolmanager: Spool=$Proxy5
+10/11/11 08:36:31 INFO  spoolmanager: Spool=$Proxy5
+10/11/11 08:36:31 INFO  spoolmanager: Run JamesSpoolManager: Spool Thread #7
+10/11/11 08:36:31 INFO  spoolmanager: Spool=$Proxy5
+10/11/11 08:36:31 INFO  spoolmanager: Run JamesSpoolManager: Spool Thread #9
+10/11/11 08:36:31 INFO  spoolmanager: Spool=$Proxy5
+10/11/11 08:36:31 INFO  spoolmanager: Run JamesSpoolManager: Spool Thread #6
+10/11/11 08:36:31 INFO  spoolmanager: Run JamesSpoolManager: Spool Thread #8
+10/11/11 08:36:31 INFO  spoolmanager: Spool=$Proxy5
+10/11/11 08:36:31 INFO  spoolmanager: Spool=$Proxy5

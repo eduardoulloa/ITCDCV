@@ -1,0 +1,24 @@
+01/11/11 11:25:07 INFO  smtpserver: SMTP Service uses default thread group.
+01/11/11 11:25:07 INFO  smtpserver: SMTP Service is running on: Eddie-VAIO
+01/11/11 11:25:07 INFO  smtpserver: SMTP Service handler hello name is: Eddie-VAIO
+01/11/11 11:25:07 INFO  smtpserver: SMTP Service handler connection timeout is: 360000
+01/11/11 11:25:07 INFO  smtpserver: SMTP Service connection backlog is: 5
+01/11/11 11:25:07 INFO  smtpserver: SMTP Service will allow a maximum of 30 connections.
+01/11/11 11:25:07 INFO  smtpserver: This SMTP server does not require authentication.
+01/11/11 11:25:07 INFO  smtpserver: Authorized addresses: [127.0.0.0/255.0.0.0]
+01/11/11 11:25:07 INFO  smtpserver: No maximum message size is enforced for this server.
+01/11/11 11:25:07 INFO  smtpserver: The idle timeout will be reset every 20480 bytes.
+01/11/11 11:25:07 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.VrfyCmdHandler
+01/11/11 11:25:07 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.AuthCmdHandler
+01/11/11 11:25:07 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.QuitCmdHandler
+01/11/11 11:25:07 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.HelpCmdHandler
+01/11/11 11:25:07 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.HeloCmdHandler
+01/11/11 11:25:07 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.MailCmdHandler
+01/11/11 11:25:07 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.DataCmdHandler
+01/11/11 11:25:07 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.RcptCmdHandler
+01/11/11 11:25:07 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.EhloCmdHandler
+01/11/11 11:25:07 INFO  smtpserver: Added MessageHandler: org.apache.james.smtpserver.SendMailHandler
+01/11/11 11:25:07 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.NoopCmdHandler
+01/11/11 11:25:07 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.ExpnCmdHandler
+01/11/11 11:25:07 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.RsetCmdHandler
+01/11/11 11:25:07 INFO  smtpserver: SMTP Service started plain:25

@@ -1,0 +1,9 @@
+24/11/11 09:47:58 INFO  James: JAMES init...
+24/11/11 09:47:58 INFO  James: Local host is: Eddie-VAIO
+24/11/11 09:47:58 INFO  James: Handling mail for: 0:0:0:0:0:0:0:1
+24/11/11 09:47:58 INFO  James: Handling mail for: eddie-vaio
+24/11/11 09:47:58 INFO  James: Handling mail for: 127.0.0.1
+24/11/11 09:47:58 INFO  James: Handling mail for: localhost
+24/11/11 09:47:58 INFO  James: Local users repository opened
+24/11/11 09:47:58 INFO  James: Private Repository LocalInbox opened
+24/11/11 09:47:58 INFO  James: JAMES ...init end

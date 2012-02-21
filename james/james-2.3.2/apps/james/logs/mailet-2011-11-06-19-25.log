@@ -1,0 +1,4 @@
+06/11/11 19:25:54 INFO  James.Mailet: RemoteDelivery: maxRetries is larger than total number of attempts specified. Increasing last delayTime with 19 attempts 
+06/11/11 19:25:54 INFO  James.Mailet: RemoteDelivery: Delay of 21600000 msecs is now attempted: 20 times
+06/11/11 19:30:34 INFO  James.Mailet: ToRepository: Storing mail Mail1320629434630-0 in file://var/mail/address-error/
+06/11/11 19:35:57 INFO  James.Mailet: ToRepository: Storing mail Mail1320629747413-1 in file://var/mail/address-error/

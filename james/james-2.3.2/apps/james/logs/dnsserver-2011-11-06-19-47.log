@@ -1,0 +1,3 @@
+06/11/11 19:47:58 INFO  dnsserver: Autodiscovery is enabled - trying to discover your system's DNS Servers
+06/11/11 19:47:58 INFO  dnsserver: Adding autodiscovered server 192.168.1.254
+06/11/11 19:47:58 INFO  dnsserver: DNS Server is: 192.168.1.254

@@ -1,0 +1,30 @@
+15/02/12 08:57:59 INFO  smtpserver: SMTP Service uses default thread group.
+15/02/12 08:57:59 INFO  smtpserver: SMTP Service is running on: Eddie-VAIO
+15/02/12 08:57:59 INFO  smtpserver: SMTP Service handler hello name is: Eddie-VAIO
+15/02/12 08:57:59 INFO  smtpserver: SMTP Service handler connection timeout is: 360000
+15/02/12 08:57:59 INFO  smtpserver: SMTP Service connection backlog is: 5
+15/02/12 08:57:59 INFO  smtpserver: SMTP Service will allow a maximum of 30 connections.
+15/02/12 08:57:59 INFO  smtpserver: This SMTP server does not require authentication.
+15/02/12 08:57:59 INFO  smtpserver: Authorized addresses: [127.0.0.0/255.0.0.0]
+15/02/12 08:57:59 INFO  smtpserver: No maximum message size is enforced for this server.
+15/02/12 08:57:59 INFO  smtpserver: The idle timeout will be reset every 20480 bytes.
+15/02/12 08:57:59 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.VrfyCmdHandler
+15/02/12 08:57:59 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.AuthCmdHandler
+15/02/12 08:57:59 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.QuitCmdHandler
+15/02/12 08:57:59 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.HelpCmdHandler
+15/02/12 08:57:59 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.HeloCmdHandler
+15/02/12 08:57:59 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.MailCmdHandler
+15/02/12 08:57:59 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.DataCmdHandler
+15/02/12 08:57:59 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.RcptCmdHandler
+15/02/12 08:57:59 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.EhloCmdHandler
+15/02/12 08:57:59 INFO  smtpserver: Added MessageHandler: org.apache.james.smtpserver.SendMailHandler
+15/02/12 08:57:59 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.NoopCmdHandler
+15/02/12 08:57:59 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.ExpnCmdHandler
+15/02/12 08:57:59 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.RsetCmdHandler
+15/02/12 08:57:59 INFO  smtpserver: SMTP Service started plain:25
+15/02/12 08:58:11 INFO  smtpserver: Connection from 127.0.0.1 (127.0.0.1)
+15/02/12 08:58:11 INFO  smtpserver: Successfully spooled mail Mail1329317891044-0 from dcv-noreply@itesm.mx on 127.0.0.1 for [A00100666@itesm.mx, A00666666@itesm.mx]
+15/02/12 09:00:38 INFO  smtpserver: Connection from 127.0.0.1 (127.0.0.1)
+15/02/12 09:00:38 INFO  smtpserver: Successfully spooled mail Mail1329318038357-1 from dcv-noreply@itesm.mx on 127.0.0.1 for [A00796570@itesm.mx]
+15/02/12 09:19:49 INFO  smtpserver: Connection from 127.0.0.1 (127.0.0.1)
+15/02/12 09:19:49 INFO  smtpserver: Successfully spooled mail Mail1329319189266-2 from dcv-noreply@itesm.mx on 127.0.0.1 for [A00796570@itesm.mx]

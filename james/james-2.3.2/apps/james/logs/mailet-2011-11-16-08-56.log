@@ -1,0 +1,16 @@
+16/11/11 08:56:21 INFO  James.Mailet: RemoteDelivery: maxRetries is larger than total number of attempts specified. Increasing last delayTime with 19 attempts 
+16/11/11 08:56:21 INFO  James.Mailet: RemoteDelivery: Delay of 21600000 msecs is now attempted: 20 times
+16/11/11 09:11:28 INFO  James.Mailet: RemoteDelivery: Attempting delivery of Mail1321456287905-0-to-gmail.com to host gmail-smtp-in.l.google.com. at 74.125.47.26 for addresses [ulloamagallanes@gmail.com, eulloamagallanes@gmail.com]
+16/11/11 09:11:32 INFO  James.Mailet: RemoteDelivery: Mail (Mail1321456287905-0-to-gmail.com) sent successfully to gmail-smtp-in.l.google.com. at 74.125.47.26 for [ulloamagallanes@gmail.com, eulloamagallanes@gmail.com]
+16/11/11 09:11:32 INFO  James.Mailet: RemoteDelivery: Attempting delivery of Mail1321456287905-0-to-hotmail.com to host mx4.hotmail.com. at 65.55.92.168 for addresses [ediulloa@hotmail.com]
+16/11/11 09:11:33 INFO  James.Mailet: RemoteDelivery: Mail (Mail1321456287905-0-to-hotmail.com) sent successfully to mx4.hotmail.com. at 65.55.92.168 for [ediulloa@hotmail.com]
+16/11/11 09:11:33 INFO  James.Mailet: RemoteDelivery: Attempting delivery of Mail1321456287905-0-to-ymail.com to host mta2.am0.yahoodns.net. at 67.195.168.31 for addresses [eduardo.ulloa@ymail.com]
+16/11/11 09:11:39 INFO  James.Mailet: RemoteDelivery: Mail (Mail1321456287905-0-to-ymail.com) sent successfully to mta2.am0.yahoodns.net. at 67.195.168.31 for [eduardo.ulloa@ymail.com]
+16/11/11 09:19:02 INFO  James.Mailet: RemoteDelivery: Attempting delivery of Mail1321456742640-1-to-itesm.mx to host as.itesm.mx. at 10.2.18.232 for addresses [A00796570@itesm.mx]
+16/11/11 09:19:02 INFO  James.Mailet: RemoteDelivery: Mail (Mail1321456742640-1-to-itesm.mx) sent successfully to as.itesm.mx. at 10.2.18.232 for [A00796570@itesm.mx]
+16/11/11 09:51:01 INFO  James.Mailet: RemoteDelivery: Attempting delivery of Mail1321458661487-2-to-gmail.com to host gmail-smtp-in.l.google.com. at 74.125.47.26 for addresses [eulloamagallanes@gmail.com]
+16/11/11 09:51:02 INFO  James.Mailet: RemoteDelivery: Mail (Mail1321458661487-2-to-gmail.com) sent successfully to gmail-smtp-in.l.google.com. at 74.125.47.26 for [eulloamagallanes@gmail.com]
+16/11/11 14:00:04 INFO  James.Mailet: RemoteDelivery: Attempting delivery of Mail1321473604545-3-to-gmail.com to host gmail-smtp-in.l.google.com. at 74.125.47.27 for addresses [eulloamagallanes@gmail.com]
+16/11/11 14:00:05 INFO  James.Mailet: RemoteDelivery: Mail (Mail1321473604545-3-to-gmail.com) sent successfully to gmail-smtp-in.l.google.com. at 74.125.47.27 for [eulloamagallanes@gmail.com]
+16/11/11 14:00:54 INFO  James.Mailet: RemoteDelivery: Attempting delivery of Mail1321473650736-4-to-itesm.mx to host as2.itesm.mx. at 10.2.18.233 for addresses [A00796570@itesm.mx]
+16/11/11 14:00:54 INFO  James.Mailet: RemoteDelivery: Mail (Mail1321473650736-4-to-itesm.mx) sent successfully to as2.itesm.mx. at 10.2.18.233 for [A00796570@itesm.mx]

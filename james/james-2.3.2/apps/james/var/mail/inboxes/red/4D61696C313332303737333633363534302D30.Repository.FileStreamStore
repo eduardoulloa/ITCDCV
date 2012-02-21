@@ -1,0 +1,65 @@
+Return-Path: <>
+Delivered-To: red@localhost
+Date: Tue, 8 Nov 2011 11:33:56 -0600 (CST)
+From: postmaster@localhost
+To: red@localhost
+Message-ID: <1144970309.1.1320773636500.JavaMail.Eddie@Eddie-VAIO>
+In-Reply-To: <332105300.0.1320773631992.JavaMail.red@localhost>
+Subject: Re:Testing blue from red
+MIME-Version: 1.0
+Content-Type: multipart/report; 
+	boundary="----=_Part_0_1478766580.1320773636470"; 
+	report-type=delivery-status
+
+------=_Part_0_1478766580.1320773636470
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+
+Hi. This is the James mail server at Eddie-VAIO.
+I'm afraid I wasn't able to deliver your message to the following addresses.
+This is a permanent error; I've given up. Sorry it didn't work out.  Below
+I include the list of recipients and the reason why I was unable to deliver
+your message.
+
+Failed recipient(s):
+a00796570@itesm.mx
+
+Error message:
+553 #5.1.8 Domain of sender address <red@localhost> does not resolve
+
+
+------=_Part_0_1478766580.1320773636470
+Content-Type: message/delivery-status; name=status.dat
+Content-Transfer-Encoding: 7bit
+Content-Description: Delivery Status Notification
+Content-Disposition: attachment; filename=status.dat
+
+Reporting-MTA: dns; Eddie-VAIO
+Received-From-MTA: dns; 127.0.0.1
+
+Final-Recipient: rfc822; a00796570@itesm.mx
+Action: failed
+Status: 5.1.8
+Diagnostic-Code: smtp; 553 #5.1.8 Domain of sender address <red@localhost> does not resolve
+Last-Attempt-Date: Tue, 8 Nov 2011 11:33:52 -0600 (CST)
+
+------=_Part_0_1478766580.1320773636470
+Content-Type: message/rfc822; name="Testing blue from red"
+Content-Disposition: Attachment; filename="Testing blue from red"
+
+Received: from 127.0.0.1 ([127.0.0.1])
+          by Eddie-VAIO (JAMES SMTP Server 2.3.2) with SMTP ID 177
+          for <a00796570@itesm.mx>;
+          Tue, 8 Nov 2011 11:33:52 -0600 (CST)
+Date: Tue, 8 Nov 2011 11:33:52 -0600 (CST)
+From: red@localhost
+To: a00796570@itesm.mx
+Message-ID: <332105300.0.1320773631992.JavaMail.red@localhost>
+Subject: Testing blue from red
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+
+Good Morning sir, it's a pleasure! Nice to meet u, i was starting to consider that u should work for us! give it a try.
+
+------=_Part_0_1478766580.1320773636470--

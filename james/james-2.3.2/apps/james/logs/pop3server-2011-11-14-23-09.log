@@ -1,0 +1,8 @@
+14/11/11 23:09:19 INFO  pop3server: POP3 Service uses default thread group.
+14/11/11 23:09:19 INFO  pop3server: POP3 Service is running on: Eddie-VAIO
+14/11/11 23:09:19 INFO  pop3server: POP3 Service handler hello name is: Eddie-VAIO
+14/11/11 23:09:19 INFO  pop3server: POP3 Service handler connection timeout is: 120000
+14/11/11 23:09:19 INFO  pop3server: POP3 Service connection backlog is: 5
+14/11/11 23:09:19 INFO  pop3server: POP3 Service will allow a maximum of 30 connections.
+14/11/11 23:09:19 INFO  pop3server: The idle timeout will be reset every 20480 bytes.
+14/11/11 23:09:19 INFO  pop3server: POP3 Service started plain:110

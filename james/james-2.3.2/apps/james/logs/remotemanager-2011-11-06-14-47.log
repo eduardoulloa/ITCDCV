@@ -1,0 +1,13 @@
+06/11/11 14:47:08 INFO  remotemanager: Remote Manager Service uses default thread group.
+06/11/11 14:47:08 INFO  remotemanager: Remote Manager Service is running on: Eddie-VAIO
+06/11/11 14:47:08 INFO  remotemanager: Remote Manager Service handler hello name is: Eddie-VAIO
+06/11/11 14:47:08 INFO  remotemanager: Remote Manager Service handler connection timeout is: 60000
+06/11/11 14:47:08 INFO  remotemanager: Remote Manager Service connection backlog is: 5
+06/11/11 14:47:08 INFO  remotemanager: Remote Manager Service will allow a maximum of 30 connections.
+06/11/11 14:47:08 INFO  remotemanager: Remote Manager Service started plain:4555
+06/11/11 18:31:39 INFO  remotemanager: Access from 0:0:0:0:0:0:0:1(0:0:0:0:0:0:0:1)
+06/11/11 18:31:44 INFO  remotemanager: Login for root successful
+06/11/11 18:31:48 INFO  remotemanager: Logout for root.
+06/11/11 18:47:18 INFO  remotemanager: Access from 0:0:0:0:0:0:0:1(0:0:0:0:0:0:0:1)
+06/11/11 18:47:21 INFO  remotemanager: Login for root successful
+06/11/11 18:47:23 INFO  remotemanager: Logout for root.

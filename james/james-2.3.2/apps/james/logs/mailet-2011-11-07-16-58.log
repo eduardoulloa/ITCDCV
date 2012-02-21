@@ -1,0 +1,26 @@
+07/11/11 16:58:22 INFO  James.Mailet: RemoteDelivery: maxRetries is larger than total number of attempts specified. Increasing last delayTime with 19 attempts 
+07/11/11 16:58:22 INFO  James.Mailet: RemoteDelivery: Delay of 21600000 msecs is now attempted: 20 times
+07/11/11 16:59:04 INFO  James.Mailet: RemoteDelivery: Attempting delivery of Mail1320706298193-0-to-gmail.com to host gmail-smtp-in.l.google.com. at 74.125.45.27 for addresses [ulloamagallanes@gmail.com]
+07/11/11 16:59:25 INFO  James.Mailet: RemoteDelivery: Could not connect to SMTP host: 74.125.45.27, port: 25
+07/11/11 16:59:35 INFO  James.Mailet: RemoteDelivery: Attempting delivery of Mail1320706298193-0-to-gmail.com to host alt1.gmail-smtp-in.l.google.com. at 74.125.113.27 for addresses [ulloamagallanes@gmail.com]
+07/11/11 16:59:56 INFO  James.Mailet: RemoteDelivery: Could not connect to SMTP host: 74.125.113.27, port: 25
+07/11/11 17:00:01 INFO  James.Mailet: RemoteDelivery: Attempting delivery of Mail1320706298193-0-to-gmail.com to host alt2.gmail-smtp-in.l.google.com. at 209.85.143.27 for addresses [ulloamagallanes@gmail.com]
+07/11/11 17:00:22 INFO  James.Mailet: RemoteDelivery: Could not connect to SMTP host: 209.85.143.27, port: 25
+07/11/11 17:00:31 INFO  James.Mailet: RemoteDelivery: Attempting delivery of Mail1320706298193-0-to-gmail.com to host alt3.gmail-smtp-in.l.google.com. at 209.85.227.27 for addresses [ulloamagallanes@gmail.com]
+07/11/11 17:00:52 INFO  James.Mailet: RemoteDelivery: Could not connect to SMTP host: 209.85.227.27, port: 25
+07/11/11 17:01:07 INFO  James.Mailet: RemoteDelivery: Attempting delivery of Mail1320706298193-0-to-gmail.com to host alt4.gmail-smtp-in.l.google.com. at 74.125.79.27 for addresses [ulloamagallanes@gmail.com]
+07/11/11 17:01:28 INFO  James.Mailet: RemoteDelivery: Could not connect to SMTP host: 74.125.79.27, port: 25
+07/11/11 17:01:28 INFO  James.Mailet: RemoteDelivery: Temporary exception delivering mail (Mail1320706298193-0-to-gmail.com: 
+07/11/11 17:01:28 INFO  James.Mailet: RemoteDelivery: Storing message Mail1320706298193-0-to-gmail.com into outgoing after 1 retries
+07/11/11 17:01:28 INFO  James.Mailet: RemoteDelivery: Attempting delivery of Mail1320706816569-0-to-gmail.com to host gmail-smtp-in.l.google.com. at 74.125.45.27 for addresses [ulloamagallanes@gmail.com]
+07/11/11 17:01:49 INFO  James.Mailet: RemoteDelivery: Could not connect to SMTP host: 74.125.45.27, port: 25
+07/11/11 17:02:04 INFO  James.Mailet: RemoteDelivery: Attempting delivery of Mail1320706816569-0-to-gmail.com to host alt1.gmail-smtp-in.l.google.com. at 74.125.113.27 for addresses [ulloamagallanes@gmail.com]
+07/11/11 17:02:25 INFO  James.Mailet: RemoteDelivery: Could not connect to SMTP host: 74.125.113.27, port: 25
+07/11/11 17:02:32 INFO  James.Mailet: RemoteDelivery: Attempting delivery of Mail1320706816569-0-to-gmail.com to host alt2.gmail-smtp-in.l.google.com. at 209.85.143.27 for addresses [ulloamagallanes@gmail.com]
+07/11/11 17:02:53 INFO  James.Mailet: RemoteDelivery: Could not connect to SMTP host: 209.85.143.27, port: 25
+07/11/11 17:02:53 INFO  James.Mailet: RemoteDelivery: Attempting delivery of Mail1320706816569-0-to-gmail.com to host alt3.gmail-smtp-in.l.google.com. at 209.85.227.27 for addresses [ulloamagallanes@gmail.com]
+07/11/11 17:03:14 INFO  James.Mailet: RemoteDelivery: Could not connect to SMTP host: 209.85.227.27, port: 25
+07/11/11 17:03:14 INFO  James.Mailet: RemoteDelivery: Attempting delivery of Mail1320706816569-0-to-gmail.com to host alt4.gmail-smtp-in.l.google.com. at 74.125.79.27 for addresses [ulloamagallanes@gmail.com]
+07/11/11 17:03:35 INFO  James.Mailet: RemoteDelivery: Could not connect to SMTP host: 74.125.79.27, port: 25
+07/11/11 17:03:35 INFO  James.Mailet: RemoteDelivery: Temporary exception delivering mail (Mail1320706816569-0-to-gmail.com: 
+07/11/11 17:03:35 INFO  James.Mailet: RemoteDelivery: Storing message Mail1320706816569-0-to-gmail.com into outgoing after 0 retries

@@ -1,0 +1,22 @@
+22/11/11 23:25:29 INFO  spoolmanager: JamesSpoolManager dispose...
+22/11/11 23:25:30 INFO  spoolmanager: Interrupted JamesSpoolManager: Spool Thread #9
+22/11/11 23:25:30 INFO  spoolmanager: Stop JamesSpoolManager: Spool Thread #9
+22/11/11 23:25:30 INFO  spoolmanager: Interrupted JamesSpoolManager: Spool Thread #1
+22/11/11 23:25:30 INFO  spoolmanager: Stop JamesSpoolManager: Spool Thread #1
+22/11/11 23:25:30 INFO  spoolmanager: Interrupted JamesSpoolManager: Spool Thread #0
+22/11/11 23:25:30 INFO  spoolmanager: Stop JamesSpoolManager: Spool Thread #0
+22/11/11 23:25:30 INFO  spoolmanager: Interrupted JamesSpoolManager: Spool Thread #7
+22/11/11 23:25:30 INFO  spoolmanager: Stop JamesSpoolManager: Spool Thread #7
+22/11/11 23:25:30 INFO  spoolmanager: Interrupted JamesSpoolManager: Spool Thread #4
+22/11/11 23:25:30 INFO  spoolmanager: Stop JamesSpoolManager: Spool Thread #4
+22/11/11 23:25:30 INFO  spoolmanager: Interrupted JamesSpoolManager: Spool Thread #8
+22/11/11 23:25:30 INFO  spoolmanager: Stop JamesSpoolManager: Spool Thread #8
+22/11/11 23:25:30 INFO  spoolmanager: Interrupted JamesSpoolManager: Spool Thread #6
+22/11/11 23:25:30 INFO  spoolmanager: Stop JamesSpoolManager: Spool Thread #6
+22/11/11 23:25:30 INFO  spoolmanager: Interrupted JamesSpoolManager: Spool Thread #3
+22/11/11 23:25:30 INFO  spoolmanager: Stop JamesSpoolManager: Spool Thread #3
+22/11/11 23:25:30 INFO  spoolmanager: Interrupted JamesSpoolManager: Spool Thread #2
+22/11/11 23:25:30 INFO  spoolmanager: Stop JamesSpoolManager: Spool Thread #2
+22/11/11 23:25:30 INFO  spoolmanager: Interrupted JamesSpoolManager: Spool Thread #5
+22/11/11 23:25:30 INFO  spoolmanager: Stop JamesSpoolManager: Spool Thread #5
+22/11/11 23:25:31 INFO  spoolmanager: JamesSpoolManager thread shutdown completed.

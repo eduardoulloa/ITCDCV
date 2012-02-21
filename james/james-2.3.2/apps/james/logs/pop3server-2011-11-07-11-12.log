@@ -1,0 +1,32 @@
+07/11/11 11:12:07 INFO  pop3server: POP3 Service uses default thread group.
+07/11/11 11:12:07 INFO  pop3server: POP3 Service is running on: Eddie-VAIO
+07/11/11 11:12:07 INFO  pop3server: POP3 Service handler hello name is: Eddie-VAIO
+07/11/11 11:12:07 INFO  pop3server: POP3 Service handler connection timeout is: 120000
+07/11/11 11:12:07 INFO  pop3server: POP3 Service connection backlog is: 5
+07/11/11 11:12:07 INFO  pop3server: POP3 Service will allow a maximum of 30 connections.
+07/11/11 11:12:07 INFO  pop3server: The idle timeout will be reset every 20480 bytes.
+07/11/11 11:12:07 INFO  pop3server: POP3 Service started plain:110
+07/11/11 12:13:14 INFO  pop3server: Connection from 127.0.0.1 (127.0.0.1) 
+07/11/11 12:13:14 INFO  pop3server: Connection for red from 127.0.0.1 (127.0.0.1) closed.
+07/11/11 12:13:14 INFO  pop3server: Connection from 127.0.0.1 (127.0.0.1) 
+07/11/11 12:13:14 INFO  pop3server: Connection for green from 127.0.0.1 (127.0.0.1) closed.
+07/11/11 12:17:27 INFO  pop3server: Connection from 127.0.0.1 (127.0.0.1) 
+07/11/11 12:17:27 INFO  pop3server: Connection for red from 127.0.0.1 (127.0.0.1) closed.
+07/11/11 12:17:27 INFO  pop3server: Connection from 127.0.0.1 (127.0.0.1) 
+07/11/11 12:17:27 INFO  pop3server: Connection for green from 127.0.0.1 (127.0.0.1) closed.
+07/11/11 12:55:02 INFO  pop3server: Connection from 127.0.0.1 (127.0.0.1) 
+07/11/11 12:55:02 INFO  pop3server: Connection for red from 127.0.0.1 (127.0.0.1) closed.
+07/11/11 12:55:02 INFO  pop3server: Connection from 127.0.0.1 (127.0.0.1) 
+07/11/11 12:55:02 INFO  pop3server: Connection for green from 127.0.0.1 (127.0.0.1) closed.
+07/11/11 12:58:39 INFO  pop3server: Connection from 127.0.0.1 (127.0.0.1) 
+07/11/11 12:58:39 INFO  pop3server: Connection for red from 127.0.0.1 (127.0.0.1) closed.
+07/11/11 12:58:39 INFO  pop3server: Connection from 127.0.0.1 (127.0.0.1) 
+07/11/11 12:58:39 INFO  pop3server: Connection for green from 127.0.0.1 (127.0.0.1) closed.
+07/11/11 12:59:03 INFO  pop3server: Connection from 127.0.0.1 (127.0.0.1) 
+07/11/11 12:59:03 INFO  pop3server: Connection for red from 127.0.0.1 (127.0.0.1) closed.
+07/11/11 12:59:03 INFO  pop3server: Connection from 127.0.0.1 (127.0.0.1) 
+07/11/11 12:59:03 INFO  pop3server: Connection for green from 127.0.0.1 (127.0.0.1) closed.
+07/11/11 12:59:03 INFO  pop3server: Connection from 127.0.0.1 (127.0.0.1) 
+07/11/11 12:59:03 INFO  pop3server: Connection for blue from 127.0.0.1 (127.0.0.1) closed.
+07/11/11 12:59:04 INFO  pop3server: Connection from 127.0.0.1 (127.0.0.1) 
+07/11/11 12:59:04 INFO  pop3server: Connection for blue from 127.0.0.1 (127.0.0.1) closed.

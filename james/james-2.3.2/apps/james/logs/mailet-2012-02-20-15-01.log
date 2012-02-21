@@ -1,0 +1,6 @@
+20/02/12 15:01:17 INFO  James.Mailet: RemoteDelivery: maxRetries is larger than total number of attempts specified. Increasing last delayTime with 19 attempts 
+20/02/12 15:01:17 INFO  James.Mailet: RemoteDelivery: Delay of 21600000 msecs is now attempted: 20 times
+20/02/12 15:02:56 INFO  James.Mailet: RemoteDelivery: Attempting delivery of Mail1329771775197-0-to-gmail.com to host gmail-smtp-in.l.google.com. at 74.125.93.27 for addresses [eulloamagallanes@gmail.com]
+20/02/12 15:02:58 INFO  James.Mailet: RemoteDelivery: Mail (Mail1329771775197-0-to-gmail.com) sent successfully to gmail-smtp-in.l.google.com. at 74.125.93.27 for [eulloamagallanes@gmail.com]
+20/02/12 15:02:58 INFO  James.Mailet: RemoteDelivery: Attempting delivery of Mail1329771775197-0-to-hotmail.com to host mx4.hotmail.com. at 65.55.37.120 for addresses [ediulloa@hotmail.com]
+20/02/12 15:02:59 INFO  James.Mailet: RemoteDelivery: Mail (Mail1329771775197-0-to-hotmail.com) sent successfully to mx4.hotmail.com. at 65.55.37.120 for [ediulloa@hotmail.com]
