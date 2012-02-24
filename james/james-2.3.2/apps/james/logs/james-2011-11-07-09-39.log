@@ -1,9 +1,0 @@
-07/11/11 09:39:30 INFO  James: JAMES init...
-07/11/11 09:39:30 INFO  James: Local host is: Eddie-VAIO
-07/11/11 09:39:33 ERROR James: Cannot get IP address(es) for eddieman.com
-07/11/11 09:39:33 INFO  James: Handling mail for: eddieman.com
-07/11/11 09:39:33 INFO  James: Handling mail for: eddie-vaio
-07/11/11 09:39:33 WARN  James: The specified postmaster address ( postmaster@localhost ) is not a local address.  This is not necessarily a problem, but it does mean that emails addressed to the postmaster will be routed to another server.  For some configurations this may cause problems.
-07/11/11 09:39:33 INFO  James: Local users repository opened
-07/11/11 09:39:33 INFO  James: Private Repository LocalInbox opened
-07/11/11 09:39:33 INFO  James: JAMES ...init end

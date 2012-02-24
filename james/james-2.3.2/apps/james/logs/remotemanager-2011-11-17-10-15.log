@@ -1,7 +1,0 @@
-17/11/11 10:15:34 INFO  remotemanager: Remote Manager Service uses default thread group.
-17/11/11 10:15:34 INFO  remotemanager: Remote Manager Service is running on: Eddie-VAIO
-17/11/11 10:15:34 INFO  remotemanager: Remote Manager Service handler hello name is: Eddie-VAIO
-17/11/11 10:15:34 INFO  remotemanager: Remote Manager Service handler connection timeout is: 60000
-17/11/11 10:15:34 INFO  remotemanager: Remote Manager Service connection backlog is: 5
-17/11/11 10:15:34 INFO  remotemanager: Remote Manager Service will allow a maximum of 30 connections.
-17/11/11 10:15:34 INFO  remotemanager: Remote Manager Service started plain:4555
