@@ -1,7 +1,0 @@
-06/12/11 09:24:20 INFO  nntpserver: NNTP Service uses default thread group.
-06/12/11 09:24:20 INFO  nntpserver: NNTP Service is running on: Eddie-VAIO
-06/12/11 09:24:20 INFO  nntpserver: NNTP Service handler hello name is: Eddie-VAIO
-06/12/11 09:24:20 INFO  nntpserver: NNTP Service handler connection timeout is: 120000
-06/12/11 09:24:20 INFO  nntpserver: NNTP Service connection backlog is: 5
-06/12/11 09:24:20 INFO  nntpserver: NNTP Service will allow a maximum of 30 connections.
-06/12/11 09:24:20 INFO  nntpserver: NNTP Service started plain:119

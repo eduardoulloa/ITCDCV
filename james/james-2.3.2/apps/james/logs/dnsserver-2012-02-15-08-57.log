@@ -1,8 +1,0 @@
-15/02/12 08:57:58 INFO  dnsserver: Autodiscovery is enabled - trying to discover your system's DNS Servers
-15/02/12 08:57:58 INFO  dnsserver: Adding autodiscovered server 10.18.6.5
-15/02/12 08:57:58 INFO  dnsserver: Adding autodiscovered server 10.18.6.6
-15/02/12 08:57:58 INFO  dnsserver: Adding autodiscovered server 10.0.2.2
-15/02/12 08:57:58 INFO  dnsserver: DNS Server is: 10.18.6.5
-15/02/12 08:57:58 INFO  dnsserver: DNS Server is: 10.18.6.6
-15/02/12 08:57:58 INFO  dnsserver: DNS Server is: 10.0.2.2
-15/02/12 08:57:58 INFO  dnsserver: DNS Server is: 192.168.1.254

@@ -1,8 +1,0 @@
-06/12/11 09:24:20 INFO  James.Mailet: RemoteDelivery: maxRetries is larger than total number of attempts specified. Increasing last delayTime with 19 attempts 
-06/12/11 09:24:20 INFO  James.Mailet: RemoteDelivery: Delay of 21600000 msecs is now attempted: 20 times
-06/12/11 09:24:24 INFO  James.Mailet: RemoteDelivery: Attempting delivery of Mail1323185062968-0-to-itesm.mx to host as3.itesm.mx. at 10.2.18.234 for addresses [A00796570@itesm.mx]
-06/12/11 09:24:24 INFO  James.Mailet: RemoteDelivery: Mail (Mail1323185062968-0-to-itesm.mx) sent successfully to as3.itesm.mx. at 10.2.18.234 for [A00796570@itesm.mx]
-06/12/11 09:24:24 INFO  James.Mailet: RemoteDelivery: Attempting delivery of Mail1323185063320-1-to-gmail.com to host gmail-smtp-in.l.google.com. at 74.125.79.27 for addresses [eulloamagallanes@gmail.com]
-06/12/11 09:24:25 INFO  James.Mailet: RemoteDelivery: Mail (Mail1323185063320-1-to-gmail.com) sent successfully to gmail-smtp-in.l.google.com. at 74.125.79.27 for [eulloamagallanes@gmail.com]
-06/12/11 09:24:25 INFO  James.Mailet: RemoteDelivery: Attempting delivery of Mail1323185063320-1-to-hotmail.com to host mx2.hotmail.com. at 65.55.37.104 for addresses [ediulloa@hotmail.com]
-06/12/11 09:24:26 INFO  James.Mailet: RemoteDelivery: Mail (Mail1323185063320-1-to-hotmail.com) sent successfully to mx2.hotmail.com. at 65.55.37.104 for [ediulloa@hotmail.com]
