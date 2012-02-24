@@ -20,39 +20,81 @@
 			//Si es alumno
 			if (Yii::app()->user->rol == 'Alumno'){
 				$menu = array(
+						array('label'=>'General'),
 						array('label'=>'Reportar Problemas de Inscripcion', 'url'=>array('solicitudProblemasInscripcion/create')),
-						array('label'=>'Solicitud de Baja de Materias', 'url'=>array('solicitudBajaMateria/create')),
-						array('label'=>'Solicitud de Baja de Semestre', 'url'=>array('solicitudBajaSemestre/create')),
-						array('label'=>'Solicitud de Revalidacion', 'url'=>array('solicitudRevalidacion/create')),
-						array('label'=>'Carta de Recomendacion', 'url'=>array('solicitudCartaRecomendacion/create')),
-						array('label'=>'Sugerencias', 'url'=>array('sugerencia/create')),
+						array('label'=>'Ver Reportes de Problemas de Inscripcion', 'url'=>array('solicitudProblemasInscripcion/index')),
+						array('label'=>''),
+						array('label'=>''),
+						array('label'=>'Escolar'),
+						array('label'=>'Crear Solicitud de Baja de Materias', 'url'=>array('solicitudBajaMateria/create')),
+						array('label'=>'Crear Solicitud de Baja de Semestre', 'url'=>array('solicitudBajaSemestre/create')),
+						array('label'=>'Crear Solicitud de Revalidacion de Materias', 'url'=>array('solicitudRevalidacion/create')),
+						array('label'=>'Crear Solicitud de Carta de Recomendacion', 'url'=>array('solicitudCartaRecomendacion/create')),
+						array('label'=>'Crear Sugerencia', 'url'=>array('sugerencia/create')),
+						array('label'=>'Ver Todas las Solicitudes', 'url'=>array('solicitud/index')),
+						array('label'=>'Ver Solicitudes de Bajas de Materias', 'url'=>array('solicitudBajaMateria/index')),
+						array('label'=>'Ver Solicitudes de Bajas de Semestre', 'url'=>array('solicitudBajaSemestre/index')),
+						array('label'=>'Ver Solicitudes de Revalidacion de Materias', 'url'=>array('solicitudRevalidacion/index')),
+						array('label'=>'Ver Solicitudes de Cartas de Recomendacion', 'url'=>array('solicitudCartaRecomendacion/index')),
+						array('label'=>'Ver Sugerencias', 'url'=>array('sugerencia/index')),
 					);
 				
 			//Si es empleado
 			}else if (Yii::app()->user->rol == 'Admin'){
 			
 				$menu = array(
-					array('label'=>'Crear alumno', 'url'=>array('alumno/create')),
-					array('label'=>'Crear empleado', 'url'=>array('empleado/create')),
-					array('label'=>'Crear carrera', 'url'=>array('carrera/create')),
-					);
-			}else if (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol){
-				$menu = array(
+
 					array('label'=>'General'),
-					array('label'=>'Boletin informativo', 'url'=>array('boletinInformativo/create')),
-					array('label'=>'Problemas de Inscripcion', 'url'=>array('solicitudProblemasInscripcion/index')),
-					array('label'=>'Registrar alumno'),
-					array('label'=>'Registrar asistente', 'url'=>array('empleado/create')),
+					array('label'=>'Ver Boletines Informativos', 'url'=>array('boletinInformativo/index')),
+					array('label'=>'Ver Problemas de Inscripcion', 'url'=>array('solicitudProblemasInscripcion/index')),
 					array('label'=>''),
 					array('label'=>''),
-					array('label'=>'Sugerencias', 'url'=>array('sugerencia/index')),
+					array('label'=>'Sugerencias'),
+					array('label'=>'Ver Sugerencias', 'url'=>array('sugerencia/index')),
 					array('label'=>''),
 					array('label'=>''),
 					array('label'=>'Escolar'),
-					array('label'=>'Bajas de materias', 'url'=>array('solicitudBajaMateria/index')),
-					array('label'=>'Bajas de semestre', 'url'=>array('solicitudBajaSemestre/index')),
-					array('label'=>'Solicitudes de cartas de recomendacion', 'url'=>array('solicitudCartaRecomendacion/index')),
-					array('label'=>'Solicitudes de revalidacion de materias', 'url'=>array('solicitudRevalidacion/index')),
+					array('label'=>'Ver Todas las Solicitudes', 'url'=>array('solicitud/index')),
+					array('label'=>'Ver Solicitudes de Bajas de Materias', 'url'=>array('solicitudBajaMateria/index')),
+					array('label'=>'Ver Solicitudes de Bajas de Semestre', 'url'=>array('solicitudBajaSemestre/index')),
+					array('label'=>'Ver Solicitudes de Cartas de Recomendacion', 'url'=>array('solicitudCartaRecomendacion/index')),
+					array('label'=>'Ver Solicitudes de Revalidacion de Materias', 'url'=>array('solicitudRevalidacion/index')),
+					array('label'=>''),
+					array('label'=>''),
+					array('label'=>'Usuarios'),
+					array('label'=>'Registrar Alumno', 'url'=>array('alumno/create')),
+					array('label'=>'Registrar Empleado', 'url'=>array('empleado/create')),
+					array('label'=>'Registrar Carrera', 'url'=>array('carrera/create')),
+					array('label'=>'Ver Alumnos', 'url'=>array('alumno/index')),
+					array('label'=>'Ver Empleados', 'url'=>array('empleado/index')),
+					array('label'=>'Ver Carreras', 'url'=>array('carrera/index')),
+					);
+			}else if (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol){
+				$menu = array(
+					
+					array('label'=>'General'),
+					array('label'=>'Crear Boletin informativo', 'url'=>array('boletinInformativo/create')),
+					array('label'=>'Ver Boletines Informativos', 'url'=>array('boletinInformativo/index')),
+					array('label'=>'Ver Problemas de Inscripcion', 'url'=>array('solicitudProblemasInscripcion/index')),
+					array('label'=>''),
+					array('label'=>''),
+					array('label'=>'Sugerencias'),
+					array('label'=>'Ver Sugerencias', 'url'=>array('sugerencia/index')),
+					array('label'=>''),
+					array('label'=>''),
+					array('label'=>'Escolar'),
+					array('label'=>'Ver Todas las Solicitudes', 'url'=>array('solicitud/index')),
+					array('label'=>'Ver Solicitudes de Bajas de Materias', 'url'=>array('solicitudBajaMateria/index')),
+					array('label'=>'Ver Solicitudes de Bajas de Semestre', 'url'=>array('solicitudBajaSemestre/index')),
+					array('label'=>'Ver Solicitudes de Cartas de Recomendacion', 'url'=>array('solicitudCartaRecomendacion/index')),
+					array('label'=>'Ver Solicitudes de Revalidacion de Materias', 'url'=>array('solicitudRevalidacion/index')),
+					array('label'=>''),
+					array('label'=>''),
+					array('label'=>'Usuarios'),
+					array('label'=>'Registrar Alumno', 'url'=>array('alumno/create')),
+					array('label'=>'Registrar Empleado', 'url'=>array('empleado/create')),
+					array('label'=>'Ver Alumnos', 'url'=>array('alumno/index')),
+					array('label'=>'Ver Empleados', 'url'=>array('empleado/index')),
 					);
 			}
 			

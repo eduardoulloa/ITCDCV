@@ -42,11 +42,30 @@ class EmpleadoController extends Controller
 		foreach($consulta_super_admin as &$valor){
 			array_push($admin, ($valor->username).'');
 		}
+		
+		$criteria = new CDbCriteria(array(
+						'select'=>'nomina',
+						'condition'=>'puesto=\'Director\''));
+						
+						
+		//Obtiene a todos los directores de carrera.
+		$consulta=Empleado::model()->findAll($criteria);
+		
+		//Arreglo con todos los directores de carrera.
+		$directores = array();
+		
+		foreach($consulta as &$valor){
+			array_push($directores, ($valor->nomina).'');
+		}
 	
 		return array(
 			array('allow', 
 				'actions'=>array('index','view','admin','delete','create','update'),
 				'users'=>$admin,
+			),
+			array('allow', 
+				'actions'=>array('index','view','admin','delete','create','update'),
+				'users'=>$directores,
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -72,6 +91,7 @@ class EmpleadoController extends Controller
 	public function actionCreate()
 	{
 		$model=new Empleado;
+		
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -79,10 +99,13 @@ class EmpleadoController extends Controller
 		if(isset($_POST['Empleado']))
 		{
 			$model->attributes=$_POST['Empleado'];
+			$pass = md5($model->attributes['password']);
+			$model->password = $pass;
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->nomina));
 		}
 
+		
 		$this->render('create',array(
 			'model'=>$model,
 		));
@@ -103,6 +126,8 @@ class EmpleadoController extends Controller
 		if(isset($_POST['Empleado']))
 		{
 			$model->attributes=$_POST['Empleado'];
+			$pass = md5($model->attributes['password']);
+			$model->password = $pass;
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->nomina));
 		}
@@ -137,7 +162,71 @@ class EmpleadoController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Empleado');
+		
+		if(Yii::app()->user->rol == 'Director'){
+			$nomina = Yii::app()->user->id;
+			
+			
+			$connection=Yii::app()->db;
+			
+			$sql = "SELECT idcarrera FROM carrera_tiene_empleado WHERE nomina ='".$nomina."'";
+			
+			$command=$connection->createCommand($sql);
+		
+			$dataReader=$command->query();
+			
+			$query = "";
+			
+			$dataReader->bindColumn(1, $id);
+			
+			$cuenta = $dataReader->count();
+			
+			
+			if($cuenta == 0){
+				$query="";
+			}else if ($cuenta == 1){
+				
+				$row = $dataReader->read();
+				$query .= 'c.idcarrera = '.$id;
+			}else{	
+				$query .= '(';
+				while($cuenta > 1){
+					$row = $dataReader->read();	
+					$query .= 'c.idcarrera = '.$id.' OR ';
+					$cuenta--;
+				}
+				$row = $dataReader->read();
+				$query .= 'c.idcarrera = '.$id.')';
+				
+				
+			}
+			
+			$criteria_idcarrera = new CDbCriteria(array(
+					'condition'=>'nomina=\''.$nomina.'\'',
+					'select'=>'idcarrera',
+				));
+				
+			$idcarrera = CarreraTieneEmpleado::model()->findAll($criteria_idcarrera);
+			
+			//Obtiene los empleados de esta carrera.
+			if($query != ""){
+				$dataProvider = new CActiveDataProvider('Empleado', array(
+					'criteria'=>array(
+						'join'=>'JOIN carrera_tiene_empleado as c ON t.nomina = c.nomina AND '.$query,
+					),
+				));
+				
+			}else{
+				$dataProvider=new CActiveDataProvider('Empleado');
+			}
+			
+		}else{
+		
+			$dataProvider=new CActiveDataProvider('Empleado');
+			
+		}
+	
+		
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));

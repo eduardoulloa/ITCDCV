@@ -9,6 +9,10 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
+	<?php
+		if(Yii::app()->user->rol != 'Alumno'){
+		
+	?>
 	<div class="row">
 		<?php echo $form->labelEx($model,'matricula'); ?>
 		<?php echo $form->textField($model,'matricula',array('size'=>9,'maxlength'=>9)); ?>
@@ -72,6 +76,31 @@
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Save'); ?>
 	</div>
+	
+	<?php
+		//Si es un alumno, solo debe poder modificar su password e e-mail.
+		}else if (Yii::app()->user->rol == 'Alumno'){
+	?>
+	
+	<div class="row">
+	<?php echo $form->labelEx($model,'password'); ?>
+	<?php echo $form->passwordField($model,'password',array('size'=>45,'maxlength'=>45)); ?>
+	<?php echo $form->error($model,'password'); ?>
+	</div>
+	
+	<div class="row">
+		<?php echo $form->labelEx($model,'email'); ?>
+		<?php echo $form->textField($model,'email',array('size'=>45,'maxlength'=>45)); ?>
+		<?php echo $form->error($model,'email'); ?>
+	</div>
+	
+	<div class="row buttons">
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Save'); ?>
+	</div>
+	
+	<?php
+		}
+	?>
 
 <?php $this->endWidget(); ?>
 

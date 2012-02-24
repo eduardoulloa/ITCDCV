@@ -144,7 +144,7 @@ class BoletinInformativoController extends Controller
 	public function accessRules()
 	{
 		
-		$adminActions=array('index','admin','delete', 'create','view_all','view',
+		$adminActions=array('index','delete', 'create','view_all','view',
 				'solicitudBajaMateria', 'solicitudBajaSemestre',
 				'solicitudCartaRecomendacion', 
 				'solicitudProblemasInscripcion',

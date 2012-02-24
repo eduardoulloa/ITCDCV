@@ -28,5 +28,10 @@
 	<b><?php echo CHtml::encode('Tipo')?>:</b>
 	<?php echo CHtml::encode(get_class($data)); ?>
 	<br />
+	
+	
+	<?php echo CHtml::link(CHtml::encode('Editar'), array('/'.get_class($data)
+				.'/update', 'id'=>$data->id)); ?>
+	<br />
 
 </div>

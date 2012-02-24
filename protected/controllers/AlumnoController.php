@@ -39,9 +39,12 @@ class AlumnoController extends Controller
 		
 		$adminConsulta = Admin::model()->findAll($adminCriteria);
 		
+		$alumnoConsulta = Alumno::model()->findAll();
+		
 		//arreglo con todos los directores de carrera
 		$directores = array();
 		$admins = array();
+		$alumnos = array();
 		
 		foreach($consulta as &$valor){
 			array_push($directores, ($valor->nomina).'');
@@ -49,6 +52,10 @@ class AlumnoController extends Controller
 		
 		foreach($adminConsulta as &$valor){
 			array_push($admins, ($valor->username).'');
+		}
+		
+		foreach($alumnoConsulta as &$valor){
+			array_push($alumnos, ($valor->matricula).'');
 		}
 	
 		return array(
@@ -60,6 +67,10 @@ class AlumnoController extends Controller
 				'actions'=>array('create','update'),
 				'users'=>array('@'),
 			),*/
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('update','view'),
+				'users'=>$alumnos,
+			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete','create','update','index','view'),
 				'users'=>$admins,
@@ -116,18 +127,45 @@ class AlumnoController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
-		$model=$this->loadModel($id);
+	
+		if(Yii::app()->user->rol != 'Alumno'){
+		
+			$model=$this->loadModel($id);
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+			// Uncomment the following line if AJAX validation is needed
+			// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Alumno']))
-		{
-			$model->attributes=$_POST['Alumno'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->matricula));
+			if(isset($_POST['Alumno']))
+			{
+				$model->attributes=$_POST['Alumno'];
+				$pass = md5($model->attributes['password']);
+				$model->password = $pass;
+				if($model->save())
+					$this->redirect(array('view','id'=>$model->matricula));
+			}
+		
+		}else if(Yii::app()->user->rol == 'Alumno'){
+		
+			$model = $this->loadModel(Yii::app()->user->id);
+			if(isset($_POST['Alumno']))
+			{	
+				$oldpass = $model->password;
+				$model->attributes=$_POST['Alumno'];
+				$newpass = $model->password;
+				
+				//Valida si el usuario ha hecho algun cambio de password.
+				if($newpass != $oldpass){
+					$pass = md5($model->password);
+					$model->password = $pass;
+				}
+				
+				$model->email = $model->attributes['email'];
+				if($model->save())
+					$this->redirect(array('view','id'=>$model->matricula));
+			}
+			
 		}
-
+		
 		$this->render('update',array(
 			'model'=>$model,
 		));
@@ -173,31 +211,16 @@ class AlumnoController extends Controller
 		
 			$nomina = Yii::app()->user->id;
 		
-			
-			$criteria_directores = new CDbCriteria(array(
-					'join'=>'JOIN carrera_tiene_empleado AS c ON t.idcarrera = c.idcarrera AND c.nomina = \''.$nomina.'\'',
-					'select'=>'t.matricula AS id',
-					));
-
-			$alumnos_de_directores = Alumno::model()->findall($criteria_directores);
-			
-			//$dataProvider = new CArrayDataProvider ($alumnos_de_directores);
-		
 			//aqui va
-			$dataProvider = new CArrayDataProvider($alumnos_de_directores, array(
+			$dataProvider = new CActiveDataProvider('Alumno', array(
 				
-					'sort'=> array(
-							'attributes'=> array(
-								'matricula',
-								),
-							'defaultOrder'=>'matricula'
-							),
+					'criteria'=>array(
+						'join'=>'JOIN carrera_tiene_empleado AS c ON t.idcarrera = c.idcarrera AND c.nomina = \''.$nomina.'\'',
+					),
 						'pagination'=> array(
 							'pageSize'=>100,
 							),
-							
-						
-						
+
 						));
 			
 		

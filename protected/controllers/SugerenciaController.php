@@ -26,7 +26,7 @@ class SugerenciaController extends Controller
 	public function accessRules()
 	{
 		//arreglo con las acciones de los directores
-		$adminActions=array('index','admin','delete','view_all','view',
+		$adminActions=array('index','admin','update','delete','view_all','view',
 				'solicitudBajaMateria', 'solicitudBajaSemestre',
 				'solicitudCartaRecomendacion', 
 				'solicitudProblemasInscripcion',
@@ -164,6 +164,7 @@ class SugerenciaController extends Controller
 		$this->render('update',array(
 			'model'=>$model,
 		));
+		
 	}
 
 	/**

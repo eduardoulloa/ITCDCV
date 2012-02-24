@@ -25,6 +25,7 @@
 			echo $form->labelEx($model,'status');
 			echo $form->dropDownList($model,'status',array('recibida'=>'Recibida', 'pendiente'=>'Pendiente', 'terminada'=>'Terminada'));
 			echo $form->error($model,'status');
+			
 		}
 	?>
 	</div>
