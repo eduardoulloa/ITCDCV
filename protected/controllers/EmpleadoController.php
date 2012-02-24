@@ -36,6 +36,14 @@ class EmpleadoController extends Controller
 		
 		$admin = array();
 		
+		$criteria_dire = new CDbCriteria(array(
+								'select'=>'username'));
+		
+		//Query para encontrar al super admin
+		//$consulta_super_admin = Admin::model()->findAllByPk('admin', $criteria_super_admin);
+		$consulta_super_admin = Admin::model()->findAll($criteria_super_admin);
+		
+		$admin = array();
 		
 		//array_push($admin, $consulta_super_admin);
 		
@@ -83,6 +91,7 @@ class EmpleadoController extends Controller
 			'model'=>$this->loadModel($id),
 		));
 	}
+    
 
 	/**
 	 * Creates a new model.
@@ -90,24 +99,40 @@ class EmpleadoController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Empleado;
-		
+        $criteria_carreras= new CDbCriteria(array(
+                                                'select'=>'id, siglas'));
 
+        $consulta_carreras = Carrera::model()->findAll($criteria_carreras);
+
+        $carreras = array();
+        
+        foreach($consulta_carreras as &$valor){
+            $carreras[$valor->id] = $valor->siglas;
+        }
+		$model=new Empleado;
+        $model_carrera=new Carrera;
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Empleado']))
+		if(isset($_POST['Empleado']) && isset($_POST['Carrera']))
 		{
 			$model->attributes=$_POST['Empleado'];
-			$pass = md5($model->attributes['password']);
-			$model->password = $pass;
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->nomina));
+            $id_carrera = $_POST['Carrera'];
+			if($model->save()){
+                $model_carrera_empleado=new CarreraTieneEmpleado;
+                $model_carrera_empleado->idcarrera = $id_carrera['id'];
+                $model_carrera_empleado->nomina = $model->nomina;
+                if($model_carrera_empleado->save())
+				    $this->redirect(array('view','id'=>$model->nomina));
+            }
+
 		}
 
 		
 		$this->render('create',array(
 			'model'=>$model,
+            'model_carrera'=>$model_carrera,
+            'carreras'=>$carreras
 		));
 	}
 
