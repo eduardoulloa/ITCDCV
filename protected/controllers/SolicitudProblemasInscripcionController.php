@@ -164,13 +164,30 @@ class SolicitudProblemasInscripcionController extends Controller
 		if(isset($_POST['SolicitudProblemasInscripcion']))
 		{
 			$model->attributes=$_POST['SolicitudProblemasInscripcion'];
-			if($model->save())
+			if($model->save()) {
+				if($this->needsToSendMail($model)) {
+					EMailSender::sendEmail($this->createEmailBody($model), 'Problema de Inscripcion', 
+													getEmailAddress($model->matriculaalumno));
+				}
 				$this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('update',array(
 			'model'=>$model,
 		));
+	}
+	
+	public function needsToSendMail($model)
+	{
+		return $model->attributes['status'] == 'terminada';
+	}
+	
+	public function createEmailBody($model) 
+	{
+		$body = "Tu Problema de Inscripcion ha cambiado al status Terminado.\n";
+		$body .= "\nComentarios: ".$model->comentarios;
+		return $body;
 	}
 
 	/**
