@@ -159,13 +159,30 @@ class SolicitudBajaSemestreController extends Controller
 		if(isset($_POST['SolicitudBajaSemestre']))
 		{
 			$model->attributes=$_POST['SolicitudBajaSemestre'];
-			if($model->save())
+			if($model->save()) {
+				if($this->needsToSendMail($model)) {
+					EMailSender::sendEmail($this->createEmailBody($model), 'Solicitud de Baja de Semestre', 
+													getEmailAddress($model->matriculaalumno));
+				}
 				$this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('update',array(
 			'model'=>$model,
 		));
+	}
+	
+	public function needsToSendMail($model)
+	{
+		return $model->attributes['status'] == 'terminada';
+	}
+	
+	public function createEmailBody($model) 
+	{
+		$body = "Tu Solicitud de Baja de Semestre ha cambiado al status Terminada.\n";
+		$body .= "\nPeriodo: ".$model->periodo;
+		return $body;
 	}
 
 	/**
