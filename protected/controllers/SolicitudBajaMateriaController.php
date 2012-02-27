@@ -26,7 +26,7 @@ class SolicitudBajaMateriaController extends Controller
 	public function accessRules()
 	{
 		//arreglo con las acciones de los directores
-		$adminActions=array('index','admin','delete','update','view_all','view',
+		$adminActions=array('index','admin','delete','view_all','view',
 				'solicitudBajaMateria', 'solicitudBajaSemestre',
 				'solicitudCartaRecomendacion', 
 				'solicitudProblemasInscripcion',
@@ -37,48 +37,14 @@ class SolicitudBajaMateriaController extends Controller
 						'select'=>'nomina',
 						'condition'=>'puesto=\'Director\''));
 						
-						
-		//Obtiene a todos los directores de carrera.
+		//obtiene todos los directores de carrera
 		$consulta=Empleado::model()->findAll($criteria);
 		
-		//Arreglo con todos los directores de carrera.
+		//arreglo con todos los directores de carrera
 		$directores = array();
 		
 		foreach($consulta as &$valor){
 			array_push($directores, ($valor->nomina).'');
-		}
-		
-		
-		
-		$asistente_criteria = new CDbCriteria(array(
-						'select'=>'nomina',
-						'condition'=>'puesto=\'Asistente\' OR puesto = \'Secretaria\''));
-		
-		//Obtiene a todos los asistentes.
-		$consulta_asistente = Empleado::model()->findAll($asistente_criteria);
-		
-		//Arreglo con todos los directores de carrera.
-		$asistentes = array();
-		
-		foreach($consulta_asistente as &$valor){
-			array_push($asistentes, ($valor->nomina).'');
-		}
-		
-		//Condiciones para buscar al super admin
-		$criteria_super_admin = new CDbCriteria(array(
-								'select'=>'username'));
-		
-		//Query para encontrar al super admin
-		//$consulta_super_admin = Admin::model()->findAllByPk('admin', $criteria_super_admin);
-		$consulta_super_admin = Admin::model()->findAll($criteria_super_admin);
-		
-		$admin = array();
-		
-		
-		//array_push($admin, $consulta_super_admin);
-		
-		foreach($consulta_super_admin as &$valor){
-			array_push($admin, ($valor->username).'');
 		}
 	
 		return array(
@@ -86,22 +52,15 @@ class SolicitudBajaMateriaController extends Controller
 				'actions'=>array('index','view'),
 				'users'=>array('*'),
 			),*/
-			array('deny',  // Negar acceso a asistentes y secretarias.
-				'users'=>$asistentes,
-			),
-			
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('index','create','view'),
+				'actions'=>array('index','create','update','view'),
 				'users'=>array('@'),
 			),
 			array('allow', 
 				'actions'=>$adminActions, // acciones de los directores de carrera
 				'users'=>$directores,
 			),
-			array('allow', 
-				'actions'=>$adminActions, // acciones de los admins
-				'users'=>$admin,
-			),
+			
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
@@ -165,13 +124,31 @@ class SolicitudBajaMateriaController extends Controller
 		if(isset($_POST['SolicitudBajaMateria']))
 		{
 			$model->attributes=$_POST['SolicitudBajaMateria'];
-			if($model->save())
+			if($model->save()) {
+				if($this->needsToSendMail($model)) {
+					EMailSender::sendEmail($this->createEmailBody($model), 'Solicitud de Baja de Materia', 
+													getEmailAddress($model->matriculaalumno));
+				}
 				$this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('update',array(
 			'model'=>$model,
 		));
+	}
+	
+	public function needsToSendMail($model)
+	{
+		return $model->attributes['status'] == 'terminada';
+	}
+	
+	public function createEmailBody($model) 
+	{
+		$body = "Tu Solicitud de Baja de Materia ha sido terminada.\n";
+		$body .= "\nClave de la materia: ".$model->clave_materia;
+		$body .= "\nNombre de la materia: ".$model->nombre_materia;
+		return $body;
 	}
 
 	/**
@@ -202,64 +179,38 @@ class SolicitudBajaMateriaController extends Controller
 	
 	{
 		
-		if(Yii::app()->user->rol == 'Alumno'){
-		
-			$mat = Yii::app()->user->id;
-			$criteria = new CDbCriteria(array(
-					'condition'=>'matriculaalumno ='.$mat));
-					
-			$solicitudes=SolicitudBajaMateria::model()->findall($criteria);
-			
-			$dataProvider= new CArrayDataProvider(
-					$solicitudes, array(
-						'sort'=> array(
-							'attributes'=> array(
-								'fechahora',
-								),
-							'defaultOrder'=>'fechahora'
-							),
-						'pagination'=> array(
-							'pageSize'=>100,
-							),
-						));
-						
-			
-						
-		}else if (Yii::app()->user->rol == 'Director'){
-			
-			$nomina = Yii::app()->user->id;
-		
-			
-			$criteria_directores = new CDbCriteria(array(
-					'join'=>'JOIN alumno AS a ON t.matriculaalumno = a.matricula
-					JOIN carrera_tiene_empleado AS c ON a.idcarrera = c.idcarrera AND c.nomina = \''.$nomina.'\'',
-					'condition'=>'status != \'Terminada\'',
-					));
-
-			$solicitudes_para_directores = SolicitudBajaMateria::model()->findall($criteria_directores);
-			
-			$dataProvider = new CArrayDataProvider ($solicitudes_para_directores, array(
-					'sort'=> array(
-							'attributes'=> array(
-								'fechahora',
-								),
-							'defaultOrder'=>'fechahora'
-							),
-						'pagination'=> array(
-							'pageSize'=>100,
-							),
-						
-						));
-						
+		$criteria = NULL;
 	
-		}else if(Yii::app()->user->rol == 'Admin'){
-			$dataProvider = new CActiveDataProvider('SolicitudBajaMateria');
+		if (Yii::app()->user->rol == 'Alumno'){ //el usuario es un alumno
+		$mat = Yii::app()->user->id;
+			$criteria = new CDbCriteria(array(
+					'condition'=>'status!=\'Terminada\' AND matriculaalumno ='.$mat));
+		}else if(Yii::app()->user->rol == 'Director'){ //el usuario es un alumno
+			$criteria = new CDbCriteria(array(
+					'condition'=>'status!=\'Terminada\''));
 		}
+		
+		$solicitudes=array();
+		
+		$solicitudes=SolicitudBajaMateria::model()->findall($criteria);
+		
+		$dataProvider= new CArrayDataProvider(
+				$solicitudes, array(
+					'sort'=> array(
+						'attributes'=> array(
+							'fechahora',
+							),
+						'defaultOrder'=>'fechahora'
+						),
+					'pagination'=> array(
+						'pageSize'=>100,
+						),
+					));
+	
 		
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
-		
 		
 		
 	}
