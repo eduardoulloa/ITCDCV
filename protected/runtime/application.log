@@ -3239,3 +3239,19 @@ Stack trace:
 REQUEST_URI=/itc/itcdcv/index.php/solicitudBajaMateria/index
 HTTP_REFERER=http://localhost/itc/itcdcv/index.php/solicitudBajaMateria/1
 ---
+2012/02/27 00:29:40 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in /Applications/XAMPP/xamppfiles/htdocs/itc/yii/framework/web/auth/CAccessControlFilter.php:157
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/itc/yii/framework/web/auth/CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/itc/yii/framework/web/filters/CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /Applications/XAMPP/xamppfiles/htdocs/itc/yii/framework/web/CController.php(1146): CFilter->filter(Object(CFilterChain))
+#3 /Applications/XAMPP/xamppfiles/htdocs/itc/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 /Applications/XAMPP/xamppfiles/htdocs/itc/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 /Applications/XAMPP/xamppfiles/htdocs/itc/yii/framework/web/CController.php(292): CFilterChain->run()
+#6 /Applications/XAMPP/xamppfiles/htdocs/itc/yii/framework/web/CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /Applications/XAMPP/xamppfiles/htdocs/itc/yii/framework/web/CWebApplication.php(276): CController->run('')
+#8 /Applications/XAMPP/xamppfiles/htdocs/itc/yii/framework/web/CWebApplication.php(135): CWebApplication->runController('solicitudBajaMa...')
+#9 /Applications/XAMPP/xamppfiles/htdocs/itc/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#10 /Applications/XAMPP/xamppfiles/htdocs/itc/itcdcv/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/itc/itcdcv/index.php/solicitudBajaMateria
+---

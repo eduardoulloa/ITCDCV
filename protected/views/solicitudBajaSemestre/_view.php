@@ -37,6 +37,8 @@
 	<b><?php echo CHtml::encode($data->getAttributeLabel('motivo')); ?>:</b>
 	<?php echo CHtml::encode($data->motivo); ?>
 	<br />
+	<?php echo CHtml::link('Editar', array('update', 'id'=>$data->id)); ?>
+	
 
 	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('telefono')); ?>:</b>
