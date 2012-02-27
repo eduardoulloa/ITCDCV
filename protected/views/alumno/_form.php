@@ -1,5 +1,26 @@
 <div class="form">
 
+<SCRIPT LANGUAGE="JavaScript" type="text/javascript">
+
+function checkAll()
+{
+//for (i = 0; i < field.length; i++){
+	//field[i].checked = true ;
+	/*for (var i = 0; i<document.forms[0].elements.length; i++){
+	var e=document.forms[0].elements[i];
+		if (e.type=='textbox')
+		{
+			e.value = "";
+		}*/
+		
+		alert('hello');
+
+}
+	
+}
+
+</SCRIPT>
+
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'alumno-form',
 	'enableAjaxValidation'=>false,
@@ -84,7 +105,7 @@
 	
 	<div class="row">
 	<?php echo $form->labelEx($model,'password'); ?>
-	<?php echo $form->passwordField($model,'password',array('size'=>45,'maxlength'=>45)); ?>
+	<?php echo $form->passwordField($model,'password',array('size'=>45,'maxlength'=>45, 'name'=>'checkAll', 'onClick'=>"checkAll()")); ?>
 	<?php echo $form->error($model,'password'); ?>
 	</div>
 	
@@ -105,3 +126,4 @@
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+

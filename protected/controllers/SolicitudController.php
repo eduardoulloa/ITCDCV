@@ -298,6 +298,11 @@ class SolicitudController extends Controller
 				'actions'=>array('index','view'),
 				'users'=>array('*'),
 			),*/
+			//prueba de stash antes de hacer merge
+			array('allow', //acciones de los directores de carrera
+				'actions'=>$adminActions,
+				'users'=>$directores,
+			),
 			
 			array('allow', //acciones de los directores de carrera
 				'actions'=>$adminActions,
@@ -316,10 +321,10 @@ class SolicitudController extends Controller
 				'actions'=>array('index','create','update','admin'), 
 				'users'=>$admin,
 			),
-	
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
-		);
+			
+					);
 	}
 }

@@ -2358,6 +2358,7 @@ Stack trace:
 #9 C:\xampp\htdocs\dcv8\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
 #10 C:\xampp\htdocs\dcv8\DCV\index.php(13): CApplication->run()
 #11 {main} REQUEST_URI=/dcv8/DCV/index.php/alumno/
+<<<<<<< Updated upstream
 2012/02/24 19:12:30 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in /Applications/XAMPP/xamppfiles/htdocs/itc/yii/framework/web/auth/CAccessControlFilter.php:157
 Stack trace:
 #0 /Applications/XAMPP/xamppfiles/htdocs/itc/yii/framework/web/auth/CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
@@ -3255,3 +3256,33 @@ Stack trace:
 #11 {main}
 REQUEST_URI=/itc/itcdcv/index.php/solicitudBajaMateria
 ---
+=======
+2012/02/27 18:41:43 [error] [php] Use of undefined constant checkAll - assumed 'checkAll' (C:\xampp\htdocs\dcv8\DCV\protected\views\alumno\_form.php:106)
+Stack trace:
+#0 C:\xampp\htdocs\dcv8\yii\framework\web\CController.php(866): AlumnoController->renderFile()
+#1 C:\xampp\htdocs\dcv8\DCV\protected\views\alumno\update.php(18): AlumnoController->renderPartial()
+#2 C:\xampp\htdocs\dcv8\yii\framework\web\CBaseController.php(119): require()
+#3 C:\xampp\htdocs\dcv8\yii\framework\web\CBaseController.php(88): AlumnoController->renderInternal()
+#4 C:\xampp\htdocs\dcv8\yii\framework\web\CController.php(866): AlumnoController->renderFile()
+#5 C:\xampp\htdocs\dcv8\yii\framework\web\CController.php(779): AlumnoController->renderPartial()
+#6 C:\xampp\htdocs\dcv8\DCV\protected\controllers\AlumnoController.php(171): AlumnoController->render()
+#7 unknown(0): AlumnoController->actionUpdate()
+#8 C:\xampp\htdocs\dcv8\yii\framework\web\actions\CAction.php(104): ReflectionMethod->invokeArgs()
+#9 C:\xampp\htdocs\dcv8\yii\framework\web\actions\CInlineAction.php(48): CInlineAction->runWithParamsInternal()
+#10 C:\xampp\htdocs\dcv8\yii\framework\web\CController.php(300): CInlineAction->runWithParams()
+#11 C:\xampp\htdocs\dcv8\yii\framework\web\filters\CFilterChain.php(134): AlumnoController->runAction()
+#12 C:\xampp\htdocs\dcv8\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#13 C:\xampp\htdocs\dcv8\yii\framework\web\CController.php(1144): CAccessControlFilter->filter()
+#14 C:\xampp\htdocs\dcv8\yii\framework\web\filters\CInlineFilter.php(59): AlumnoController->filterAccessControl()
+#15 C:\xampp\htdocs\dcv8\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter()
+#16 C:\xampp\htdocs\dcv8\yii\framework\web\CController.php(283): CFilterChain->run()
+#17 C:\xampp\htdocs\dcv8\yii\framework\web\CController.php(257): AlumnoController->runActionWithFilters()
+#18 C:\xampp\htdocs\dcv8\yii\framework\web\CWebApplication.php(277): AlumnoController->run()
+#19 C:\xampp\htdocs\dcv8\yii\framework\web\CWebApplication.php(136): CWebApplication->runController()
+#20 C:\xampp\htdocs\dcv8\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#21 C:\xampp\htdocs\dcv8\DCV\index.php(13): CWebApplication->run()
+REQUEST_URI=/dcv8/DCV/index.php/alumno/update/909090
+in C:\xampp\htdocs\dcv8\DCV\protected\views\alumno\_form.php (106)
+in C:\xampp\htdocs\dcv8\DCV\protected\views\alumno\update.php (18)
+in C:\xampp\htdocs\dcv8\DCV\protected\controllers\AlumnoController.php (171)
+>>>>>>> Stashed changes
