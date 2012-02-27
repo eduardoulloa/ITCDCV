@@ -236,6 +236,7 @@ class SolicitudController extends Controller
 	{
 		//arreglo con las acciones de los directores
 		$adminActions=array('index','admin','delete','view_all','view',
+				'solicitud',
 				'solicitudBajaMateria', 'solicitudBajaSemestre',
 				'solicitudCartaRecomendacion', 
 				'solicitudProblemasInscripcion',
@@ -245,7 +246,6 @@ class SolicitudController extends Controller
 				'solicitudProblemasInscripcionCount',
 				'solicitudRevalidacionCount', 'solicitudesTotales');
 				
-		
 		$criteria = new CDbCriteria(array(
 						'select'=>'nomina',
 						'condition'=>'puesto=\'Director\''));
@@ -299,6 +299,11 @@ class SolicitudController extends Controller
 				'users'=>array('*'),
 			),*/
 			
+			array('allow', //acciones de los directores de carrera
+				'actions'=>$adminActions,
+				'users'=>$directores,
+			),
+			
 			array('deny',  // Negar acceso a los asistentes.
 				'users'=>$asistentes,
 			),
@@ -311,10 +316,7 @@ class SolicitudController extends Controller
 				'actions'=>array('index','create','update','admin'), 
 				'users'=>$admin,
 			),
-			array('allow', //acciones de los directores de carrera
-				'actions'=>$adminActions,
-				'users'=>$directores,
-			),
+	
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),

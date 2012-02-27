@@ -40,6 +40,9 @@
 	<b><?php echo CHtml::encode($data->getAttributeLabel('unidades_materia')); ?>:</b>
 	<?php echo CHtml::encode($data->unidades_materia); ?>
 	<br />
+	
+	<?php echo CHtml::link('Editar', array('update', 'id'=>$data->id)); ?>
+	
 
 	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('grupo')); ?>:</b>
