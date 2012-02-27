@@ -38,6 +38,9 @@
 	<b><?php echo CHtml::encode($data->getAttributeLabel('quitar_prioridades')); ?>:</b>
 	<?php echo CHtml::encode($data->quitar_prioridades); ?>
 	<br />
+	
+	<?php echo CHtml::link('Editar', array('update', 'id'=>$data->id)); ?>
+
 
 	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('comentarios')); ?>:</b>
