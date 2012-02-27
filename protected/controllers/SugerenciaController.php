@@ -158,13 +158,31 @@ class SugerenciaController extends Controller
 		{
 			$model->attributes=$_POST['Sugerencia'];
 			if($model->save())
+			{
+				if($this->needsToSendMail($model)) {
+					EMailSender::sendEmail($this->createEmailBody($model), 'Sugerencia', 
+													getEmailAddress($model->matriculaalumno));
+				}
 				$this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('update',array(
 			'model'=>$model,
 		));
-		
+	}
+	
+	public function needsToSendMail($model)
+	{
+		return $model->attributes['status'] == 'terminada';
+	}
+	
+	public function createEmailBody($model) 
+	{
+		$body = "Tu sugerencia ha recibido una respuesta\n";
+		$body .= "SUGERENCIA:".$model->sugerencia;
+		$body .= "\nRESPUESTA: ".$model->respuesta;
+		return $body;
 	}
 
 	/**
