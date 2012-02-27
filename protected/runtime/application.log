@@ -79,6 +79,1898 @@ Stack trace:
 Stack trace:
 #0 C:\xampp\htdocs\dcv8\DCV\protected\controllers\EmpleadoController.php(83): EmpleadoController->loadModel('1')
 #1 [internal function]: EmpleadoController->actionView('1')
+<<<<<<< HEAD
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\actions\CAction.php(104): ReflectionMethod->invokeArgs(Object(EmpleadoController), Array)
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\actions\CInlineAction.php(48): CAction->runWithParamsInternal(Object(EmpleadoController), Object(ReflectionMethod), Array)
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(300): CInlineAction->runWithParams(Array)
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#11 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('view')
+#13 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('empleado/view')
+#14 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#16 {main} REQUEST_URI=/dcv7/DCV/index.php/empleado/1
+2012/01/05 20:42:45 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "carlos".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('carlos')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('carlos')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('empleado/carlos')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/empleado/carlos
+2012/01/05 20:51:26 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('admin')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('solicitudBajaMa...')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/solicitudBajaMateria/admin
+2012/01/05 20:51:52 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('admin')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('solicitudBajaSe...')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/solicitudBajaSemestre/admin
+2012/01/06 20:24:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "carlos".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('carlos')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('carlos')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('empleado/carlos')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/empleado/carlos
+2012/01/11 18:18:10 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('boletinInformat...')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/boletinInformativo
+2012/01/11 20:13:13 [error] [php] Undefined variable: menu (C:\xampp\htdocs\dcv7\DCV\protected\views\layouts\column2.php:46)
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(781): BoletinInformativoController->renderFile()
+#1 C:\xampp\htdocs\dcv7\DCV\protected\controllers\BoletinInformativoController.php(387): BoletinInformativoController->render()
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\actions\CInlineAction.php(50): BoletinInformativoController->actionIndex()
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(300): CInlineAction->runWithParams()
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(134): BoletinInformativoController->runAction()
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CAccessControlFilter->filter()
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): BoletinInformativoController->filterAccessControl()
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter()
+#9 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#10 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): BoletinInformativoController->runActionWithFilters()
+#11 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): BoletinInformativoController->run()
+#12 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController()
+#13 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\dcv7\DCV\index.php(13): CWebApplication->run()
+REQUEST_URI=/dcv7/DCV/index.php/boletinInformativo
+in C:\xampp\htdocs\dcv7\DCV\protected\views\layouts\column2.php (46)
+in C:\xampp\htdocs\dcv7\DCV\protected\controllers\BoletinInformativoController.php (387)
+in C:\xampp\htdocs\dcv7\DCV\index.php (13)
+2012/01/11 20:13:16 [error] [php] Undefined variable: menu (C:\xampp\htdocs\dcv7\DCV\protected\views\layouts\column2.php:46)
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(781): BoletinInformativoController->renderFile()
+#1 C:\xampp\htdocs\dcv7\DCV\protected\controllers\BoletinInformativoController.php(387): BoletinInformativoController->render()
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\actions\CInlineAction.php(50): BoletinInformativoController->actionIndex()
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(300): CInlineAction->runWithParams()
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(134): BoletinInformativoController->runAction()
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CAccessControlFilter->filter()
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): BoletinInformativoController->filterAccessControl()
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter()
+#9 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#10 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): BoletinInformativoController->runActionWithFilters()
+#11 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): BoletinInformativoController->run()
+#12 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController()
+#13 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\dcv7\DCV\index.php(13): CWebApplication->run()
+REQUEST_URI=/dcv7/DCV/index.php/boletinInformativo
+in C:\xampp\htdocs\dcv7\DCV\protected\views\layouts\column2.php (46)
+in C:\xampp\htdocs\dcv7\DCV\protected\controllers\BoletinInformativoController.php (387)
+in C:\xampp\htdocs\dcv7\DCV\index.php (13)
+2012/01/12 17:46:14 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('create')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('empleado/create')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/empleado/create
+2012/01/12 17:46:19 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('create')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('empleado/create')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/empleado/create
+2012/01/12 17:58:55 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('create')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('empleado/create')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/empleado/create
+2012/01/12 19:10:08 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('create')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('empleado/create')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/empleado/create
+2012/01/12 19:12:52 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('create')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('empleado/create')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/empleado/create
+2012/01/12 23:47:36 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('create')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('empleado/create')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/empleado/create
+2012/01/12 23:57:35 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('boletinInformat...')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/boletinInformativo
+2012/01/13 00:10:48 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('alumno')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/alumno
+2012/01/13 00:11:12 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('create')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('alumno/create')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/alumno/create
+2012/01/13 00:14:16 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('admin')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('admin/admin')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/admin/admin
+2012/01/13 00:24:48 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('alumno')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/alumno
+2012/01/13 00:26:58 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('admin')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/admin
+2012/01/13 00:27:57 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('admin')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/admin
+2012/01/13 00:30:56 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('boletinInformat...')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/boletinInformativo
+2012/01/13 00:47:00 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('carrera')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/carrera
+2012/01/13 00:47:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "1".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('1')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('1')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('carrera/1/admin')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/carrera/1/admin
+2012/01/13 19:35:52 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('carrera')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/carrera
+2012/01/13 19:38:47 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('carrera')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/carrera
+2012/01/13 19:38:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "empleado".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('empleado')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('empleado')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('carrera/emplead...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/carrera/empleado
+2012/01/13 19:39:04 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('empleado')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/empleado
+2012/01/13 19:55:35 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('solicitudBajaMa...')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/solicitudBajaMateria
+2012/01/24 20:10:45 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('admin')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/admin
+2012/02/02 16:37:18 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('admin')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/admin
+2012/02/02 16:37:31 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('alumno')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/alumno
+2012/02/02 17:21:49 [error] [exception.CException] exception 'CException' with message 'Property "CWebUser.nomina" is not defined.' in C:\xampp\htdocs\dcv7\yii\framework\base\CComponent.php:131
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CWebUser.php(124): CComponent->__get('nomina')
+#1 C:\xampp\htdocs\dcv7\DCV\protected\views\solicitudProblemasInscripcion\index.php(19): CWebUser->__get('nomina')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CBaseController.php(119): require('C:\xampp\htdocs...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\CBaseController.php(88): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(866): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(779): CController->renderPartial('index', Array, true)
+#6 C:\xampp\htdocs\dcv7\DCV\protected\controllers\SolicitudProblemasInscripcionController.php(190): CController->render('index', Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\actions\CInlineAction.php(50): SolicitudProblemasInscripcionController->actionIndex()
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(300): CInlineAction->runWithParams(Array)
+#9 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#10 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#11 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#12 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#13 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#14 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#15 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('')
+#17 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('solicitudProble...')
+#18 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#19 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#20 {main} REQUEST_URI=/dcv7/DCV/index.php/solicitudProblemasInscripcion
+2012/02/02 18:44:02 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'carlos' in 'where clause'. The SQL statement executed was: SELECT idcarrera FROM `carrera_tiene_empleado` `t` WHERE nomina=carlos LIMIT 1.
+in C:\xampp\htdocs\dcv7\DCV\protected\controllers\AlumnoController.php (169)
+in C:\xampp\htdocs\dcv7\DCV\index.php (13)
+2012/02/02 18:44:02 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'carlos' in 'where clause'. The SQL statement executed was: SELECT idcarrera FROM `carrera_tiene_empleado` `t` WHERE nomina=carlos LIMIT 1' in C:\xampp\htdocs\dcv7\yii\framework\db\CDbCommand.php:516
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\db\CDbCommand.php(393): CDbCommand->queryInternal('fetch', Array, Array)
+#1 C:\xampp\htdocs\dcv7\yii\framework\db\ar\CActiveRecord.php(1290): CDbCommand->queryRow()
+#2 C:\xampp\htdocs\dcv7\yii\framework\db\ar\CActiveRecord.php(1396): CActiveRecord->query(Object(CDbCriteria))
+#3 C:\xampp\htdocs\dcv7\DCV\protected\controllers\AlumnoController.php(169): CActiveRecord->find(Object(CDbCriteria))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\actions\CInlineAction.php(50): AlumnoController->actionIndex()
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(300): CInlineAction->runWithParams(Array)
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#12 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('')
+#14 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('alumno')
+#15 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#16 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#17 {main} REQUEST_URI=/dcv7/DCV/index.php/alumno
+2012/02/02 18:45:51 [error] [php] Undefined variable: dataProvider (C:\xampp\htdocs\dcv7\DCV\protected\controllers\AlumnoController.php:179)
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(134): AlumnoController->runAction()
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CAccessControlFilter->filter()
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): AlumnoController->filterAccessControl()
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter()
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): AlumnoController->runActionWithFilters()
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): AlumnoController->run()
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController()
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CWebApplication->run()
+REQUEST_URI=/dcv7/DCV/index.php/alumno
+in C:\xampp\htdocs\dcv7\DCV\protected\controllers\AlumnoController.php (179)
+in C:\xampp\htdocs\dcv7\DCV\index.php (13)
+2012/02/02 18:46:08 [error] [exception.CException] exception 'CException' with message 'CarreraTieneEmpleado and its behaviors do not have a method or closure named "getData".' in C:\xampp\htdocs\dcv7\yii\framework\base\CComponent.php:269
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\db\ar\CActiveRecord.php(214): CComponent->__call('getData', Array)
+#1 C:\xampp\htdocs\dcv7\yii\framework\zii\widgets\CBaseListView.php(105): CActiveRecord->__call('getData', Array)
+#2 C:\xampp\htdocs\dcv7\yii\framework\zii\widgets\CBaseListView.php(105): CarreraTieneEmpleado->getData()
+#3 C:\xampp\htdocs\dcv7\yii\framework\zii\widgets\CListView.php(173): CBaseListView->init()
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\CBaseController.php(140): CListView->init()
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CBaseController.php(165): CBaseController->createWidget('zii.widgets.CLi...', Array)
+#6 C:\xampp\htdocs\dcv7\DCV\protected\views\alumno\index.php(17): CBaseController->widget('zii.widgets.CLi...', Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CBaseController.php(119): require('C:\xampp\htdocs...')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CBaseController.php(88): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#9 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(866): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#10 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(779): CController->renderPartial('index', Array, true)
+#11 C:\xampp\htdocs\dcv7\DCV\protected\controllers\AlumnoController.php(180): CController->render('index', Array)
+#12 C:\xampp\htdocs\dcv7\yii\framework\web\actions\CInlineAction.php(50): AlumnoController->actionIndex()
+#13 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(300): CInlineAction->runWithParams(Array)
+#14 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#15 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#16 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#17 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#18 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#19 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#20 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#21 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('')
+#22 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('alumno')
+#23 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#24 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#25 {main} REQUEST_URI=/dcv7/DCV/index.php/alumno
+2012/02/02 18:58:04 [error] [php] Object of class CarreraTieneEmpleado could not be converted to string (C:\xampp\htdocs\dcv7\DCV\protected\controllers\AlumnoController.php:173)
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(134): AlumnoController->runAction()
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CAccessControlFilter->filter()
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): AlumnoController->filterAccessControl()
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter()
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): AlumnoController->runActionWithFilters()
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): AlumnoController->run()
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController()
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CWebApplication->run()
+REQUEST_URI=/dcv7/DCV/index.php/alumno
+in C:\xampp\htdocs\dcv7\DCV\protected\controllers\AlumnoController.php (173)
+in C:\xampp\htdocs\dcv7\DCV\index.php (13)
+2012/02/02 19:14:45 [error] [php] Undefined offset: 0 (C:\xampp\htdocs\dcv7\DCV\protected\components\UserIdentity.php:42)
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\validators\CValidator.php(192): CInlineValidator->validateAttribute()
+#1 C:\xampp\htdocs\dcv7\yii\framework\base\CModel.php(152): CInlineValidator->validate()
+#2 C:\xampp\htdocs\dcv7\DCV\protected\controllers\SiteController.php(88): LoginForm->validate()
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\actions\CInlineAction.php(50): SiteController->actionLogin()
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(300): CInlineAction->runWithParams()
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(278): SiteController->runAction()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): SiteController->runActionWithFilters()
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): SiteController->run()
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController()
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CWebApplication->run()
+REQUEST_URI=/dcv7/DCV/index.php/site/login
+in C:\xampp\htdocs\dcv7\DCV\protected\components\UserIdentity.php (42)
+in C:\xampp\htdocs\dcv7\DCV\protected\models\LoginForm.php (52)
+in C:\xampp\htdocs\dcv7\DCV\protected\controllers\SiteController.php (88)
+2012/02/02 19:15:05 [error] [php] Undefined offset: 0 (C:\xampp\htdocs\dcv7\DCV\protected\components\UserIdentity.php:42)
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\validators\CValidator.php(192): CInlineValidator->validateAttribute()
+#1 C:\xampp\htdocs\dcv7\yii\framework\base\CModel.php(152): CInlineValidator->validate()
+#2 C:\xampp\htdocs\dcv7\DCV\protected\controllers\SiteController.php(88): LoginForm->validate()
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\actions\CInlineAction.php(50): SiteController->actionLogin()
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(300): CInlineAction->runWithParams()
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(278): SiteController->runAction()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): SiteController->runActionWithFilters()
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): SiteController->run()
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController()
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CWebApplication->run()
+REQUEST_URI=/dcv7/DCV/index.php/site/login
+in C:\xampp\htdocs\dcv7\DCV\protected\components\UserIdentity.php (42)
+in C:\xampp\htdocs\dcv7\DCV\protected\models\LoginForm.php (52)
+in C:\xampp\htdocs\dcv7\DCV\protected\controllers\SiteController.php (88)
+2012/02/12 22:51:10 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:328
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(301): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('update')
+#9 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('solicitudBajaMa...')
+#10 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#11 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#12 {main} REQUEST_URI=/dcv7/DCV/index.php/solicitudBajaMateria/update
+2012/02/12 22:51:35 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:328
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(301): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('delete')
+#9 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('alumno/delete')
+#10 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#11 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#12 {main} REQUEST_URI=/dcv7/DCV/index.php/alumno/delete
+2012/02/12 22:51:39 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:328
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(301): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('update')
+#9 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('alumno/update')
+#10 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#11 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#12 {main} REQUEST_URI=/dcv7/DCV/index.php/alumno/update
+2012/02/12 22:51:49 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:328
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(301): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('delete')
+#9 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('alumno/delete')
+#10 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#11 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#12 {main} REQUEST_URI=/dcv7/DCV/index.php/alumno/delete
+2012/02/12 22:51:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "alumn".' in C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('alumn')
+#1 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/dcv7/DCV/index.php/alumn
+2012/02/12 22:51:55 [error] [exception.CException] exception 'CException' with message 'Property "CWebUser.carrera" is not defined.' in C:\xampp\htdocs\dcv7\yii\framework\base\CComponent.php:131
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CWebUser.php(124): CComponent->__get('carrera')
+#1 C:\xampp\htdocs\dcv7\DCV\protected\controllers\AlumnoController.php(164): CWebUser->__get('carrera')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\actions\CInlineAction.php(50): AlumnoController->actionIndex()
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(300): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#10 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('')
+#12 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('alumno')
+#13 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#15 {main} REQUEST_URI=/dcv7/DCV/index.php/alumno
+2012/02/12 22:52:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index.php".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('index.php')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('index.php')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('alumno/index.ph...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/alumno/index.php
+2012/02/12 22:52:15 [error] [exception.CException] exception 'CException' with message 'Property "CWebUser.carrera" is not defined.' in C:\xampp\htdocs\dcv7\yii\framework\base\CComponent.php:131
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CWebUser.php(124): CComponent->__get('carrera')
+#1 C:\xampp\htdocs\dcv7\DCV\protected\controllers\AlumnoController.php(164): CWebUser->__get('carrera')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\actions\CInlineAction.php(50): AlumnoController->actionIndex()
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(300): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#10 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('')
+#12 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('alumno')
+#13 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#15 {main} REQUEST_URI=/dcv7/DCV/index.php/alumno
+2012/02/12 22:53:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "git".' in C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('git')
+#1 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/dcv7/DCV/index.php/git
+2012/02/12 22:53:46 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "git".' in C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('git')
+#1 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/dcv7/DCV/index.php/git
+2012/02/12 22:53:59 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "git".' in C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('git')
+#1 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/dcv7/DCV/index.php/git
+2012/02/12 23:18:23 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('create')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('empleado/create')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/empleado/create
+2012/02/12 23:22:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "1".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('1')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('1')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('solicitudBajaMa...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/solicitudBajaMateria/1/admin
+2012/02/12 23:29:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "1".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('1')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('1')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('solicitudBajaSe...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/solicitudBajaSemestre/1/admin
+2012/02/13 15:10:06 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('Empleado')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/Empleado
+2012/02/13 15:10:17 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('empleado')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/empleado
+2012/02/13 18:10:15 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('empleado')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/empleado
+2012/02/13 18:11:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "git".' in C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('git')
+#1 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/dcv7/DCV/index.php/git
+2012/02/13 18:11:48 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('empleado')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/empleado
+2012/02/13 18:12:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "git".' in C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('git')
+#1 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/dcv7/DCV/index.php/git
+2012/02/13 18:12:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_close.png
+2012/02/13 18:12:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_loading.png
+2012/02/13 18:12:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_shadow_n.png
+2012/02/13 18:12:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_shadow_ne.png
+2012/02/13 18:12:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_shadow_e.png
+2012/02/13 18:12:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_shadow_se.png
+2012/02/13 18:12:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_shadow_s.png
+2012/02/13 18:12:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_shadow_sw.png
+2012/02/13 18:12:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_shadow_w.png
+2012/02/13 18:12:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_shadow_nw.png
+2012/02/13 18:12:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_nav_left.png
+2012/02/13 18:12:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_nav_right.png
+2012/02/13 18:12:31 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_close.png
+2012/02/13 18:12:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_loading.png
+2012/02/13 18:12:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_shadow_n.png
+2012/02/13 18:12:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_shadow_ne.png
+2012/02/13 18:12:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_shadow_e.png
+2012/02/13 18:12:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_shadow_se.png
+2012/02/13 18:12:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_shadow_s.png
+2012/02/13 18:12:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_shadow_sw.png
+2012/02/13 18:12:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_shadow_w.png
+2012/02/13 18:12:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_shadow_nw.png
+2012/02/13 18:12:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_nav_left.png
+2012/02/13 18:12:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_nav_right.png
+2012/02/13 18:12:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii/fancybox/fancy_close.png".' in C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/fancybox/fa...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/fancybox/fancy_close.png
+2012/02/13 18:12:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii/fancybox/fancy_loading.png".' in C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/fancybox/fa...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/fancybox/fancy_loading.png
+2012/02/13 18:12:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii/fancybox/fancy_shadow_n.png".' in C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/fancybox/fa...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/fancybox/fancy_shadow_n.png
+2012/02/13 18:12:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii/fancybox/fancy_shadow_ne.png".' in C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/fancybox/fa...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/fancybox/fancy_shadow_ne.png
+2012/02/13 18:12:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii/fancybox/fancy_shadow_e.png".' in C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/fancybox/fa...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/fancybox/fancy_shadow_e.png
+2012/02/13 18:12:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii/fancybox/fancy_shadow_se.png".' in C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/fancybox/fa...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/fancybox/fancy_shadow_se.png
+2012/02/13 18:12:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii/fancybox/fancy_shadow_s.png".' in C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/fancybox/fa...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/fancybox/fancy_shadow_s.png
+2012/02/13 18:12:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii/fancybox/fancy_shadow_sw.png".' in C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/fancybox/fa...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/fancybox/fancy_shadow_sw.png
+2012/02/13 18:12:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii/fancybox/fancy_shadow_w.png".' in C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/fancybox/fa...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/fancybox/fancy_shadow_w.png
+2012/02/13 18:12:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii/fancybox/fancy_shadow_nw.png".' in C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/fancybox/fa...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/fancybox/fancy_shadow_nw.png
+2012/02/13 18:12:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii/fancybox/fancy_nav_left.png".' in C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/fancybox/fa...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/fancybox/fancy_nav_left.png
+2012/02/13 18:12:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii/fancybox/fancy_nav_right.png".' in C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/fancybox/fa...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/fancybox/fancy_nav_right.png
+2012/02/13 18:12:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_close.png
+2012/02/13 18:12:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_loading.png
+2012/02/13 18:12:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_shadow_n.png
+2012/02/13 18:12:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_shadow_ne.png
+2012/02/13 18:12:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_shadow_e.png
+2012/02/13 18:12:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_shadow_se.png
+2012/02/13 18:12:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_shadow_s.png
+2012/02/13 18:12:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_shadow_sw.png
+2012/02/13 18:12:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_shadow_w.png
+2012/02/13 18:12:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_shadow_nw.png
+2012/02/13 18:12:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_nav_left.png
+2012/02/13 18:12:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_nav_right.png
+2012/02/13 18:12:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii/fancybox/fancy_close.png".' in C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/fancybox/fa...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/fancybox/fancy_close.png
+2012/02/13 18:12:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii/fancybox/fancy_loading.png".' in C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/fancybox/fa...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/fancybox/fancy_loading.png
+2012/02/13 18:12:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii/fancybox/fancy_shadow_n.png".' in C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/fancybox/fa...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/fancybox/fancy_shadow_n.png
+2012/02/13 18:12:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii/fancybox/fancy_shadow_ne.png".' in C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/fancybox/fa...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/fancybox/fancy_shadow_ne.png
+2012/02/13 18:12:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii/fancybox/fancy_shadow_e.png".' in C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/fancybox/fa...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/fancybox/fancy_shadow_e.png
+2012/02/13 18:12:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii/fancybox/fancy_shadow_se.png".' in C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/fancybox/fa...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/fancybox/fancy_shadow_se.png
+2012/02/13 18:12:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii/fancybox/fancy_shadow_s.png".' in C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/fancybox/fa...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/fancybox/fancy_shadow_s.png
+2012/02/13 18:12:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii/fancybox/fancy_shadow_sw.png".' in C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/fancybox/fa...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/fancybox/fancy_shadow_sw.png
+2012/02/13 18:12:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii/fancybox/fancy_shadow_w.png".' in C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/fancybox/fa...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/fancybox/fancy_shadow_w.png
+2012/02/13 18:12:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii/fancybox/fancy_shadow_nw.png".' in C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/fancybox/fa...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/fancybox/fancy_shadow_nw.png
+2012/02/13 18:12:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii/fancybox/fancy_nav_left.png".' in C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/fancybox/fa...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/fancybox/fancy_nav_left.png
+2012/02/13 18:12:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii/fancybox/fancy_nav_right.png".' in C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/fancybox/fa...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/fancybox/fancy_nav_right.png
+2012/02/13 18:12:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_close.png
+2012/02/13 18:12:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_loading.png
+2012/02/13 18:12:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_shadow_n.png
+2012/02/13 18:12:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_shadow_ne.png
+2012/02/13 18:12:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_shadow_e.png
+2012/02/13 18:12:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_shadow_se.png
+2012/02/13 18:12:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_shadow_s.png
+2012/02/13 18:12:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_shadow_sw.png
+2012/02/13 18:12:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_shadow_w.png
+2012/02/13 18:12:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_shadow_nw.png
+2012/02/13 18:12:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_nav_left.png
+2012/02/13 18:12:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "fancybox".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('fancybox')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('fancybox')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('gii/default/fan...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/gii/default/fancybox/fancy_nav_right.png
+2012/02/13 18:13:07 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('empleado')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/empleado
+2012/02/13 18:14:03 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('create')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('empleado/create')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/empleado/create
+2012/02/13 18:15:36 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('empleado')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/empleado
+2012/02/13 18:15:40 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('create')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('empleado/create')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/empleado/create
+2012/02/13 18:20:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "1".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('1')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('1')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('sugerencia/1/ad...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/sugerencia/1/admin
+2012/02/13 18:20:46 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "update".' in C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('update')
+#1 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/dcv7/DCV/index.php/update/
+2012/02/13 18:20:54 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:328
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(301): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('update')
+#9 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('sugerencia/upda...')
+#10 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#11 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#12 {main} REQUEST_URI=/dcv7/DCV/index.php/sugerencia/update
+2012/02/13 18:24:54 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('admin')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('solicitudProble...')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/solicitudProblemasInscripcion/admin
+2012/02/13 18:28:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "1".' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:477
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(262): CController->missingAction('1')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('1')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('sugerencia/1/up...')
+#3 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/dcv7/DCV/index.php/sugerencia/1/update
+2012/02/13 18:41:24 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('admin')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('sugerencia/admi...')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/sugerencia/admin
+2012/02/13 18:41:42 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('admin')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('sugerencia/admi...')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/sugerencia/admin
+2012/02/13 18:42:50 [error] [exception.CException] exception 'CException' with message 'Property "CWebUser.carrera" is not defined.' in C:\xampp\htdocs\dcv7\yii\framework\base\CComponent.php:131
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CWebUser.php(124): CComponent->__get('carrera')
+#1 C:\xampp\htdocs\dcv7\DCV\protected\controllers\AlumnoController.php(164): CWebUser->__get('carrera')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\actions\CInlineAction.php(50): AlumnoController->actionIndex()
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(300): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#10 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('')
+#12 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('alumno')
+#13 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#15 {main} REQUEST_URI=/dcv7/DCV/index.php/alumno
+2012/02/13 18:43:02 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('admin')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('sugerencia/admi...')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/sugerencia/admin
+2012/02/13 21:07:17 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\xampp\htdocs\dcv7\yii\framework\web\CController.php:328
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(301): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('update')
+#9 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('sugerencia/upda...')
+#10 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#11 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#12 {main} REQUEST_URI=/dcv7/DCV/index.php/sugerencia/update
+2012/02/13 21:12:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "carreraTieneEmpleado".' in C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('carreraTieneEmp...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/dcv7/DCV/index.php/carreraTieneEmpleado
+2012/02/13 21:13:40 [error] [exception.CException] exception 'CException' with message 'Property "CWebUser.carrera" is not defined.' in C:\xampp\htdocs\dcv7\yii\framework\base\CComponent.php:131
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CWebUser.php(124): CComponent->__get('carrera')
+#1 C:\xampp\htdocs\dcv7\DCV\protected\controllers\AlumnoController.php(164): CWebUser->__get('carrera')
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\actions\CInlineAction.php(50): AlumnoController->actionIndex()
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(300): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#10 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('')
+#12 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('alumno')
+#13 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#15 {main} REQUEST_URI=/dcv7/DCV/index.php/alumno
+2012/02/13 21:14:07 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('create')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('empleado/create')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/empleado/create
+2012/02/13 21:23:16 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('create')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('empleado/create')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/empleado/create
+2012/02/13 21:28:39 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php:158
+Stack trace:
+#0 C:\xampp\htdocs\dcv7\yii\framework\web\auth\CAccessControlFilter.php(120): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilter.php(39): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(1144): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\dcv7\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(283): CFilterChain->run()
+#6 C:\xampp\htdocs\dcv7\yii\framework\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(277): CController->run('create')
+#8 C:\xampp\htdocs\dcv7\yii\framework\web\CWebApplication.php(136): CWebApplication->runController('empleado/create')
+#9 C:\xampp\htdocs\dcv7\yii\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\dcv7\DCV\index.php(13): CApplication->run()
+#11 {main} REQUEST_URI=/dcv7/DCV/index.php/empleado/create
+2012/02/24 05:57:29 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`dcv`.`empleado`, CONSTRAINT `empleado_ibfk_1` FOREIGN KEY (`carrera`) REFERENCES `carrera` (`id`)). The SQL statement executed was: INSERT INTO `empleado` (`nomina`, `nombre`, `apellido_paterno`, `apellido_materno`, `password`, `puesto`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5).
+in /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php (82)
+in /opt/lampp/htdocs/ITCDCV/index.php (13)
+2012/02/24 05:57:29 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`dcv`.`empleado`, CONSTRAINT `empleado_ibfk_1` FOREIGN KEY (`carrera`) REFERENCES `carrera` (`id`)). The SQL statement executed was: INSERT INTO `empleado` (`nomina`, `nombre`, `apellido_paterno`, `apellido_materno`, `password`, `puesto`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5)' in /opt/lampp/htdocs/yii/framework/db/CDbCommand.php:354
+Stack trace:
+#0 /opt/lampp/htdocs/yii/framework/db/ar/CActiveRecord.php(1014): CDbCommand->execute()
+#1 /opt/lampp/htdocs/yii/framework/db/ar/CActiveRecord.php(787): CActiveRecord->insert(NULL)
+#2 /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php(82): CActiveRecord->save()
+#3 /opt/lampp/htdocs/yii/framework/web/actions/CInlineAction.php(50): EmpleadoController->actionCreate()
+#4 /opt/lampp/htdocs/yii/framework/web/CController.php(309): CInlineAction->runWithParams(Array)
+#5 /opt/lampp/htdocs/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 /opt/lampp/htdocs/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#7 /opt/lampp/htdocs/yii/framework/web/CController.php(1146): CFilter->filter(Object(CFilterChain))
+#8 /opt/lampp/htdocs/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#9 /opt/lampp/htdocs/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 /opt/lampp/htdocs/yii/framework/web/CController.php(292): CFilterChain->run()
+#11 /opt/lampp/htdocs/yii/framework/web/CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /opt/lampp/htdocs/yii/framework/web/CWebApplication.php(276): CController->run('create')
+#13 /opt/lampp/htdocs/yii/framework/web/CWebApplication.php(135): CWebApplication->runController('empleado/create')
+#14 /opt/lampp/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#15 /opt/lampp/htdocs/ITCDCV/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/ITCDCV/index.php/empleado/create
+HTTP_REFERER=http://192.168.0.15/ITCDCV/index.php/empleado/create
+---
+2012/02/24 06:16:40 [error] [exception.CException] exception 'CException' with message 'Property "Empleado.puestos" is not defined.' in /opt/lampp/htdocs/yii/framework/base/CComponent.php:131
+Stack trace:
+#0 /opt/lampp/htdocs/yii/framework/db/ar/CActiveRecord.php(144): CComponent->__get('puestos')
+#1 /opt/lampp/htdocs/yii/framework/web/helpers/CHtml.php(2044): CActiveRecord->__get('puestos')
+#2 /opt/lampp/htdocs/yii/framework/web/helpers/CHtml.php(1774): CHtml::resolveValue(Object(Empleado), 'puestos')
+#3 /opt/lampp/htdocs/yii/framework/web/helpers/CHtml.php(1205): CHtml::activeInputField('text', Object(Empleado), 'puestos', Array)
+#4 /opt/lampp/htdocs/yii/framework/web/widgets/CActiveForm.php(575): CHtml::activeTextField(Object(Empleado), 'puestos', Array)
+#5 /opt/lampp/htdocs/ITCDCV/protected/views/empleado/create.php(41): CActiveForm->textField(Object(Empleado), 'puestos')
+#6 /opt/lampp/htdocs/yii/framework/web/CBaseController.php(127): require('/opt/lampp/htdo...')
+#7 /opt/lampp/htdocs/yii/framework/web/CBaseController.php(96): CBaseController->renderInternal('/opt/lampp/htdo...', Array, true)
+#8 /opt/lampp/htdocs/yii/framework/web/CController.php(870): CBaseController->renderFile('/opt/lampp/htdo...', Array, true)
+#9 /opt/lampp/htdocs/yii/framework/web/CController.php(783): CController->renderPartial('create', Array, true)
+#10 /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php(88): CController->render('create', Array)
+#11 /opt/lampp/htdocs/yii/framework/web/actions/CInlineAction.php(50): EmpleadoController->actionCreate()
+#12 /opt/lampp/htdocs/yii/framework/web/CController.php(309): CInlineAction->runWithParams(Array)
+#13 /opt/lampp/htdocs/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#14 /opt/lampp/htdocs/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#15 /opt/lampp/htdocs/yii/framework/web/CController.php(1146): CFilter->filter(Object(CFilterChain))
+#16 /opt/lampp/htdocs/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#17 /opt/lampp/htdocs/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#18 /opt/lampp/htdocs/yii/framework/web/CController.php(292): CFilterChain->run()
+#19 /opt/lampp/htdocs/yii/framework/web/CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 /opt/lampp/htdocs/yii/framework/web/CWebApplication.php(276): CController->run('create')
+#21 /opt/lampp/htdocs/yii/framework/web/CWebApplication.php(135): CWebApplication->runController('empleado/create')
+#22 /opt/lampp/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#23 /opt/lampp/htdocs/ITCDCV/index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/ITCDCV/index.php/empleado/create
+---
+2012/02/24 06:25:14 [error] [php] include(Carreras.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory (/opt/lampp/htdocs/yii/framework/YiiBase.php:418)
+Stack trace:
+#0 /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php(78): spl_autoload_call()
+#1 /opt/lampp/htdocs/yii/framework/web/actions/CInlineAction.php(50): EmpleadoController->actionCreate()
+#2 /opt/lampp/htdocs/yii/framework/web/CController.php(309): CInlineAction->runWithParams()
+#3 /opt/lampp/htdocs/yii/framework/web/filters/CFilterChain.php(134): EmpleadoController->runAction()
+#4 /opt/lampp/htdocs/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#5 /opt/lampp/htdocs/yii/framework/web/CController.php(1146): CAccessControlFilter->filter()
+#6 /opt/lampp/htdocs/yii/framework/web/filters/CInlineFilter.php(59): EmpleadoController->filterAccessControl()
+#7 /opt/lampp/htdocs/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter()
+#8 /opt/lampp/htdocs/yii/framework/web/CController.php(292): CFilterChain->run()
+#9 /opt/lampp/htdocs/yii/framework/web/CController.php(266): EmpleadoController->runActionWithFilters()
+#10 /opt/lampp/htdocs/yii/framework/web/CWebApplication.php(276): EmpleadoController->run()
+#11 /opt/lampp/htdocs/yii/framework/web/CWebApplication.php(135): CWebApplication->runController()
+#12 /opt/lampp/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#13 /opt/lampp/htdocs/ITCDCV/index.php(13): CWebApplication->run()
+REQUEST_URI=/ITCDCV/index.php/empleado/create
+in /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php (78)
+in /opt/lampp/htdocs/ITCDCV/index.php (13)
+2012/02/24 06:34:03 [error] [exception.CException] exception 'CException' with message 'Property "Carrera.carreras" is not defined.' in /opt/lampp/htdocs/yii/framework/base/CComponent.php:131
+Stack trace:
+#0 /opt/lampp/htdocs/yii/framework/db/ar/CActiveRecord.php(144): CComponent->__get('carreras')
+#1 /opt/lampp/htdocs/yii/framework/web/helpers/CHtml.php(2044): CActiveRecord->__get('carreras')
+#2 /opt/lampp/htdocs/yii/framework/web/helpers/CHtml.php(1402): CHtml::resolveValue(Object(Carrera), 'carreras')
+#3 /opt/lampp/htdocs/yii/framework/web/helpers/CHtml.php(1454): CHtml::activeDropDownList(Object(Carrera), 'carreras', Array, Array)
+#4 /opt/lampp/htdocs/yii/framework/web/widgets/CActiveForm.php(697): CHtml::activeListBox(Object(Carrera), 'carreras', Array, Array)
+#5 /opt/lampp/htdocs/ITCDCV/protected/views/empleado/create.php(45): CActiveForm->listBox(Object(Carrera), 'carreras', Array)
+#6 /opt/lampp/htdocs/yii/framework/web/CBaseController.php(127): require('/opt/lampp/htdo...')
+#7 /opt/lampp/htdocs/yii/framework/web/CBaseController.php(96): CBaseController->renderInternal('/opt/lampp/htdo...', Array, true)
+#8 /opt/lampp/htdocs/yii/framework/web/CController.php(870): CBaseController->renderFile('/opt/lampp/htdo...', Array, true)
+#9 /opt/lampp/htdocs/yii/framework/web/CController.php(783): CController->renderPartial('create', Array, true)
+#10 /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php(101): CController->render('create', Array)
+#11 /opt/lampp/htdocs/yii/framework/web/actions/CInlineAction.php(50): EmpleadoController->actionCreate()
+#12 /opt/lampp/htdocs/yii/framework/web/CController.php(309): CInlineAction->runWithParams(Array)
+#13 /opt/lampp/htdocs/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#14 /opt/lampp/htdocs/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#15 /opt/lampp/htdocs/yii/framework/web/CController.php(1146): CFilter->filter(Object(CFilterChain))
+#16 /opt/lampp/htdocs/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#17 /opt/lampp/htdocs/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#18 /opt/lampp/htdocs/yii/framework/web/CController.php(292): CFilterChain->run()
+#19 /opt/lampp/htdocs/yii/framework/web/CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 /opt/lampp/htdocs/yii/framework/web/CWebApplication.php(276): CController->run('create')
+#21 /opt/lampp/htdocs/yii/framework/web/CWebApplication.php(135): CWebApplication->runController('empleado/create')
+#22 /opt/lampp/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#23 /opt/lampp/htdocs/ITCDCV/index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/ITCDCV/index.php/empleado/create
+---
+2012/02/24 07:17:46 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '90' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `empleado` (`nomina`, `nombre`, `apellido_paterno`, `apellido_materno`, `password`, `puesto`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5).
+in /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php (94)
+in /opt/lampp/htdocs/ITCDCV/index.php (13)
+2012/02/24 07:17:46 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '90' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `empleado` (`nomina`, `nombre`, `apellido_paterno`, `apellido_materno`, `password`, `puesto`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5)' in /opt/lampp/htdocs/yii/framework/db/CDbCommand.php:354
+Stack trace:
+#0 /opt/lampp/htdocs/yii/framework/db/ar/CActiveRecord.php(1014): CDbCommand->execute()
+#1 /opt/lampp/htdocs/yii/framework/db/ar/CActiveRecord.php(787): CActiveRecord->insert(NULL)
+#2 /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php(94): CActiveRecord->save()
+#3 /opt/lampp/htdocs/yii/framework/web/actions/CInlineAction.php(50): EmpleadoController->actionCreate()
+#4 /opt/lampp/htdocs/yii/framework/web/CController.php(309): CInlineAction->runWithParams(Array)
+#5 /opt/lampp/htdocs/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 /opt/lampp/htdocs/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#7 /opt/lampp/htdocs/yii/framework/web/CController.php(1146): CFilter->filter(Object(CFilterChain))
+#8 /opt/lampp/htdocs/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#9 /opt/lampp/htdocs/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 /opt/lampp/htdocs/yii/framework/web/CController.php(292): CFilterChain->run()
+#11 /opt/lampp/htdocs/yii/framework/web/CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /opt/lampp/htdocs/yii/framework/web/CWebApplication.php(276): CController->run('create')
+#13 /opt/lampp/htdocs/yii/framework/web/CWebApplication.php(135): CWebApplication->runController('empleado/create')
+#14 /opt/lampp/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#15 /opt/lampp/htdocs/ITCDCV/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/ITCDCV/index.php/empleado/create
+HTTP_REFERER=http://192.168.0.15/ITCDCV/index.php/empleado/create
+---
+2012/02/24 07:41:36 [warning] [application] Failed to set unsafe attribute "nomina" of "Carrera".
+in /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php (94)
+in /opt/lampp/htdocs/ITCDCV/index.php (13)
+2012/02/24 07:41:36 [warning] [application] Failed to set unsafe attribute "apellido_paterno" of "Carrera".
+in /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php (94)
+in /opt/lampp/htdocs/ITCDCV/index.php (13)
+2012/02/24 07:41:36 [warning] [application] Failed to set unsafe attribute "apellido_materno" of "Carrera".
+in /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php (94)
+in /opt/lampp/htdocs/ITCDCV/index.php (13)
+2012/02/24 07:41:36 [warning] [application] Failed to set unsafe attribute "password" of "Carrera".
+in /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php (94)
+in /opt/lampp/htdocs/ITCDCV/index.php (13)
+2012/02/24 07:41:36 [warning] [application] Failed to set unsafe attribute "puesto" of "Carrera".
+in /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php (94)
+in /opt/lampp/htdocs/ITCDCV/index.php (13)
+2012/02/24 07:42:25 [warning] [application] Failed to set unsafe attribute "nomina" of "Carrera".
+in /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php (94)
+in /opt/lampp/htdocs/ITCDCV/index.php (13)
+2012/02/24 07:42:25 [warning] [application] Failed to set unsafe attribute "apellido_paterno" of "Carrera".
+in /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php (94)
+in /opt/lampp/htdocs/ITCDCV/index.php (13)
+2012/02/24 07:42:25 [warning] [application] Failed to set unsafe attribute "apellido_materno" of "Carrera".
+in /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php (94)
+in /opt/lampp/htdocs/ITCDCV/index.php (13)
+2012/02/24 07:42:25 [warning] [application] Failed to set unsafe attribute "password" of "Carrera".
+in /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php (94)
+in /opt/lampp/htdocs/ITCDCV/index.php (13)
+2012/02/24 07:42:25 [warning] [application] Failed to set unsafe attribute "puesto" of "Carrera".
+in /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php (94)
+in /opt/lampp/htdocs/ITCDCV/index.php (13)
+2012/02/24 07:42:25 [error] [php] Cannot modify header information - headers already sent by (output started at /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php:97) (/opt/lampp/htdocs/yii/framework/web/CHttpRequest.php:716)
+Stack trace:
+#0 /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php(100): EmpleadoController->redirect()
+#1 /opt/lampp/htdocs/yii/framework/web/actions/CInlineAction.php(50): EmpleadoController->actionCreate()
+#2 /opt/lampp/htdocs/yii/framework/web/CController.php(309): CInlineAction->runWithParams()
+#3 /opt/lampp/htdocs/yii/framework/web/filters/CFilterChain.php(134): EmpleadoController->runAction()
+#4 /opt/lampp/htdocs/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#5 /opt/lampp/htdocs/yii/framework/web/CController.php(1146): CAccessControlFilter->filter()
+#6 /opt/lampp/htdocs/yii/framework/web/filters/CInlineFilter.php(59): EmpleadoController->filterAccessControl()
+#7 /opt/lampp/htdocs/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter()
+#8 /opt/lampp/htdocs/yii/framework/web/CController.php(292): CFilterChain->run()
+#9 /opt/lampp/htdocs/yii/framework/web/CController.php(266): EmpleadoController->runActionWithFilters()
+#10 /opt/lampp/htdocs/yii/framework/web/CWebApplication.php(276): EmpleadoController->run()
+#11 /opt/lampp/htdocs/yii/framework/web/CWebApplication.php(135): CWebApplication->runController()
+#12 /opt/lampp/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#13 /opt/lampp/htdocs/ITCDCV/index.php(13): CWebApplication->run()
+REQUEST_URI=/ITCDCV/index.php/empleado/create
+in /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php (100)
+in /opt/lampp/htdocs/ITCDCV/index.php (13)
+2012/02/24 07:45:09 [warning] [application] Failed to set unsafe attribute "id" of "Carrera".
+in /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php (93)
+in /opt/lampp/htdocs/ITCDCV/index.php (13)
+2012/02/24 07:45:14 [warning] [application] Failed to set unsafe attribute "id" of "Carrera".
+in /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php (93)
+in /opt/lampp/htdocs/ITCDCV/index.php (13)
+2012/02/24 07:45:14 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '90' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `empleado` (`nomina`, `nombre`, `apellido_paterno`, `apellido_materno`, `password`, `puesto`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5).
+in /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php (94)
+in /opt/lampp/htdocs/ITCDCV/index.php (13)
+2012/02/24 07:45:14 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '90' for key 'PRIMARY'. The SQL statement executed was: INSERT INTO `empleado` (`nomina`, `nombre`, `apellido_paterno`, `apellido_materno`, `password`, `puesto`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5)' in /opt/lampp/htdocs/yii/framework/db/CDbCommand.php:354
+Stack trace:
+#0 /opt/lampp/htdocs/yii/framework/db/ar/CActiveRecord.php(1014): CDbCommand->execute()
+#1 /opt/lampp/htdocs/yii/framework/db/ar/CActiveRecord.php(787): CActiveRecord->insert(NULL)
+#2 /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php(94): CActiveRecord->save()
+#3 /opt/lampp/htdocs/yii/framework/web/actions/CInlineAction.php(50): EmpleadoController->actionCreate()
+#4 /opt/lampp/htdocs/yii/framework/web/CController.php(309): CInlineAction->runWithParams(Array)
+#5 /opt/lampp/htdocs/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 /opt/lampp/htdocs/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#7 /opt/lampp/htdocs/yii/framework/web/CController.php(1146): CFilter->filter(Object(CFilterChain))
+#8 /opt/lampp/htdocs/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#9 /opt/lampp/htdocs/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 /opt/lampp/htdocs/yii/framework/web/CController.php(292): CFilterChain->run()
+#11 /opt/lampp/htdocs/yii/framework/web/CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /opt/lampp/htdocs/yii/framework/web/CWebApplication.php(276): CController->run('create')
+#13 /opt/lampp/htdocs/yii/framework/web/CWebApplication.php(135): CWebApplication->runController('empleado/create')
+#14 /opt/lampp/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#15 /opt/lampp/htdocs/ITCDCV/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/ITCDCV/index.php/empleado/create
+HTTP_REFERER=http://192.168.0.15/ITCDCV/index.php/empleado/create
+---
+2012/02/24 07:47:05 [warning] [application] Failed to set unsafe attribute "id" of "Carrera".
+in /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php (93)
+in /opt/lampp/htdocs/ITCDCV/index.php (13)
+2012/02/24 07:47:55 [warning] [application] Failed to set unsafe attribute "id" of "Carrera".
+in /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php (93)
+in /opt/lampp/htdocs/ITCDCV/index.php (13)
+2012/02/24 07:48:11 [warning] [application] Failed to set unsafe attribute "id" of "Carrera".
+in /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php (93)
+in /opt/lampp/htdocs/ITCDCV/index.php (13)
+2012/02/24 07:48:39 [warning] [application] Failed to set unsafe attribute "id" of "Carrera".
+in /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php (93)
+in /opt/lampp/htdocs/ITCDCV/index.php (13)
+2012/02/24 07:53:56 [warning] [application] Failed to set unsafe attribute "id" of "Carrera".
+in /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php (93)
+in /opt/lampp/htdocs/ITCDCV/index.php (13)
+2012/02/24 07:54:28 [warning] [application] Failed to set unsafe attribute "id" of "Carrera".
+in /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php (93)
+in /opt/lampp/htdocs/ITCDCV/index.php (13)
+2012/02/24 07:54:28 [error] [exception.CException] exception 'CException' with message 'Property "Carrera.idcarrera" is not defined.' in /opt/lampp/htdocs/yii/framework/base/CComponent.php:131
+Stack trace:
+#0 /opt/lampp/htdocs/yii/framework/db/ar/CActiveRecord.php(144): CComponent->__get('idcarrera')
+#1 /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php(94): CActiveRecord->__get('idcarrera')
+#2 /opt/lampp/htdocs/yii/framework/web/actions/CInlineAction.php(50): EmpleadoController->actionCreate()
+#3 /opt/lampp/htdocs/yii/framework/web/CController.php(309): CInlineAction->runWithParams(Array)
+#4 /opt/lampp/htdocs/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#5 /opt/lampp/htdocs/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#6 /opt/lampp/htdocs/yii/framework/web/CController.php(1146): CFilter->filter(Object(CFilterChain))
+#7 /opt/lampp/htdocs/yii/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#8 /opt/lampp/htdocs/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#9 /opt/lampp/htdocs/yii/framework/web/CController.php(292): CFilterChain->run()
+#10 /opt/lampp/htdocs/yii/framework/web/CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /opt/lampp/htdocs/yii/framework/web/CWebApplication.php(276): CController->run('create')
+#12 /opt/lampp/htdocs/yii/framework/web/CWebApplication.php(135): CWebApplication->runController('empleado/create')
+#13 /opt/lampp/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#14 /opt/lampp/htdocs/ITCDCV/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/ITCDCV/index.php/empleado/create
+HTTP_REFERER=http://192.168.0.15/ITCDCV/index.php/empleado/create
+---
+2012/02/24 07:55:32 [warning] [application] Failed to set unsafe attribute "id" of "Carrera".
+in /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php (93)
+in /opt/lampp/htdocs/ITCDCV/index.php (13)
+2012/02/24 07:56:46 [warning] [application] Failed to set unsafe attribute "id" of "Carrera".
+in /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php (93)
+in /opt/lampp/htdocs/ITCDCV/index.php (13)
+2012/02/24 07:57:27 [warning] [application] Failed to set unsafe attribute "id" of "Carrera".
+in /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php (93)
+in /opt/lampp/htdocs/ITCDCV/index.php (13)
+2012/02/24 07:58:02 [warning] [application] Failed to set unsafe attribute "id" of "Carrera".
+in /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php (93)
+in /opt/lampp/htdocs/ITCDCV/index.php (13)
+2012/02/24 07:58:36 [warning] [application] Failed to set unsafe attribute "id" of "Carrera".
+in /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php (93)
+in /opt/lampp/htdocs/ITCDCV/index.php (13)
+2012/02/24 08:00:49 [error] [php] Trying to get property of non-object (/opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php:93)
+Stack trace:
+#0 /opt/lampp/htdocs/yii/framework/web/filters/CFilterChain.php(134): EmpleadoController->runAction()
+#1 /opt/lampp/htdocs/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#2 /opt/lampp/htdocs/yii/framework/web/CController.php(1146): CAccessControlFilter->filter()
+#3 /opt/lampp/htdocs/yii/framework/web/filters/CInlineFilter.php(59): EmpleadoController->filterAccessControl()
+#4 /opt/lampp/htdocs/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter()
+#5 /opt/lampp/htdocs/yii/framework/web/CController.php(292): CFilterChain->run()
+#6 /opt/lampp/htdocs/yii/framework/web/CController.php(266): EmpleadoController->runActionWithFilters()
+#7 /opt/lampp/htdocs/yii/framework/web/CWebApplication.php(276): EmpleadoController->run()
+#8 /opt/lampp/htdocs/yii/framework/web/CWebApplication.php(135): CWebApplication->runController()
+#9 /opt/lampp/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#10 /opt/lampp/htdocs/ITCDCV/index.php(13): CWebApplication->run()
+REQUEST_URI=/ITCDCV/index.php/empleado/create
+in /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php (93)
+in /opt/lampp/htdocs/ITCDCV/index.php (13)
+2012/02/24 08:01:08 [error] [php] Trying to get property of non-object (/opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php:93)
+Stack trace:
+#0 /opt/lampp/htdocs/yii/framework/web/filters/CFilterChain.php(134): EmpleadoController->runAction()
+#1 /opt/lampp/htdocs/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#2 /opt/lampp/htdocs/yii/framework/web/CController.php(1146): CAccessControlFilter->filter()
+#3 /opt/lampp/htdocs/yii/framework/web/filters/CInlineFilter.php(59): EmpleadoController->filterAccessControl()
+#4 /opt/lampp/htdocs/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter()
+#5 /opt/lampp/htdocs/yii/framework/web/CController.php(292): CFilterChain->run()
+#6 /opt/lampp/htdocs/yii/framework/web/CController.php(266): EmpleadoController->runActionWithFilters()
+#7 /opt/lampp/htdocs/yii/framework/web/CWebApplication.php(276): EmpleadoController->run()
+#8 /opt/lampp/htdocs/yii/framework/web/CWebApplication.php(135): CWebApplication->runController()
+#9 /opt/lampp/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#10 /opt/lampp/htdocs/ITCDCV/index.php(13): CWebApplication->run()
+REQUEST_URI=/ITCDCV/index.php/empleado/create
+in /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php (93)
+in /opt/lampp/htdocs/ITCDCV/index.php (13)
+2012/02/24 08:01:16 [error] [php] Trying to get property of non-object (/opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php:93)
+Stack trace:
+#0 /opt/lampp/htdocs/yii/framework/web/filters/CFilterChain.php(134): EmpleadoController->runAction()
+#1 /opt/lampp/htdocs/yii/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#2 /opt/lampp/htdocs/yii/framework/web/CController.php(1146): CAccessControlFilter->filter()
+#3 /opt/lampp/htdocs/yii/framework/web/filters/CInlineFilter.php(59): EmpleadoController->filterAccessControl()
+#4 /opt/lampp/htdocs/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter()
+#5 /opt/lampp/htdocs/yii/framework/web/CController.php(292): CFilterChain->run()
+#6 /opt/lampp/htdocs/yii/framework/web/CController.php(266): EmpleadoController->runActionWithFilters()
+#7 /opt/lampp/htdocs/yii/framework/web/CWebApplication.php(276): EmpleadoController->run()
+#8 /opt/lampp/htdocs/yii/framework/web/CWebApplication.php(135): CWebApplication->runController()
+#9 /opt/lampp/htdocs/yii/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#10 /opt/lampp/htdocs/ITCDCV/index.php(13): CWebApplication->run()
+REQUEST_URI=/ITCDCV/index.php/empleado/create
+in /opt/lampp/htdocs/ITCDCV/protected/controllers/EmpleadoController.php (93)
+in /opt/lampp/htdocs/ITCDCV/index.php (13)
+=======
 #2 C:\xampp\htdocs\dcv8\yii\framework\web\actions\CAction.php(104): ReflectionMethod->invokeArgs(Object(EmpleadoController), Array)
 #3 C:\xampp\htdocs\dcv8\yii\framework\web\actions\CInlineAction.php(48): CAction->runWithParamsInternal(Object(EmpleadoController), Object(ReflectionMethod), Array)
 #4 C:\xampp\htdocs\dcv8\yii\framework\web\CController.php(300): CInlineAction->runWithParams(Array)
