@@ -8,6 +8,12 @@
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($model); ?>
+	
+	<?php 
+	//Se trata de un alumno colocando una nueva solicitud.
+	if($model->isNewRecord) { 
+	?>
+
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'tipo'); ?>
@@ -35,6 +41,15 @@
 		<?php echo $form->error($model,'comentarios'); ?>
 	</div>
 
+	<?php 
+	}else{
+		//Se trata de un director respondiendo a la solicitud.
+		echo $form->labelEx($model,'status');
+		echo $form->dropDownList($model,'status',array('recibida'=>'Recibida', 'pendiente'=>'Pendiente'
+														, 'terminada'=>'Terminada'));
+		echo $form->error($model,'status');
+	}
+	?>
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Save'); ?>

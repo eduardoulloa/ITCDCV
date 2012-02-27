@@ -33,6 +33,8 @@
 	<b><?php echo CHtml::encode($data->getAttributeLabel('comentarios')); ?>:</b>
 	<?php echo CHtml::encode($data->comentarios); ?>
 	<br />
+	<?php echo CHtml::link('Editar', array('update', 'id'=>$data->id)); ?>
+	
 
 	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('matriculaalumno')); ?>:</b>
