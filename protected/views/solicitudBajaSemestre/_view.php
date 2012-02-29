@@ -37,7 +37,12 @@
 	<b><?php echo CHtml::encode($data->getAttributeLabel('motivo')); ?>:</b>
 	<?php echo CHtml::encode($data->motivo); ?>
 	<br />
-	<?php echo CHtml::link('Editar', array('update', 'id'=>$data->id)); ?>
+	
+	
+	<?php if(Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin'){
+		echo CHtml::link('Editar', array('update', 'id'=>$data->id));
+	}
+	?>
 	
 
 	<?php /*

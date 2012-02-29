@@ -17,7 +17,7 @@ class EmpleadoController extends Controller
 			'accessControl', // perform access control for CRUD operations
 		);
 	}
-
+	
 	/**
 	 * Specifies the access control rules.
 	 * This method is used by the 'accessControl' filter.
@@ -72,7 +72,7 @@ class EmpleadoController extends Controller
 				'users'=>$admin,
 			),
 			array('allow', 
-				'actions'=>array('index','view','admin','delete','create','update'),
+				'actions'=>array('index','view','admin','delete','create','update','actualizar'),
 				'users'=>$directores,
 			),
 			array('deny',  // deny all users
@@ -143,8 +143,9 @@ class EmpleadoController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
-		$model=$this->loadModel($id);
-
+		
+		$model = $this->loadModel($id);
+		
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 

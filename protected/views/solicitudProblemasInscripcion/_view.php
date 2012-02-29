@@ -39,18 +39,19 @@
 	<?php echo CHtml::encode($data->quitar_prioridades); ?>
 	<br />
 	
-	<?php echo CHtml::link('Editar', array('update', 'id'=>$data->id)); ?>
-
-
-	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('comentarios')); ?>:</b>
 	<?php echo CHtml::encode($data->comentarios); ?>
 	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('matriculaalumno')); ?>:</b>
-	<?php echo CHtml::encode($data->matriculaalumno); ?>
+	
+	<?php if(Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin' || Yii::app()->user->rol == 'Asistente' || Yii::app()->user->rol == 'Secretaria'){
+		echo CHtml::link('Editar', array('update', 'id'=>$data->id));
+	}
+	?>
+	
+	<!--
+	<b><?php /*echo CHtml::encode($data->getAttributeLabel('matriculaalumno')); */?>:</b>
+	<?php /*echo CHtml::encode($data->matriculaalumno); */?>
 	<br />
-
-	*/ ?>
+	-->
 
 </div>

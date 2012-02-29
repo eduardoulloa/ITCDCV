@@ -41,7 +41,10 @@
 	<?php echo CHtml::encode($data->unidades_materia); ?>
 	<br />
 	
-	<?php echo CHtml::link('Editar', array('update', 'id'=>$data->id)); ?>
+	<?php if(Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin'){
+		echo CHtml::link('Editar', array('update', 'id'=>$data->id));
+	}
+	?>
 	
 
 	<?php /*

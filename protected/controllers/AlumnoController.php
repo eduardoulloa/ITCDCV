@@ -145,7 +145,7 @@ class AlumnoController extends Controller
 			}
 		
 		}else if(Yii::app()->user->rol == 'Alumno'){
-		
+			
 			$model = $this->loadModel(Yii::app()->user->id);
 			if(isset($_POST['Alumno']))
 			{	

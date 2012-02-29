@@ -33,9 +33,12 @@
 	<b><?php echo CHtml::encode($data->getAttributeLabel('comentarios')); ?>:</b>
 	<?php echo CHtml::encode($data->comentarios); ?>
 	<br />
-	<?php echo CHtml::link('Editar', array('update', 'id'=>$data->id)); ?>
 	
-
+	<?php if(Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin'){
+		echo CHtml::link('Editar', array('update', 'id'=>$data->id));
+	}
+	?>
+	
 	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('matriculaalumno')); ?>:</b>
 	<?php echo CHtml::encode($data->matriculaalumno); ?>

@@ -234,7 +234,8 @@ class SolicitudBajaMateriaController extends Controller
 							'attributes'=> array(
 								'fechahora',
 								),
-							'defaultOrder'=>'fechahora'
+							'defaultOrder'=>'fechahora',
+							
 							),
 						'pagination'=> array(
 							'pageSize'=>100,

@@ -31,6 +31,8 @@
 						array('label'=>'Crear Solicitud de Revalidacion de Materias', 'url'=>array('solicitudRevalidacion/create')),
 						array('label'=>'Crear Solicitud de Carta de Recomendacion', 'url'=>array('solicitudCartaRecomendacion/create')),
 						array('label'=>'Crear Sugerencia', 'url'=>array('sugerencia/create')),
+						array('label'=>''),
+						array('label'=>''),
 						array('label'=>'Ver Todas las Solicitudes', 'url'=>array('solicitud/index')),
 						array('label'=>'Ver Solicitudes de Bajas de Materias', 'url'=>array('solicitudBajaMateria/index')),
 						array('label'=>'Ver Solicitudes de Bajas de Semestre', 'url'=>array('solicitudBajaSemestre/index')),
@@ -46,7 +48,7 @@
 
 					array('label'=>'General'),
 					array('label'=>'Ver Boletines Informativos', 'url'=>array('boletinInformativo/index')),
-					array('label'=>'Ver Problemas de Inscripcion', 'url'=>array('solicitudProblemasInscripcion/index')),
+					array('label'=>'Ver Reportes de Problemas de Inscripcion', 'url'=>array('solicitudProblemasInscripcion/index')),
 					array('label'=>''),
 					array('label'=>''),
 					array('label'=>'Sugerencias'),
@@ -69,13 +71,13 @@
 					array('label'=>'Ver Empleados', 'url'=>array('empleado/index')),
 					array('label'=>'Ver Carreras', 'url'=>array('carrera/index')),
 					);
-			}else if (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol){
+			}else if (Yii::app()->user->rol == 'Director'){
 				$menu = array(
 					
 					array('label'=>'General'),
 					array('label'=>'Crear Boletin informativo', 'url'=>array('boletinInformativo/create')),
 					array('label'=>'Ver Boletines Informativos', 'url'=>array('boletinInformativo/index')),
-					array('label'=>'Ver Problemas de Inscripcion', 'url'=>array('solicitudProblemasInscripcion/index')),
+					array('label'=>'Ver Reportes de Problemas de Inscripcion', 'url'=>array('solicitudProblemasInscripcion/index')),
 					array('label'=>''),
 					array('label'=>''),
 					array('label'=>'Sugerencias'),
@@ -95,6 +97,24 @@
 					array('label'=>'Registrar Empleado', 'url'=>array('empleado/create')),
 					array('label'=>'Ver Alumnos', 'url'=>array('alumno/index')),
 					array('label'=>'Ver Empleados', 'url'=>array('empleado/index')),
+					);
+			}else if(Yii::app()->user->rol == 'Asistente' || Yii::app()->user->rol == 'Secretaria'){
+				$menu = array(
+					
+					array('label'=>'General'),
+					array('label'=>'Ver Reportes de Problemas de Inscripcion', 'url'=>array('solicitudProblemasInscripcion/index')),
+					array('label'=>''),
+					array('label'=>''),
+					array('label'=>'Sugerencias'),
+					array('label'=>'Ver Sugerencias', 'url'=>array('sugerencia/index')),
+					array('label'=>''),
+					array('label'=>''),
+					array('label'=>'Escolar'),
+					array('label'=>'Ver Solicitudes de Revalidacion de Materias', 'url'=>array('solicitudRevalidacion/index')),
+					array('label'=>''),
+					array('label'=>''),
+					array('label'=>'Configurar cuenta', 'url'=>array('empleado/update/'.Yii::app()->user->id)),
+					
 					);
 			}
 			

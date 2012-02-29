@@ -29,9 +29,10 @@
 	<?php echo CHtml::encode(get_class($data)); ?>
 	<br />
 	
-	
-	<?php echo CHtml::link(CHtml::encode('Editar'), array('/'.get_class($data)
-				.'/update', 'id'=>$data->id)); ?>
-	<br />
+	<?php if(Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin'){
+		echo CHtml::link(CHtml::encode('Editar'), array('/'.get_class($data)
+				.'/update', 'id'=>$data->id));
+	}
+	?>
 
 </div>
