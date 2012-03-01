@@ -209,7 +209,7 @@ class SolicitudRevalidacionController extends Controller
 							'attributes'=> array(
 								'fechahora',
 								),
-							'defaultOrder'=>'fechahora'
+							'defaultOrder'=>'fechahora DESC'
 							),
 						'pagination'=> array(
 							'pageSize'=>100,
@@ -234,7 +234,7 @@ class SolicitudRevalidacionController extends Controller
 							'attributes'=> array(
 								'fechahora',
 								),
-							'defaultOrder'=>'fechahora'
+							'defaultOrder'=>'fechahora DESC'
 							),
 						'pagination'=> array(
 							'pageSize'=>100,
@@ -243,7 +243,15 @@ class SolicitudRevalidacionController extends Controller
 						));
 	
 		}else if (Yii::app()->user->rol == 'Admin'){
-			$dataProvider = new CActiveDataProvider('SolicitudRevalidacion');
+			$dataProvider = new CActiveDataProvider('SolicitudRevalidacion', array(
+					'sort'=>array(
+							'attributes'=>array(
+								'fechahora',
+								),
+							'defaultOrder'=>'fechahora DESC'
+							),
+				)
+			);
 		}
 		
 		$this->render('index',array(

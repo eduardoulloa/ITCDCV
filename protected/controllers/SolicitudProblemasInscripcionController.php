@@ -258,7 +258,7 @@ class SolicitudProblemasInscripcionController extends Controller
 							'attributes'=> array(
 								'fechahora',
 								),
-							'defaultOrder'=>'fechahora'
+							'defaultOrder'=>'fechahora DESC'
 							),
 						'pagination'=> array(
 							'pageSize'=>100,
@@ -283,7 +283,7 @@ class SolicitudProblemasInscripcionController extends Controller
 							'attributes'=> array(
 								'fechahora',
 								),
-							'defaultOrder'=>'fechahora'
+							'defaultOrder'=>'fechahora DESC'
 							),
 						'pagination'=> array(
 							'pageSize'=>100,
@@ -293,7 +293,17 @@ class SolicitudProblemasInscripcionController extends Controller
 	
 		}else if(Yii::app()->user->rol == 'Admin'){
 		
-			$dataProvider = new CActiveDataProvider('SolicitudProblemasInscripcion');
+			$dataProvider = new CActiveDataProvider('SolicitudProblemasInscripcion', array(
+					'sort'=>array(
+							'attributes'=>array(
+								'fechahora',
+								),
+							'defaultOrder'=>'fechahora DESC'
+							),
+				)
+			);
+			
+			
 		}
 		
 		$this->render('index',array(

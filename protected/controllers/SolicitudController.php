@@ -33,7 +33,7 @@ class SolicitudController extends Controller
 							'attributes'=> array(
 								'fechahora',
 								),
-							'defaultOrder'=>'fechahora'
+							'defaultOrder'=>'fechahora DESC'
 							),
 						'pagination'=> array(
 							'pageSize'=>100,
@@ -69,7 +69,7 @@ class SolicitudController extends Controller
 							'attributes'=> array(
 								'fechahora',
 								),
-							'defaultOrder'=>'fechahora'
+							'defaultOrder'=>'fechahora DESC'
 							),
 						'pagination'=> array(
 							'pageSize'=>100,
@@ -95,7 +95,7 @@ class SolicitudController extends Controller
 							'attributes'=> array(
 								'fechahora',
 								),
-							'defaultOrder'=>'fechahora'
+							'defaultOrder'=>'fechahora DESC'
 							),
 						'pagination'=> array(
 							'pageSize'=>100,
