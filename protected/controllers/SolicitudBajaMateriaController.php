@@ -198,6 +198,7 @@ class SolicitudBajaMateriaController extends Controller
 	
 	public function createEmailBody($model) 
 	{
+		$body = "";
 		$body .= "\nClave de la materia: ".$model->clave_materia;
 		$body .= "\nNombre de la materia: ".$model->nombre_materia;
 		return $body;

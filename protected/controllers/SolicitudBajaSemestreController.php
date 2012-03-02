@@ -180,6 +180,7 @@ class SolicitudBajaSemestreController extends Controller
 	
 	public function createEmailBody($model) 
 	{
+		$body = "";
 		$body .= "\nPeriodo: ".$model->periodo;
 		return $body;
 	}

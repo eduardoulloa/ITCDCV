@@ -185,6 +185,7 @@ class SolicitudProblemasInscripcionController extends Controller
 	
 	public function createEmailBody($model) 
 	{
+		$body = "";
 		$body .= "\nComentarios: ".$model->comentarios;
 		return $body;
 	}

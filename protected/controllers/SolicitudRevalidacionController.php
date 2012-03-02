@@ -181,6 +181,7 @@ class SolicitudRevalidacionController extends Controller
 	
 	public function createEmailBody($model) 
 	{
+		$body = "";
 		$body .= "\nMateria a Revalidar: ".$model->clave_revalidar." ".$model->nombre_revalidar;
 		$body .= "\nMateria Cursada: ".$mode->clave_cursada." ".$model->nombre_cursada;
 		return $body;

@@ -179,6 +179,7 @@ class SugerenciaController extends Controller
 	
 	public function createEmailBody($model) 
 	{
+		$body = "";
 		$body .= "\nSUGERENCIA:".$model->sugerencia;
 		$body .= "\nRESPUESTA: ".$model->respuesta;
 		return $body;

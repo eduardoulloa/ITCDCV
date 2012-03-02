@@ -178,6 +178,7 @@ class SolicitudCartaRecomendacionController extends Controller
 	
 	public function createEmailBody($model) 
 	{
+		$body = "";
 		$body .= "\nCarta de Recomendacion";
 		$body .= "\nTipo: ".$model->tipo;
 		$body .= "\nFormato: ".$model->formato;
