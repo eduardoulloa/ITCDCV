@@ -183,7 +183,7 @@ class SolicitudRevalidacionController extends Controller
 	{
 		$body = "";
 		$body .= "\nMateria a Revalidar: ".$model->clave_revalidar." ".$model->nombre_revalidar;
-		$body .= "\nMateria Cursada: ".$mode->clave_cursada." ".$model->nombre_cursada;
+		$body .= "\nMateria Cursada: ".$model->clave_cursada." ".$model->nombre_cursada;
 		return $body;
 	}
 	
