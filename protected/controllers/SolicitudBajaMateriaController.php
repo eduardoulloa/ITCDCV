@@ -91,7 +91,7 @@ class SolicitudBajaMateriaController extends Controller
 			),
 			
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('index','create','view'),
+				'actions'=>array('index','create','view','update'),
 				'users'=>array('@'),
 			),
 			array('allow', 
@@ -157,6 +157,9 @@ class SolicitudBajaMateriaController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
+	
+	
+		
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
@@ -164,19 +167,28 @@ class SolicitudBajaMateriaController extends Controller
 
 		if(isset($_POST['SolicitudBajaMateria']))
 		{
+		
 			$model->attributes=$_POST['SolicitudBajaMateria'];
+
 			if($model->save()) {
 				if($this->needsToSendMail($model)) {
 					EMailSender::sendEmail($this->createEmailBody($model), $this->createSubject($model), 
 													getEmailAddress($model->matriculaalumno));
+
 				}
-				$this->redirect(array('view','id'=>$model->id));
+			
+				
+					$this->redirect(array('view','id'=>$model->id));
+
 			}
+			
 		}
 
 		$this->render('update',array(
 			'model'=>$model,
 		));
+		
+		
 	}
 	
 	public function needsToSendMail($model)
@@ -207,13 +219,26 @@ class SolicitudBajaMateriaController extends Controller
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
+			
 			$this->loadModel($id)->delete();
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 			if(!isset($_GET['ajax']))
 				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 		}
-		else
+		/*else if(Yii::app()->user->rol == 'Alumno'){
+			
+			if($this->loadModel($id)->matriculaalumno == Yii::app()->user->id){
+				$this->loadModel($id)->delete();
+				$this->redirect(array('index'));
+			}else{
+				
+				throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+			}
+			
+		}*/
+			
+		else	
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
 

@@ -51,7 +51,7 @@ class SolicitudBajaSemestre extends CActiveRecord
 			array('periodo', 'length', 'max'=>16),
 			array('anio', 'length', 'max'=>4),
 			array('domicilio', 'length', 'max'=>100),
-			array('motivo', 'length', 'max'=>20),
+			array('motivo', 'length', 'max'=>500),
 			array('telefono', 'length', 'max'=>12),
 			array('extranjero','length','max'=>2),
 			// The following rule is used by search().

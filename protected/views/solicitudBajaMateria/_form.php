@@ -63,11 +63,25 @@
 
 	<?php 
 	}else{
-		//Se trata de un director respondiendo a la solicitud.
-		echo $form->labelEx($model,'status');
-		echo $form->dropDownList($model,'status',array('recibida'=>'Recibida', 'pendiente'=>'Pendiente'
-														, 'terminada'=>'Terminada'));
-		echo $form->error($model,'status');
+	
+		if (Yii::app()->user->rol == 'Director'){
+		
+			//Se trata de un director respondiendo a la solicitud.
+			echo $form->labelEx($model,'status');
+			echo $form->dropDownList($model,'status',array('recibida'=>'Recibida', 'pendiente'=>'Pendiente'
+															, 'terminada'=>'Terminada'));
+			echo $form->error($model,'status');
+			
+		}else if (Yii::app()->user->rol == 'Alumno'){
+			
+			echo("<div class=\"row\">");
+			echo $form->labelEx($model,'motivo');
+			echo $form->textArea($model,'motivo',array('rows'=>8,'cols'=>50));
+			echo $form->error($model,'motivo');
+			echo("</div>");
+			
+		}
+		
 	}
 	?>
 

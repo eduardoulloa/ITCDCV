@@ -90,7 +90,7 @@ class SolicitudBajaSemestreController extends Controller
 			),
 			
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('index','create','view'),
+				'actions'=>array('index','create','view','update'),
 				'users'=>array('@'),
 			),
 			array('allow', 
