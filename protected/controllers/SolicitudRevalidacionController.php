@@ -160,13 +160,36 @@ class SolicitudRevalidacionController extends Controller
 		if(isset($_POST['SolicitudRevalidacion']))
 		{
 			$model->attributes=$_POST['SolicitudRevalidacion'];
-			if($model->save())
+			if($model->save()) {
+				if($this->needsToSendMail($model)) {
+					EMailSender::sendEmail($this->createEmailBody($model), $this->createSubject($model), 
+													getEmailAddress($model->matriculaalumno));
+				}
 				$this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('update',array(
 			'model'=>$model,
 		));
+	}
+	
+	public function needsToSendMail($model)
+	{
+		return $model->attributes['status'] == 'terminada';
+	}
+	
+	public function createEmailBody($model) 
+	{
+		$body .= "\nMateria a Revalidar: ".$model->clave_revalidar." ".$model->nombre_revalidar;
+		$body .= "\nMateria Cursada: ".$mode->clave_cursada." ".$model->nombre_cursada;
+		return $body;
+	}
+	
+	public function createSubject($model)
+	{
+		$subject = "Solicitud de Revalidacion de Materia con ID: ".$model->id;
+		return $subject;
 	}
 
 	/**

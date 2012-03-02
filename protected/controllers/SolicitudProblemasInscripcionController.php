@@ -166,7 +166,7 @@ class SolicitudProblemasInscripcionController extends Controller
 			$model->attributes=$_POST['SolicitudProblemasInscripcion'];
 			if($model->save()) {
 				if($this->needsToSendMail($model)) {
-					EMailSender::sendEmail($this->createEmailBody($model), 'Problema de Inscripcion', 
+					EMailSender::sendEmail($this->createEmailBody($model), $this->createSubject($model), 
 													getEmailAddress($model->matriculaalumno));
 				}
 				$this->redirect(array('view','id'=>$model->id));
@@ -185,9 +185,14 @@ class SolicitudProblemasInscripcionController extends Controller
 	
 	public function createEmailBody($model) 
 	{
-		$body = "Tu Problema de Inscripcion ha cambiado al status Terminado.\n";
 		$body .= "\nComentarios: ".$model->comentarios;
 		return $body;
+	}
+	
+	public function createSubject($model)
+	{
+		$subject = "Reporte de Problema de Inscripcion con ID: ".$model->id;
+		return $subject;
 	}
 
 	/**

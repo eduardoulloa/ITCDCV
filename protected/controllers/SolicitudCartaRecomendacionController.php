@@ -159,7 +159,7 @@ class SolicitudCartaRecomendacionController extends Controller
 			$model->attributes=$_POST['SolicitudCartaRecomendacion'];
 			if($model->save()) {
 				if($this->needsToSendMail($model)) {
-					EMailSender::sendEmail($this->createEmailBody($model), 'Solicitud de Carta de Recomendacion', 
+					EMailSender::sendEmail($this->createEmailBody($model), $this->createSubject($model), 
 													getEmailAddress($model->matriculaalumno));
 				}
 				$this->redirect(array('view','id'=>$model->id));
@@ -178,10 +178,16 @@ class SolicitudCartaRecomendacionController extends Controller
 	
 	public function createEmailBody($model) 
 	{
-		$body = "Tu Solicitud de Carta de Recomendacion ha sido terminada.\n";
+		$body .= "\nCarta de Recomendacion";
 		$body .= "\nTipo: ".$model->tipo;
 		$body .= "\nFormato: ".$model->formato;
 		return $body;
+	}
+	
+	public function createSubject($model)
+	{
+		$subject = "Solicitud de Carta de Recomendacion con ID: ".$model->id;
+		return $subject;
 	}
 
 	/**

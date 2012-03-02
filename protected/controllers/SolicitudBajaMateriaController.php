@@ -167,7 +167,7 @@ class SolicitudBajaMateriaController extends Controller
 			$model->attributes=$_POST['SolicitudBajaMateria'];
 			if($model->save()) {
 				if($this->needsToSendMail($model)) {
-					EMailSender::sendEmail($this->createEmailBody($model), 'Solicitud de Baja de Materia', 
+					EMailSender::sendEmail($this->createEmailBody($model), $this->createSubject($model), 
 													getEmailAddress($model->matriculaalumno));
 				}
 				$this->redirect(array('view','id'=>$model->id));
@@ -186,10 +186,15 @@ class SolicitudBajaMateriaController extends Controller
 	
 	public function createEmailBody($model) 
 	{
-		$body = "Tu Solicitud de Baja de Materia ha sido terminada.\n";
 		$body .= "\nClave de la materia: ".$model->clave_materia;
 		$body .= "\nNombre de la materia: ".$model->nombre_materia;
 		return $body;
+	}
+	
+	public function createSubject($model)
+	{
+		$subject = "Solicitud de Baja de Materia con ID: ".$model->id;
+		return $subject;
 	}
 
 	/**

@@ -160,7 +160,7 @@ class SugerenciaController extends Controller
 			if($model->save())
 			{
 				if($this->needsToSendMail($model)) {
-					EMailSender::sendEmail($this->createEmailBody($model), 'Sugerencia', 
+					EMailSender::sendEmail($this->createEmailBody($model), $this->createSubject($model), 
 													getEmailAddress($model->matriculaalumno));
 				}
 				$this->redirect(array('view','id'=>$model->id));
@@ -179,10 +179,15 @@ class SugerenciaController extends Controller
 	
 	public function createEmailBody($model) 
 	{
-		$body = "Tu sugerencia ha recibido una respuesta\n";
-		$body .= "SUGERENCIA:".$model->sugerencia;
+		$body .= "\nSUGERENCIA:".$model->sugerencia;
 		$body .= "\nRESPUESTA: ".$model->respuesta;
 		return $body;
+	}
+	
+	public function createSubject($model)
+	{
+		$subject = "Sugerencia con ID: ".$model->id;
+		return $subject;
 	}
 
 	/**
