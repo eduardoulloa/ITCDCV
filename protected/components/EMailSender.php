@@ -36,9 +36,9 @@ class EMailSender {
 	{
 		$result = "\n\nTe recordamos que la Dirección de Carrera Virtual es un servicio para informar al personal de la dirección de tu carrera sobre problemas, solicitudes y sugerencias en cuanto a asuntos escolares. Sin embargo, es tu responsabilidad llevar a cabo los trámites oficiales en los organismos correspondientes del instituto para efectuar dichos movimientos.
 
-		Atentamente,
+Atentamente,
 
-		Dirección de Carrera Virtual";
+Dirección de Carrera Virtual";
 		return $result;
 	}
 }
