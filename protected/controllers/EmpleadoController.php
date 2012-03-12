@@ -87,6 +87,18 @@ class EmpleadoController extends Controller
 	 */
 	public function actionView($id)
 	{
+
+        // Repeating myself here, we need to store this inside a fuction.
+        $criteria_carreras= new CDbCriteria(array(
+                                                'select'=>'id, siglas'));
+
+        $consulta_carreras = Carrera::model()->findAll($criteria_carreras);
+
+        $carreras = array();
+        
+        foreach($consulta_carreras as &$valor){
+            $carreras[$valor->id] = $valor->siglas;
+        }
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));
