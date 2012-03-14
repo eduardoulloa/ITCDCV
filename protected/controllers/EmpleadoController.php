@@ -88,19 +88,21 @@ class EmpleadoController extends Controller
 	public function actionView($id)
 	{
 
-        // Repeating myself here, we need to store this inside a fuction.
-        $criteria_carreras= new CDbCriteria(array(
-                                                'select'=>'id, siglas'));
+        $consulta_carreras = Empleado::model()->findByPk($id);
 
-        $consulta_carreras = Carrera::model()->findAll($criteria_carreras);
-
-        $carreras = array();
         
-        foreach($consulta_carreras as &$valor){
-            $carreras[$valor->id] = $valor->siglas;
+
+        $carreras = $consulta_carreras->carreras;
+        
+        $resultados = array();
+        //print_r($consulta_carreras->carreras);
+        foreach($carreras as &$carrera){
+            $resultados[$carrera['id']] = $carrera['siglas'];
         }
+            
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
+            'carreras'=>$resultados
 		));
 	}
     
@@ -149,7 +151,7 @@ class EmpleadoController extends Controller
 	}
 
 	/**
-	 * Updates a particular model.
+
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
 	 */

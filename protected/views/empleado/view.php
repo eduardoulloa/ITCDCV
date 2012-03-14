@@ -15,14 +15,24 @@ $this->menu=array(
 
 <h1>View Empleado #<?php echo $model->nomina; ?></h1>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		'nomina',
-		'nombre',
-		'apellido_paterno',
-		'apellido_materno',
-		'password',
-		'puesto',
-	),
-)); ?>
+
+
+<?php 
+
+
+$this->widget('zii.widgets.CDetailView', array(
+    'data'=>$model,
+    'attributes'=>array(
+        'nomina',
+        'nombre',
+        'apellido_paterno',
+        'apellido_materno',
+        'password',
+        'puesto',
+        $carreras
+    ),
+)); 
+
+
+
+?>

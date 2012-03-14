@@ -24,5 +24,10 @@
 	<?php echo CHtml::encode($data->puesto); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('puesto')); ?>:</b>
+	<?php echo CHtml::encode($data->puesto); ?>
+	<br />
+
+    <?php print_r($data); ?>
 
 </div>
