@@ -43,9 +43,9 @@
 	<?php echo CHtml::encode($data->comentarios); ?>
 	<br />
 	
-	<?php if(Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin' || Yii::app()->user->rol == 'Asistente' || Yii::app()->user->rol == 'Secretaria'){
+	<?php //if(Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin' || Yii::app()->user->rol == 'Asistente' || Yii::app()->user->rol == 'Secretaria'){
 		echo CHtml::link('Editar', array('update', 'id'=>$data->id));
-	}
+	//}
 	?>
 	
 	<!--

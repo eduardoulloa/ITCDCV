@@ -53,12 +53,21 @@
 	</div>
 
 	<?php 
-	}else{
+	}else if (!$model->isNewRecord && (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Asistente' || Yii::app()->user->rol == 'Secretaria' || Yii::app()->user->rol =='Admin')){
 		//Se trata de un director respondiendo a la solicitud.
 		echo $form->labelEx($model,'status');
 		echo $form->dropDownList($model,'status',array('recibida'=>'Recibida', 'pendiente'=>'Pendiente'
 														, 'terminada'=>'Terminada'));
 		echo $form->error($model,'status');
+	}else if (!$model->isNewRecord && Yii::app()->user->rol == 'Alumno'){
+		echo $form->labelEx($model,'clave_cursada');
+		echo $form->textField($model,'clave_cursada',array('size'=>10,'maxlength'=>10));
+		echo $form->error($model,'clave_cursada');
+
+		echo $form->labelEx($model,'nombre_cursada');
+		echo $form->textField($model,'nombre_cursada',array('size'=>60,'maxlength'=>100));
+		echo $form->error($model,'nombre_cursada');
+	
 	}
 	?>
 

@@ -21,6 +21,7 @@
 
 <div class="container" id="page">
 
+
     <div id="header">
         <div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
     </div><!-- header -->
@@ -45,6 +46,7 @@
         All Rights Reserved.<br/>
         <?php echo Yii::powered(); ?>
     </div><!-- footer -->
+
 
 </div><!-- page -->
 

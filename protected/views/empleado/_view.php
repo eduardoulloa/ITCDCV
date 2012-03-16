@@ -24,5 +24,7 @@
 	<?php echo CHtml::encode($data->puesto); ?>
 	<br />
 
+	<?php echo CHtml::link('Editar', array('update', 'id'=>$data->nomina)); ?>
+	<br />
 
 </div>

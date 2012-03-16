@@ -16,7 +16,7 @@
 			echo $form->labelEx($model,'sugerencia');
 			echo $form->textArea($model,'sugerencia',array('rows'=>8,'cols'=>50));
 			echo $form->error($model,'sugerencia');
-		}else{
+		}else if (!$model->isNewRecord && (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Asistente')){
 			//Se trata de un director respondiendo a la sugerencia.
 			echo $form->labelEx($model,'respuesta');
 			echo $form->textArea($model,'respuesta',array('rows'=>8,'cols'=>50));

@@ -156,20 +156,71 @@ class SugerenciaController extends Controller
 
 		if(isset($_POST['Sugerencia']))
 		{
+		
 			$model->attributes=$_POST['Sugerencia'];
-			if($model->save())
-			{
-				if($this->needsToSendMail($model)) {
-					EMailSender::sendEmail($this->createEmailBody($model), $this->createSubject($model), 
-													getEmailAddress($model->matriculaalumno));
+		
+			if(Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Asistente' ){
+			
+				$matricula = $model->matriculaalumno;
+				$nomina = Yii::app()->user->id;
+				$challenge = Empleado::model()->findBySql('SELECT matricula FROM carrera_tiene_empleado JOIN alumno ON alumno.idcarrera = carrera_tiene_empleado.idcarrera AND carrera_tiene_empleado.nomina = \''.$nomina.'\' AND alumno.matricula =\''.$matricula.'\'');
+			
+				if(!empty($challenge)){
+				
+				
+			
+					if($model->save()) {
+						if($this->needsToSendMail($model)) {
+							EMailSender::sendEmail($this->createEmailBody($model), $this->createSubject($model), 
+															getEmailAddress($model->matriculaalumno));
+
+						}
+					
+						
+							$this->redirect(array('view','id'=>$model->id));
+
+					}
+				
+				}else{
+					throw new CHttpException(400,'No se encontró la solicitud a editar.');
 				}
-				$this->redirect(array('view','id'=>$model->id));
+			}else{
+				
+				if($model->save())
+				{
+					if($this->needsToSendMail($model)) {
+						EMailSender::sendEmail($this->createEmailBody($model), $this->createSubject($model), 
+														getEmailAddress($model->matriculaalumno));
+					}
+					$this->redirect(array('view','id'=>$model->id));
+				}
 			}
 		}
-
-		$this->render('update',array(
-			'model'=>$model,
-		));
+		
+		if(Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Asistente' ){
+			
+			$matricula = $model->matriculaalumno;
+			$nomina = Yii::app()->user->id;
+			$challenge = Empleado::model()->findBySql('SELECT matricula FROM carrera_tiene_empleado JOIN alumno ON alumno.idcarrera = carrera_tiene_empleado.idcarrera AND carrera_tiene_empleado.nomina = \''.$nomina.'\' AND alumno.matricula =\''.$matricula.'\'');
+		
+			if(!empty($challenge)){
+			
+				$this->render('update',array(
+					'model'=>$model,
+				));
+		
+			
+			}else{
+				throw new CHttpException(400,'No se encontro la solicitud a editar.');
+			}
+			
+			
+		}else{
+			$this->render('update',array(
+				'model'=>$model,
+			));
+		}
+		
 	}
 	
 	public function needsToSendMail($model)

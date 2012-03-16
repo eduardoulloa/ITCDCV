@@ -64,7 +64,7 @@
 	<?php 
 	}else{
 	
-		if (Yii::app()->user->rol == 'Director'){
+		if (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin'){
 		
 			//Se trata de un director respondiendo a la solicitud.
 			echo $form->labelEx($model,'status');

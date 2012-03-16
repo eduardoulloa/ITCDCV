@@ -28,6 +28,7 @@ function checkAll()
 	<?php echo $form->errorSummary($model); ?>
 
 	<?php
+		
 		if(Yii::app()->user->rol != 'Alumno'){
 		
 	?>
@@ -76,6 +77,8 @@ function checkAll()
 	<div class="row">
 		<?php echo $form->labelEx($model,'anio_graduado'); ?>
 		<?php echo $form->textField($model,'anio_graduado',array('size'=>4,'maxlength'=>4)); ?>
+		<?php /*echo $form->dropDownList($model,'anio_graduado',array('2005'=>'2005', '2006'=>'2006'
+														, '2007'=>'2009'));*/ ?>
 		<?php echo $form->error($model,'anio_graduado'); ?>
 	</div>
 
@@ -117,7 +120,12 @@ function checkAll()
 	</div>
 	
 	<?php
+		
+		
+		
 		}
+		
+		
 	?>
 
 <?php $this->endWidget(); ?>
