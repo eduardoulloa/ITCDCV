@@ -27,4 +27,8 @@
 	<?php echo CHtml::link('Editar', array('update', 'id'=>$data->nomina)); ?>
 	<br />
 
+
+    <?php print_r($data); ?>
+
+
 </div>
