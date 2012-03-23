@@ -52,8 +52,7 @@ class EmpleadoController extends Controller
 		}
 		
 		$criteria = new CDbCriteria(array(
-						'select'=>'nomina',
-						'condition'=>'puesto=\'Director\''));
+						'select'=>'nomina'));
 						
 						
 		//Obtiene a todos los directores de carrera.
