@@ -59,11 +59,15 @@ class AlumnoController extends Controller
 		}
 	
 		return array(
-			/*array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+			/*
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				//'actions'=>array('index','view'),
+				'actions'=>array('create'),
 				'users'=>array('*'),
 			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+			*/
+			
+			/*array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update'),
 				'users'=>array('@'),
 			),*/
@@ -79,10 +83,19 @@ class AlumnoController extends Controller
 				'actions'=>array('admin','delete','create','update','index','view'),
 				'users'=>$directores,
 			),
+			
+			array('allow',  // deny all users
+				'actions'=>array('crearexalumno'),
+				'users'=>array(),
+			),
+			array('deny',  // deny all users
+				'actions'=>array('crearexalumno'),
+				'users'=>$alumnos,
+			),
+			
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
-			
 		);
 	}
 
@@ -111,13 +124,48 @@ class AlumnoController extends Controller
 		if(isset($_POST['Alumno']))
 		{
 			$model->attributes=$_POST['Alumno'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->matricula));
+			
+			$this->verificaQueMatriculaNoEstaRegistrada($model->matricula);
+			$model->password = cifraPassword($model->password);
+			
+			if($model->save()) {
+				$this->redirect(array('create','id'=>$model->matricula));
+			}
+	
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
 		));
+	}
+	
+	public function verificaQueMatriculaNoEstaRegistrada($matricula) {
+		if(matriculaYaExiste($matricula)) {
+			throw new CHttpException(400, 'Error. Ya existe un usuario registrado con la matrícula
+			 o el nombre de usuario proporcionado. Favor de verificarlo. Puede también crear un
+			 nombre de usuario a partir de una cadena de caracteres. ');
+		}
+	}
+	
+	public function actionCrearExalumno()
+	{
+		$model = new Alumno;
+		
+		if(isset($_POST['Alumno']))
+		{
+			$model->attributes = $_POST['Alumno'];			
+			$model->semestre = -1;
+			$model->plan = -1;
+			
+			$this->verificaQueMatriculaNoEstaRegistrada($model->matricula);
+			$model->password = cifraPassword($model->password);
+			
+			if($model->save()) {
+				$this->redirect(array('crearexalumno','id'=>$model->matricula));
+			}
+		}
+		
+		$this->render('crearexalumno',array('model'=>$model,));
 	}
 
 	/**
@@ -127,45 +175,28 @@ class AlumnoController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
+		$model=$this->loadModel($id);
 	
-		if(Yii::app()->user->rol != 'Alumno'){
-		
-			$model=$this->loadModel($id);
-
-			// Uncomment the following line if AJAX validation is needed
-			// $this->performAjaxValidation($model);
-
-			if(isset($_POST['Alumno']))
-			{
-				$model->attributes=$_POST['Alumno'];
-				$pass = md5($model->attributes['password']);
-				$model->password = $pass;
-				if($model->save())
-					$this->redirect(array('view','id'=>$model->matricula));
-			}
-		
-		}else if(Yii::app()->user->rol == 'Alumno'){
+		if(isset($_POST['Alumno']))
+		{	
 			
-			$model = $this->loadModel(Yii::app()->user->id);
-			if(isset($_POST['Alumno']))
-			{	
-				$oldpass = $model->password;
-				$model->attributes=$_POST['Alumno'];
-				$newpass = $model->password;
-				
-				//Valida si el usuario ha hecho algun cambio de password.
-				if($newpass != $oldpass){
-					$pass = md5($model->password);
-					$model->password = $pass;
+			if ('' === $_POST['Alumno']['password']) {
+				$_POST['Alumno']['password'] = $model->password;
+			}
+			else {
+				if(md5($_POST['passwordActual']) != $model->password) {
+					throw new CHttpException(400, 'El password actual no es correcto.');
 				}
-				
-				$model->email = $model->attributes['email'];
-				if($model->save())
-					$this->redirect(array('view','id'=>$model->matricula));
+				else {
+					$_POST['Alumno']['password'] = md5($_POST['Alumno']['password']);
+				}
 			}
-			
+			$model->attributes = $_POST['Alumno'] + $model->attributes;
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->matricula));
 		}
-		
+		$model->password = '';
+
 		$this->render('update',array(
 			'model'=>$model,
 		));

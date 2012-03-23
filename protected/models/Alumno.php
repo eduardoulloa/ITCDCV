@@ -34,7 +34,7 @@ class Alumno extends CActiveRecord
 	{
 		return parent::model($className);
 	}
-
+	
 	/**
 	 * @return string the associated database table name
 	 */
@@ -53,7 +53,7 @@ class Alumno extends CActiveRecord
 		return array(
 			array('matricula, nombre, apellido_paterno, plan, semestre, password, idcarrera, email', 'required'),
 			array('semestre, idcarrera', 'numerical', 'integerOnly'=>true),
-			array('matricula', 'length', 'max'=>9),
+			array('matricula', 'length', 'max'=>30),
 			array('nombre, apellido_paterno, apellido_materno', 'length', 'max'=>60),
 			array('plan', 'length', 'max'=>10),
 			array('password, email', 'length', 'max'=>45),

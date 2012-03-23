@@ -151,7 +151,6 @@ class EmpleadoController extends Controller
 	}
 
 	/**
-
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
 	 */
@@ -175,6 +174,7 @@ class EmpleadoController extends Controller
 		$this->render('update',array(
 			'model'=>$model,
 		));
+		
 	}
 
 	/**

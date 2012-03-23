@@ -28,77 +28,29 @@ function checkAll()
 	<?php echo $form->errorSummary($model); ?>
 
 	<?php
-		if(Yii::app()->user->rol != 'Alumno'){
+		if(esDirectorOAdmin() || !userTieneRolAsignado()) {
 		
 	?>
-	<div class="row">
-		<?php echo $form->labelEx($model,'matricula'); ?>
-		<?php echo $form->textField($model,'matricula',array('size'=>9,'maxlength'=>9)); ?>
-		<?php echo $form->error($model,'matricula'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'nombre'); ?>
-		<?php echo $form->textField($model,'nombre',array('size'=>60,'maxlength'=>60)); ?>
-		<?php echo $form->error($model,'nombre'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'apellido_paterno'); ?>
-		<?php echo $form->textField($model,'apellido_paterno',array('size'=>60,'maxlength'=>60)); ?>
-		<?php echo $form->error($model,'apellido_paterno'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'apellido_materno'); ?>
-		<?php echo $form->textField($model,'apellido_materno',array('size'=>60,'maxlength'=>60)); ?>
-		<?php echo $form->error($model,'apellido_materno'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'plan'); ?>
-		<?php echo $form->textField($model,'plan',array('size'=>10,'maxlength'=>10)); ?>
-		<?php echo $form->error($model,'plan'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'semestre'); ?>
-		<?php echo $form->textField($model,'semestre'); ?>
-		<?php echo $form->error($model,'semestre'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'password'); ?>
-		<?php echo $form->passwordField($model,'password',array('size'=>45,'maxlength'=>45)); ?>
-		<?php echo $form->error($model,'password'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'anio_graduado'); ?>
-		<?php echo $form->textField($model,'anio_graduado',array('size'=>4,'maxlength'=>4)); ?>
-		<?php echo $form->error($model,'anio_graduado'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'idcarrera'); ?>
-		<?php echo $form->textField($model,'idcarrera'); ?>
-		<?php echo $form->error($model,'idcarrera'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'email'); ?>
-		<?php echo $form->textField($model,'email',array('size'=>45,'maxlength'=>45)); ?>
-		<?php echo $form->error($model,'email'); ?>
-	</div>
-
+	
+	<?php echo $this->renderPartial('_alumno_actual', array('model'=>$model, 'form'=>$form)); ?>
+	<?php echo $this->renderPartial('_exalumno', array('model'=>$model, 'form'=>$form)); ?>
+	
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Save'); ?>
 	</div>
 	
 	<?php
 		//Si es un alumno, solo debe poder modificar su password e e-mail.
-		}else if (Yii::app()->user->rol == 'Alumno'){
+		} else  {
 	?>
+	
+	<div class="row">
+		<label for="passwordActual" class="required">
+			Password Actual
+			<span class="required">*</span>
+		</label>
+		<?php echo(Chtml::passwordField('passwordActual', '', array('size'=>45,'maxlength'=>45))); ?>
+	</div>
 	
 	<div class="row">
 	<?php echo $form->labelEx($model,'password'); ?>
@@ -118,6 +70,7 @@ function checkAll()
 	
 	<?php
 		}
+
 	?>
 
 <?php $this->endWidget(); ?>

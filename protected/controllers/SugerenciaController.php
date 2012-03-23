@@ -149,8 +149,8 @@ class SugerenciaController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
-		$model=$this->loadModel($id);
 
+		
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -170,6 +170,7 @@ class SugerenciaController extends Controller
 		$this->render('update',array(
 			'model'=>$model,
 		));
+		
 	}
 	
 	public function needsToSendMail($model)
