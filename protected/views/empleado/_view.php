@@ -24,10 +24,11 @@
 	<?php echo CHtml::encode($data->puesto); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('puesto')); ?>:</b>
-	<?php echo CHtml::encode($data->puesto); ?>
+	<?php echo CHtml::link('Editar', array('update', 'id'=>$data->nomina)); ?>
 	<br />
 
-    <?php print_r($data); ?>
+
+    <?php //print_r($data); ?>
+
 
 </div>

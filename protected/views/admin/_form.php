@@ -9,11 +9,14 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'username'); ?>
-		<?php echo $form->textField($model,'username',array('size'=>25,'maxlength'=>25)); ?>
-		<?php echo $form->error($model,'username'); ?>
-	</div>
+	<?php if($model->isNewRecord){
+	echo("<div class=\"row\">");
+		echo $form->labelEx($model,'username');
+		echo $form->textField($model,'username',array('size'=>25,'maxlength'=>25));
+		echo $form->error($model,'username');
+	echo("</div>");
+	}
+	?>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'password'); ?>

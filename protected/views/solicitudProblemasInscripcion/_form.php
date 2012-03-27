@@ -41,12 +41,18 @@
 	</div>
 	
 	<?php 
-	}else{
+	}else if(!$model->isNewRecord && (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Asistente' || Yii::app()->user->rol == 'Secretaria')){
 		//Se trata de un director respondiendo a la solicitud.
 		echo $form->labelEx($model,'status');
 		echo $form->dropDownList($model,'status',array('recibida'=>'Recibida', 'pendiente'=>'Pendiente'
 														, 'terminada'=>'Terminada'));
 		echo $form->error($model,'status');
+	}else if(!$model->isNewRecord && Yii::app()->user->rol == 'Alumno'){
+	
+		echo $form->labelEx($model,'comentarios');
+		echo $form->textArea($model,'comentarios',array('rows'=>8, 'cols'=>50));
+		echo $form->error($model,'comentarios');
+		
 	}
 	?>
 

@@ -66,7 +66,11 @@ class AlumnoController extends Controller
 				'users'=>array('*'),
 			),
 			*/
-			
+			/*array('allow',  // allow all users to perform 'index' and 'view' actions
+				//'actions'=>array('index','view'),
+				'actions'=>array('create'),
+				'users'=>array('*'),
+			),*/
 			/*array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update'),
 				'users'=>array('@'),
@@ -175,28 +179,78 @@ class AlumnoController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
-		$model=$this->loadModel($id);
 	
-		if(isset($_POST['Alumno']))
-		{	
-			
-			if ('' === $_POST['Alumno']['password']) {
-				$_POST['Alumno']['password'] = $model->password;
+		if(Yii::app()->user->rol == 'Admin'){
+		
+			$model=$this->loadModel($id);
+
+			if(isset($_POST['Alumno']))
+			{
+				$model->attributes=$_POST['Alumno'];
+				$pass = md5($model->attributes['password']);
+				$model->password = $pass;
+				if($model->save())
+					$this->redirect(array('view','id'=>$model->matricula));
 			}
-			else {
-				if(md5($_POST['passwordActual']) != $model->password) {
-					throw new CHttpException(400, 'El password actual no es correcto.');
+		
+		}else if(Yii::app()->user->rol == 'Alumno'){
+			$model = $this->loadModel(Yii::app()->user->id);
+			if(isset($_POST['Alumno'])) {
+			
+				if ('' === $_POST['Alumno']['password']) {
+					$_POST['Alumno']['password'] = $model->password;
 				}
 				else {
-					$_POST['Alumno']['password'] = md5($_POST['Alumno']['password']);
+					if(md5($_POST['passwordActual']) != $model->password) {
+						throw new CHttpException(400, 'El password actual no es correcto.');
+					}
+					else {
+						$_POST['Alumno']['password'] = md5($_POST['Alumno']['password']);
+					}
+				}
+				$model->attributes = $_POST['Alumno'] + $model->attributes;
+				if($model->save()) {
+					$this->redirect(array('view','id'=>$model->matricula));
 				}
 			}
-			$model->attributes = $_POST['Alumno'] + $model->attributes;
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->matricula));
+			
+		}else if(Yii::app()->user->rol == 'Director'){
+			
+			$nomina = Yii::app()->user->id;
+			
+			$validacion = Alumno::model()->findAllBySql('SELECT matricula FROM alumno JOIN  carrera_tiene_empleado ON alumno.idcarrera = carrera_tiene_empleado.idcarrera AND alumno.matricula ='.$id.' AND carrera_tiene_empleado.nomina = \''.$nomina.'\'');
+			
+			if(!empty($validacion)){
+			
+				$model=$this->loadModel($id);
+				
+				if(isset($_POST['Alumno']))
+				{	
+					$oldpass = $model->password;
+					$model->attributes=$_POST['Alumno'];
+					$newpass = $model->password;
+					
+					//Valida si el usuario ha hecho algun cambio de password.
+					if($newpass != $oldpass){
+						$pass = md5($model->password);
+						$model->password = $pass;
+					}
+					
+					//$model->email = $model->attributes['email'];
+					if($model->save())
+						$this->redirect(array('view','id'=>$model->matricula));
+				}
+			
+			}else{
+				throw new CHttpException(400,'El alumno no se encuentra registrado en ninguna de las carreras de su direccion.');
+			}
+		
+			
+		
 		}
+		
 		$model->password = '';
-
+		
 		$this->render('update',array(
 			'model'=>$model,
 		));

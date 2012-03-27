@@ -164,18 +164,101 @@ class SolicitudProblemasInscripcionController extends Controller
 		if(isset($_POST['SolicitudProblemasInscripcion']))
 		{
 			$model->attributes=$_POST['SolicitudProblemasInscripcion'];
-			if($model->save()) {
-				if($this->needsToSendMail($model)) {
-					EMailSender::sendEmail($this->createEmailBody($model), $this->createSubject($model), 
-													getEmailAddress($model->matriculaalumno));
+			
+			if(Yii::app()->user->rol == 'Alumno'){
+				
+				if($model->matriculaalumno == Yii::app()->user->id){
+				
+					if($model->save()) {
+						if($this->needsToSendMail($model)) {
+							EMailSender::sendEmail($this->createEmailBody($model), $this->createSubject($model), 
+															getEmailAddress($model->matriculaalumno));
+
+						}
+					
+						
+						$this->redirect(array('view','id'=>$model->id));
+
+					}
+				
+				}else{
+					throw new CHttpException(400,'No es posible acceder a la solicitud con el identificador proporcionado.');
 				}
-				$this->redirect(array('view','id'=>$model->id));
+				
+			}else if (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Asistente' || Yii::app()->user->rol == 'Secretaria' ){
+			
+				$matricula = $model->matriculaalumno;
+				$nomina = Yii::app()->user->id;
+				$challenge = Empleado::model()->findBySql('SELECT matricula FROM carrera_tiene_empleado JOIN alumno ON alumno.idcarrera = carrera_tiene_empleado.idcarrera AND carrera_tiene_empleado.nomina = \''.$nomina.'\' AND alumno.matricula =\''.$matricula.'\'');
+			
+				if(!empty($challenge)){
+				
+				
+			
+					if($model->save()) {
+						if($this->needsToSendMail($model)) {
+							EMailSender::sendEmail($this->createEmailBody($model), $this->createSubject($model), 
+															getEmailAddress($model->matriculaalumno));
+
+						}
+					
+						
+							$this->redirect(array('view','id'=>$model->id));
+
+					}
+				
+				}else{
+					throw new CHttpException(400,'No se encontró la solicitud a editar.');
+				}
+			
+			}else{
+				if($model->save()) {
+					if($this->needsToSendMail($model)) {
+						EMailSender::sendEmail($this->createEmailBody($model), $this->createSubject($model), 
+														getEmailAddress($model->matriculaalumno));
+
+					}
+				
+					
+						$this->redirect(array('view','id'=>$model->id));
+
+				}
 			}
+			
 		}
 
-		$this->render('update',array(
-			'model'=>$model,
-		));
+		if(Yii::app()->user->rol == 'Alumno'){
+
+			if(Yii::app()->user->id == $model->matriculaalumno){
+				$this->render('update',array(
+				'model'=>$model,
+				));
+			}else{
+				throw new CHttpException(400,'No es posible acceder a la solicitud con el identificador proporcionado.');
+			}
+		
+		}else if(Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Asistente' || Yii::app()->user->rol == 'Secretaria' ){
+			$matricula = $model->matriculaalumno;
+			$nomina = Yii::app()->user->id;
+			$challenge = Empleado::model()->findBySql('SELECT matricula FROM carrera_tiene_empleado JOIN alumno ON alumno.idcarrera = carrera_tiene_empleado.idcarrera AND carrera_tiene_empleado.nomina = \''.$nomina.'\' AND alumno.matricula =\''.$matricula.'\'');
+		
+			if(!empty($challenge)){
+			
+				$this->render('update',array(
+					'model'=>$model,
+				));
+		
+			
+			}else{
+				throw new CHttpException(400,'No se encontro la solicitud a editar.');
+			}
+		}else{
+		
+			$this->render('update',array(
+				'model'=>$model,
+			));
+			
+		}
 	}
 	
 	public function needsToSendMail($model)

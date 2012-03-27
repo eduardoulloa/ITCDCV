@@ -39,9 +39,9 @@
 	<?php echo CHtml::encode($data->nombre_revalidar); ?>
 	<br />
 	
-	<?php if(Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin'){
+	<?php //if(Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin'){
 		echo CHtml::link('Editar', array('update', 'id'=>$data->id));
-	}
+	//}
 	?>
 
 	<?php /*
