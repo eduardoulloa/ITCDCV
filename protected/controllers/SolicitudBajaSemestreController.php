@@ -86,6 +86,7 @@ class SolicitudBajaSemestreController extends Controller
 			),*/
 			
 			array('deny',  // Negar acceso a asistentes y secretarias.
+				'actions'=>array('index','create','view','update'),
 				'users'=>$asistentes,
 			),
 			

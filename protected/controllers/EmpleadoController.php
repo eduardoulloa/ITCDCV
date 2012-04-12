@@ -129,7 +129,9 @@ class EmpleadoController extends Controller
 
 		if(isset($_POST['Empleado']) && isset($_POST['Carrera']))
 		{
+			$_POST['Empleado']['password'] = md5($_POST['Empleado']['password']);
 			$model->attributes=$_POST['Empleado'];
+			
             $id_carrera = $_POST['Carrera'];
 			if($model->save()){
                 $model_carrera_empleado=new CarreraTieneEmpleado;

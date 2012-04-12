@@ -86,25 +86,40 @@ class SolicitudBajaMateriaController extends Controller
 				'actions'=>array('index','view'),
 				'users'=>array('*'),
 			),*/
+			array('allow', 
+				//'actions'=>$adminActions, // acciones de los directores de carrera
+				'actions'=>$adminActions,
+				'users'=>$directores,
+			),
+			
 			array('deny',  // Negar acceso a asistentes y secretarias.
+				'actions'=>array('index','create','view','update'),
 				'users'=>$asistentes,
+				
 			),
 			
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('index','create','view','update'),
 				'users'=>array('@'),
 			),
-			array('allow', 
-				'actions'=>$adminActions, // acciones de los directores de carrera
+			
+			
+			
+			/*array('allow', 
+				//'actions'=>$adminActions, // acciones de los directores de carrera
+				'actions'=>$adminActions,
 				'users'=>$directores,
-			),
+			),*/
 			array('allow', 
 				'actions'=>$adminActions, // acciones de los admins
 				'users'=>$admin,
 			),
+			
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
+			
+			
 		);
 	}
 
@@ -270,6 +285,14 @@ class SolicitudBajaMateriaController extends Controller
 			
 		}
 		
+	}
+	
+	public function actionRevisar(){
+		if(Yii::app()->user->checkAccess('index') == TRUE){
+			echo('acceso permitido');
+		}else{
+			echo('acceso negado');
+		}
 	}
 	
 	public function needsToSendMail($model)
