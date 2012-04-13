@@ -76,7 +76,7 @@ else if(Yii::app()->user->rol == 'Alumno'){
                 array("url" => array( "route" => "solicitudCartaRecomendacion/index"), "label" => "Solicitudes de Cartas de Recomendacion"),
             )
         ),
-        array("url" => array( "route" => "empleado/update/".Yii::app()->user->name), "label" => "Configurar Cuenta")
+        array("url" => array( "route" => "alumno/update/".Yii::app()->user->name), "label" => "Configurar Cuenta")
     );
 }
     
