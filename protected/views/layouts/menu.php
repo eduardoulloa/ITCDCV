@@ -29,14 +29,12 @@ else if(Yii::app()->user->rol == 'Admin' || Yii::app()->user->rol == 'Director')
         array("url"=> array( "route" => "site/page?view=about"), "label"=>"Usuarios",
             array("url" => array( "route" => "alumno/create"), "label" => "Registrar Alumno"),
             array("url" => array( "route" => "empleado/create"), "label" => "Registrar Empleado"),
-            array("url" => array( "route" => "carrera/create"), "label" => "Registrar Carrera"),
             array("url" => array( "route" => "alumno/index"), "label" => "Ver Alumnos"),
             array("url" => array( "route" => "empleado/index"), "label" => "Ver Empleados"),
-            array("url" => array( "route" => "carrera/index"), "label" => "Ver Carreras")
         )
     );
-
 }
+
 else if(Yii::app()->user->rol == 'Asistente'){
     array_push($menu,
         array("url"=> "", "label"=>"General",
@@ -81,6 +79,16 @@ else if(Yii::app()->user->rol == 'Alumno'){
     );
 }
     
+if(isset(Yii::app()->user->rol) && Yii::app()->user->rol == 'Admin') {
+
+    // Es 3 porque esa es la posición de la categoría escolar
+    array_push($menu[3],
+        array("url" => array( "route" => "carrera/index"), "label" => "Ver Carreras"),
+        array("url" => array( "route" => "carrera/create"), "label" => "Registar Carrera")
+    );
+
+}
+
 array_push($menu,
     array('label'=>'Entrar', 'url'=>array("route" => '/site/login'), 'visible'=>Yii::app()->user->isGuest),
     array('label'=>'Salir ('.Yii::app()->user->name.')', 'url'=>array( "route" => '/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
