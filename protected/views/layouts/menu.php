@@ -16,6 +16,7 @@ else if(Yii::app()->user->rol == 'Admin' || Yii::app()->user->rol == 'Director')
             array("url" => array( "route" => "boletinInformativo/create"), "label" => "Crear Boletin Informativo"),
             array("url" => array( "route" => "boletinInformativo/index"), "label" => "Ver Boletines Informativos"),
             array("url" => array( "route" => "solicitudProblemasInscripcion/index"), "label" => "Problemas Inscripcion"),
+            array("url"=> array( "route" => "empleado/update/".Yii::app()->user->name), "label"=>"Configurar Cuenta")
         ),
         array("url"=> array( "route" => "sugerencia/index"), "label"=>"Sugerencias"),
         array("url"=> "", "label"=>"Escolar",
