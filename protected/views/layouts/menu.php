@@ -6,7 +6,8 @@ $menu = array(
 if(!isset(Yii::app()->user->rol)){
     array_push($menu,
         array("url"=> array( "route" => "site/page?view=about"), "label"=>"Acerca de DCV"),
-        array("url"=>array( "route" => "site/contact"), "label"=>"Contacto")
+        array("url"=>array( "route" => "site/contact"), "label"=>"Contacto"),
+        array("url"=>array( "route" => "alumno/crearexalumno"), "label"=>"Registar Exalumno")
     );
 }
 else if(Yii::app()->user->rol == 'Admin' || Yii::app()->user->rol == 'Director') {
