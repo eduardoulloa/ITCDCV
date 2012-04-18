@@ -155,7 +155,8 @@ class EmpleadoController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
-		/*if(Yii::app()->user->rol == 'Admin'){
+		
+		if(Yii::app()->user->rol == 'Admin'){
 			$model = $this->loadModel($id);
 			
 			// Uncomment the following line if AJAX validation is needed
@@ -163,82 +164,124 @@ class EmpleadoController extends Controller
 
 			if(isset($_POST['Empleado']))
 			{
-				$model->attributes=$_POST['Empleado'];
-				$pass = md5($model->attributes['password']);
-				$model->password = $pass;
+				if ('' === $_POST['Empleado']['password']) {
+					$_POST['Empleado']['password'] = $model->password;
+				}
+				else {		
+					$_POST['Empleado']['password'] = md5($_POST['Empleado']['password']);
+				}
+				$model->attributes = $_POST['Empleado'] + $model->attributes;
+				
 				if($model->save())
 					$this->redirect(array('view','id'=>$model->nomina));
 			}
 		}else if(Yii::app()->user->rol == 'Director'){
 			
-			$nomina = Yii::app()->user->id;
+			$model = $this->loadModel($id);
 			
-			//El empleado a modificar
-			$criteria_empleado = new CDbCriteria(array(
-								'join'=>'JOIN empleado ON empleado.nomina = t.nomina AND t.nomina =\''.$id.'\''));
-								
-			$consulta_empleado = CarreraTieneEmpleado::model()->find($criteria_empleado);
-			
-			$idcarrera_empleado = $consulta_empleado->idcarrera;
-			
-			
-			//Este director
-			$criteria_dir = new CDbCriteria(array(
-								'join'=>'JOIN empleado ON empleado.nomina = t.nomina AND t.nomina =\''.$nomina.'\''));
-								
-			$consulta_dir = CarreraTieneEmpleado::model()->find($criteria_dir);
-			
-			
-			$idcarrera = $consulta_dir->idcarrera;
-			
-			$validacion = CarreraTieneEmpleado::model()->findBySql('SELECT nomina FROM carrera_tiene_empleado WHERE idcarrera ='.$idcarrera.' AND nomina =\''.$id.'\'');
-			
-			if(!empty($validacion)){
-			
-				$model=$this->loadModel($id);
-				
-				if(isset($_POST['Empleado']))
-				{	
-					$oldpass = $model->password;
-					$model->attributes=$_POST['Empleado'];
-					$newpass = $model->password;
-					
-					//Valida si el usuario ha hecho algun cambio de password.
-					if($newpass != $oldpass){
-						$pass = md5($model->password);
-						$model->password = $pass;
+			//director tratando de editarse a si mismo
+			if(Yii::app()->user->id == $model->nomina) {
+				if(isset($_POST['Empleado'])) {
+
+					if ('' === $_POST['Empleado']['password']) {
+						$_POST['Empleado']['password'] = $model->password;
 					}
-					
-					//$model->email = $model->attributes['email'];
-					if($model->save())
+					else {
+						if(md5($_POST['passwordActual']) != $model->password) {
+							throw new CHttpException(400, 'El password actual no es correcto.');
+						}
+						else {
+							$_POST['Empleado']['password'] = md5($_POST['Empleado']['password']);
+						}
+					}
+					$model->attributes = $_POST['Empleado'] + $model->attributes;
+					if($model->save()) {
 						$this->redirect(array('view','id'=>$model->nomina));
+					}
 				}
-			
-			}else{
-				throw new CHttpException(400,'El empleado no se encuentra registrado en ninguna de las carreras de su direccion.');
 			}
+			else {
+				//director tratando de editar a un empleado de su carrera
+				$nomina = Yii::app()->user->id;
 			
-		}*/
-
+				//El empleado a modificar
+				$criteria_empleado = new CDbCriteria(array(
+									'join'=>'JOIN empleado ON empleado.nomina = t.nomina AND t.nomina =\''.$id.'\''));
+								
+				$consulta_empleado = CarreraTieneEmpleado::model()->find($criteria_empleado);
+			
+				$idcarrera_empleado = $consulta_empleado->idcarrera;
+			
+			
+				//Este director
+				$criteria_dir = new CDbCriteria(array(
+									'join'=>'JOIN empleado ON empleado.nomina = t.nomina AND t.nomina =\''.$nomina.'\''));
+								
+				$consulta_dir = CarreraTieneEmpleado::model()->find($criteria_dir);
+			
+			
+				$idcarrera = $consulta_dir->idcarrera;
+			
+				$validacion = CarreraTieneEmpleado::model()->findBySql('SELECT nomina FROM carrera_tiene_empleado WHERE idcarrera ='.$idcarrera.' AND nomina =\''.$id.'\'');
+			
+				if(!empty($validacion)){
+			
+					$model=$this->loadModel($id);
+				
+					if(isset($_POST['Empleado']))
+					{	
+						$oldpass = $model->password;
+						$model->attributes=$_POST['Empleado'];
+						$newpass = $model->password;
+					
+						//Valida si el usuario ha hecho algun cambio de password.
+						if($newpass != $oldpass){
+							$pass = md5($model->password);
+							$model->password = $pass;
+						}
+					
+						//$model->email = $model->attributes['email'];
+						if($model->save())
+							$this->redirect(array('view','id'=>$model->nomina));
+					}
+			
+				}else{
+					throw new CHttpException(400,
+							'El empleado no se encuentra registrado en ninguna de las carreras de su direccion.');
+				}
+			}
+		}
+		else //es un empleado normal(secretaria o asistente, etc.)
+		{
 		
-		$model = $this->loadModel($id);
-			
-			// Uncomment the following line if AJAX validation is needed
-			// $this->performAjaxValidation($model);
-
-			if(isset($_POST['Empleado']))
-			{
-				$model->attributes=$_POST['Empleado'];
-				$pass = md5($model->attributes['password']);
-				$model->password = $pass;
-				if($model->save())
+			$model = $this->loadModel(Yii::app()->user->id);
+			if(isset($_POST['Empleado'])) {
+		
+				if ('' === $_POST['Empleado']['password']) {
+					$_POST['Empleado']['password'] = $model->password;
+				}
+				else {
+					if(md5($_POST['passwordActual']) != $model->password) {
+						throw new CHttpException(400, 'El password actual no es correcto.');
+					}
+					else {
+						$_POST['Empleado']['password'] = md5($_POST['Empleado']['password']);
+					}
+				}
+				$model->attributes = $_POST['Empleado'] + $model->attributes;
+				if($model->save()) {
 					$this->redirect(array('view','id'=>$model->nomina));
+				}
 			}
+		
+		}
+		
+		
+		$model->password = '';
 		
 		$this->render('update',array(
 			'model'=>$model,
 		));
-		
 	}
 
 	/**

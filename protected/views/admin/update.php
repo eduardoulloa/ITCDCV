@@ -16,3 +16,4 @@ $this->menu=array(
 <h1>Update Admin <?php echo $model->username; ?></h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+

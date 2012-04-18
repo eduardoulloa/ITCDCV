@@ -28,7 +28,10 @@ function checkAll()
 	<?php echo $form->errorSummary($model); ?>
 
 	<?php
-		if(esDirectorOAdmin() || !userTieneRolAsignado()) {
+		//va a hacer un update y es director o admin
+		// o va a registrar un nuevo exalumno
+		if(!esAlumno() || !userTieneRolAsignado()) {
+			
 		
 	?>
 	

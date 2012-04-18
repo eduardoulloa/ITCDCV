@@ -49,7 +49,6 @@
 			}else if (Yii::app()->user->rol == 'Admin'){
 			
 				$menu = array(
-
 					array('label'=>'General'),
 					array('label'=>'Ver Boletines Informativos', 'url'=>array('boletinInformativo/index')),
 					array('label'=>'Ver Reportes de Problemas de Inscripcion', 'url'=>array('solicitudProblemasInscripcion/index')),
@@ -77,15 +76,20 @@
 					);
 			}else if (Yii::app()->user->rol == 'Director'){
 				$menu = array(
-					
 					array('label'=>'General'),
 					array('label'=>'Crear Boletin informativo', 'url'=>array('boletinInformativo/create')),
 					array('label'=>'Ver Boletines Informativos', 'url'=>array('boletinInformativo/index')),
 					array('label'=>'Ver Reportes de Problemas de Inscripcion', 'url'=>array('solicitudProblemasInscripcion/index')),
 					array('label'=>''),
 					array('label'=>''),
+					array('label'=>''),
+					array('label'=>''),
+					array('label'=>''),
 					array('label'=>'Sugerencias'),
 					array('label'=>'Ver Sugerencias', 'url'=>array('sugerencia/index')),
+					array('label'=>''),
+					array('label'=>''),
+					array('label'=>''),
 					array('label'=>''),
 					array('label'=>''),
 					array('label'=>'Escolar'),
@@ -94,6 +98,9 @@
 					array('label'=>'Ver Solicitudes de Bajas de Semestre', 'url'=>array('solicitudBajaSemestre/index')),
 					array('label'=>'Ver Solicitudes de Cartas de Recomendacion', 'url'=>array('solicitudCartaRecomendacion/index')),
 					array('label'=>'Ver Solicitudes de Revalidacion de Materias', 'url'=>array('solicitudRevalidacion/index')),
+					array('label'=>''),
+					array('label'=>''),
+					array('label'=>''),
 					array('label'=>''),
 					array('label'=>''),
 					array('label'=>'Usuarios'),

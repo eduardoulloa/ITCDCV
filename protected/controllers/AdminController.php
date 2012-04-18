@@ -103,17 +103,37 @@ class AdminController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
-		$model=$this->loadModel($id);
+		$model=$this->loadModel(Yii::app()->user->id);
+		
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Admin']))
 		{
+			if ('' === $_POST['Admin']['password']) {
+				$_POST['Admin']['password'] = $model->password;
+			}
+			else {
+				if(md5($_POST['passwordActual']) != $model->password) {
+					throw new CHttpException(400, 'El password actual no es correcto.');
+				}
+				else {
+					$_POST['Admin']['password'] = md5($_POST['Admin']['password']);
+				}
+			}
+			$model->attributes = $_POST['Admin'] + $model->attributes;
+			if($model->save()) {
+				$this->redirect(array('view','id'=>$model->username));
+			}
+			
+			/*
 			$model->attributes=$_POST['Admin'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->username));
+				*/
 		}
+		$model->password = '';
 
 		$this->render('update',array(
 			'model'=>$model,
