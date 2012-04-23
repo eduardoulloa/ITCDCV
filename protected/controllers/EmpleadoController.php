@@ -221,26 +221,26 @@ class EmpleadoController extends Controller
 			// Uncomment the following line if AJAX validation is needed
 			// $this->performAjaxValidation($model);
 
-            $carreras = $this->getEmpleadoCarreras($id);
-            $not_carreras = $this->getNotEmpleadoCarreras($id);
-            $model_carrera=new Carrera;
+        $carreras = $this->getEmpleadoCarreras($id);
+        $not_carreras = $this->getNotEmpleadoCarreras($id);
+        $model_carrera=new Carrera;
 
-		if(isset($_POST['Empleado']) && isset($_POST['Carrera']))
-			{
-				$model->attributes=$_POST['Empleado'];
-				$pass = md5($model->attributes['password']);
-				$model->password = $pass;
-                $id_carrera = $_POST['Carrera'];
-                if($model->save()){
-                    if($id_carrera['id'] != 0){
-                        $model_carrera_empleado=new CarreraTieneEmpleado;
-                        $model_carrera_empleado->idcarrera = $id_carrera['id'];
-                        $model_carrera_empleado->nomina = $model->nomina;
-                        $model_carrera_empleado->save();
-                    }
-                    $this->redirect(array('view','id'=>$model->nomina));
+        if(isset($_POST['Empleado']) && isset($_POST['Carrera']))
+        {
+            $model->attributes=$_POST['Empleado'];
+            $pass = md5($model->attributes['password']);
+            $model->password = $pass;
+            $id_carrera = $_POST['Carrera'];
+            if($model->save()){
+                if($id_carrera['id'] != 0){
+                    $model_carrera_empleado=new CarreraTieneEmpleado;
+                    $model_carrera_empleado->idcarrera = $id_carrera['id'];
+                    $model_carrera_empleado->nomina = $model->nomina;
+                    $model_carrera_empleado->save();
                 }
+                $this->redirect(array('view','id'=>$model->nomina));
             }
+        }
 
         $this->render('update',array(
             'model'=>$model,
@@ -407,7 +407,7 @@ class EmpleadoController extends Controller
     private function getEmpleadoCarreras($empleado)
     {
         $sql = "SELECT DISTINCT * FROM `carrera_tiene_empleado`,`carrera` 
-            WHERE nomina = ".$empleado." and idcarrera = id\n";
+            WHERE nomina = \"".$empleado."\" and idcarrera = id\n";
 
         $salida = $this->getQueryResult($sql);
 
@@ -426,7 +426,7 @@ class EmpleadoController extends Controller
         $connection=Yii::app()->db;
         $sql = "SELECT * FROM `carrera` WHERE id NOT IN 
             (select idcarrera from `carrera_tiene_empleado` 
-            where nomina = ".$empleado.")";
+            where nomina = \"".$empleado."\")";
 
         $salida = $this->getQueryResult($sql);
 
