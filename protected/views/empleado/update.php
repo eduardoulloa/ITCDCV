@@ -13,6 +13,12 @@ $this->menu=array(
 );
 ?>
 
+
 <h1>Update Empleado <?php echo $model->nomina; ?></h1>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model, 
+'model_carrera'=>$model_carrera,
+'carreras'=>$carreras,
+'not_carreras'=>$not_carreras)); ?>
+
+

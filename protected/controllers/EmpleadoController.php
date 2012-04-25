@@ -112,16 +112,9 @@ class EmpleadoController extends Controller
 	 */
 	public function actionCreate()
 	{
-        $criteria_carreras= new CDbCriteria(array(
-                                                'select'=>'id, siglas'));
-
-        $consulta_carreras = Carrera::model()->findAll($criteria_carreras);
-
-        $carreras = array();
+        # Metodo que nos da las carreras
+        $carreras = getCarreras();
         
-        foreach($consulta_carreras as &$valor){
-            $carreras[$valor->id] = $valor->siglas;
-        }
 		$model=new Empleado;
         $model_carrera=new Carrera;
 		// Uncomment the following line if AJAX validation is needed
@@ -129,7 +122,9 @@ class EmpleadoController extends Controller
 
 		if(isset($_POST['Empleado']) && isset($_POST['Carrera']))
 		{
+			$_POST['Empleado']['password'] = md5($_POST['Empleado']['password']);
 			$model->attributes=$_POST['Empleado'];
+			
             $id_carrera = $_POST['Carrera'];
 			if($model->save()){
                 $model_carrera_empleado=new CarreraTieneEmpleado;
@@ -149,21 +144,28 @@ class EmpleadoController extends Controller
 		));
 	}
 
+
 	/**
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
 	 */
 	public function actionUpdate($id)
 	{
-		
+		$carreras = $this->getEmpleadoCarreras($id);					//
+		$not_carreras = $this->getNotEmpleadoCarreras($id);		//
+		$model_carrera = new Carrera;													//
+
 		if(Yii::app()->user->rol == 'Admin'){
+			
 			$model = $this->loadModel($id);
+			
 			
 			// Uncomment the following line if AJAX validation is needed
 			// $this->performAjaxValidation($model);
 
 			if(isset($_POST['Empleado']))
 			{
+				
 				if ('' === $_POST['Empleado']['password']) {
 					$_POST['Empleado']['password'] = $model->password;
 				}
@@ -172,8 +174,11 @@ class EmpleadoController extends Controller
 				}
 				$model->attributes = $_POST['Empleado'] + $model->attributes;
 				
-				if($model->save())
+				if($model->save()) {	
+					$this->addCarrera($model);
+					
 					$this->redirect(array('view','id'=>$model->nomina));
+				}
 			}
 		}else if(Yii::app()->user->rol == 'Director'){
 			
@@ -241,8 +246,11 @@ class EmpleadoController extends Controller
 						}
 					
 						//$model->email = $model->attributes['email'];
-						if($model->save())
+						if($model->save()) {
+							$this->addCarrera($model);
+							
 							$this->redirect(array('view','id'=>$model->nomina));
+						}
 					}
 			
 				}else{
@@ -275,148 +283,238 @@ class EmpleadoController extends Controller
 			}
 		
 		}
-		
-		
+
+
 		$model->password = '';
 		
+		//$this->render('update',array('model'=>$model));
+		
 		$this->render('update',array(
-			'model'=>$model,
-		));
+        'model'=>$model,
+        'model_carrera'=>$model_carrera,
+        'carreras'=>$carreras,
+        'not_carreras'=>$not_carreras
+    ));
+
 	}
-
-	/**
-	 * Deletes a particular model.
-	 * If deletion is successful, the browser will be redirected to the 'admin' page.
-	 * @param integer $id the ID of the model to be deleted
-	 */
-	public function actionDelete($id)
-	{
-		if(Yii::app()->request->isPostRequest)
-		{
-			// we only allow deletion via POST request
-			$this->loadModel($id)->delete();
-
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if(!isset($_GET['ajax']))
-				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-		}
-		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-	}
-
-	/**
-	 * Lists all models.
-	 */
-	public function actionIndex()
-	{
-		
-		if(Yii::app()->user->rol == 'Director'){
-			$nomina = Yii::app()->user->id;
-			
-			
-			$connection=Yii::app()->db;
-			
-			$sql = "SELECT idcarrera FROM carrera_tiene_empleado WHERE nomina ='".$nomina."'";
-			
-			$command=$connection->createCommand($sql);
-		
-			$dataReader=$command->query();
-			
-			$query = "";
-			
-			$dataReader->bindColumn(1, $id);
-			
-			$cuenta = $dataReader->count();
-			
-			
-			if($cuenta == 0){
-				$query="";
-			}else if ($cuenta == 1){
-				
-				$row = $dataReader->read();
-				$query .= 'c.idcarrera = '.$id;
-			}else{	
-				$query .= '(';
-				while($cuenta > 1){
-					$row = $dataReader->read();	
-					$query .= 'c.idcarrera = '.$id.' OR ';
-					$cuenta--;
-				}
-				$row = $dataReader->read();
-				$query .= 'c.idcarrera = '.$id.')';
-				
-				
-			}
-			
-			$criteria_idcarrera = new CDbCriteria(array(
-					'condition'=>'nomina=\''.$nomina.'\'',
-					'select'=>'idcarrera',
-				));
-				
-			$idcarrera = CarreraTieneEmpleado::model()->findAll($criteria_idcarrera);
-			
-			//Obtiene los empleados de esta carrera.
-			if($query != ""){
-				$dataProvider = new CActiveDataProvider('Empleado', array(
-					'criteria'=>array(
-						'join'=>'JOIN carrera_tiene_empleado as c ON t.nomina = c.nomina AND '.$query,
-					),
-				));
-				
-			}else{
-				$dataProvider=new CActiveDataProvider('Empleado');
-			}
-			
-		}else{
-		
-			$dataProvider=new CActiveDataProvider('Empleado');
-			
-		}
 	
+	private function addCarrera($model) {
 		
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
+		if(isset($_POST['Carrera'])) {																	//
+			$id_carrera = $_POST['Carrera'];															//
+			if($id_carrera['id'] != 0){																		//
+	        $model_carrera_empleado=new CarreraTieneEmpleado;					//
+	        $model_carrera_empleado->idcarrera = $id_carrera['id'];		//
+	        $model_carrera_empleado->nomina = $model->nomina;					//
+	        $model_carrera_empleado->save();													//
+	    }																															//
+		}																																//
 	}
 
-	/**
-	 * Manages all models.
-	 */
-	public function actionAdmin()
-	{
-		$model=new Empleado('search');
-		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Empleado']))
-			$model->attributes=$_GET['Empleado'];
+    /**
+     * Deletes a particular model.
+     * If deletion is successful, the browser will be redirected to the 'admin' page.
+     * @param integer $id the ID of the model to be deleted
+     */
+    public function actionDelete($id)
+    {
+        if(Yii::app()->request->isPostRequest)
+        {
+            // we only allow deletion via POST request
+            $this->loadModel($id)->delete();
 
-		$this->render('admin',array(
-			'model'=>$model,
-		));
-	}
+            // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+            if(!isset($_GET['ajax']))
+                $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+        }
+        else
+            throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+    }
 
-	/**
-	 * Returns the data model based on the primary key given in the GET variable.
-	 * If the data model is not found, an HTTP exception will be raised.
-	 * @param integer the ID of the model to be loaded
-	 */
-	public function loadModel($id)
-	{
-		$model=Empleado::model()->findByPk($id);
-		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
-		return $model;
-	}
+    /**
+     * Lists all models.
+     */
+    public function actionIndex()
+    {
 
-	/**
-	 * Performs the AJAX validation.
-	 * @param CModel the model to be validated
-	 */
-	protected function performAjaxValidation($model)
-	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='empleado-form')
-		{
-			echo CActiveForm::validate($model);
-			Yii::app()->end();
-		}
-	}
+        if(Yii::app()->user->rol == 'Director'){
+            $nomina = Yii::app()->user->id;
+
+
+            $connection=Yii::app()->db;
+
+            $sql = "SELECT idcarrera FROM carrera_tiene_empleado WHERE nomina ='".$nomina."'";
+
+            $command=$connection->createCommand($sql);
+
+            $dataReader=$command->query();
+
+            $query = "";
+
+            $dataReader->bindColumn(1, $id);
+
+            $cuenta = $dataReader->count();
+
+
+            if($cuenta == 0){
+                $query="";
+            }else if ($cuenta == 1){
+
+                $row = $dataReader->read();
+                $query .= 'c.idcarrera = '.$id;
+            }else{	
+                $query .= '(';
+                while($cuenta > 1){
+                    $row = $dataReader->read();	
+                    $query .= 'c.idcarrera = '.$id.' OR ';
+                    $cuenta--;
+                }
+                $row = $dataReader->read();
+                $query .= 'c.idcarrera = '.$id.')';
+
+
+            }
+
+            $criteria_idcarrera = new CDbCriteria(array(
+                'condition'=>'nomina=\''.$nomina.'\'',
+                'select'=>'idcarrera',
+            ));
+
+            $idcarrera = CarreraTieneEmpleado::model()->findAll($criteria_idcarrera);
+
+            //Obtiene los empleados de esta carrera.
+            if($query != ""){
+                $dataProvider = new CActiveDataProvider('Empleado', array(
+                    'criteria'=>array(
+                        'join'=>'JOIN carrera_tiene_empleado as c ON t.nomina = c.nomina AND '.$query,
+                    ),
+                ));
+
+            }else{
+                $dataProvider=new CActiveDataProvider('Empleado');
+            }
+
+        }else{
+
+            $dataProvider=new CActiveDataProvider('Empleado');
+
+        }
+
+
+        $this->render('index',array(
+            'dataProvider'=>$dataProvider,
+        ));
+    }
+
+    /**
+     * Manages all models.
+     */
+    public function actionAdmin()
+    {
+        $model=new Empleado('search');
+        $model->unsetAttributes();  // clear any default values
+        if(isset($_GET['Empleado']))
+            $model->attributes=$_GET['Empleado'];
+
+        $this->render('admin',array(
+            'model'=>$model,
+        ));
+    }
+
+    /**
+     * Returns the data model based on the primary key given in the GET variable.
+     * If the data model is not found, an HTTP exception will be raised.
+     * @param integer the ID of the model to be loaded
+     */
+    public function loadModel($id)
+    {
+        $model=Empleado::model()->findByPk($id);
+        if($model===null)
+            throw new CHttpException(404,'The requested page does not exist.');
+        return $model;
+    }
+
+    /**
+     * Performs the AJAX validation.
+     * @param CModel the model to be validated
+     */
+    protected function performAjaxValidation($model)
+    {
+        if(isset($_POST['ajax']) && $_POST['ajax']==='empleado-form')
+        {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+        }
+    }
+
+    private function getCarreras()
+    {
+
+        $criteria_carreras= new CDbCriteria(array(
+            'select'=>'id, siglas'));
+
+        $consulta_carreras = Carrera::model()->findAll($criteria_carreras);
+
+        $carreras = array();
+
+        foreach($consulta_carreras as &$valor){
+            $carreras[$valor->id] = $valor->siglas;
+        }
+
+        return $carreras;
+    }
+
+    private function getEmpleadoCarreras($empleado)
+    {
+        $sql = "SELECT DISTINCT * FROM `carrera_tiene_empleado`,`carrera` 
+            WHERE nomina = \"".$empleado."\" and idcarrera = id\n";
+
+        $salida = $this->getQueryResult($sql);
+
+        $carreras = array();
+
+        foreach($salida as &$valor){
+            $carreras[$valor[ "id" ]] = $valor[ "siglas" ];
+
+        }
+								
+        return $carreras;
+    }
+
+    private function getNotEmpleadoCarreras($empleado)
+    {
+        $connection=Yii::app()->db;
+        $sql = "SELECT * FROM `carrera` WHERE id NOT IN 
+            (select idcarrera from `carrera_tiene_empleado` 
+            where nomina = \"".$empleado."\")";
+
+        $salida = $this->getQueryResult($sql);
+
+        $carreras = array();
+
+        $carreras[0] = "";
+
+        foreach($salida as &$valor){
+            $carreras[$valor[ "id" ]] = $valor[ "siglas" ];
+
+        }
+
+
+        return $carreras;
+    }
+
+    private function getQueryResult($sql)
+    {
+        $connection=Yii::app()->db;
+        $command=$connection->createCommand($sql);
+        $dataReader=$command->query();
+
+        $salida = array(); 
+
+        for($i = 0; $i < $dataReader->count(); $i++)
+            array_push($salida,$dataReader->read());
+
+        return $salida;
+
+    }
 }

@@ -49,6 +49,17 @@
 		<?php echo $form->error($model,'puesto'); ?>
 	</div>
 	
+	<div class="row">
+      <?php echo $form->label($model_carrera,'Carreras:'); ?>
+      <?php echo $form->dropDownList($model_carrera,'id', $carreras); ?>
+  </div>
+
+
+  <div class="row">
+      <?php echo $form->label($model_carrera,'Agregar Carrera'); ?>
+      <?php echo $form->dropDownList($model_carrera,'id', $not_carreras); ?>
+  </div>	
+	
 	<?php
 		}
 		else if(esDirector() && Yii::app()->user->id != $model->nomina) {
@@ -71,6 +82,17 @@
 			<?php echo $form->textField($model,'apellido_materno',array('size'=>60,'maxlength'=>60)); ?>
 			<?php echo $form->error($model,'apellido_materno'); ?>
 		</div>
+		
+		<div class="row">
+	      <?php echo $form->label($model_carrera,'Carreras:'); ?>
+	      <?php echo $form->dropDownList($model_carrera,'id', $carreras); ?>
+	  </div>
+
+
+	  <div class="row">
+	      <?php echo $form->label($model_carrera,'Agregar Carrera'); ?>
+	      <?php echo $form->dropDownList($model_carrera,'id', $not_carreras); ?>
+	  </div>
 	<?php 
 		}
 		else {
