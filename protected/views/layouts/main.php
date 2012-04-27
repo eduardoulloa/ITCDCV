@@ -42,8 +42,8 @@
     <?php echo $content; ?>
 
     <div id="footer">
-        Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>
-        All Rights Reserved.<br/>
+        &copy; DCV <?php echo date('Y'); ?> by Direcci&oacute;n de ITC, ITESM<br/>
+        Derechos Reservados.<br/>
         <?php echo Yii::powered(); ?>
     </div><!-- footer -->
 
