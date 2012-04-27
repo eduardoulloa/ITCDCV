@@ -13,51 +13,12 @@ $this->menu=array(
 );
 ?>
 
-<h1>Actualizar Empleado <?php echo $model->nomina; ?></h1>
 
-<div class="form">
-<?php $form=$this->beginWidget('CActiveForm'); ?>
- 
-    <?php echo $form->errorSummary($model); ?>
-    <div class="row">
-        <?php echo $form->label($model,'nomina'); ?>
-        <?php echo $form->textField($model,'nomina') ?>
-    </div>
- 
-    <div class="row">
-        <?php echo $form->label($model,'nombre'); ?>
-        <?php echo $form->textField($model,'nombre') ?>
-    </div>
-    <div class="row">
-        <?php echo $form->label($model,'apellido_paterno'); ?>
-        <?php echo $form->textField($model,'apellido_paterno') ?>
-    </div>
+<h1>Update Empleado <?php echo $model->nomina; ?></h1>
 
-    <div class="row">
-        <?php echo $form->label($model,'apellido_materno'); ?>
-        <?php echo $form->textField($model,'apellido_materno') ?>
-    </div>
- 
- 
-    <div class="row">
-        <?php echo $form->label($model,'puesto'); ?>
-        <?php echo $form->textField($model,'puesto') ?>
-    </div>
-
-    <div class="row">
-        <?php echo $form->label($model_carrera,'Carreras:'); ?>
-        <?php echo $form->dropDownList($model_carrera,'id', $carreras); ?>
-    </div>
+<?php echo $this->renderPartial('_form', array('model'=>$model, 
+'model_carrera'=>$model_carrera,
+'carreras'=>$carreras,
+'not_carreras'=>$not_carreras)); ?>
 
 
-    <div class="row">
-        <?php echo $form->label($model_carrera,'Agregar Carrera'); ?>
-        <?php echo $form->dropDownList($model_carrera,'id', $not_carreras); ?>
-    </div>
-
-    <div class="row submit">
-        <?php echo CHtml::submitButton('Actualizar'); ?>
-    </div>
- 
-<?php $this->endWidget(); ?>
-</div><!-- form -->

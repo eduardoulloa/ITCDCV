@@ -144,112 +144,172 @@ class EmpleadoController extends Controller
 		));
 	}
 
+
 	/**
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
 	 */
 	public function actionUpdate($id)
 	{
-		/*if(Yii::app()->user->rol == 'Admin'){
+		$carreras = $this->getEmpleadoCarreras($id);					//
+		$not_carreras = $this->getNotEmpleadoCarreras($id);		//
+		$model_carrera = new Carrera;													//
+
+		if(Yii::app()->user->rol == 'Admin'){
+			
 			$model = $this->loadModel($id);
+			
 			
 			// Uncomment the following line if AJAX validation is needed
 			// $this->performAjaxValidation($model);
 
 			if(isset($_POST['Empleado']))
 			{
-				$model->attributes=$_POST['Empleado'];
-				$pass = md5($model->attributes['password']);
-				$model->password = $pass;
-				if($model->save())
+				
+				if ('' === $_POST['Empleado']['password']) {
+					$_POST['Empleado']['password'] = $model->password;
+				}
+				else {		
+					$_POST['Empleado']['password'] = md5($_POST['Empleado']['password']);
+				}
+				$model->attributes = $_POST['Empleado'] + $model->attributes;
+				
+				if($model->save()) {	
+					$this->addCarrera($model);
+					
 					$this->redirect(array('view','id'=>$model->nomina));
+				}
 			}
 		}else if(Yii::app()->user->rol == 'Director'){
 			
-			$nomina = Yii::app()->user->id;
+			$model = $this->loadModel($id);
 			
-			//El empleado a modificar
-			$criteria_empleado = new CDbCriteria(array(
-								'join'=>'JOIN empleado ON empleado.nomina = t.nomina AND t.nomina =\''.$id.'\''));
-								
-			$consulta_empleado = CarreraTieneEmpleado::model()->find($criteria_empleado);
-			
-			$idcarrera_empleado = $consulta_empleado->idcarrera;
-			
-			
-			//Este director
-			$criteria_dir = new CDbCriteria(array(
-								'join'=>'JOIN empleado ON empleado.nomina = t.nomina AND t.nomina =\''.$nomina.'\''));
-								
-			$consulta_dir = CarreraTieneEmpleado::model()->find($criteria_dir);
-			
-			
-			$idcarrera = $consulta_dir->idcarrera;
-			
-			$validacion = CarreraTieneEmpleado::model()->findBySql('SELECT nomina FROM carrera_tiene_empleado WHERE idcarrera ='.$idcarrera.' AND nomina =\''.$id.'\'');
-			
-			if(!empty($validacion)){
-			
-				$model=$this->loadModel($id);
-				
-				if(isset($_POST['Empleado']))
-				{	
-					$oldpass = $model->password;
-					$model->attributes=$_POST['Empleado'];
-					$newpass = $model->password;
-					
-					//Valida si el usuario ha hecho algun cambio de password.
-					if($newpass != $oldpass){
-						$pass = md5($model->password);
-						$model->password = $pass;
+			//director tratando de editarse a si mismo
+			if(Yii::app()->user->id == $model->nomina) {
+				if(isset($_POST['Empleado'])) {
+
+					if ('' === $_POST['Empleado']['password']) {
+						$_POST['Empleado']['password'] = $model->password;
 					}
-					
-					//$model->email = $model->attributes['email'];
-					if($model->save())
+					else {
+						if(md5($_POST['passwordActual']) != $model->password) {
+							throw new CHttpException(400, 'El password actual no es correcto.');
+						}
+						else {
+							$_POST['Empleado']['password'] = md5($_POST['Empleado']['password']);
+						}
+					}
+					$model->attributes = $_POST['Empleado'] + $model->attributes;
+					if($model->save()) {
 						$this->redirect(array('view','id'=>$model->nomina));
+					}
 				}
-			
-			}else{
-				throw new CHttpException(400,'El empleado no se encuentra registrado en ninguna de las carreras de su direccion.');
 			}
+			else {
+				//director tratando de editar a un empleado de su carrera
+				$nomina = Yii::app()->user->id;
 			
-		}*/
-
+				//El empleado a modificar
+				$criteria_empleado = new CDbCriteria(array(
+									'join'=>'JOIN empleado ON empleado.nomina = t.nomina AND t.nomina =\''.$id.'\''));
+								
+				$consulta_empleado = CarreraTieneEmpleado::model()->find($criteria_empleado);
+			
+				$idcarrera_empleado = $consulta_empleado->idcarrera;
+			
+			
+				//Este director
+				$criteria_dir = new CDbCriteria(array(
+									'join'=>'JOIN empleado ON empleado.nomina = t.nomina AND t.nomina =\''.$nomina.'\''));
+								
+				$consulta_dir = CarreraTieneEmpleado::model()->find($criteria_dir);
+			
+			
+				$idcarrera = $consulta_dir->idcarrera;
+			
+				$validacion = CarreraTieneEmpleado::model()->findBySql('SELECT nomina FROM carrera_tiene_empleado WHERE idcarrera ='.$idcarrera.' AND nomina =\''.$id.'\'');
+			
+				if(!empty($validacion)){
+			
+					$model=$this->loadModel($id);
+				
+					if(isset($_POST['Empleado']))
+					{	
+						$oldpass = $model->password;
+						$model->attributes=$_POST['Empleado'];
+						$newpass = $model->password;
+					
+						//Valida si el usuario ha hecho algun cambio de password.
+						if($newpass != $oldpass){
+							$pass = md5($model->password);
+							$model->password = $pass;
+						}
+					
+						//$model->email = $model->attributes['email'];
+						if($model->save()) {
+							$this->addCarrera($model);
+							
+							$this->redirect(array('view','id'=>$model->nomina));
+						}
+					}
+			
+				}else{
+					throw new CHttpException(400,
+							'El empleado no se encuentra registrado en ninguna de las carreras de su direccion.');
+				}
+			}
+		}
+		else //es un empleado normal(secretaria o asistente, etc.)
+		{
 		
-		$model = $this->loadModel($id);
-			
-			// Uncomment the following line if AJAX validation is needed
-			// $this->performAjaxValidation($model);
+			$model = $this->loadModel(Yii::app()->user->id);
+			if(isset($_POST['Empleado'])) {
+		
+				if ('' === $_POST['Empleado']['password']) {
+					$_POST['Empleado']['password'] = $model->password;
+				}
+				else {
+					if(md5($_POST['passwordActual']) != $model->password) {
+						throw new CHttpException(400, 'El password actual no es correcto.');
+					}
+					else {
+						$_POST['Empleado']['password'] = md5($_POST['Empleado']['password']);
+					}
+				}
+				$model->attributes = $_POST['Empleado'] + $model->attributes;
+				if($model->save()) {
+					$this->redirect(array('view','id'=>$model->nomina));
+				}
+			}
+		
+		}
 
-        $carreras = $this->getEmpleadoCarreras($id);
-        $not_carreras = $this->getNotEmpleadoCarreras($id);
-        $model_carrera=new Carrera;
 
-        if(isset($_POST['Empleado']) && isset($_POST['Carrera']))
-        {
-            $model->attributes=$_POST['Empleado'];
-            $pass = md5($model->attributes['password']);
-            $model->password = $pass;
-            $id_carrera = $_POST['Carrera'];
-            if($model->save()){
-                if($id_carrera['id'] != 0){
-                    $model_carrera_empleado=new CarreraTieneEmpleado;
-                    $model_carrera_empleado->idcarrera = $id_carrera['id'];
-                    $model_carrera_empleado->nomina = $model->nomina;
-                    $model_carrera_empleado->save();
-                }
-                $this->redirect(array('view','id'=>$model->nomina));
-            }
-        }
+		$model->password = '';
+		
+		//$this->render('update',array('model'=>$model));
+		
+		$this->render('update',array(
+        'model'=>$model,
+        'model_carrera'=>$model_carrera,
+        'carreras'=>$carreras,
+        'not_carreras'=>$not_carreras
+    ));
 
-        $this->render('update',array(
-            'model'=>$model,
-            'model_carrera'=>$model_carrera,
-            'carreras'=>$carreras,
-            'not_carreras'=>$not_carreras
-        ));
-
-    }
+	}
+	
+	private function addCarrera($model) {
+		
+		if(isset($_POST['Carrera'])) {																	//
+			$id_carrera = $_POST['Carrera'];															//
+			if($id_carrera['id'] != 0){																		//
+	        $model_carrera_empleado=new CarreraTieneEmpleado;					//
+	        $model_carrera_empleado->idcarrera = $id_carrera['id'];		//
+	        $model_carrera_empleado->nomina = $model->nomina;					//
+	        $model_carrera_empleado->save();													//
+	    }																															//
+		}																																//
+	}
 
     /**
      * Deletes a particular model.
@@ -417,7 +477,7 @@ class EmpleadoController extends Controller
             $carreras[$valor[ "id" ]] = $valor[ "siglas" ];
 
         }
-
+								
         return $carreras;
     }
 

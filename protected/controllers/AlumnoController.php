@@ -186,11 +186,18 @@ class AlumnoController extends Controller
 
 			if(isset($_POST['Alumno']))
 			{
-				$model->attributes=$_POST['Alumno'];
-				$pass = md5($model->attributes['password']);
-				$model->password = $pass;
-				if($model->save())
+				if ('' === $_POST['Alumno']['password']) {
+					$_POST['Alumno']['password'] = $model->password;
+				}
+				else {		
+					$_POST['Alumno']['password'] = md5($_POST['Alumno']['password']);
+				}
+				
+				$model->attributes = $_POST['Alumno'] + $model->attributes;
+				
+				if($model->save()) {
 					$this->redirect(array('view','id'=>$model->matricula));
+				}
 			}
 		
 		}else if(Yii::app()->user->rol == 'Alumno'){
@@ -213,7 +220,6 @@ class AlumnoController extends Controller
 					$this->redirect(array('view','id'=>$model->matricula));
 				}
 			}
-			
 		}else if(Yii::app()->user->rol == 'Director'){
 			
 			$nomina = Yii::app()->user->id;
@@ -237,8 +243,9 @@ class AlumnoController extends Controller
 					}
 					
 					//$model->email = $model->attributes['email'];
-					if($model->save())
+					if($model->save()) {
 						$this->redirect(array('view','id'=>$model->matricula));
+					}
 				}
 			
 			}else{

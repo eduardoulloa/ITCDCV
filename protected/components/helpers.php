@@ -15,12 +15,49 @@
 		return isset(Yii::app()->user->rol);
 	}
 	
-	function esDirectorOAdmin() {
+	function esAdmin() {
 		if(userTieneRolAsignado()) {
-			return Yii::app()->user->rol != 'Alumno';
+			return Yii::app()->user->rol == 'Admin';
 		}
 		return false;
 	}
+	
+	function esDirector() {
+		if(userTieneRolAsignado()) {
+			return Yii::app()->user->rol == 'Director';
+		}
+		return false;
+	}
+	
+	function esCoDirector() {
+		if(userTieneRolAsignado()) {
+			return Yii::app()->user->rol == 'Co-director';
+		}
+		return false;
+	}
+	
+	function esSecretaria() {
+		if(userTieneRolAsignado()) {
+			return Yii::app()->user->rol == 'Secretaria';
+		}
+		return false;
+	}
+	
+	function esAsistente() {
+		if(userTieneRolAsignado()) {
+			return Yii::app()->user->rol == 'Asistente';
+		}
+		return false;
+	}
+	
+	function esAlumno() {
+		if(userTieneRolAsignado()) {
+			return Yii::app()->user->rol == 'Alumno';
+		}
+		return false;
+	}
+	
+	//Yii:app()->user->id
 	
 	function matriculaYaExiste($matricula) {
 		$matriculas = array();
@@ -43,9 +80,18 @@
 		return $res;
 	}
 	
+	function getPuestos() {
+		$res = array();
+		$res["Director"] = "Director";
+		$res["Co-director"] = "Co-director";
+		$res["Secretaria"] = "Secretaria";
+		$res["Asistente"] = "Asistente";
+		return $res;		
+	}
+	
 	function cifraPassword($password) {
 		if($password != '') {
-			return md5($password);	
+			return md5($password);
 		}
 		return $password;
 	}

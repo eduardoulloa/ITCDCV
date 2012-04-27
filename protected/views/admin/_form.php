@@ -17,7 +17,21 @@
 	echo("</div>");
 	}
 	?>
-
+	
+	<?php
+	if(!$model->isNewRecord) {
+	?>
+	<div class="row">
+		<label for="passwordActual" class="required">
+			Password Actual
+			<span class="required">*</span>
+		</label>
+		<?php echo(Chtml::passwordField('passwordActual', '', array('size'=>45,'maxlength'=>45))); ?>
+	</div>
+	<?php
+	}
+	?>
+	
 	<div class="row">
 		<?php echo $form->labelEx($model,'password'); ?>
 		<?php echo $form->passwordField($model,'password',array('size'=>45,'maxlength'=>45)); ?>
