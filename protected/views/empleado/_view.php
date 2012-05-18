@@ -24,11 +24,21 @@
 	<?php echo CHtml::encode($data->puesto); ?>
 	<br />
 
+    <?php if(isset($carreras)) { ?>
+	    <b><?php echo CHtml::encode("Carreras"); ?>:</b>
+        <?php foreach($carreras as $carr){
+            echo CHtml::encode($carr)." ";
+        }?>
+
+	<br />
+    <?php } ?>
+
 	<?php echo CHtml::link('Editar', array('update', 'id'=>$data->nomina)); ?>
 	<br />
 
 
-    <?php //print_r($data); ?>
+
+
 
 
 </div>

@@ -94,13 +94,13 @@ class EmpleadoController extends Controller
         $carreras = $consulta_carreras->carreras;
         
         $resultados = array();
-        //print_r($consulta_carreras->carreras);
         foreach($carreras as &$carrera){
             $resultados[$carrera['id']] = $carrera['siglas'];
         }
             
+        $resultados = $this->getEmpleadoCarreras($id);
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'data'=>$this->loadModel($id),
             'carreras'=>$resultados
 		));
 	}
