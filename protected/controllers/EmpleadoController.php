@@ -464,7 +464,7 @@ class EmpleadoController extends Controller
         return $carreras;
     }
 
-    private function getEmpleadoCarreras($empleado)
+    public function getEmpleadoCarreras($empleado)
     {
         $sql = "SELECT DISTINCT * FROM `carrera_tiene_empleado`,`carrera` 
             WHERE nomina = \"".$empleado."\" and idcarrera = id\n";

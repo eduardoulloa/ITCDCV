@@ -24,14 +24,17 @@
 	<?php echo CHtml::encode($data->puesto); ?>
 	<br />
 
-    <?php if(isset($carreras)) { ?>
+    <?php if(!isset($carreras)) { 
+
+        $carreras = $this->getEmpleadoCarreras($data->nomina);
+
+    } ?>
+
 	    <b><?php echo CHtml::encode("Carreras"); ?>:</b>
         <?php foreach($carreras as $carr){
             echo CHtml::encode($carr)." ";
         }?>
-
 	<br />
-    <?php } ?>
 
 	<?php echo CHtml::link('Editar', array('update', 'id'=>$data->nomina)); ?>
 	<br />
