@@ -110,6 +110,7 @@ class BoletinInformativoController extends Controller
 		$message = new YiiMailMessage;
 		
 		//se establece el cuerpo del mensaje.
+		
 		$message->setBody($body);
 		
 		//se establece el asunto del mensaje.

@@ -29,7 +29,15 @@
 	<?php echo CHtml::encode(get_class($data)); ?>
 	<br />
 	
-	<?php if(Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin' || Yii::app()->user->rol == 'Alumno'){
+	<!-- fue modificada la condicion para que los alumnos no puedan hacer updates de sus solicitudes.
+	a continuacion se muestra como originalmente estaba la solicitud-->
+	<?php /*if(Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin' || Yii::app()->user->rol == 'Alumno'){
+		echo CHtml::link(CHtml::encode('Editar'), array('/'.get_class($data)
+				.'/update', 'id'=>$data->id));
+	}*/
+	?>
+	
+	<?php if(Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin'){
 		echo CHtml::link(CHtml::encode('Editar'), array('/'.get_class($data)
 				.'/update', 'id'=>$data->id));
 	}

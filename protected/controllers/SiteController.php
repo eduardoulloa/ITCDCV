@@ -85,6 +85,11 @@ class SiteController extends Controller
 		{
 			$model->attributes=$_POST['LoginForm'];
 			
+			//aqui capturo el nombre del usuario en una variable de sesión. esto es para poder
+			//ingresar al módulo de registro de alumnos desde el documento de google docs
+			session_start();
+			$_SESSION['username'] = $model->username;
+			$_SESSION['password'] = md5($model->password);
 			//AQUI EMPIEZA LA VALIDACION
 			
 			// validate user input and redirect to the previous page if valid

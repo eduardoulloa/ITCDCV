@@ -133,7 +133,7 @@ class AlumnoController extends Controller
 			$model->password = cifraPassword($model->password);
 			
 			if($model->save()) {
-				$this->redirect(array('create','id'=>$model->matricula));
+				$this->redirect(array('view','id'=>$model->matricula));
 			}
 	
 		}

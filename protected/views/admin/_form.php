@@ -33,7 +33,11 @@
 	?>
 	
 	<div class="row">
-		<?php echo $form->labelEx($model,'password'); ?>
+		<label for="passwordActual" class="required">
+			Password Nuevo
+			<span class="required">*</span>
+		</label>
+		<?php /*echo $form->labelEx($model,'password');*/ ?>
 		<?php echo $form->passwordField($model,'password',array('size'=>45,'maxlength'=>45)); ?>
 		<?php echo $form->error($model,'password'); ?>
 	</div>

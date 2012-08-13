@@ -9,7 +9,7 @@ if(!isset(Yii::app()->user->rol)){
         array("url"=>array( "route" => "alumno/crearexalumno"), "label"=>"Registar Exalumno")
     );
 }
-else if(Yii::app()->user->rol == 'Admin' || Yii::app()->user->rol == 'Director') {
+else if(Yii::app()->user->rol == 'Director') {
 
     array_push($menu,
         array("url"=> "", "label"=>"General",
@@ -29,6 +29,34 @@ else if(Yii::app()->user->rol == 'Admin' || Yii::app()->user->rol == 'Director')
         array("url"=> array( "route" => "site/page?view=about"), "label"=>"Usuarios",
             array("url" => array( "route" => "alumno/create"), "label" => "Registrar Alumno"),
             array("url" => array( "route" => "empleado/create"), "label" => "Registrar Empleado"),
+			array("url" => array( "route" => "../../../../../altas/registro.php"), "label" => "Registro de alumnos desde Internet"),
+            array("url" => array( "route" => "alumno/index"), "label" => "Ver Alumnos"),
+            array("url" => array( "route" => "empleado/index"), "label" => "Ver Empleados"),
+        )
+    );
+}
+
+else if(Yii::app()->user->rol == 'Admin') {
+
+    array_push($menu,
+        array("url"=> "", "label"=>"General",
+            
+            array("url" => array( "route" => "boletinInformativo/index"), "label" => "Ver Boletines Informativos"),
+            array("url" => array( "route" => "solicitudProblemasInscripcion/index"), "label" => "Problemas Inscripcion"),
+            array("url"=> array( "route" => "admin/update/".Yii::app()->user->name), "label"=>"Configurar Cuenta")
+        ),
+        array("url"=> array( "route" => "sugerencia/index"), "label"=>"Sugerencias"),
+        array("url"=> "", "label"=>"Escolar",
+            array("url" => array( "route" => "solicitud/index"), "label" => "Ver Solicitudes"),
+            array("url" => array( "route" => "solicitudBajaMateria/index"), "label" => "Solicitudes Baja Materias"),
+            array("url" => array( "route" => "solicitudBajaSemestre/index"), "label" => "Solicitudes Baja Semestre"),
+            array("url" => array( "route" => "solicitudCartaRecomendacion/index"), "label" => "Solicitudes Cartas Recomendacion"),
+            array("url" => array( "route" => "solicitudRevalidacion/index"), "label" => "Solicitudes Revalidacion Materias"),
+        ),
+        array("url"=> array( "route" => "site/page?view=about"), "label"=>"Usuarios",
+            array("url" => array( "route" => "alumno/create"), "label" => "Registrar Alumno"),
+            array("url" => array( "route" => "empleado/create"), "label" => "Registrar Empleado"),
+			array("url" => array( "route" => "../../../../../altas/registro.php"), "label" => "Registro de alumnos desde Internet"),
             array("url" => array( "route" => "alumno/index"), "label" => "Ver Alumnos"),
             array("url" => array( "route" => "empleado/index"), "label" => "Ver Empleados"),
         )
@@ -45,7 +73,8 @@ else if(Yii::app()->user->rol == 'Asistente'){
             array("url" => array( "route" => "solicitudRevalidacion/index"), "label" => "Solicitudes Revalidacion Materias"),
         ),
         array("url"=> array( "route" => "site/page?view=about"), "label"=>"Usuarios",
-            array("url" => array( "route" => "empleado/update/".Yii::app()->user->name), "label" => "Configurar Cuenta")
+            array("url" => array( "route" => "empleado/update/".Yii::app()->user->name), "label" => "Configurar Cuenta"),
+			array("url" => array( "route" => "../../../../../altas/registro.php"), "label" => "Registro de alumnos desde Internet"),
         )
     );
 }
@@ -58,7 +87,7 @@ else if(Yii::app()->user->rol == 'Alumno'){
         ),
         array("url"=> "", "label"=>"Sugerencias",
             array("url"=> array( "route" => "sugerencia/index"), "label"=>"Ver sugerencias"),
-            array("url"=> array( "route" => "sugerencia/index"), "label"=>"Crear sugerencias"),
+            array("url"=> array( "route" => "sugerencia/create"), "label"=>"Crear sugerencias"),
         ),
         array("url"=> "", "label"=>"Escolar",
             array("url" => "", "label" => "Crear",
@@ -93,6 +122,7 @@ array_push($menu,
     array('label'=>'Entrar', 'url'=>array("route" => '/site/login'), 'visible'=>Yii::app()->user->isGuest),
     array('label'=>'Salir ('.Yii::app()->user->name.')', 'url'=>array( "route" => '/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 );
+
 
 $this->widget('application.extensions.menu.SMenu',
     array(
