@@ -42,9 +42,9 @@
     <?php echo $content; ?>
 
     <div id="footer">
-        &copy; DCV <?php echo date('Y'); ?> by Direcci&oacute;n de ITC, ITESM<br/>
+        &copy; DCV <?php echo date('Y'); ?> por la Direcci&oacute;n de ITC, ITESM<br/>
         Derechos Reservados.<br/>
-        <?php echo Yii::powered(); ?>
+        <?php echo "Impulsado por " ?><a href="http://www.yiiframework.com">Yii</a>
     </div><!-- footer -->
 
 

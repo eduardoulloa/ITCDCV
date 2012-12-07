@@ -85,8 +85,8 @@ class SiteController extends Controller
 		{
 			$model->attributes=$_POST['LoginForm'];
 			
-			//aqui capturo el nombre del usuario en una variable de sesi�n. esto es para poder
-			//ingresar al m�dulo de registro de alumnos desde el documento de google docs
+			//aqui capturo el nombre del usuario en una variable de sesión. esto es para poder
+			//ingresar al módulo de registro de alumnos desde el documento de google docs
 			session_start();
 			$_SESSION['username'] = $model->username;
 			$_SESSION['password'] = md5($model->password);
@@ -108,4 +108,43 @@ class SiteController extends Controller
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
 	}
+	
+	public function verificaQueMatriculaNoEstaRegistrada($matricula) {
+		if(matriculaYaExiste($matricula)) {
+			throw new CHttpException(400, 'Error. Ya existe un usuario registrado con la matrícula o el nombre de usuario proporcionado. 
+			Favor de verificarlo. Puede también crear un nombre de usuario a partir de una cadena de caracteres.');
+		}
+	}
+	
+	public function actionCrearExalumno()
+	{
+		$model = new Alumno;
+		
+		if(isset($_POST['Alumno']))
+		{
+			$model->attributes = $_POST['Alumno'];			
+			$model->semestre = -1;
+			$model->plan = -1;
+			
+			$this->verificaQueMatriculaNoEstaRegistrada($model->matricula);
+			
+			$model->password = cifraPassword($model->password);
+			
+			if($model->save()) {
+				$this->redirect(array('exalumnoregistrado', 'id'=>$model->matricula));
+			}
+			
+		}
+		
+		$this->render('crearexalumno',array('model'=>$model,));
+	}
+	
+	public function actionExalumnoRegistrado($id)
+	{
+		$this->render('exalumnoregistrado',array(
+			'id'=>$id,
+		));
+	}
+	
+	
 }

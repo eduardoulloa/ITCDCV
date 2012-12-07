@@ -80,14 +80,14 @@ class SolicitudBajaSemestre extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'fechahora' => 'Fecha',
-			'status' => 'Status',
+			'status' => 'Estatus',
 			'periodo' => 'Periodo',
-			'anio' => 'Anio',
+			'anio' => 'Año',
 			'domicilio' => 'Domicilio',
 			'motivo' => 'Motivo',
-			'telefono' => 'Telefono',
+			'telefono' => 'Teléfono',
 			'extranjero' => 'Extranjero',
-			'matriculaalumno' => 'Matricula',
+			'matriculaalumno' => 'Matrícula',
 		);
 	}
 

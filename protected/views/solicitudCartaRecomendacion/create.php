@@ -10,6 +10,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Crear Solicitud de Carta Recomendaci&oacute;n</h1>
+<h1>Crear solicitud de carta recomendaci&oacute;n</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

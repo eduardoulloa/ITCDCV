@@ -71,12 +71,18 @@ class SolicitudBajaSemestreController extends Controller
 		$consulta_super_admin = Admin::model()->findAll($criteria_super_admin);
 		
 		$admin = array();
+		$alumnos = array();
 		
+		$consulta_alumnos = Alumno::model()->findAll();
 		
 		//array_push($admin, $consulta_super_admin);
 		
 		foreach($consulta_super_admin as &$valor){
 			array_push($admin, ($valor->username).'');
+		}
+		
+		foreach($consulta_alumnos as &$valor){
+			array_push($alumnos, ($valor->matricula).'');
 		}
 	
 		return array(
@@ -88,6 +94,11 @@ class SolicitudBajaSemestreController extends Controller
 			array('deny',  // Negar acceso a asistentes y secretarias.
 				'actions'=>array('index','create','view','update'),
 				'users'=>$asistentes,
+			),
+			
+			array('deny',
+				'actions'=>array('update'),
+				'users'=>$alumnos,
 			),
 			
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -102,6 +113,7 @@ class SolicitudBajaSemestreController extends Controller
 				'actions'=>$adminActions, //acciones de los administradores
 				'users'=>$admin,
 			),
+			
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),

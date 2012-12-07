@@ -13,7 +13,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Ver Solicitud de Revalidacion #<?php echo $model->id; ?></h1>
+<h1>Ver solicitud de revalidación #<?php echo $model->id; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,

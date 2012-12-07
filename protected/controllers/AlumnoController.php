@@ -89,13 +89,13 @@ class AlumnoController extends Controller
 			),
 			
 			array('allow',  // deny all users
-				'actions'=>array('crearexalumno'),
-				'users'=>array(),
+				'actions'=>array('crearexalumno', 'exalumnoregistrado'),
+				'users'=>array('*'),
 			),
-			array('deny',  // deny all users
+			/*array('deny',  // deny all users
 				'actions'=>array('crearexalumno'),
 				'users'=>$alumnos,
-			),
+			),*/
 			
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -112,6 +112,7 @@ class AlumnoController extends Controller
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));
+		
 	}
 
 	/**
@@ -151,27 +152,6 @@ class AlumnoController extends Controller
 		}
 	}
 	
-	public function actionCrearExalumno()
-	{
-		$model = new Alumno;
-		
-		if(isset($_POST['Alumno']))
-		{
-			$model->attributes = $_POST['Alumno'];			
-			$model->semestre = -1;
-			$model->plan = -1;
-			
-			$this->verificaQueMatriculaNoEstaRegistrada($model->matricula);
-			$model->password = cifraPassword($model->password);
-			
-			if($model->save()) {
-				$this->redirect(array('crearexalumno','id'=>$model->matricula));
-			}
-		}
-		
-		$this->render('crearexalumno',array('model'=>$model,));
-	}
-
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
@@ -338,7 +318,7 @@ class AlumnoController extends Controller
 			'model'=>$model,
 		));
 	}
-
+	
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.

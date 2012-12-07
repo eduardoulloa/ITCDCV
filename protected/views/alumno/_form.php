@@ -2,7 +2,7 @@
 
 <SCRIPT LANGUAGE="JavaScript" type="text/javascript">
 
-function checkAll()
+/*function checkAll()
 {
 //for (i = 0; i < field.length; i++){
 	//field[i].checked = true ;
@@ -14,7 +14,7 @@ function checkAll()
 		}
 }
 	
-}
+}*/
 
 </SCRIPT>
 
@@ -23,7 +23,7 @@ function checkAll()
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Los campos con <span class="required">*</span> son requeridos.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
@@ -39,7 +39,7 @@ function checkAll()
 	<?php echo $this->renderPartial('_exalumno', array('model'=>$model, 'form'=>$form)); ?>
 	
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Guardar'); ?>
 	</div>
 	
 	<?php
@@ -49,7 +49,7 @@ function checkAll()
 	
 	<div class="row">
 		<label for="passwordActual" class="required">
-			Password Actual
+			Contraseña actual
 			<span class="required">*</span>
 		</label>
 		<?php echo(Chtml::passwordField('passwordActual', '', array('size'=>45,'maxlength'=>45))); ?>
@@ -58,7 +58,7 @@ function checkAll()
 	<div class="row">
 	<?php /*echo $form->labelEx($model,'password');*/ ?>
 	<label for="password" class="required">
-				Password Nuevo
+				Contraseña nueva
 				<span class="required">*</span>
 	</label>
 	<?php echo $form->passwordField($model,'password',array('size'=>45,'maxlength'=>45)); ?>
@@ -66,13 +66,16 @@ function checkAll()
 	</div>
 	
 	<div class="row">
-		<?php echo $form->labelEx($model,'email'); ?>
+		<label for="password" class="required">
+				E-mail
+				<span class="required">*</span>
+		</label>
 		<?php echo $form->textField($model,'email',array('size'=>45,'maxlength'=>45)); ?>
 		<?php echo $form->error($model,'email'); ?>
 	</div>
 	
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Guardar'); ?>
 	</div>
 	
 	<?php

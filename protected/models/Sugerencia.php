@@ -71,10 +71,10 @@ class Sugerencia extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'fechahora' => 'Fecha',
-			'status' => 'Status',
+			'status' => 'Estatus',
 			'sugerencia' => 'Sugerencia',
 			'respuesta' => 'Respuesta',
-			'matriculaalumno' => 'Matricula',
+			'matriculaalumno' => 'Matrícula',
 		);
 	}
 

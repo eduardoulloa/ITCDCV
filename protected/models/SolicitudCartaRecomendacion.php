@@ -74,11 +74,11 @@ class SolicitudCartaRecomendacion extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'fechahora' => 'Fecha',
-			'status' => 'Status',
+			'status' => 'Estatus',
 			'tipo' => 'Tipo',
 			'formato' => 'Formato',
 			'comentarios' => 'Comentarios',
-			'matriculaalumno' => 'Matricula',
+			'matriculaalumno' => 'Matrícula',
 		);
 	}
 

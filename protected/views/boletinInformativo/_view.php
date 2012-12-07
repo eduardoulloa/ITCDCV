@@ -16,6 +16,7 @@
 	<?php echo CHtml::encode($data->fechahora); ?>
 	<br />
 
+	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('semestre1')); ?>:</b>
 	<?php echo CHtml::encode($data->semestre1); ?>
 	<br />
@@ -31,6 +32,8 @@
 	<b><?php echo CHtml::encode($data->getAttributeLabel('semestre4')); ?>:</b>
 	<?php echo CHtml::encode($data->semestre4); ?>
 	<br />
+	*/
+	?>
 
 	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('semestre5')); ?>:</b>
@@ -56,11 +59,12 @@
 	<b><?php echo CHtml::encode($data->getAttributeLabel('exatec')); ?>:</b>
 	<?php echo CHtml::encode($data->exatec); ?>
 	<br />
-
+	*/
+	?>
+	
 	<b><?php echo CHtml::encode($data->getAttributeLabel('idcarrera')); ?>:</b>
 	<?php echo CHtml::encode($data->idcarrera); ?>
 	<br />
 
-	*/ ?>
 
 </div>

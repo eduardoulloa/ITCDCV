@@ -79,15 +79,15 @@ class SolicitudRevalidacion extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'fechahora' => 'Fecha',
-			'status' => 'Status',
+			'status' => 'Estatus',
 			'periodo' => 'Periodo',
-			'anio' => 'Anio',
-			'clave_revalidar' => 'Clave de Materia a Revalidar',
-			'nombre_revalidar' => 'Nombre de Materia a Revalidar',
-			'clave_cursada' => 'Clave de Materia Cursada',
-			'nombre_cursada' => 'Nombre de Materia Cursada',
+			'anio' => 'Año',
+			'clave_revalidar' => 'Clave de materia a revalidar',
+			'nombre_revalidar' => 'Nombre de materia a revalidar',
+			'clave_cursada' => 'Clave de materia cursada',
+			'nombre_cursada' => 'Nombre de materia cursada',
 			'universidad' => 'Universidad',
-			'matriculaalumno' => 'Matricula',
+			'matriculaalumno' => 'Matrícula',
 		);
 	}
 

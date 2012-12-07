@@ -11,8 +11,9 @@
 	<?php
 	if (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin'){ //si el usuario es director de carrera debe ver tambien la matricula del alumno
 		echo "<b>";
-		echo CHtml::encode($data->getAttributeLabel('Matricula del Alumno')); 
-		echo ":</b>";
+		//echo CHtml::encode($data->getAttributeLabel('Matricula del Alumno'));
+		echo "Matrícula del alumno";
+		echo ": </b>";
 		echo CHtml::encode($data->matriculaalumno);
 		echo "<br />";
 		} 
@@ -39,7 +40,7 @@
 	<br />
 	
 	
-	<?php if(Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin' || Yii::app()->user->rol == 'Alumno'){
+	<?php if(Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin' || Yii::app()->user->rol == 'Secretaria' || Yii::app()->user->rol == 'Asistente' ){
 		echo CHtml::link('Editar', array('update', 'id'=>$data->id));
 	}
 	?>

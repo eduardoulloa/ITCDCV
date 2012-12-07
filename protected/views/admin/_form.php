@@ -5,7 +5,7 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Los campos con <span class="required">*</span> son requeridos.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
@@ -23,7 +23,7 @@
 	?>
 	<div class="row">
 		<label for="passwordActual" class="required">
-			Password Actual
+			Contraseña actual
 			<span class="required">*</span>
 		</label>
 		<?php echo(Chtml::passwordField('passwordActual', '', array('size'=>45,'maxlength'=>45))); ?>
@@ -34,7 +34,7 @@
 	
 	<div class="row">
 		<label for="passwordActual" class="required">
-			Password Nuevo
+			Contraseña nueva
 			<span class="required">*</span>
 		</label>
 		<?php /*echo $form->labelEx($model,'password');*/ ?>
@@ -43,7 +43,7 @@
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Guardar'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

@@ -5,7 +5,7 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Los campos con <span class="required">*</span> son requeridos.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
@@ -16,13 +16,13 @@
 			echo $form->labelEx($model,'sugerencia');
 			echo $form->textArea($model,'sugerencia',array('rows'=>8,'cols'=>50));
 			echo $form->error($model,'sugerencia');
-		}else if (!$model->isNewRecord && (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Asistente')){
+		}else if (!$model->isNewRecord && (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Asistente' || Yii::app()->user->rol == 'Admin')){
 			//Se trata de un director respondiendo a la sugerencia.
 			echo $form->labelEx($model,'respuesta');
 			echo $form->textArea($model,'respuesta',array('rows'=>8,'cols'=>50));
 			echo $form->error($model,'respuesta');
 			
-			echo $form->labelEx($model,'status');
+			echo "<label for=\"status\" class=\"required\"> Estatus <span class=\"required\">*</span></label>";
 			echo $form->dropDownList($model,'status',array('recibida'=>'Recibida', 'pendiente'=>'Pendiente', 'terminada'=>'Terminada'));
 			echo $form->error($model,'status');
 			
@@ -40,7 +40,7 @@
 	
 	
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Guardar'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

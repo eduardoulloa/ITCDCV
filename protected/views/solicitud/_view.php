@@ -13,20 +13,32 @@
 	
 	if (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin'){ //si el usuario es director de carrera debe ver tambien la matricula del alumno
 		echo "<b>";
-		echo CHtml::encode($data->getAttributeLabel('Matricula del Alumno')); 
-		echo ":</b>";
+		echo "Matrícula";
+		echo ": </b>";
 		echo CHtml::encode($data->matriculaalumno);
 		echo "<br />";
 		} 
 		
 		?>
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('Status')); ?>:</b>
+	<b><?php echo "Estatus"; ?>:</b>
 	<?php echo CHtml::encode($data->status); ?>
 	<br />
 
 	<b><?php echo CHtml::encode('Tipo')?>:</b>
-	<?php echo CHtml::encode(get_class($data)); ?>
+	<?php /*echo CHtml::encode(get_class($data));*/
+		$claseDeSolicitud = get_class($data);
+		$label = "";
+		switch($claseDeSolicitud){
+			case "SolicitudBajaMateria": $label = "Baja de materia"; break;
+			case "SolicitudBajaSemestre": $label = "Baja de semestre"; break;
+			case "SolicitudCartaRecomendacion": $label = "Carta de recomendación"; break;
+			case "SolicitudProblemasInscripcion": $label = "Problemas de inscripción"; break;
+			case "SolicitudRevalidacion": $label = "Revalidación de materia"; break;
+		}
+		echo $label;
+	?>
+	
 	<br />
 	
 	<!-- fue modificada la condicion para que los alumnos no puedan hacer updates de sus solicitudes.

@@ -13,20 +13,46 @@ $this->menu=array(
 );
 ?>
 
-<h1>Ver Alumno #<?php echo $model->matricula; ?></h1>
+<h1>Ver alumno <?php echo $model->matricula; ?></h1>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
+<?php
+$not_an_admin = array(
 		'matricula',
 		'nombre',
 		'apellido_paterno',
 		'apellido_materno',
 		'plan',
 		'semestre',
-		'password',
 		'anio_graduado',
-		'idcarrera',
 		'email',
-	),
-)); ?>
+	);
+?>
+
+
+<?php 
+
+	if (Yii::app()->user->rol == 'Admin'){
+		$this->widget('zii.widgets.CDetailView', array(
+		'data'=>$model,
+		'attributes'=>array(
+			'matricula',
+			'nombre',
+			'apellido_paterno',
+			'apellido_materno',
+			'plan',
+			'semestre',
+			'password',
+			'anio_graduado',
+			'idcarrera',
+			'email',
+		),
+		)
+		);
+	}else{
+		$this->widget('zii.widgets.CDetailView', array(
+		'data'=>$model,
+		'attributes'=>$not_an_admin,
+		)
+		);
+	}
+?>

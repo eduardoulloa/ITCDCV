@@ -5,7 +5,7 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Los campos con <span class="required">*</span> son requeridos.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 	<?php 
@@ -36,7 +36,10 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'telefono'); ?>
+		<label for="password" class="required">
+				Teléfono
+				<span class="required">*</span>
+		</label>
 		<?php echo $form->textField($model,'telefono',array('size'=>12,'maxlength'=>12)); ?>
 		<?php echo $form->error($model,'telefono'); ?>
 	</div>
@@ -51,10 +54,10 @@
 	
 	}else{
 	
-		if (Yii::app()->user->rol == 'Director'){
+		if (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin'){
 		
 		//Se trata de un director respondiendo a la solicitud.
-		echo $form->labelEx($model,'status');
+		echo "<label for=\"status\" class=\"required\"> Estatus <span class=\"required\">*</span></label>";
 		echo $form->dropDownList($model,'status',array('recibida'=>'Recibida', 'pendiente'=>'Pendiente'
 														, 'terminada'=>'Terminada'));
 		echo $form->error($model,'status');
@@ -86,7 +89,7 @@
 
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Guardar'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

@@ -10,6 +10,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Crear Carrera</h1>
+<h1>Crear carrera</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

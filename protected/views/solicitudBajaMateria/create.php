@@ -10,7 +10,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Crear Solicitud de Baja de Materias</h1>
+<h1>Crear solicitud de baja de materia</h1>
 
 
 

@@ -59,6 +59,7 @@ class SolicitudBajaMateriaController extends Controller
 		
 		//Arreglo con todos los directores de carrera.
 		$asistentes = array();
+		$alumnos = array();
 		
 		foreach($consulta_asistente as &$valor){
 			array_push($asistentes, ($valor->nomina).'');
@@ -71,6 +72,7 @@ class SolicitudBajaMateriaController extends Controller
 		//Query para encontrar al super admin
 		//$consulta_super_admin = Admin::model()->findAllByPk('admin', $criteria_super_admin);
 		$consulta_super_admin = Admin::model()->findAll($criteria_super_admin);
+		$consulta_alumnos = Alumno::model()->findAll();
 		
 		$admin = array();
 		
@@ -79,6 +81,10 @@ class SolicitudBajaMateriaController extends Controller
 		
 		foreach($consulta_super_admin as &$valor){
 			array_push($admin, ($valor->username).'');
+		}
+		
+		foreach($consulta_alumnos as &$valor){
+			array_push($alumnos, ($valor->matricula).'');
 		}
 	
 		return array(
@@ -96,6 +102,11 @@ class SolicitudBajaMateriaController extends Controller
 				'actions'=>array('index','create','view','update'),
 				'users'=>$asistentes,
 				
+			),
+			
+			array('deny',  // Negar acceso a asistentes y secretarias.
+				'actions'=>array('update'),
+				'users'=>$alumnos,
 			),
 			
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions

@@ -13,7 +13,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Ver Solicitud de Problemas de Inscripcion #<?php echo $model->id; ?></h1>
+<h1>Ver reporte de problemas de inscripción #<?php echo $model->id; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,

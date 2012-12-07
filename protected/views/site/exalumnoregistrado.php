@@ -1,0 +1,1 @@
+<h2> Se registró exitosamente al exalumno con la matrícula <?php echo $id ?> <h2> 

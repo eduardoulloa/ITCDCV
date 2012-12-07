@@ -77,13 +77,13 @@ class SolicitudProblemasInscripcion extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'fechahora' => 'Fecha',
-			'status' => 'Status',
+			'status' => 'Estatus',
 			'periodo' => 'Periodo',
-			'anio' => 'Anio',
+			'anio' => 'Año',
 			'unidades' => 'Unidades',
-			'quitar_prioridades' => 'Quitar Prioridades',
+			'quitar_prioridades' => 'Quitar prioridades',
 			'comentarios' => 'Comentarios',
-			'matriculaalumno' => 'Matricula',
+			'matriculaalumno' => 'Matrícula',
 		);
 	}
 

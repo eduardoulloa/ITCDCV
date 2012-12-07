@@ -10,23 +10,38 @@ $this->menu=array(
 );
 ?>
 
-<h1>Crear Empleado</h1>
+<h1>Crear empleado</h1>
 
 <div class="form">
 <?php $form=$this->beginWidget('CActiveForm'); ?>
  
     <?php echo $form->errorSummary($model); ?>
     <div class="row">
-        <?php echo $form->label($model,'nomina'); ?>
+		<label for="nomina" class="required">
+			Nómina o matrícula
+			<span class="required">*</span>
+		</label>
+        <?php /*echo $form->label($model,'nomina'); */?>
         <?php echo $form->textField($model,'nomina') ?>
     </div>
  
     <div class="row">
-        <?php echo $form->label($model,'nombre'); ?>
+		
+		<label for="nombre" class="required">
+			Nombre
+			<span class="required">*</span>
+		</label>
+	
+        
         <?php echo $form->textField($model,'nombre') ?>
     </div>
     <div class="row">
-        <?php echo $form->label($model,'apellido_paterno'); ?>
+	
+		<label for="apellido_paterno" class="required">
+			Apellido paterno
+			<span class="required">*</span>
+		</label>
+        
         <?php echo $form->textField($model,'apellido_paterno') ?>
     </div>
 
@@ -36,12 +51,20 @@ $this->menu=array(
     </div>
  
     <div class="row">
-        <?php echo $form->label($model,'password'); ?>
+        <label for="password" class="required">
+			Contraseña
+			<span class="required">*</span>
+		</label>
         <?php echo $form->passwordField($model,'password') ?>
     </div>
  
     <div class="row">
-        <?php echo $form->label($model,'puesto'); ?>
+        
+		<label for="puesto" class="required">
+			Puesto
+			<span class="required">*</span>
+		</label>
+		
         <?php echo $form->textField($model,'puesto') ?>
     </div>
 

@@ -9,7 +9,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Solicitudes de Revalidacion</h1>
+<h1>Solicitudes de Revalidación</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,

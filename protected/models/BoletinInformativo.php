@@ -92,7 +92,7 @@ class BoletinInformativo extends CActiveRecord
 			'semestre8' => 'Semestre 8',
 			'semestre9' => 'Semestre 9',
 			'exatec' => 'Exatec',
-			'idcarrera' => 'Id de carrera',
+			'idcarrera' => 'ID de carrera',
 		);
 	}
 

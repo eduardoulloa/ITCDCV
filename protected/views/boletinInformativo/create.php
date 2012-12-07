@@ -10,6 +10,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Crear Bolet&iacute;n Informativo</h1>
+<h1>Crear bolet&iacute;n informativo</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

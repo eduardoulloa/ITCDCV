@@ -13,6 +13,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update SolicitudProblemasInscripcion <?php echo $model->id; ?></h1>
+<h1>Editar reporte de problemas de inscripción #<?php echo $model->id; ?></h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

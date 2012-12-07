@@ -16,9 +16,14 @@
 	<?php echo CHtml::encode($data->apellido_materno); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('password')); ?>:</b>
-	<?php echo CHtml::encode($data->password); ?>
-	<br />
+	<!-- Si el usuario es un administrador, se muestra la contraseña -->
+	<?php
+	if (Yii::app()->user->rol == 'Admin'){
+		echo "<b>Contraseña: </b>";
+		echo CHtml::encode($data->password);
+		echo "<br />";
+	}
+	?>
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('puesto')); ?>:</b>
 	<?php echo CHtml::encode($data->puesto); ?>

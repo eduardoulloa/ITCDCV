@@ -88,16 +88,16 @@ class Alumno extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'matricula' => 'Matricula',
+			'matricula' => 'Matrícula',
 			'nombre' => 'Nombre',
-			'apellido_paterno' => 'Apellido Paterno',
-			'apellido_materno' => 'Apellido Materno',
-			'plan' => 'Plan',
+			'apellido_paterno' => 'Apellido paterno',
+			'apellido_materno' => 'Apellido materno',
+			'plan' => 'Plan de estudios',
 			'semestre' => 'Semestre',
-			'password' => 'Password',
-			'anio_graduado' => 'Anio Graduado',
-			'idcarrera' => 'Idcarrera',
-			'email' => 'Email',
+			'password' => 'Contraseña',
+			'anio_graduado' => 'Año de graduado',
+			'idcarrera' => 'ID de carrera',
+			'email' => 'E-mail',
 		);
 	}
 

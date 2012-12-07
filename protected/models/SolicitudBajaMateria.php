@@ -82,17 +82,17 @@ class SolicitudBajaMateria extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'fechahora' => 'Fecha',
-			'status' => 'Status',
+			'status' => 'Estatus',
 			'motivo' => 'Motivo',
-			'clave_materia' => 'Clave de la Materia',
-			'nombre_materia' => 'Nombre de la Materia',
-			'unidades_materia' => 'Unidades de la Materia',
+			'clave_materia' => 'Clave de la materia',
+			'nombre_materia' => 'Nombre de la materia',
+			'unidades_materia' => 'Unidades de la materia',
 			'grupo' => 'Grupo',
 			'atributo' => 'Atributo',
 			'unidades' => 'Unidades',
 			'periodo' => 'Periodo',
-			'anio' => 'Anio',
-			'matriculaalumno' => 'Matricula del alumno',
+			'anio' => 'Año',
+			'matriculaalumno' => 'Matrícula',
 		);
 	}
 

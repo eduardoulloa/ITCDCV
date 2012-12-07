@@ -13,8 +13,37 @@ $this->menu=array(
 );
 ?>
 
-<h1>View Empleado #<?php echo $data->nomina; ?></h1>
+<h1>Ver empleado <?php echo $data->nomina; ?></h1>
 
 <?php 
-include_once("_view.php");
+/*include_once("_view.php");*/
+	$not_an_admin = array(
+	'nomina',
+	'nombre',
+	'apellido_paterno',
+	'apellido_materno',
+	'puesto',
+	);
+
+	if (Yii::app()->user->rol == 'Admin'){
+		$this->widget('zii.widgets.CDetailView', array(
+		'data'=>$data,
+		'attributes'=>array(
+			'nomina',
+			'nombre',
+			'apellido_paterno',
+			'apellido_materno',
+			'password',
+			'puesto',
+		),
+		)
+		);
+	}else{
+		$this->widget('zii.widgets.CDetailView', array(
+			'data'=>$data,
+			'attributes'=>$not_an_admin,
+			)
+			);
+	}
+
 ?>

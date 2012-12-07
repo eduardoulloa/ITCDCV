@@ -6,9 +6,9 @@ $this->breadcrumbs=array(
 
 ?>
 
-<h1>Login</h1>
+<h1>Inicio de sesión</h1>
 
-<p>Por favor proporcione sus credenciales para ingresar:</p>
+<p>Por favor proporciona tus credenciales para iniciar tu sesión:</p>
 
 <div class="form">
 <?php $form=$this->beginWidget('CActiveForm', array(
@@ -21,29 +21,50 @@ $this->breadcrumbs=array(
 
 	<p class="note">Los campos con<span class="required">*</span> son requeridos.</p>
 
+	
 	<div class="row">
-		<?php echo $form->labelEx($model,'username'); ?>
+		<label for="username" class="required">
+				Nombre de usuario
+				<span class="required">*</span>
+		</label>
+		<?php /*echo $form->labelEx($model,'username');*/ ?>
 		<?php echo $form->textField($model,'username'); ?>
 		<?php echo $form->error($model,'username'); ?>
 	</div>
-
+	
+	
 	<div class="row">
-		<?php echo $form->labelEx($model,'password'); ?>
+		<label for="password" class="required">
+				Contraseña
+				<span class="required">*</span>
+		</label>
+		<?php /*echo $form->labelEx($model,'password');*/ ?>
 		<?php echo $form->passwordField($model,'password'); ?>
 		<?php echo $form->error($model,'password'); ?>
+		
+		<!--
 		<p class="hint">
 			Hint: You may login with <tt>demo/demo</tt> or <tt>admin/admin</tt>.
 		</p>
+		-->
+		
 	</div>
+	
 
 	<div class="row rememberMe">
 		<?php echo $form->checkBox($model,'rememberMe'); ?>
-		<?php echo $form->label($model,'rememberMe'); ?>
+		
+		<label for="rememberMe">
+				Recordarme la próxima vez que inicie mi sesión
+				
+		</label>
+		
+		<?php /*echo $form->label($model,'rememberMe');*/ ?>
 		<?php echo $form->error($model,'rememberMe'); ?>
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Login'); ?>
+		<?php echo CHtml::submitButton('Iniciar sesión'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

@@ -70,11 +70,11 @@ class Empleado extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'nomina' => 'Nomina',
+			'nomina' => 'Nómina',
 			'nombre' => 'Nombre',
-			'apellido_paterno' => 'Apellido Paterno',
-			'apellido_materno' => 'Apellido Materno',
-			'password' => 'Password',
+			'apellido_paterno' => 'Apellido paterno',
+			'apellido_materno' => 'Apellido materno',
+			'password' => 'Contraseña',
 			'puesto' => 'Puesto',
 		);
 	}

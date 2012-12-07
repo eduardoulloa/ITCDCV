@@ -10,6 +10,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Crear Solicitud de Revalidaci&oacute;n</h1>
+<h1>Crear solicitud de revalidaci&oacute;n</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

@@ -10,7 +10,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Crear Alumno</h1>
+<h1>Crear alumno</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
 

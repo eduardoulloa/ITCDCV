@@ -59,8 +59,8 @@ class Admin extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'username' => 'Username',
-			'password' => 'Password',
+			'username' => 'Nombre de usuario',
+			'password' => 'Contraseña',
 		);
 	}
 
