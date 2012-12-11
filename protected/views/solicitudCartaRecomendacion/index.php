@@ -9,7 +9,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Solicitudes de Cartas de Recomendaci&oacute;n</h1>
+<h1>Solicitudes de Carta de Recomendaci&oacute;n</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,

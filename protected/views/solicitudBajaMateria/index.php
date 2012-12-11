@@ -9,7 +9,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Solicitudes de Bajas de Materias</h1>
+<h1>Solicitudes de Baja de Materia</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
