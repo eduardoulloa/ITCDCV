@@ -69,12 +69,14 @@ $this->menu=array(
     </div>
 
     <div class="row">
-        <?php echo $form->label($model_carrera,'carrera'); ?>
+		<label for="id" class="required">
+			Carrera
+			<span class="required">*</span>
+        <?php /*echo $form->label($model_carrera,'carrera');*/ ?>
+		</label>
         <?php echo $form->dropDownList($model_carrera,'id', $carreras); ?>
     </div>
     
-    
- 
     <div class="row submit">
         <?php echo CHtml::submitButton('Crear'); ?>
     </div>

@@ -34,11 +34,14 @@
 	<?php echo $form->error($model,'email'); ?>
 </div>
 
-<?php
-echo $form->labelEx($model,'Carrera');
-echo $form->dropDownList($model,'idcarrera', getCarreras());
-echo $form->error($model,'idcarrera');
-?>
+<div class="row">
+	<label for="idcarrera" class="required">
+			Carrera
+			<span class="required">*</span>
+	</label>
+	<?php echo $form->dropDownList($model,'idcarrera', getCarreras()); ?>
+	<?php echo $form->error($model,'idcarrera'); ?>
+</div>
 
 <div class="row">
 	<label for="anio_graduado">

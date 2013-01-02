@@ -481,6 +481,9 @@ class EmpleadoController extends Controller
         return $carreras;
     }
 
+	/*
+		Obtiene TODAS las carreras en las que NO está registrado un empleado.
+	*/
     private function getNotEmpleadoCarreras($empleado)
     {
         $connection=Yii::app()->db;
