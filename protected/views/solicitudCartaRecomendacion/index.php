@@ -11,6 +11,13 @@ $this->menu=array(
 
 <h1>Solicitudes de Carta de Recomendaci&oacute;n</h1>
 
+<?php
+//Si el usuario es un admin, se le da la opción de administrar las solicitudes de carta de recomendación.
+if(Yii::app()->user->rol == 'Admin'){
+	echo CHtml::link("Administrar solicitudes de carta de recomendación", array('solicitudCartaRecomendacion/admin'));
+}
+?>
+
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',

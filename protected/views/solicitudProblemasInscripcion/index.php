@@ -11,6 +11,13 @@ $this->menu=array(
 
 <h1>Reportes de Problemas de Inscripción</h1>
 
+<?php
+//Si el usuario es un admin, se le da la opción de administrar las solicitudes de carta de problemas de inscripción.
+if(Yii::app()->user->rol == 'Admin'){
+	echo CHtml::link("Administrar reportes de problemas de inscripción", array('solicitudProblemasInscripcion/admin'));
+}
+?>
+
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',

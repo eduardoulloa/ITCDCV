@@ -39,7 +39,7 @@
 	<?php echo $this->renderPartial('_exalumno', array('model'=>$model, 'form'=>$form)); ?>
 	
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Guardar'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Registrar' : 'Guardar'); ?>
 	</div>
 	
 	<?php
@@ -75,7 +75,7 @@
 	</div>
 	
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Guardar'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Registrar' : 'Guardar'); ?>
 	</div>
 	
 	<?php

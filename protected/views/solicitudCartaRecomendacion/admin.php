@@ -23,7 +23,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Administrar solicitudes de carta de recomendacion</h1>
+<h1>Administrar solicitudes de carta de recomendación</h1>
 
 <p>
 Opcionalmente puede ingresar un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>

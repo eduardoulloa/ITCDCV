@@ -10,7 +10,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Crear empleado</h1>
+<h1>Registrar empleado</h1>
 
 <div class="form">
 <?php $form=$this->beginWidget('CActiveForm'); ?>
@@ -78,7 +78,7 @@ $this->menu=array(
     </div>
     
     <div class="row submit">
-        <?php echo CHtml::submitButton('Crear'); ?>
+        <?php echo CHtml::submitButton('Registrar'); ?>
     </div>
  
 <?php $this->endWidget(); ?>

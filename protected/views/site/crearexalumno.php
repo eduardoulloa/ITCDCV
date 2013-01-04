@@ -6,7 +6,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Crear ExAlumno</h1>
+<h1>Registrar exalumno</h1>
 
 
 <div class="form">
@@ -25,7 +25,7 @@ $this->menu=array(
 			
 
 			<div class="row buttons">
-				<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Guardar'); ?>
+				<?php echo CHtml::submitButton($model->isNewRecord ? 'Registrar' : 'Guardar'); ?>
 			</div>
 
 		<?php $this->endWidget(); ?>
