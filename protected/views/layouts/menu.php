@@ -15,7 +15,7 @@ else if(Yii::app()->user->rol == 'Director') {
         array("url"=> "", "label"=>"General",
             array("url" => array( "route" => "boletinInformativo/create"), "label" => "Crear boletín informativo"),
             array("url" => array( "route" => "boletinInformativo/index"), "label" => "Ver boletines informativos"),
-            array("url" => array( "route" => "solicitudProblemasInscripcion/index"), "label" => "Ver problemas de inscripción"),
+            array("url" => array( "route" => "solicitudProblemasInscripcion/index"), "label" => "Ver reportes de problemas de inscripción"),
             array("url"=> array( "route" => "empleado/update/".Yii::app()->user->name), "label"=>"Configurar cuenta")
         ),
         array("url"=> array( "route" => "sugerencia/index"), "label"=>"Sugerencias"),
@@ -42,7 +42,7 @@ else if(Yii::app()->user->rol == 'Admin') {
         array("url"=> "", "label"=>"General",
             
             array("url" => array( "route" => "boletinInformativo/index"), "label" => "Ver boletines informativos"),
-            array("url" => array( "route" => "solicitudProblemasInscripcion/index"), "label" => "Ver problemas de inscripción"),
+            array("url" => array( "route" => "solicitudProblemasInscripcion/index"), "label" => "Ver reportes de problemas de inscripción"),
             array("url"=> array( "route" => "admin/update/".Yii::app()->user->name), "label"=>"Configurar cuenta")
         ),
         array("url"=> array( "route" => "sugerencia/index"), "label"=>"Sugerencias"),
@@ -66,7 +66,7 @@ else if(Yii::app()->user->rol == 'Admin') {
 else if(Yii::app()->user->rol == 'Asistente'){
     array_push($menu,
         array("url"=> "", "label"=>"General",
-            array("url" => array( "route" => "solicitudProblemasInscripcion/index"), "label" => "Ver problemas de inscripción"),
+            array("url" => array( "route" => "solicitudProblemasInscripcion/index"), "label" => "Ver reportes de problemas de inscripción"),
         ),
         array("url"=> array( "route" => "sugerencia/index"), "label"=>"Sugerencias"),
         array("url"=> "", "label"=>"Escolar",
