@@ -320,9 +320,6 @@ class SolicitudCartaRecomendacionController extends Controller
 								),
 							'defaultOrder'=>'fechahora DESC'
 							),
-						'pagination'=> array(
-							'pageSize'=>100,
-							),
 						));
 						
 		}else if (Yii::app()->user->rol == 'Director'){
@@ -345,10 +342,6 @@ class SolicitudCartaRecomendacionController extends Controller
 								),
 							'defaultOrder'=>'fechahora DESC'
 							),
-						'pagination'=> array(
-							'pageSize'=>100,
-							),
-						
 						));
 	
 		}else if(Yii::app()->user->rol == 'Admin'){

@@ -334,9 +334,6 @@ class SolicitudBajaSemestreController extends Controller
 								),
 							'defaultOrder'=>'fechahora DESC'
 							),
-						'pagination'=> array(
-							'pageSize'=>100,
-							),
 						));
 						
 		}else if (Yii::app()->user->rol == 'Director'){
@@ -358,9 +355,6 @@ class SolicitudBajaSemestreController extends Controller
 								'fechahora',
 								),
 							'defaultOrder'=>'fechahora DESC'
-							),
-						'pagination'=> array(
-							'pageSize'=>100,
 							),
 						
 						));

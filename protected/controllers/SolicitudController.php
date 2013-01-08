@@ -35,9 +35,6 @@ class SolicitudController extends Controller
 								),
 							'defaultOrder'=>'fechahora DESC'
 							),
-						'pagination'=> array(
-							'pageSize'=>100,
-							),
 						));
 			
 			
@@ -71,9 +68,6 @@ class SolicitudController extends Controller
 								),
 							'defaultOrder'=>'fechahora DESC'
 							),
-						'pagination'=> array(
-							'pageSize'=>100,
-							),
 						));
 			
 	
@@ -96,9 +90,6 @@ class SolicitudController extends Controller
 								'fechahora',
 								),
 							'defaultOrder'=>'fechahora DESC'
-							),
-						'pagination'=> array(
-							'pageSize'=>100,
 							),
 						));
 		}

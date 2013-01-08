@@ -383,9 +383,6 @@ class SolicitudBajaMateriaController extends Controller
 							'defaultOrder'=>'fechahora DESC',
 							
 							),
-						'pagination'=> array(
-							'pageSize'=>100,
-							),
 						));
 						
 			
@@ -410,15 +407,20 @@ class SolicitudBajaMateriaController extends Controller
 								),
 							'defaultOrder'=>'fechahora DESC'
 							),
-						'pagination'=> array(
-							'pageSize'=>100,
-							),
-						
 						));
 						
 	
 		}else if(Yii::app()->user->rol == 'Admin'){
-			$dataProvider = new CActiveDataProvider('SolicitudBajaMateria');
+			$dataProvider = new CActiveDataProvider('SolicitudBajaMateria', array(
+					'sort'=> array(
+							'attributes'=> array(
+								'fechahora',
+								),
+							'defaultOrder'=>'fechahora DESC'
+							),
+						)
+				
+			);
 		}
 		
 		$this->render('index',array(

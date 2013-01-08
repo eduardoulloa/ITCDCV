@@ -396,10 +396,24 @@ class BoletinInformativoController extends Controller
 				'criteria'=>array(
 					'condition'=>'idcarrera='.$carreraTieneEmpleado->idcarrera,
 					),
+				
+				'sort'=> array(
+					'attributes'=> array(
+						'fechahora',
+						),
+					'defaultOrder'=>'fechahora DESC'
+					),
 				));
 			
 		}else if(Yii::app()->user->rol == 'Admin'){
-			$dataProvider = new CActiveDataProvider('BoletinInformativo');
+			$dataProvider = new CActiveDataProvider('BoletinInformativo', array(
+				'sort'=> array(
+					'attributes'=> array(
+						'fechahora',
+						),
+					'defaultOrder'=>'fechahora DESC'
+				),
+			));
 		}
 
 		$this->render('index',array(

@@ -319,9 +319,6 @@ class SolicitudRevalidacionController extends Controller
 								),
 							'defaultOrder'=>'fechahora DESC'
 							),
-						'pagination'=> array(
-							'pageSize'=>100,
-							),
 						));
 						
 		}else if (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Asistente' || Yii::app()->user->rol == 'Secretaria'){
@@ -344,10 +341,6 @@ class SolicitudRevalidacionController extends Controller
 								),
 							'defaultOrder'=>'fechahora DESC'
 							),
-						'pagination'=> array(
-							'pageSize'=>100,
-							),
-						
 						));
 	
 		}else if (Yii::app()->user->rol == 'Admin'){
