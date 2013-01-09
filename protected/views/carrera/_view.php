@@ -11,6 +11,11 @@
 	<b><?php echo CHtml::encode($data->getAttributeLabel('nombre')); ?>:</b>
 	<?php echo CHtml::encode($data->nombre); ?>
 	<br />
+	
+	<?php if(Yii::app()->user->rol == 'Admin'){
+		echo CHtml::link('Editar', array('update', 'id'=>$data->id));
+	}
+	?>
 
 
 </div>
