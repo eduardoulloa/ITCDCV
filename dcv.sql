@@ -441,3 +441,24 @@ ALTER TABLE `sugerencia`
 create table admin(username char(20), password char(60));
 
 insert into admin values('admin', MD5('admin'));
+
+--
+-- Agrego la tabla revalidacion
+--
+CREATE TABLE IF NOT EXISTS `revalidacion` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `fechahora` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `universidad` varchar(100) NOT NULL,
+  `clave_materia_local` varchar(10) NOT NULL,
+  `nombre_materia_local` varchar(100) NOT NULL,
+  `clave_materia_cursada` varchar(20) NOT NULL,
+  `nombre_materia_cursada` varchar(100) NOT NULL,
+  `periodo_de_revalidacion` enum('Enero-Mayo','Verano','Agosto-Diciembre') NOT NULL,
+  `anio_de_revalidacion` char(4) NOT NULL,
+  `idcarrera` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_revalidacion_carrera1` (`idcarrera`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `revalidacion`
+  ADD CONSTRAINT `fk_revalidacion_carrera1` FOREIGN KEY (`idcarrera`) REFERENCES `carrera` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;

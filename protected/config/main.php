@@ -44,6 +44,9 @@ return array(
 			'rules'=>array(
 				//'sugerencia/update/<id>'=>'sugerencia/update',				
 				//'<controller:\w+>/<id:\d+>'=>'<controller>/view',
+				'gii'=>'gii',
+				'gii/<controller:\w+>'=>'gii/<controller>',
+				'gii/<controller:\w+>/<action:\w+>'=>'gii/<controller>/<action>',
 				'<controller:\w+>/<action:\w+>/<id:\w+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>'
 			),
