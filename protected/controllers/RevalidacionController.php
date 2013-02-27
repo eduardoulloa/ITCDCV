@@ -25,20 +25,16 @@ class RevalidacionController extends Controller
 	 */
 	public function accessRules()
 	{
-		//Criterio de búsqueda para obtener a todos los directores
-		$criteria_director = new CDbCriteria(array(
-						'select'=>'nomina',
-						'condition'=>'puesto=\'Director\''));
 						
 		//Query que obtiene todos los directores de carrera
-		$consulta_director=Empleado::model()->findAll($criteria_director);
+		$consulta_empleado = Empleado::model()->findAll();
 		
 		//Arreglo para almacenar a todos los directores de carrera
-		$directores = array();
+		$empleados = array();
 		
 		//Se agregan todos los directores al arreglo.
-		foreach($consulta_director as &$valor){
-			array_push($directores, ($valor->nomina).'');
+		foreach($consulta_empleado as &$valor){
+			array_push($empleados, ($valor->nomina).'');
 		}
 		
 		//Criterio de búsquda para encontrar a todos los admins
@@ -61,9 +57,9 @@ class RevalidacionController extends Controller
 				'actions'=>array('index', 'view'),
 				'users'=>array('@'),
 			),
-			array('allow', // allow directores de carrera to perform 'create' and 'update' actions
+			array('allow', // allow directores de carrera to perform 'update', 'delete' actions
 				'actions'=>array('update'),
-				'users'=>$directores,
+				'users'=>$empleados,
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
@@ -82,31 +78,8 @@ class RevalidacionController extends Controller
 	public function actionView($id)
 	{
 	
-		if(Yii::app()->user->rol == 'Director'){
-			$nomina = Yii::app()->user->id;
-			
-			$criteria = new CDbCriteria(array(
-						'condition'=>'nomina=\''.$nomina.'\''));
-			
-			//Variable que almacena los datos del director
-			$carreraTieneEmpleado = CarreraTieneEmpleado::model()->find($criteria);
-			
-			$dataProvider = new CActiveDataProvider('Revalidacion', array(
-				'criteria'=>array(
-					'condition'=>'idcarrera='.$carreraTieneEmpleado->idcarrera,
-					),
-				
-				'sort'=> array(
-					'attributes'=> array(
-						'fechahora',
-						),
-					'defaultOrder'=>'fechahora DESC'
-					),
-				));
-		}
-		
 		$this->render('view',array(
-			'model'=>$dataProvider,
+			'model'=>$this->loadModel($id),
 		));
 	}
 
@@ -144,17 +117,28 @@ class RevalidacionController extends Controller
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
+		
+		
+		$nomina = Yii::app()->user->id;
+		
+		//Variable que obtiene un objeto de revalidacion. Si no lo obtiene, el objeto no existe o no le corresponde al director.
+		$challenge = Revalidacion::model()->findBySql('SELECT id FROM revalidacion JOIN carrera_tiene_empleado ON carrera_tiene_empleado.idcarrera = revalidacion.idcarrera AND carrera_tiene_empleado.nomina =  \'' . $nomina .'\' AND revalidacion.id = '. $id);
 
-		if(isset($_POST['Revalidacion']))
-		{
-			$model->attributes=$_POST['Revalidacion'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+		if (!empty($challenge)){
+
+			if(isset($_POST['Revalidacion']))
+			{
+				$model->attributes=$_POST['Revalidacion'];
+				if($model->save())
+					$this->redirect(array('view','id'=>$model->id));
+			}
+
+			$this->render('update',array(
+				'model'=>$model,
+			));
+		}else{
+			throw new CHttpException(400,'No se encontró la revalidación a editar.');
 		}
-
-		$this->render('update',array(
-			'model'=>$model,
-		));
 	}
 
 	/**
@@ -182,7 +166,69 @@ class RevalidacionController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Revalidacion');
+	
+		$id = Yii::app()->user->id;
+		
+		/*El caso de ser un director de carrera, asistente, o secretaria. En cualquiera de los anteriores, se obtienen
+		todas las revalidaciones realizadas para todas las carreras en las que el empleado labora.
+		*/
+		if (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Asistente' || Yii::app()->user->rol == 'Secretaria'){
+			$nomina = $id;
+					
+					
+					$criteria = new CDbCriteria(array(
+								'condition'=>'nomina=\''.$nomina.'\''));
+					
+					$carreraTieneEmpleado = CarreraTieneEmpleado::model()->findAll($criteria);
+					
+					//String para el condition del CActiveDataProvider. Se almacenan todos los ids de las carreras a en las que labora el empleado.
+					$ids;
+					
+					$ids = $carreraTieneEmpleado[0]->idcarrera;
+					
+					$i = 1;
+					while($carreraTieneEmpleado[$i]!= NULL){
+						$ids = $ids . " OR idcarrera = " . $carreraTieneEmpleado[$i]->idcarrera;
+						$i++;
+					}
+					
+					$dataProvider = new CActiveDataProvider('Revalidacion', array(
+						'criteria'=>array(
+							'condition'=>'idcarrera ='.$ids,
+							),
+						
+						'sort'=> array(
+							'attributes'=> array(
+								'fechahora',
+								),
+							'defaultOrder'=>'fechahora DESC'
+							),
+						));
+		/* 
+		En caso de ser alumno, se obtienen únicamente las revalidaciones realizadas en su carrera.
+		*/				
+		}else if (Yii::app()->user->rol == 'Alumno'){
+						//Variable para almacenar el modelo del alumno, para obtener su carrera.
+						$alumno = Alumno::model()->findByPk($id);
+						$dataProvider = new CActiveDataProvider('Revalidacion', array(
+						'criteria'=>array(
+							'condition'=>'idcarrera ='.$alumno->idcarrera,
+							),
+						
+						'sort'=> array(
+							'attributes'=> array(
+								'fechahora',
+								),
+							'defaultOrder'=>'fechahora DESC'
+							),
+						));
+		/*
+		En caso de ser administrador, debe indexar todas las solicitudes de todas las carreras.
+		*/
+		}else{
+			$dataProvider=new CActiveDataProvider('Revalidacion');
+		}
+
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));

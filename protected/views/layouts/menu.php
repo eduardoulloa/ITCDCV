@@ -25,6 +25,8 @@ else if(Yii::app()->user->rol == 'Director') {
             array("url" => array( "route" => "solicitudBajaSemestre/index"), "label" => "Ver solicitudes de baja de semestre"),
             array("url" => array( "route" => "solicitudCartaRecomendacion/index"), "label" => "Ver solicitudes de carta de recomendación"),
             array("url" => array( "route" => "solicitudRevalidacion/index"), "label" => "Ver solicitudes de revalidación de materia"),
+			array("url" => array( "route" => "../../../../../altas/revalidaciones.php"), "label" => "Registrar revalidaciones autorizadas"),
+			array("url" => array( "route" => "revalidacion/index"), "label" => "Ver revalidaciones autorizadas en sus carreras"),
         ),
         array("url"=> "", "label"=>"Usuarios",
             array("url" => array( "route" => "alumno/create"), "label" => "Registrar alumno"),
@@ -52,6 +54,8 @@ else if(Yii::app()->user->rol == 'Admin') {
             array("url" => array( "route" => "solicitudBajaSemestre/index"), "label" => "Ver solicitudes de baja de semestre"),
             array("url" => array( "route" => "solicitudCartaRecomendacion/index"), "label" => "Ver solicitudes de carta de recomendación"),
             array("url" => array( "route" => "solicitudRevalidacion/index"), "label" => "Ver solicitudes de revalidación de materia"),
+			array("url" => array( "route" => "../../../../../altas/revalidaciones.php"), "label" => "Registrar revalidaciones autorizadas"),
+			array("url" => array( "route" => "revalidacion/index"), "label" => "Ver revalidaciones autorizadas"),
         ),
         array("url"=> "", "label"=>"Usuarios",
             array("url" => array( "route" => "alumno/create"), "label" => "Registrar alumno"),
@@ -63,7 +67,7 @@ else if(Yii::app()->user->rol == 'Admin') {
     );
 }
 
-else if(Yii::app()->user->rol == 'Asistente'){
+else if(Yii::app()->user->rol == 'Asistente' || Yii::app()->user->rol == 'Secretaria'){
     array_push($menu,
         array("url"=> "", "label"=>"General",
             array("url" => array( "route" => "solicitudProblemasInscripcion/index"), "label" => "Ver reportes de problemas de inscripción"),
@@ -71,6 +75,8 @@ else if(Yii::app()->user->rol == 'Asistente'){
         array("url"=> array( "route" => "sugerencia/index"), "label"=>"Sugerencias"),
         array("url"=> "", "label"=>"Escolar",
             array("url" => array( "route" => "solicitudRevalidacion/index"), "label" => "Ver solicitudes de revalidación de materia"),
+			array("url" => array( "route" => "../../../../../altas/revalidaciones.php"), "label" => "Registrar revalidaciones autorizadas"),
+			array("url" => array( "route" => "revalidacion/index"), "label" => "Ver revalidaciones autorizadas en sus carreras"),
         ),
         array("url"=> "", "label"=>"Usuarios",
             array("url" => array( "route" => "empleado/update/".Yii::app()->user->name), "label" => "Configurar cuenta"),
@@ -101,6 +107,7 @@ else if(Yii::app()->user->rol == 'Alumno'){
                 array("url" => array( "route" => "solicitudBajaMateria/index"), "label" => "Solicitudes de baja de materia"),
                 array("url" => array( "route" => "solicitudBajaSemestre/index"), "label" => "Solicitudes de baja de semestre"),
                 array("url" => array( "route" => "solicitudRevalidacion/index"), "label" => "Solicitudes de revalidación de materia"),
+				array("url" => array( "route" => "revalidacion/index"), "label" => "Revalidaciones autorizadas en tu carrera"),
                 array("url" => array( "route" => "solicitudCartaRecomendacion/index"), "label" => "Solicitudes de carta de recomendación"),
             )
         ),
@@ -112,8 +119,9 @@ if(isset(Yii::app()->user->rol) && Yii::app()->user->rol == 'Admin') {
 
     // Es 3 porque esa es la posición de la categoría escolar
     array_push($menu[3],
-        array("url" => array( "route" => "carrera/index"), "label" => "Ver carreras registradas"),
-        array("url" => array( "route" => "carrera/create"), "label" => "Registar carrera")
+		array("url" => array( "route" => "carrera/create"), "label" => "Registar carrera"),
+        array("url" => array( "route" => "carrera/index"), "label" => "Ver carreras registradas")
+        
     );
 
 }

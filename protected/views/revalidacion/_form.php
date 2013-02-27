@@ -5,15 +5,9 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Los campos con <span class="required">*</span> son requeridos.</p>
 
 	<?php echo $form->errorSummary($model); ?>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'fechahora'); ?>
-		<?php echo $form->textField($model,'fechahora'); ?>
-		<?php echo $form->error($model,'fechahora'); ?>
-	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'universidad'); ?>
@@ -57,14 +51,8 @@
 		<?php echo $form->error($model,'anio_de_revalidacion'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'idcarrera'); ?>
-		<?php echo $form->textField($model,'idcarrera'); ?>
-		<?php echo $form->error($model,'idcarrera'); ?>
-	</div>
-
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Guardar'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

@@ -77,14 +77,14 @@ class Revalidacion extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'fechahora' => 'Fechahora',
+			'fechahora' => 'Fecha y hora',
 			'universidad' => 'Universidad',
-			'clave_materia_local' => 'Clave Materia Local',
-			'nombre_materia_local' => 'Nombre Materia Local',
-			'clave_materia_cursada' => 'Clave Materia Cursada',
-			'nombre_materia_cursada' => 'Nombre Materia Cursada',
-			'periodo_de_revalidacion' => 'Periodo De Revalidacion',
-			'anio_de_revalidacion' => 'Anio De Revalidacion',
+			'clave_materia_local' => 'Clave de la materia local',
+			'nombre_materia_local' => 'Nombre de la materia local',
+			'clave_materia_cursada' => 'Clave de la materia cursada',
+			'nombre_materia_cursada' => 'Nombre de la materia cursada',
+			'periodo_de_revalidacion' => 'Periodo de revalidación',
+			'anio_de_revalidacion' => 'Año de revalidación',
 			'idcarrera' => 'Idcarrera',
 		);
 	}
