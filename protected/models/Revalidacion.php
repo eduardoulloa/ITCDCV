@@ -77,7 +77,7 @@ class Revalidacion extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'fechahora' => 'Fecha y hora',
+			'fechahora' => 'Fecha de registro en DCV',
 			'universidad' => 'Universidad',
 			'clave_materia_local' => 'Clave de la materia local',
 			'nombre_materia_local' => 'Nombre de la materia local',

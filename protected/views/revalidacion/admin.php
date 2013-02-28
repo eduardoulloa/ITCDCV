@@ -23,11 +23,11 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Revalidacions</h1>
+<h1>Administrar revalidaciones</h1>
 
 <p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
+Opcionalmente puede ingresar un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
+or <b>=</b>) al principio de cada uno de sus valores de búsqueda para especificar cómo se debería realizar la comparación.
 </p>
 
 <?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>

@@ -226,7 +226,14 @@ class RevalidacionController extends Controller
 		En caso de ser administrador, debe indexar todas las solicitudes de todas las carreras.
 		*/
 		}else{
-			$dataProvider=new CActiveDataProvider('Revalidacion');
+			$dataProvider=new CActiveDataProvider('Revalidacion', array (
+			'sort'=> array(
+						'attributes'=> array(
+							'fechahora',
+							),
+						'defaultOrder'=>'fechahora DESC'
+						),
+			));
 		}
 
 		$this->render('index',array(

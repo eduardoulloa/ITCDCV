@@ -9,7 +9,14 @@ $this->menu=array(
 );
 ?>
 
-<h1>Revalidaciones</h1>
+<h1>Historial de revalidaciones</h1>
+
+<?php
+//Si el usuario es un admin, se le da la opción de administrar las revalidaciones.
+if(Yii::app()->user->rol == 'Admin'){
+	echo CHtml::link("Administrar revalidaciones", array('revalidacion/admin'));
+}
+?>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
