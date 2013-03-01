@@ -17,12 +17,12 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'tipo'); ?>
-		<?php echo $form->dropDownList($model,'tipo',array('Carta de recomendacion DAE'=>'Carta de Recomendacion DAE', 
-											'Carta de Recomendacion para PI'=>'Carta de Recomendacion para PI', 
-											'Carta de Recomendacion para Universidad Extranjera'=>'Carta de Recomendacion para Universidad Extranjera',
-											'Carta de Recomendacion para Graduados'=>'Carta de Recomendacion para Graduados',
-											'Carta de Comprobacion de Sesestre'=>'Carta de Comprobacion de Semestre',
-											'Carta de Comprobacion de Promedio'=>'Carta de Comprobacion de Promedio',
+		<?php echo $form->dropDownList($model,'tipo',array('Carta de recomendación DAE'=>'Carta de recomendación DAE', 
+											'Carta de recomendación para PI'=>'Carta de recomendación para PI', 
+											'Carta de recomendación para universidad extranjera'=>'Carta de recomendación para universidad extranjera',
+											'Carta de recomendación para graduados'=>'Carta de recomendación para graduados',
+											'Carta de comprobación de semestre'=>'Carta de comprobación de semestre',
+											'Carta de comprobacion de promedio'=>'Carta de comprobación de promedio',
 											'Otro tipo de carta'=>'Otro tipo de carta',
 											)); ?>
 		

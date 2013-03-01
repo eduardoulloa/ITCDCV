@@ -175,8 +175,7 @@ class EmpleadoController extends Controller
 				$model->attributes = $_POST['Empleado'] + $model->attributes;
 				
 				if($model->save()) {	
-					$this->addCarrera($model);
-					
+					$this->addCarrera($model);					
 					$this->redirect(array('view','id'=>$model->nomina));
 				}
 			}

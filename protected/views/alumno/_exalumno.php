@@ -51,11 +51,21 @@
 	<?php echo $form->error($model,'anio_graduado'); ?>
 </div>
 
-<div class="row">
-	<label for="password" class="required">
-		Contraseña
-		<span class="required">*</span>
-	</label>
-	<?php echo $form->passwordField($model,'password',array('size'=>45,'maxlength'=>45)); ?>
-	<?php echo $form->error($model,'password'); ?>
-</div>
+<?php
+	/*
+	Solamente los usuarios no loggeados (y alumnos) pueden ingresar datos en el campo de la contraseña.
+	Esto es para permitirle a exalumnos no loggeados que llenen la forma para crear su cuenta, incluyendo el campo
+	de la contraseña.
+	*/
+	
+	if(Yii::app()->user->rol == 'Alumno' || !userTieneRolAsignado()){
+		echo "<div class=\"row\">";
+		echo "<label for=\"password\" class=\"required\">";
+		echo "Contraseña";
+		echo "<span class=\"required\">*</span>";
+		echo "</label>";
+		echo $form->passwordField($model,'password',array('size'=>45,'maxlength'=>45));
+		echo $form->error($model,'password');
+		echo "</div>";
+	}
+?>
