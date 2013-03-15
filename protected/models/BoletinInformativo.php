@@ -106,6 +106,16 @@ class BoletinInformativo extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
+		$nombre_de_usuario = Yii::app()->user->id;
+		$rol = Yii::app()->user->rol;
+		
+		/*
+			Modifico el query para que los directores puedan únicamente buscar sus propios boletines.
+		*/
+		if($rol == 'Director'){
+			$criteria->join = 'JOIN carrera_tiene_empleado AS c ON t.idcarrera = c.idcarrera AND
+			c.nomina = \''.$nombre_de_usuario.'\'';
+		}
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('mensaje',$this->mensaje,true);

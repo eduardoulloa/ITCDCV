@@ -39,7 +39,26 @@
 			Carrera
 			<span class="required">*</span>
 	</label>
-	<?php echo $form->dropDownList($model,'idcarrera', getCarreras()); ?>
+	
+	<?php
+		if(Yii::app()->user->rol == 'Director'){
+			/*
+				Query para obtener todas las carreras en las que labora el director.
+			*/
+			$criteria = new CDbCriteria(array(
+				'join'=>'JOIN carrera_tiene_empleado as c on t.id = c.idcarrera AND c.nomina =\''.Yii::app()->user->id.'\'',
+				));
+							
+			$carreras = Carrera::model()->findAll($criteria);
+					
+			$opciones = CHtml::listData($carreras, 'id', 'siglas');
+			
+			echo $form->dropDownList($model,'idcarrera', $opciones);
+		}else{
+			echo $form->dropDownList($model,'idcarrera', getCarreras());
+		}
+	?>
+	
 	<?php echo $form->error($model,'idcarrera'); ?>
 </div>
 
@@ -53,12 +72,12 @@
 
 <?php
 	/*
-	Solamente los usuarios no loggeados (y alumnos) pueden ingresar datos en el campo de la contraseña.
-	Esto es para permitirle a exalumnos no loggeados que llenen la forma para crear su cuenta, incluyendo el campo
-	de la contraseña.
+	Solamente los usuarios no loggeados, administradores generales, directores de carrera y alumnos pueden ingresar datos 
+	en el campo de la contraseña. Se permite a los usuarios no loggeados ingresar datos en este campo, para que exalumnos no loggeados 
+	llenen la forma para crear su cuenta.
 	*/
 	
-	if(Yii::app()->user->rol == 'Alumno' || !userTieneRolAsignado()){
+	if(Yii::app()->user->rol == 'Alumno' || Yii::app()->user->rol == 'Admin' || Yii::app()->user->rol == 'Director' || !userTieneRolAsignado()){
 		echo "<div class=\"row\">";
 		echo "<label for=\"password\" class=\"required\">";
 		echo "Contraseña";

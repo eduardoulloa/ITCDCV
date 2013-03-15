@@ -56,11 +56,18 @@ class BoletinInformativoController extends Controller
 		while(($row = $dataReader->read())!== false){
 			$address = '';
 			if(strlen($mat)==6){
+				//si la matrícula es de 6 dígitos se le agrega el prefijo de "A00"
 				$address .= 'A00'.$mat.'@itesm.mx';
 			}else if(strlen($mat)==7){
+				//si la matrícula es de 7 dígitos se le agrega el prefijo de "A0"
 				$address .= 'A0'.$mat.'@itesm.mx';
 			}
 			array_push($destinatario, $address);
+		}
+		
+		//Obtiene el tamaño del arreglo de destinatarios. Si está vacío, lanza una excepción describiendo el error.
+		if(count($destinatario)==0){
+			throw new CHttpException(500,'No se encontraron destinatarios con los criterios seleccionados.');
 		}
 		
 		$message = new YiiMailMessage;
@@ -107,6 +114,11 @@ class BoletinInformativoController extends Controller
 			array_push($destinatario, $mat);
 		}
 		
+		//Obtiene el tamaño del arreglo de destinatarios. Si está vacío, lanza una excepción describiendo el error.
+		if(count($destinatario)==0){
+			throw new CHttpException(500,'No se encontraron destinatarios con los criterios seleccionados.');
+		}
+		
 		$message = new YiiMailMessage;
 		
 		//se establece el cuerpo del mensaje.
@@ -145,11 +157,13 @@ class BoletinInformativoController extends Controller
 	public function accessRules()
 	{
 		
-		$adminActions=array('index','delete', 'create','view_all','view',
+		$adminActions=array('index', 'delete', 'create','view_all','view',
 				'solicitudBajaMateria', 'solicitudBajaSemestre',
 				'solicitudCartaRecomendacion', 
 				'solicitudProblemasInscripcion',
 				'solicitudRevalidacion');
+				
+		$directorActions = array('index', 'admin', 'delete', 'create', 'view_all', 'view');
 				
 		$criteria = new CDbCriteria(array(
 						'select'=>'nomina',
@@ -194,7 +208,7 @@ class BoletinInformativoController extends Controller
 				'users'=>array('@'),
 			),*/
 			array('allow', // acciones del director
-				'actions'=>$adminActions,
+				'actions'=>$directorActions,
 				'users'=>$directores, 
 			),
 			
@@ -236,17 +250,9 @@ class BoletinInformativoController extends Controller
 
 		if(isset($_POST['BoletinInformativo']))
 		{
-			$dir = Yii::app()->user->id;
-			
-			//Obtiene el id de la carrera asociada al Director
-			$sql2 = "SELECT idcarrera FROM carrera_tiene_empleado WHERE nomina = '".$dir."'";
-			$command2 = $connection->createCommand($sql2);
-			$dataReader2 = $command2->query();
-			$dataReader2->bindColumn(1, $idcarrera);
-			$row = $dataReader2->read();
 			
 			$model->attributes=$_POST['BoletinInformativo'];
-			$model->setAttribute('idcarrera', $idcarrera);
+			$idcarrera = $model->attributes['idcarrera'];
 			
 			$sem1 = $model->attributes['semestre1'];
 			$sem2 = $model->attributes['semestre2'];
@@ -263,68 +269,66 @@ class BoletinInformativoController extends Controller
 			}else{
 				$arr = array();
 			
-			$paraAlumno = 0;
-			
-			if ($sem1 == 1){
-				array_push($arr, 1);
-				$paraAlumno = 1;
-			}
-			
-			if ($sem2 == 1){
-				array_push($arr, 2);
-				$paraAlumno = 1;
-			}
-			
-			if ($sem3 == 1){
-				array_push($arr, 3);
-				$paraAlumno = 1;
-			}
-			
-			if ($sem4 == 1){
-				array_push($arr, 4);
-				$paraAlumno = 1;
-			}
-			
-			if ($sem5 == 1){
-				array_push($arr, 5);
-				$paraAlumno = 1;
-			}
-			
-			if ($sem6 == 1){
-				array_push($arr, 6);
-				$paraAlumno = 1;
-			}
-			
-			if ($sem7 == 1){
-				array_push($arr, 7);
-				$paraAlumno = 1;
-			}
-			
-			if ($sem8 == 1){
-				array_push($arr, 8);
-				$paraAlumno = 1;
-			}
-			
-			if ($sem9 == 1){
-				array_push($arr, 9);
-				$paraAlumno = 1;
-			}
-			
-			if ($paraAlumno == 1){
-				$this->mandarAlumno($arr, $model->attributes['mensaje'], $model->attributes['subject'], $idcarrera);
-			}
-			
-			if ($model->attributes['exatec']==1){
-				$this->mandarExAlumno($model->attributes['mensaje'], $model->attributes['subject'], $idcarrera);
-			}
-			
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
-		
+				$paraAlumno = 0;
 				
+				if ($sem1 == 1){
+					array_push($arr, 1);
+					$paraAlumno = 1;
+				}
+				
+				if ($sem2 == 1){
+					array_push($arr, 2);
+					$paraAlumno = 1;
+				}
+				
+				if ($sem3 == 1){
+					array_push($arr, 3);
+					$paraAlumno = 1;
+				}
+				
+				if ($sem4 == 1){
+					array_push($arr, 4);
+					$paraAlumno = 1;
+				}
+				
+				if ($sem5 == 1){
+					array_push($arr, 5);
+					$paraAlumno = 1;
+				}
+				
+				if ($sem6 == 1){
+					array_push($arr, 6);
+					$paraAlumno = 1;
+				}
+				
+				if ($sem7 == 1){
+					array_push($arr, 7);
+					$paraAlumno = 1;
+				}
+				
+				if ($sem8 == 1){
+					array_push($arr, 8);
+					$paraAlumno = 1;
+				}
+				
+				if ($sem9 == 1){
+					array_push($arr, 9);
+					$paraAlumno = 1;
+				}
+				
+				if ($paraAlumno == 1){
+					$this->mandarAlumno($arr, $model->attributes['mensaje'], $model->attributes['subject'], $idcarrera);
+				}
+				
+				if ($model->attributes['exatec']==1){
+					$this->mandarExAlumno($model->attributes['mensaje'], $model->attributes['subject'], $idcarrera);
+				}
+				
+				if($model->save())
+					$this->redirect(array('view','id'=>$model->id));
+		
 			}
 			
-
 		}
 		
 		$this->render('create',array(
@@ -386,15 +390,9 @@ class BoletinInformativoController extends Controller
 		if(Yii::app()->user->rol == 'Director'){
 			$nomina = Yii::app()->user->id;
 			
-			$criteria = new CDbCriteria(array(
-						'condition'=>'nomina=\''.$nomina.'\''));
-			
-			$carreraTieneEmpleado = CarreraTieneEmpleado::model()->find($criteria);
-			
-
 			$dataProvider = new CActiveDataProvider('BoletinInformativo', array(
 				'criteria'=>array(
-					'condition'=>'idcarrera='.$carreraTieneEmpleado->idcarrera,
+					'join'=>'JOIN carrera_tiene_empleado AS c ON t.idcarrera = c.idcarrera AND c.nomina = \''.$nomina.'\'',
 					),
 				
 				'sort'=> array(

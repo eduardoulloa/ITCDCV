@@ -88,6 +88,17 @@ class Sugerencia extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
+		
+		/*Modifico el query para que directores de carrera, asistentes y secretarias de alguna dirección solo puedan
+		buscar sus solicitudes correspondientes*/
+		
+		$rol = Yii::app()->user->rol;
+		$nombre_de_usuario = Yii::app()->user->id;
+		
+		if($rol == 'Director' || $rol == 'Asistente'|| $rol == 'Secretaria'){
+			$criteria->join = 'JOIN alumno AS a ON t.matriculaalumno = a.matricula
+					JOIN carrera_tiene_empleado AS c ON a.idcarrera = c.idcarrera AND c.nomina = \''.$nombre_de_usuario.'\'';
+		}
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('fechahora',$this->fechahora,true);

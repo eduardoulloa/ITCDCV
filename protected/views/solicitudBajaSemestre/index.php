@@ -14,8 +14,8 @@ $this->menu=array(
 <h1>Solicitudes de Baja de Semestre</h1>
 
 <?php
-//Si el usuario es un admin, se le da la opción de administrar las solicitudes de baja de semestre.
-if(Yii::app()->user->rol == 'Admin'){
+//Si el usuario no es alumno, se le da la opción de administrar las solicitudes de baja de semestre.
+if(Yii::app()->user->rol != 'Alumno'){
 	echo CHtml::link("Administrar solicitudes de baja de semestre", array('solicitudBajaSemestre/admin'));
 }
 ?>

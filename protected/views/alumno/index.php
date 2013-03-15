@@ -12,8 +12,8 @@ $this->menu=array(
 <h1>Alumnos</h1>
 
 <?php
-//Si el usuario es un admin, se le da la opción de administrar los alumnos.
-if(Yii::app()->user->rol == 'Admin'){
+//Si el usuario es un admin o un director, se le da la opción de administrar los alumnos.
+if(Yii::app()->user->rol == 'Admin' || Yii::app()->user->rol == 'Director'){
 	echo CHtml::link("Administrar alumnos", array('alumno/admin'));
 }
 ?>

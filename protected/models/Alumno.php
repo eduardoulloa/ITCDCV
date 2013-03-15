@@ -111,6 +111,17 @@ class Alumno extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
+		
+		$rol = Yii::app()->user->rol;
+		$nombre_de_usuario = Yii::app()->user->id;
+		
+		/*
+			Modifico el query para que los directores puedan buscar únicamente a los alumnos inscritos en sus carreras.
+		*/
+		if($rol == 'Director'){
+			$criteria->join = 'JOIN carrera_tiene_empleado AS c ON t.idcarrera = c.idcarrera AND
+			c.nomina = \''.$nombre_de_usuario.'\'';
+		}
 
 		$criteria->compare('matricula',$this->matricula,true);
 		$criteria->compare('nombre',$this->nombre,true);

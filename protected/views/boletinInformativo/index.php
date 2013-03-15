@@ -15,49 +15,16 @@ $this->menu=array(
 
 <h1>Boletines Informativos</h1>
 
+<?php 
+//Si el usuario es un administrador general o un director de carrera, se agrega una liga para administrar los boletines informativos.
+if(Yii::app()->user->rol == 'Director'){
+	echo CHtml::link("Administrar boletines informativos", array('boletinInformativo/admin'));
+}
+?>
+
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',
 )); 
-/*
-		$connection=Yii::app()->db;
-		$dir = Yii::app()->user->id;
-		
-		
-		//consulto el id de carrera del Director
-		$sql2 = "SELECT idcarrera FROM carrera_tiene_empleado WHERE nomina = '".$dir."'";
-		$command2 = $connection->createCommand($sql2);
-		$dataReader2 = $command2->query();
-		$dataReader2->bindColumn(1, $idcarrera);
-		$row = $dataReader2->read();
-		
-		
-		
-		$sql = "";
-		
-		$sql = "SELECT matricula FROM alumno WHERE anio_graduado IS NOT NULL AND idcarrera = ".$idcarrera;
-		
-		$command=$connection->createCommand($sql);
-		
-		$dataReader=$command->query();
-		
-		$dataReader->bindColumn(1, $mat);
-		
-		$destinatario = array();
-		
-		while(($row = $dataReader->read())!== false){
-			$address = '';
-			if(strlen($mat)==6){
-				$address .= 'A00'.$mat.'@itesm.mx';
-			}else if(strlen($mat)==7){
-				$address .= 'A0'.$mat.'@itesm.mx';
-			}
-			array_push($destinatario, $address);
-		}
-		
-		foreach($destinatario as &$valor){
-			echo $valor." ";
-		}
-		*/
 
 ?>

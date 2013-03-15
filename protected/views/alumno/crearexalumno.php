@@ -6,7 +6,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Crear ExAlumno</h1>
+<h1>Registrar exalumno</h1>
 
 
 <div class="form">

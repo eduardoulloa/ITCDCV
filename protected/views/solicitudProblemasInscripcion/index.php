@@ -12,8 +12,8 @@ $this->menu=array(
 <h1>Reportes de Problemas de Inscripción</h1>
 
 <?php
-//Si el usuario es un admin, se le da la opción de administrar las solicitudes de carta de problemas de inscripción.
-if(Yii::app()->user->rol == 'Admin'){
+//Si el usuario no es alumno, se le da la opción de administrar las solicitudes de carta de problemas de inscripción.
+if(Yii::app()->user->rol != 'Alumno'){
 	echo CHtml::link("Administrar reportes de problemas de inscripción", array('solicitudProblemasInscripcion/admin'));
 }
 ?>

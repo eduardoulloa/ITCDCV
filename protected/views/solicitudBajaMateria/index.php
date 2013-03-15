@@ -12,9 +12,9 @@ $this->menu=array(
 <h1>Solicitudes de Baja de Materia</h1>
 
 <?php 
-//Si el usuario es un admin, se le da la opción de administrar las solicitudes de baja de materia.
-if(Yii::app()->user->rol == 'Admin'){
-	echo CHtml::link("Administrar solicitudes de baja de materia", array('solicitudBajaMateria/admin'));
+//Si el usuario no es alumno se le da la opción de administrar las solicitudes de baja de materia.
+if(Yii::app()->user->rol != 'Alumno'){
+	echo CHtml::link("Administrar solicitudes de baja de materia", array('solicitudBajaMateria/admin')); 
 }
 ?>
 

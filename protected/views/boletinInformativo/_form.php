@@ -10,6 +10,29 @@
 
 	<p class="note">Los campos con <span class="required">*</span> son requeridos.</p>
 	
+	<div class="row">	
+	<label for="idcarrera" class="required">
+		Seleccionar carrera:
+		<span class="required">*</span>
+	</label>
+	
+	<?php
+		/*
+			Query para obtener todas las carreras en las que labora el empleado.
+		*/
+		$criteria = new CDbCriteria(array(
+			'join'=>'JOIN carrera_tiene_empleado as c on t.id = c.idcarrera AND c.nomina =\''.Yii::app()->user->id.'\'',
+			));
+						
+		$carreras = Carrera::model()->findAll($criteria);
+				
+		$opciones = CHtml::listData($carreras, 'id', 'siglas');
+		
+		echo $form->dropDownList($model,'idcarrera', $opciones); 
+	?>
+	<?php echo $form->error($model,'idcarrera'); ?>
+	</div>
+	
 	<p><strong>Seleccionar alumnos por semestre:</strong> </p>
 	
 	<?php echo $form->errorSummary($model); ?>
@@ -97,8 +120,7 @@
 		<?php echo $form->textArea($model,'mensaje',array('rows'=>15, 'cols'=>80)); ?>
 		<?php echo $form->error($model,'mensaje'); ?>
 	</div>
-
-
+	
 <?php $this->endWidget(); ?>
 
 

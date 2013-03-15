@@ -89,6 +89,15 @@ class Empleado extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
+		$rol = Yii::app()->user->rol;
+		$nombre_de_usuario = Yii::app()->user->id;
+		
+		if($rol == 'Director'){
+		
+			$criteria->condition = 'nomina IN (SELECT nomina FROM carrera_tiene_empleado WHERE idcarrera IN (SELECT idcarrera FROM carrera_tiene_empleado WHERE nomina =  \''.$nombre_de_usuario.'\') GROUP BY nomina)';
+			$criteria->group = 'nomina';
+
+		}
 
 		$criteria->compare('nomina',$this->nomina,true);
 		$criteria->compare('nombre',$this->nombre,true);

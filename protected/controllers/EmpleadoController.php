@@ -52,7 +52,9 @@ class EmpleadoController extends Controller
 		}
 		
 		$criteria = new CDbCriteria(array(
-						'select'=>'nomina'));
+						'select'=>'nomina',
+						'condition'=>'puesto = \'Director\'',
+		));
 						
 						
 		//Obtiene a todos los directores de carrera.
@@ -337,61 +339,16 @@ class EmpleadoController extends Controller
     {
 
         if(Yii::app()->user->rol == 'Director'){
-            $nomina = Yii::app()->user->id;
-
-
-            $connection=Yii::app()->db;
-
-            $sql = "SELECT idcarrera FROM carrera_tiene_empleado WHERE nomina ='".$nomina."'";
-
-            $command=$connection->createCommand($sql);
-
-            $dataReader=$command->query();
-
-            $query = "";
-
-            $dataReader->bindColumn(1, $id);
-
-            $cuenta = $dataReader->count();
-
-
-            if($cuenta == 0){
-                $query="";
-            }else if ($cuenta == 1){
-
-                $row = $dataReader->read();
-                $query .= 'c.idcarrera = '.$id;
-            }else{	
-                $query .= '(';
-                while($cuenta > 1){
-                    $row = $dataReader->read();	
-                    $query .= 'c.idcarrera = '.$id.' OR ';
-                    $cuenta--;
-                }
-                $row = $dataReader->read();
-                $query .= 'c.idcarrera = '.$id.')';
-
-
-            }
-
-            $criteria_idcarrera = new CDbCriteria(array(
-                'condition'=>'nomina=\''.$nomina.'\'',
-                'select'=>'idcarrera',
-            ));
-
-            $idcarrera = CarreraTieneEmpleado::model()->findAll($criteria_idcarrera);
-
-            //Obtiene los empleados de esta carrera.
-            if($query != ""){
-                $dataProvider = new CActiveDataProvider('Empleado', array(
+			
+			/*
+				Obtiene a todos los empleados que laboran en la carrera donde labora el director.
+			*/
+			$dataProvider = new CActiveDataProvider('Empleado', array(
                     'criteria'=>array(
-                        'join'=>'JOIN carrera_tiene_empleado as c ON t.nomina = c.nomina AND '.$query,
-                    ),
-                ));
-
-            }else{
-                $dataProvider=new CActiveDataProvider('Empleado');
-            }
+						'condition'=>'nomina IN (SELECT nomina FROM carrera_tiene_empleado WHERE idcarrera IN (SELECT idcarrera FROM carrera_tiene_empleado WHERE nomina =  \''.Yii::app()->user->id.'\') GROUP BY nomina)',
+						'group'=>'nomina'
+					),
+            ));
 
         }else{
 

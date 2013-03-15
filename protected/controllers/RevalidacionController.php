@@ -26,10 +26,10 @@ class RevalidacionController extends Controller
 	public function accessRules()
 	{
 						
-		//Query que obtiene todos los directores de carrera
+		//Query que obtiene todos los empleados (directores, asistentes y secretarias)
 		$consulta_empleado = Empleado::model()->findAll();
 		
-		//Arreglo para almacenar a todos los directores de carrera
+		//Arreglo para almacenar a todos los empleados
 		$empleados = array();
 		
 		//Se agregan todos los directores al arreglo.
@@ -58,7 +58,7 @@ class RevalidacionController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow directores de carrera to perform 'update', 'delete' actions
-				'actions'=>array('update'),
+				'actions'=>array('update', 'admin', 'delete'),
 				'users'=>$empleados,
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
