@@ -10,10 +10,11 @@
 	<?php echo $form->errorSummary($model); ?>
 	
 	<?php
-		if(esAdmin() || $model->isNewRecord) {
+		//if(esAdmin() || $model->isNewRecord) {
+		if(Yii::app()->user->rol == 'Admin'){
+			if(!$model->isNewRecord){
 	?>
-
-	<div class="row">
+			<div class="row">
 		<?php echo $form->labelEx($model,'nomina'); ?>
 		<?php echo $form->textField($model,'nomina',array('size'=>9,'maxlength'=>9)); ?>
 		<?php echo $form->error($model,'nomina'); ?>
@@ -58,10 +59,12 @@
   <div class="row">
       <?php echo $form->label($model_carrera,'Agregar Carrera'); ?>
       <?php echo $form->dropDownList($model_carrera,'id', $not_carreras); ?>
-  </div>	
-	
-	<?php
-		}
+  </div>
+
+  
+  <?php
+	}
+	}
 		else if(esDirector() && Yii::app()->user->id != $model->nomina) {
 			//un director tratando de editar a alguien de su carrera
 	?>
@@ -83,16 +86,31 @@
 			<?php echo $form->error($model,'apellido_materno'); ?>
 		</div>
 		
-		<div class="row">
-	      <?php echo $form->label($model_carrera,'Carreras:'); ?>
-	      <?php echo $form->dropDownList($model_carrera,'id', $carreras); ?>
-	  </div>
 
+		<div class="row">
+		<?php echo $form->label($model_carrera,'Carreras:'); 
+	  
+		/*
+			Se realiza una consulta para obtener a todas las carreras en las que labora el director.
+		*/
+		$criteria = new CDbCriteria(array(
+				'join'=>'JOIN carrera_tiene_empleado as c on t.id = c.idcarrera AND c.nomina =\''.$model->nomina.'\'',
+				));
+						
+		$carreras = Carrera::model()->findAll($criteria);
+				
+		$opciones = CHtml::listData($carreras, 'id', 'siglas');
+		
+		echo $form->dropDownList($model_carrera,'id', $opciones);
+		?>
+	  
+		</div>
 
 	  <div class="row">
 	      <?php echo $form->label($model_carrera,'Agregar Carrera'); ?>
 	      <?php echo $form->dropDownList($model_carrera,'id', $not_carreras); ?>
 	  </div>
+	  
 	<?php 
 		}
 		else {

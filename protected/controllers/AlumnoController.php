@@ -131,10 +131,14 @@ class AlumnoController extends Controller
 			$model->attributes=$_POST['Alumno'];
 			
 			$this->verificaQueMatriculaNoEstaRegistrada($model->matricula);
+			$contrasena_no_cifrada = $model->password;
 			$model->password = cifraPassword($model->password);
 			
 			if($model->save()) {
 				$this->redirect(array('view','id'=>$model->matricula));
+			}else{
+				//Si no se pudo grabar el nuevo modelo, le devuelvo su contraseña (sin cifrar en MD5)
+				$model->password = $contrasena_no_cifrada;
 			}
 	
 		}

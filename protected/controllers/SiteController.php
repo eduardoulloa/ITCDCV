@@ -128,10 +128,13 @@ class SiteController extends Controller
 			
 			$this->verificaQueMatriculaNoEstaRegistrada($model->matricula);
 			
+			$contrasena_no_cifrada = $model->password;
 			$model->password = cifraPassword($model->password);
 			
 			if($model->save()) {
 				$this->redirect(array('exalumnoregistrado', 'id'=>$model->matricula));
+			}else{
+				$model->password = $contrasena_no_cifrada;
 			}
 			
 		}

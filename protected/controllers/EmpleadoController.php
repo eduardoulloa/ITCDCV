@@ -66,6 +66,19 @@ class EmpleadoController extends Controller
 		foreach($consulta as &$valor){
 			array_push($directores, ($valor->nomina).'');
 		}
+		
+		$criteria_asistentes = new CDbCriteria(array(
+						'select'=>'nomina',
+						'condition'=>'puesto = \'Asistente\' || puesto = \'Secretaria\'',
+		));
+		
+		$asistentes_secretarias = array();
+		
+		$consulta = Empleado::model()->findAll($criteria_asistentes);
+		
+		foreach($consulta as &$valor){
+			array_push($asistentes_secretarias, ($valor->nomina).'');
+		}
 	
 		return array(
 			array('allow', 
@@ -75,6 +88,10 @@ class EmpleadoController extends Controller
 			array('allow', 
 				'actions'=>array('index','view','admin','delete','create','update','actualizar'),
 				'users'=>$directores,
+			),
+			array('allow',
+				'actions'=>array('view', 'update'),
+				'users'=>$asistentes_secretarias,
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -115,7 +132,7 @@ class EmpleadoController extends Controller
 	public function actionCreate()
 	{
         # Metodo que nos da las carreras
-        $carreras = getCarreras();
+        //$carreras = getCarreras();
         
 		$model=new Empleado;
         $model_carrera=new Carrera;
@@ -124,8 +141,15 @@ class EmpleadoController extends Controller
 
 		if(isset($_POST['Empleado']) && isset($_POST['Carrera']))
 		{
-			$_POST['Empleado']['password'] = md5($_POST['Empleado']['password']);
 			$model->attributes=$_POST['Empleado'];
+			
+			$contrasena_no_cifrada = $model->password;
+			
+			if(strlen($contrasena_no_cifrada) == 0){
+				throw new CHttpException(400, 'Error. El campo de la contraseña no puede dejarse vacío.');
+			}
+			
+			$model->password = md5($model->password);
 			
             $id_carrera = $_POST['Carrera'];
 			if($model->save()){
@@ -134,7 +158,9 @@ class EmpleadoController extends Controller
                 $model_carrera_empleado->nomina = $model->nomina;
                 if($model_carrera_empleado->save())
 				    $this->redirect(array('view','id'=>$model->nomina));
-            }
+            }else{
+				$model->password = $contrasena_no_cifrada;
+			}
 
 		}
 
@@ -142,7 +168,7 @@ class EmpleadoController extends Controller
 		$this->render('create',array(
 			'model'=>$model,
             'model_carrera'=>$model_carrera,
-            'carreras'=>$carreras
+            //'carreras'=>$carreras
 		));
 	}
 
@@ -155,6 +181,7 @@ class EmpleadoController extends Controller
 	{
 		$carreras = $this->getEmpleadoCarreras($id);					//
 		$not_carreras = $this->getNotEmpleadoCarreras($id);		//
+		
 		$model_carrera = new Carrera;													//
 
 		if(Yii::app()->user->rol == 'Admin'){
@@ -194,7 +221,7 @@ class EmpleadoController extends Controller
 					}
 					else {
 						if(md5($_POST['passwordActual']) != $model->password) {
-							throw new CHttpException(400, 'El password actual no es correcto.');
+							throw new CHttpException(400, 'La contraseña actual no es correcta.');
 						}
 						else {
 							$_POST['Empleado']['password'] = md5($_POST['Empleado']['password']);
@@ -227,7 +254,25 @@ class EmpleadoController extends Controller
 			
 			
 				$idcarrera = $consulta_dir->idcarrera;
-			
+				
+				$connection=Yii::app()->db;
+				
+				//Obtiene de las carreras en las que labora el director, aquellas carreras donde NO labora el empleado con la nomina indicada.
+				$sql = "SELECT id, siglas FROM carrera WHERE id IN
+				(SELECT idcarrera FROM (SELECT idcarrera FROM carrera_tiene_empleado AS c WHERE c.nomina = '".$nomina."') AS t
+				WHERE idcarrera NOT IN
+				(SELECT idcarrera FROM carrera_tiene_empleado AS c WHERE c.nomina = '".$id."'))";
+
+				$salida = $this->getQueryResult($sql);
+
+				$not_carreras = array();
+
+				$not_carreras[0] = "";
+
+				foreach($salida as &$valor){
+					$not_carreras[$valor[ "id" ]] = $valor[ "siglas" ];
+				}
+
 				$validacion = CarreraTieneEmpleado::model()->findBySql('SELECT nomina FROM carrera_tiene_empleado WHERE idcarrera ='.$idcarrera.' AND nomina =\''.$id.'\'');
 			
 				if(!empty($validacion)){
@@ -260,10 +305,15 @@ class EmpleadoController extends Controller
 				}
 			}
 		}
-		else //es un empleado normal(secretaria o asistente, etc.)
+		else //es un empleado normal(secretaria o asistente, etc.); ellos solo pueden editarse a sí mismos.
 		{
 		
+			if($id != Yii::app()->user->id){
+				throw new CHttpException(403, 'Usted no se encuentra autorizado para realizar esta acción.');
+			}
+			
 			$model = $this->loadModel(Yii::app()->user->id);
+			
 			if(isset($_POST['Empleado'])) {
 		
 				if ('' === $_POST['Empleado']['password']) {
@@ -438,7 +488,7 @@ class EmpleadoController extends Controller
     }
 
 	/*
-		Obtiene TODAS las carreras en las que NO est� registrado un empleado.
+		Obtiene TODAS las carreras en las que NO está registrado un empleado.
 	*/
     private function getNotEmpleadoCarreras($empleado)
     {
