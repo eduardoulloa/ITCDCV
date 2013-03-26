@@ -182,14 +182,29 @@ class RevalidacionController extends Controller
 					$carreraTieneEmpleado = CarreraTieneEmpleado::model()->findAll($criteria);
 					
 					//String para el condition del CActiveDataProvider. Se almacenan todos los ids de las carreras a en las que labora el empleado.
-					$ids;
 					
-					$ids = $carreraTieneEmpleado[0]->idcarrera;
+					$ids = "";
 					
-					$i = 1;
-					while($carreraTieneEmpleado[$i]!= NULL){
-						$ids = $ids . " OR idcarrera = " . $carreraTieneEmpleado[$i]->idcarrera;
-						$i++;
+					//El empleado no labora en ninguna carrera.
+					if(sizeof($carreraTieneEmpleado) == 0){
+					
+						$ids = "";
+					//El empleado labora solamente en una carrera.
+					}else if (sizeof($carreraTieneEmpleado) == 1){
+						
+						$ids = $carreraTieneEmpleado[0]->idcarrera;
+					//El empleado labora en más de una carrera.
+					}else{
+					
+						$ids = $carreraTieneEmpleado[0]->idcarrera;
+						
+						$i = 1;
+					
+						while($carreraTieneEmpleado[$i]!= NULL){
+							$ids = $ids . " OR idcarrera = " . $carreraTieneEmpleado[$i]->idcarrera;
+							$i++;
+						}
+					
 					}
 					
 					$dataProvider = new CActiveDataProvider('Revalidacion', array(
