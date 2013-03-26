@@ -112,6 +112,19 @@ class SugerenciaController extends Controller
 	 */
 	public function actionView($id)
 	{
+	
+		if(Yii::app()->user->rol == 'Alumno'){
+			$mat = Yii::app()->user->id;
+			$criteria = new CDbCriteria(array(
+						'condition'=>'matriculaalumno = '.$mat.' AND id = '.$id));
+						
+			$sugerencias=Sugerencia::model()->find($criteria);
+			
+			if(sizeof($sugerencias) == 0){
+				throw new CHttpException(403,'Usted no está autorizado para realizar esta acción.');
+			}
+		}
+		
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));

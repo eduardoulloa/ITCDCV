@@ -114,6 +114,19 @@ class SolicitudRevalidacionController extends Controller
 	 */
 	public function actionView($id)
 	{
+	
+		if(Yii::app()->user->rol == 'Alumno'){
+			$mat = Yii::app()->user->id;
+			$criteria = new CDbCriteria(array(
+						'condition'=>'matriculaalumno = '.$mat.' AND id = '.$id));
+						
+			$solicitudes=SolicitudRevalidacion::model()->find($criteria);
+			
+			if(sizeof($solicitudes) == 0){
+				throw new CHttpException(403,'Usted no está autorizado para realizar esta acción.');
+			}
+		}
+	
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));
@@ -204,7 +217,7 @@ class SolicitudRevalidacionController extends Controller
 					}
 				
 				}else{
-					throw new CHttpException(400,'No se encontr� la solicitud a editar.');
+					throw new CHttpException(400,'No se encontró la solicitud a editar.');
 				}
 			
 			}else{
