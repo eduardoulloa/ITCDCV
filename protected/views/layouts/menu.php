@@ -20,7 +20,7 @@ else if(Yii::app()->user->rol == 'Director') {
         ),
         array("url"=> array( "route" => "sugerencia/index"), "label"=>"Sugerencias"),
         array("url"=> array(), "label"=>"Escolar",
-            array("url" => array( "route" => "solicitud/index"), "label" => "Ver solicitudes"),
+            array("url" => array( "route" => "solicitud/index"), "label" => "Ver todas las solicitudes"),
             array("url" => array( "route" => "solicitudBajaMateria/index"), "label" => "Ver solicitudes de baja de materia"),
             array("url" => array( "route" => "solicitudBajaSemestre/index"), "label" => "Ver solicitudes de baja de semestre"),
             array("url" => array( "route" => "solicitudCartaRecomendacion/index"), "label" => "Ver solicitudes de carta de recomendación"),

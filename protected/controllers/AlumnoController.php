@@ -292,12 +292,9 @@ class AlumnoController extends Controller
 				
 					'criteria'=>array(
 						'join'=>'JOIN carrera_tiene_empleado AS c ON t.idcarrera = c.idcarrera AND c.nomina = \''.$nomina.'\'',
-					),
-						'pagination'=> array(
-							'pageSize'=>100,
-							),
+					)
 
-						));
+			));
 			
 		
 		}

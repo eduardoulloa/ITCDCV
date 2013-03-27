@@ -3,6 +3,7 @@
 			Matrícula
 			<span class="required">*</span>
 	</label>
+	<?php /*aqui se debe probar si el modelo es un nuevo record */ ?>
 	<?php echo $form->textField($model,'matricula',array('size'=>9,'maxlength'=>9)); ?>
 	<?php echo $form->error($model,'matricula'); ?>
 </div>
