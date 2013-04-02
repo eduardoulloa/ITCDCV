@@ -215,16 +215,25 @@ class AlumnoController extends Controller
 				$model=$this->loadModel($id);
 				
 				if(isset($_POST['Alumno']))
-				{	
+				{
+					
 					$oldpass = $model->password;
 					$model->attributes=$_POST['Alumno'];
 					$newpass = $model->password;
 					
+					//Valida si el campo para la contraseña está vacío, en caso de ser así, conserva la contraseña anterior.
+					if ('' === $_POST['Alumno']['password']) {
+						$model->password = $oldpass;
+					}
+					else {		
+						$model->password = md5($_POST['Alumno']['password']);
+					}
+					
 					//Valida si el usuario ha hecho algun cambio de password.
-					if($newpass != $oldpass){
+					/*if($newpass != $oldpass){
 						$pass = md5($model->password);
 						$model->password = $pass;
-					}
+					}*/
 					
 					//$model->email = $model->attributes['email'];
 					if($model->save()) {

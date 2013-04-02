@@ -1,11 +1,11 @@
 <div class="row">
-	<label for="passwordActual" class="required">
-			Matrícula
-			<span class="required">*</span>
-	</label>
-	<?php /*aqui se debe probar si el modelo es un nuevo record */ ?>
-	<?php echo $form->textField($model,'matricula',array('size'=>9,'maxlength'=>9)); ?>
-	<?php echo $form->error($model,'matricula'); ?>
+	<?php /*Utilizo PHP para validar si el modelo corresponde a un nuevo registro.*/ 
+		if ($model->isNewRecord){
+			echo "<label for=\"passwordActual\" class=\"required\">Matrícula<span class=\"required\">*</span></label>";
+			echo $form->textField($model,'matricula',array('size'=>9,'maxlength'=>9));
+			echo $form->error($model,'matricula');
+		}
+	?>
 </div>
 
 <div class="row">
