@@ -264,68 +264,76 @@ class BoletinInformativoController extends Controller
 			$sem8 = $model->attributes['semestre8'];
 			$sem9 = $model->attributes['semestre9'];
 			
+			//Se valida primero si se seleccionó al menos un grupo de destinatarios.
 			if(($sem1 == 0) && ($sem2 == 0) && ($sem3 == 0) && ($sem4 == 0) && ($sem5 == 0) && ($sem6 == 0) && ($sem7 == 0) && ($sem8 == 0) && ( $sem9 == 0) && ($model->attributes['exatec']==0)){
 				$model->addError($model->attributes['semestre1'],'Debe seleccionar al menos un grupo de destinatarios');
 			}else{
-				$arr = array();
-			
-				$paraAlumno = 0;
+				//Se valida ahora si el campo del mensaje no está vacío.
+				if('' === $_POST['BoletinInformativo']['mensaje']){
+					$model->addError($model->attributes['mensaje'],'El campo del mensaje no se puede dejar vacío.');
+				}else{
+					//Todo está bien. Se procede con el envío del mensaje.
+					$arr = array();
 				
-				if ($sem1 == 1){
-					array_push($arr, 1);
-					$paraAlumno = 1;
+					$paraAlumno = 0;
+					
+					if ($sem1 == 1){
+						array_push($arr, 1);
+						$paraAlumno = 1;
+					}
+					
+					if ($sem2 == 1){
+						array_push($arr, 2);
+						$paraAlumno = 1;
+					}
+					
+					if ($sem3 == 1){
+						array_push($arr, 3);
+						$paraAlumno = 1;
+					}
+					
+					if ($sem4 == 1){
+						array_push($arr, 4);
+						$paraAlumno = 1;
+					}
+					
+					if ($sem5 == 1){
+						array_push($arr, 5);
+						$paraAlumno = 1;
+					}
+					
+					if ($sem6 == 1){
+						array_push($arr, 6);
+						$paraAlumno = 1;
+					}
+					
+					if ($sem7 == 1){
+						array_push($arr, 7);
+						$paraAlumno = 1;
+					}
+					
+					if ($sem8 == 1){
+						array_push($arr, 8);
+						$paraAlumno = 1;
+					}
+					
+					if ($sem9 == 1){
+						array_push($arr, 9);
+						$paraAlumno = 1;
+					}
+					
+					if ($paraAlumno == 1){
+						$this->mandarAlumno($arr, $model->attributes['mensaje'], $model->attributes['subject'], $idcarrera);
+					}
+					
+					if ($model->attributes['exatec']==1){
+						$this->mandarExAlumno($model->attributes['mensaje'], $model->attributes['subject'], $idcarrera);
+					}
+					
+					if($model->save())
+						$this->redirect(array('view','id'=>$model->id));
+						
 				}
-				
-				if ($sem2 == 1){
-					array_push($arr, 2);
-					$paraAlumno = 1;
-				}
-				
-				if ($sem3 == 1){
-					array_push($arr, 3);
-					$paraAlumno = 1;
-				}
-				
-				if ($sem4 == 1){
-					array_push($arr, 4);
-					$paraAlumno = 1;
-				}
-				
-				if ($sem5 == 1){
-					array_push($arr, 5);
-					$paraAlumno = 1;
-				}
-				
-				if ($sem6 == 1){
-					array_push($arr, 6);
-					$paraAlumno = 1;
-				}
-				
-				if ($sem7 == 1){
-					array_push($arr, 7);
-					$paraAlumno = 1;
-				}
-				
-				if ($sem8 == 1){
-					array_push($arr, 8);
-					$paraAlumno = 1;
-				}
-				
-				if ($sem9 == 1){
-					array_push($arr, 9);
-					$paraAlumno = 1;
-				}
-				
-				if ($paraAlumno == 1){
-					$this->mandarAlumno($arr, $model->attributes['mensaje'], $model->attributes['subject'], $idcarrera);
-				}
-				
-				if ($model->attributes['exatec']==1){
-					$this->mandarExAlumno($model->attributes['mensaje'], $model->attributes['subject'], $idcarrera);
-				}
-				
-				if($model->save())
-					$this->redirect(array('view','id'=>$model->id));
 		
 			}
 			
