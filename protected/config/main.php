@@ -10,7 +10,7 @@ require_once( dirname(__FILE__) . '/../components/helpers.php');
 
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'Director de Carrera Virtual',
+	'name'=>'Dirección de Carrera Virtual',
 	'language'=>'es',
 
 	// preloading 'log' component
