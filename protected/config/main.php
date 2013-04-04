@@ -10,7 +10,13 @@ require_once( dirname(__FILE__) . '/../components/helpers.php');
 
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
+	/*
+		El nombre del sistema
+	*/
 	'name'=>'Dirección de Carrera Virtual',
+	/*
+		El lenguaje del sistema
+	*/
 	'language'=>'es',
 
 	// preloading 'log' component
@@ -44,6 +50,10 @@ return array(
 			'rules'=>array(
 				//'sugerencia/update/<id>'=>'sugerencia/update',				
 				//'<controller:\w+>/<id:\d+>'=>'<controller>/view',
+				/*
+					Expresiones regulares para acceder vía URLs a las vistas
+					y a las acciones de los controladores.
+				*/
 				'gii'=>'gii',
 				'gii/<controller:\w+>'=>'gii/<controller>',
 				'gii/<controller:\w+>/<action:\w+>'=>'gii/<controller>/<action>',
@@ -52,6 +62,9 @@ return array(
 			),
 		),
 		'mail'=>array(
+			/*
+				La clase de Yii que proporciona el servicio de correo electrónico
+			*/
 			'class'=>'YiiMail',
 		),
 		/*
@@ -92,6 +105,9 @@ return array(
 	// using Yii::app()->params['paramName']
 	'params'=>array(
 		// this is used in contact page
+		/*
+			Dirección de correo electrónico del remitente en la Dirección de Carrera Virtual
+		*/
 		'adminEmail'=>'dcv@itesm.mx',
 	),
 );

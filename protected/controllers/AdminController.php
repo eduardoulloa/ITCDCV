@@ -1,44 +1,42 @@
 <?php
 
 class AdminController extends Controller
-{
-	/**
-	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
-	 * using two-column layout. See 'protected/views/layouts/column2.php'.
+{	 
+	 /**
+	 * @var string la distribución por defecto para las vistas. Por defecto es '//layouts/column2', lo cual
+	 * indica que se utiliza una distribución de dos columnas. Ver 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='//layouts/column2';
 
 	/**
-	 * @return array action filters
+	 * @return array filtros de acción
 	 */
 	public function filters()
 	{
 		return array(
-			'accessControl', // perform access control for CRUD operations
+			'accessControl', //otorgar control de acceso para operaciones CRUD
 		);
 	}
-
-	/**
-	 * Specifies the access control rules.
-	 * This method is used by the 'accessControl' filter.
-	 * @return array access control rules
+	 
+	 /**
+	 * Indica las reglas de control de acceso.
+	 * Este método es utilizado por el filtro 'accessControl'.
+	 * @return array reglas de control de acceso
 	 */
 	public function accessRules()
 	{
 	
-		
-						
+		//Criterios de búsqueda para obtener a todos los administradores
 		$adminCriteria = new CDbCriteria(array(
 						'select'=>'username'));
 						
-						
+		//Variable que almacena el resultado de la búsqueda
 		$adminConsulta = Admin::model()->findAll($adminCriteria);
 		
-		//arreglo con todos los directores de carrera
-		
+		//Arreglo para almacenar los nombres de usuario de los administradores generales
 		$admins = array();
 		
-		
+		//Almacena los nombres de usuario de los administradores generales en el arreglo $admins
 		foreach($adminConsulta as &$valor){
 			array_push($admins, ($valor->username).'');
 		}
@@ -52,19 +50,19 @@ class AdminController extends Controller
 				'actions'=>array('create','update'),
 				'users'=>array('@'),
 			),*/
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+			array('allow', // le permite a los administradores generales realizar acciones de tipo 'admin', 'delete', 'create', 'update', 'index' y 'view'
 				'actions'=>array('admin','delete','create','update','index','view'),
 				'users'=>$admins,
 			),
-			array('deny',  // deny all users
+			array('deny',  // negar a todos los usuarios
 				'users'=>array('*'),
 			),
 		);
 	}
-
-	/**
-	 * Displays a particular model.
-	 * @param integer $id the ID of the model to be displayed
+	 
+	 /**
+	 * Despliega un modelo en particular.
+	 * @param integer $id el ID del modelo a desplegar
 	 */
 	public function actionView($id)
 	{
@@ -73,9 +71,9 @@ class AdminController extends Controller
 		));
 	}
 
-	/**
-	 * Creates a new model.
-	 * If creation is successful, the browser will be redirected to the 'view' page.
+	 /**
+	 * Crea un nuevo modelo.
+	 * Si la creación es exitosa el navegador será redirigido a la página 'view'.
 	 */
 	public function actionCreate()
 	{
@@ -96,63 +94,69 @@ class AdminController extends Controller
 		));
 	}
 
-	/**
-	 * Updates a particular model.
-	 * If update is successful, the browser will be redirected to the 'view' page.
-	 * @param integer $id the ID of the model to be updated
+	 /**
+	 * Actualiza un modelo en particular.
+	 * Si la actualización es exitosa, el navegador será redirigido a la página de 'view'.
+	 * @param integer $id el ID del modelo a actualizar
 	 */
 	public function actionUpdate($id)
 	{
+		// Se carga el modelo.
 		$model=$this->loadModel(Yii::app()->user->id);
 		
-
-		// Uncomment the following line if AJAX validation is needed
+		// Quitar comentarios de la siguiente línea si se requiere validación AJAX.
 		// $this->performAjaxValidation($model);
-
+		
+		// Valida si se recibió un modelo de admin vía una petición de POST.
 		if(isset($_POST['Admin']))
 		{
+			// Si el campo de la contraseña se dejó vacío, la contraseña no se 
+			// cambia. Es decir, se conserva la contraseña anterior.
 			if ('' === $_POST['Admin']['password']) {
 				$_POST['Admin']['password'] = $model->password;
 			}
 			else {
+				// Se valida si la contraseña actual es correcta.
+				// De lo contrario se indica un mensaje de error.
 				if(md5($_POST['passwordActual']) != $model->password) {
 					throw new CHttpException(400, 'El password actual no es correcto.');
 				}
 				else {
+				
+					// Se encripta la nueva contraseña en MD5.
 					$_POST['Admin']['password'] = md5($_POST['Admin']['password']);
 				}
 			}
+			// Se agregan los atributos al modelo.
 			$model->attributes = $_POST['Admin'] + $model->attributes;
 			if($model->save()) {
 				$this->redirect(array('view','id'=>$model->username));
 			}
 			
-			/*
-			$model->attributes=$_POST['Admin'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->username));
-				*/
 		}
+		
+		// La contraseña se deja vacía.
 		$model->password = '';
-
+		
+		// Se despliega la forma para hacer la actualización del modelo cargado.
 		$this->render('update',array(
 			'model'=>$model,
 		));
 	}
 
-	/**
-	 * Deletes a particular model.
-	 * If deletion is successful, the browser will be redirected to the 'admin' page.
-	 * @param integer $id the ID of the model to be deleted
+	 /**
+	 * Elimina un modelo en particular.
+	 * Si la eliminación es exitosa, el navegador es redirigido a la página 'admin'.
+	 * @param integer $id el ID del modelo a eliminar
 	 */
 	public function actionDelete($id)
 	{
 		if(Yii::app()->request->isPostRequest)
 		{
-			// we only allow deletion via POST request
+			// solo se permite elminación vía una petición de tipo POST
 			$this->loadModel($id)->delete();
 
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+			// si es una petición AJAX (impulsada por elminación vía la vista de tabla de admin), no se debe redirigir al navegador
 			if(!isset($_GET['ajax']))
 				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 		}
@@ -161,7 +165,7 @@ class AdminController extends Controller
 	}
 
 	/**
-	 * Lists all models.
+	 * Enlista a todos los modelos.
 	 */
 	public function actionIndex()
 	{
@@ -172,7 +176,7 @@ class AdminController extends Controller
 	}
 
 	/**
-	 * Manages all models.
+	 * Administra a los modelos.
 	 */
 	public function actionAdmin()
 	{
@@ -186,10 +190,10 @@ class AdminController extends Controller
 		));
 	}
 
-	/**
-	 * Returns the data model based on the primary key given in the GET variable.
-	 * If the data model is not found, an HTTP exception will be raised.
-	 * @param integer the ID of the model to be loaded
+	 /**
+	 * Devuelve el modelo de datos basado en la llave primaria otorgada en la variable GET.
+	 * Si el modelo de datos no se encuentra se lanzará una excepción de HTTP.
+	 * @param integer el ID del modelo a cargar
 	 */
 	public function loadModel($id)
 	{
@@ -199,9 +203,9 @@ class AdminController extends Controller
 		return $model;
 	}
 
-	/**
-	 * Performs the AJAX validation.
-	 * @param CModel the model to be validated
+	 /**
+	 * Realiza validación AJAX.
+	 * @param CModel el modelo a validar
 	 */
 	protected function performAjaxValidation($model)
 	{

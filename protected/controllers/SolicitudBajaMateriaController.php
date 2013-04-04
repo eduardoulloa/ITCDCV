@@ -296,7 +296,7 @@ class SolicitudBajaMateriaController extends Controller
 		
 			
 			}else{
-				throw new CHttpException(400,'No se encontro la solicitud a editar.');
+				throw new CHttpException(400,'No se encontró la solicitud a editar.');
 			}
 			
 			
