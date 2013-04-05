@@ -1,59 +1,68 @@
 <?php
 
 class AlumnoController extends Controller
-{
-	/**
-	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
-	 * using two-column layout. See 'protected/views/layouts/column2.php'.
+{	 
+	 /**
+	 * @var string la distribución por defecto para las vistas. Por defecto es '//layouts/column2', lo
+	 * cual significa que se utiliza una distribución de dos columnas. Ver 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='//layouts/column2';
-
-	/**
-	 * @return array action filters
+	 
+	 /**
+	 * @return array filtros de acción
 	 */
 	public function filters()
 	{
 		return array(
-			'accessControl', // perform access control for CRUD operations
+			'accessControl', // Realiza control de acceso para operaciones CRUD.
 		);
 	}
 
-	/**
-	 * Specifies the access control rules.
-	 * This method is used by the 'accessControl' filter.
-	 * @return array access control rules
+	 /**
+	 * Indica las reglas de control de acceso.
+	 * Este método es empleado por el filtro 'accessControl'.
+	 * @return array reglas de control de acceso
 	 */
 	public function accessRules()
 	{
-	
+		// Criterios de búsqueda para obtener los nombres de usuario de todos los directores
 		$criteria = new CDbCriteria(array(
 						'select'=>'nomina',
 						'condition'=>'puesto=\'Director\''));
-						
+		
+		// Criterios de búsqueda para obtener los nombres de usuario de todos los administradores generales
 		$adminCriteria = new CDbCriteria(array(
 						'select'=>'username'));
 						
-						
-		//obtiene todos los directores de carrera
+		// Obtiene los modelos de todos los directores de carrera
 		$consulta=Empleado::model()->findAll($criteria);
 		
+		// Obtiene los modelos de todos los administradores generales
 		$adminConsulta = Admin::model()->findAll($adminCriteria);
 		
+		// Obtiene los modelos de todos los alumnos
 		$alumnoConsulta = Alumno::model()->findAll();
 		
-		//arreglo con todos los directores de carrera
+		// Arreglo para almacenar los nombres de usuario de todos los directores de carrera
 		$directores = array();
+		
+		// Arreglo para almacener los nombres de usuario de todos los administradores generales
 		$admins = array();
+		
+		// Arreglo para almacenar los nombres de usuario de todos alumnos
 		$alumnos = array();
 		
+		// Almacena en el arreglo $directores los nombres de usuario de todos los directores de carrera.
 		foreach($consulta as &$valor){
 			array_push($directores, ($valor->nomina).'');
 		}
 		
+		// Almacena en el arreglo $admins los nombres de usuario de todos los administradores generales.
 		foreach($adminConsulta as &$valor){
 			array_push($admins, ($valor->username).'');
 		}
 		
+		// Almacena en el arreglo $alumnos los nombres de usuario (matrículas) de todos los alumnos.
 		foreach($alumnoConsulta as &$valor){
 			array_push($alumnos, ($valor->matricula).'');
 		}
@@ -75,37 +84,34 @@ class AlumnoController extends Controller
 				'actions'=>array('create','update'),
 				'users'=>array('@'),
 			),*/
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+			array('allow', // Les permite a los alumnos realizar acciones de 'update' y 'view'.
 				'actions'=>array('update','view'),
 				'users'=>$alumnos,
 			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+			array('allow', // Les permite a los administradores generales realizar acciones de
+						   // 'admin', 'delete', 'create', 'update', 'index' y 'view'.
 				'actions'=>array('admin','delete','create','update','index','view'),
 				'users'=>$admins,
 			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+			array('allow', // Les permite a los directores de carrera realizar acciones de
+						   // 'admin', 'delete', 'create', 'update', 'index' y 'view'.
 				'actions'=>array('admin','delete','create','update','index','view'),
 				'users'=>$directores,
 			),
-			
-			array('allow',  // deny all users
+			array('allow',  // Les permite a todos los usuarios realizar acciones de
+							// 'crearexalumno' y 'exalumnoregistrado'.
 				'actions'=>array('crearexalumno', 'exalumnoregistrado'),
 				'users'=>array('*'),
-			),
-			/*array('deny',  // deny all users
-				'actions'=>array('crearexalumno'),
-				'users'=>$alumnos,
-			),*/
-			
-			array('deny',  // deny all users
+			),			
+			array('deny',  // Niega a todos los usuarios.
 				'users'=>array('*'),
 			),
 		);
 	}
 
-	/**
-	 * Displays a particular model.
-	 * @param integer $id the ID of the model to be displayed
+	 /**
+	 * Despliega un modelo en particular.
+	 * @param integer $id el ID del modelo a desplegar
 	 */
 	public function actionView($id)
 	{
@@ -115,9 +121,9 @@ class AlumnoController extends Controller
 		
 	}
 
-	/**
-	 * Creates a new model.
-	 * If creation is successful, the browser will be redirected to the 'view' page.
+	 /**
+	 * Crea un nuevo modelo.
+	 * Si la creación es exitosa, el navegador será redirigido a la página 'view'.
 	 */
 	public function actionCreate()
 	{
@@ -126,28 +132,42 @@ class AlumnoController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
+		// Valida si se recibió el modelo de algún alumno vía una petición de POST.
 		if(isset($_POST['Alumno']))
 		{
+			// Se le agregan los atributos al modelo.
 			$model->attributes=$_POST['Alumno'];
 			
+			// Verifica que la matrícula no haya sido previamente registrada en la base de datos.
 			$this->verificaQueMatriculaNoEstaRegistrada($model->matricula);
+			
+			// Almacena la contraseña sin cifrar en MD5.
 			$contrasena_no_cifrada = $model->password;
+			
+			// Cifra la contraseña en MD5.
 			$model->password = cifraPassword($model->password);
 			
+			// Valida si el modelo pudo ser registrado en la base de datos.
+			// De no ser posible el almacenamiento, se reestablece al modelo la contraseña, sin cifrar en MD5.
 			if($model->save()) {
 				$this->redirect(array('view','id'=>$model->matricula));
 			}else{
-				//Si no se pudo grabar el nuevo modelo, le devuelvo su contraseña (sin cifrar en MD5)
 				$model->password = $contrasena_no_cifrada;
 			}
 	
 		}
-
+		
+		// Despliega la forma para crear un nuevo modelo.
 		$this->render('create',array(
 			'model'=>$model,
 		));
 	}
 	
+	/**
+	 * Verifica que una matrícula no haya sido registrada previamente en la base de datos.
+	 * Si la matrícula ya estaba registrada, se despliega un mensaje con una descripción del error.
+	 * @param char $matricula la matrícula a validar
+	 */
 	public function verificaQueMatriculaNoEstaRegistrada($matricula) {
 		if(matriculaYaExiste($matricula)) {
 			throw new CHttpException(400, 'Error. Ya existe un usuario registrado con la matrícula
@@ -156,119 +176,149 @@ class AlumnoController extends Controller
 		}
 	}
 	
-	/**
-	 * Updates a particular model.
-	 * If update is successful, the browser will be redirected to the 'view' page.
-	 * @param integer $id the ID of the model to be updated
+	 /**
+	 * Actualiza un modelo en particular.
+	 * Si la actualización es exitosa, el navegador será redirigido a la página 'view'.
+	 * @param integer $id el ID del modelo a actualizar
 	 */
 	public function actionUpdate($id)
 	{
-	
+		// Valida si el usuario es un administrador general.
 		if(Yii::app()->user->rol == 'Admin'){
-		
+			
+			// Carga el modelo.
 			$model=$this->loadModel($id);
 
+			// Valida si se recibió algún modelo vía alguna petición de POST.
 			if(isset($_POST['Alumno']))
 			{
-				if ('' === $_POST['Alumno']['password']) {
-					$_POST['Alumno']['password'] = $model->password;
-				}
-				else {		
-					$_POST['Alumno']['password'] = md5($_POST['Alumno']['password']);
-				}
-				
-				$model->attributes = $_POST['Alumno'] + $model->attributes;
-				
-				if($model->save()) {
-					$this->redirect(array('view','id'=>$model->matricula));
-				}
-			}
-		
-		}else if(Yii::app()->user->rol == 'Alumno'){
-			$model = $this->loadModel(Yii::app()->user->id);
-			if(isset($_POST['Alumno'])) {
-			
+				// Valida si el campo de texto de la contraseña se dejó vacío.
+				// En caso de ser así, se le asigna al modelo la antigua contraseña.
 				if ('' === $_POST['Alumno']['password']) {
 					$_POST['Alumno']['password'] = $model->password;
 				}
 				else {
-					if(md5($_POST['passwordActual']) != $model->password) {
-						throw new CHttpException(400, 'El password actual no es correcto.');
-					}
-					else {
-						$_POST['Alumno']['password'] = md5($_POST['Alumno']['password']);
-					}
+				// En caso de no dejar vacío el campo de la contraseña, se cifra la 
+				// nueva contraseña en MD5 y se le asigna al modelo.
+					$_POST['Alumno']['password'] = md5($_POST['Alumno']['password']);
 				}
+				
+				// Se le asignan los atributos al modelo.
 				$model->attributes = $_POST['Alumno'] + $model->attributes;
+				
+				// Valida si es posible registrar los cambios al modelo en la base de datos.
 				if($model->save()) {
 					$this->redirect(array('view','id'=>$model->matricula));
 				}
 			}
+		
+		// Valida si el usuario es un alumno.
+		}else if(Yii::app()->user->rol == 'Alumno'){
+			
+			// Carga el modelo.
+			$model = $this->loadModel(Yii::app()->user->id);
+			
+			// Valida si se recibió algún modelo vía alguna petición de POST.
+			if(isset($_POST['Alumno'])) {
+				
+				// Valida si el campo de texto de la contraseña se dejó vacío.
+				// En caso de ser así, se le asigna al modelo la antigua contraseña.
+				if ('' === $_POST['Alumno']['password']) {
+					$_POST['Alumno']['password'] = $model->password;
+				}
+				else {
+					// Valida si la contraseña actual es incorrecta.
+					// Si es así, se muestra en el navegador un mensaje con una descripción del error.
+					if(md5($_POST['passwordActual']) != $model->password) {
+						throw new CHttpException(400, 'La contraseña actual no es correcto.');
+					}
+					// Cifra la contraseña actual en MD5.
+					else {
+						$_POST['Alumno']['password'] = md5($_POST['Alumno']['password']);
+					}
+				}
+				
+				// Se le asignan al modelo los atributos.
+				$model->attributes = $_POST['Alumno'] + $model->attributes;
+				
+				// Valida si es posible registrar los cambios al modelo en la base de datos.
+				if($model->save()) {
+					$this->redirect(array('view','id'=>$model->matricula));
+				}
+			}
+		// Valida si el usuario es un director de carrera.
 		}else if(Yii::app()->user->rol == 'Director'){
 			
+			// Almacena el nombre de usuario del director de carrera.
 			$nomina = Yii::app()->user->id;
 			
+			// Obtiene el modelo del alumno a actualizar.
 			$validacion = Alumno::model()->findAllBySql('SELECT matricula FROM alumno JOIN  carrera_tiene_empleado ON alumno.idcarrera = carrera_tiene_empleado.idcarrera AND alumno.matricula ='.$id.' AND carrera_tiene_empleado.nomina = \''.$nomina.'\'');
 			
+			// Valida que $validacion no esté vacío, comprobando que el modelo corresponde a un alumno del director de carrera.
 			if(!empty($validacion)){
 			
+				// Carga el modelo.
 				$model=$this->loadModel($id);
 				
+				// Valida si se recibió algún modelo vía alguna petición de POST.
 				if(isset($_POST['Alumno']))
 				{
-					
+					// Almacena la antigua contraseña del modelo.
 					$oldpass = $model->password;
+					
+					// Asigna los atributos al modelo.
 					$model->attributes=$_POST['Alumno'];
+					
+					// Almacena la nueva contraseña del modelo.
 					$newpass = $model->password;
 					
-					//Valida si el campo para la contraseña está vacío, en caso de ser así, conserva la contraseña anterior.
+					//Valida si el campo de texto de la contraseña está vacío;
+					// en caso de ser así, se le asigna la contraseña anterior.
 					if ('' === $_POST['Alumno']['password']) {
 						$model->password = $oldpass;
 					}
-					else {		
+					else {
+						// Se cifra la nueva contraseña en MD5.
 						$model->password = md5($_POST['Alumno']['password']);
 					}
 					
-					//Valida si el usuario ha hecho algun cambio de password.
-					/*if($newpass != $oldpass){
-						$pass = md5($model->password);
-						$model->password = $pass;
-					}*/
-					
-					//$model->email = $model->attributes['email'];
+					// Valida si los cambios al modelo se pudieron registrar en la base de datos.
 					if($model->save()) {
 						$this->redirect(array('view','id'=>$model->matricula));
 					}
 				}
 			
 			}else{
+				// El alumno no se encuentra registrado en ninguna de las carreras del director de carrera.
+				// Se despliega en el navegador un mensaje con una descripción del error.
 				throw new CHttpException(400,'El alumno no se encuentra registrado en ninguna de las carreras de su direccion.');
 			}
-		
-			
-		
 		}
 		
+		// Asigna una contraseña vacía al modelo.
 		$model->password = '';
 		
+		// Se despliega una forma para actualizar el modelo.
 		$this->render('update',array(
 			'model'=>$model,
 		));
 	}
 
-	/**
-	 * Deletes a particular model.
-	 * If deletion is successful, the browser will be redirected to the 'admin' page.
-	 * @param integer $id the ID of the model to be deleted
+	 /**
+	 * Elimina a un modelo en particular.
+	 * Si la eliminación es exitosa el navegador será redirigido a la página de 'admin'.
+	 * @param integer $id el ID del modelo a eliminar
 	 */
 	public function actionDelete($id)
 	{
 		if(Yii::app()->request->isPostRequest)
 		{
-			// we only allow deletion via POST request
+			// Solo se permite eliminación vía una petición de POST.
 			$this->loadModel($id)->delete();
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+			// Si es una petición de AJAX (impulsada por eliminación vía la vista de tabla de admin) el navegador no debe ser redirigido.
 			if(!isset($_GET['ajax']))
 				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 		}
@@ -277,50 +327,54 @@ class AlumnoController extends Controller
 	}
 
 	/**
-	 * Lists all models.
+	 * Enlista todos los modelos.
 	 */
 	public function actionIndex()
 	{
-	
+		// Valida si el usuario es un alumno.
 		if (Yii::app()->user->rol == 'Alumno'){
+		
+			// Criterios para los datos de todos los alumnos.
 			$dataProvider=new CActiveDataProvider('Alumno', array(
 				'criteria'=>array(
 						'condition'=>'idcarrera='.Yii::app()->user->carrera,
 					),
 				)
 			);
+		
+		// Valida si el usuario es un administrador general.
 		}else if(Yii::app()->user->rol == 'Admin'){
+		
+			// Criterios para obtener los datos de todos los alumnos.
 			$dataProvider=new CActiveDataProvider('Alumno');
-			
+		
+		// Valida si el usuario es un director de carrera.
 		}else if(Yii::app()->user->rol == 'Director'){
 		
+			// Almacena el nombre de usuario del director de carrera.
 			$nomina = Yii::app()->user->id;
 		
-			//aqui va
+			// Criterios para obtener los datos de todos los alumnos del director de carrera. (Pueden ser alumnos de varias carreras).
 			$dataProvider = new CActiveDataProvider('Alumno', array(
-				
 					'criteria'=>array(
 						'join'=>'JOIN carrera_tiene_empleado AS c ON t.idcarrera = c.idcarrera AND c.nomina = \''.$nomina.'\'',
 					)
-
 			));
-			
-		
 		}
 	
-		
+		// Despliega los datos de los alumnos, en base a los criterios establecidos anteriormente.
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
 	}
 
 	/**
-	 * Manages all models.
+	 * Administra los modelos, dependiendo del tipo de usuario.
 	 */
 	public function actionAdmin()
 	{
 		$model=new Alumno('search');
-		$model->unsetAttributes();  // clear any default values
+		$model->unsetAttributes();  // Elimina valores por defecto.
 		if(isset($_GET['Alumno']))
 			$model->attributes=$_GET['Alumno'];
 
@@ -329,22 +383,22 @@ class AlumnoController extends Controller
 		));
 	}
 	
-	/**
-	 * Returns the data model based on the primary key given in the GET variable.
-	 * If the data model is not found, an HTTP exception will be raised.
-	 * @param integer the ID of the model to be loaded
+	 /**
+	 * Devuelve el modelo de datos, de acuerdo con la llave primaria indicada en la variable GET.
+	 * Si el modelo de datos no se encuentra, se lanzará una excepción HTTP.
+	 * @param integer el ID del modelo a cargar
 	 */
 	public function loadModel($id)
 	{
 		$model=Alumno::model()->findByPk($id);
 		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
+			throw new CHttpException(404,'La página solicitada no existe.');
 		return $model;
 	}
 
-	/**
-	 * Performs the AJAX validation.
-	 * @param CModel the model to be validated
+	 /**
+	 * Realiza validación AJAX.
+	 * @param CModel el modelo a validar
 	 */
 	protected function performAjaxValidation($model)
 	{

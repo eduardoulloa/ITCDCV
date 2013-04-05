@@ -14,7 +14,7 @@ class AdminController extends Controller
 	public function filters()
 	{
 		return array(
-			'accessControl', //otorgar control de acceso para operaciones CRUD
+			'accessControl', // Otorga control de acceso para operaciones CRUD.
 		);
 	}
 	 
@@ -26,17 +26,17 @@ class AdminController extends Controller
 	public function accessRules()
 	{
 	
-		//Criterios de búsqueda para obtener a todos los administradores
+		// Criterios de búsqueda para obtener los nombres de usuario de todos los administradores
 		$adminCriteria = new CDbCriteria(array(
 						'select'=>'username'));
 						
-		//Variable que almacena el resultado de la búsqueda
+		// Variable que almacena el resultado de la búsqueda
 		$adminConsulta = Admin::model()->findAll($adminCriteria);
 		
-		//Arreglo para almacenar los nombres de usuario de los administradores generales
+		// Arreglo para almacenar los nombres de usuario de los administradores generales
 		$admins = array();
 		
-		//Almacena los nombres de usuario de los administradores generales en el arreglo $admins
+		// Almacena los nombres de usuario de los administradores generales en el arreglo $admins
 		foreach($adminConsulta as &$valor){
 			array_push($admins, ($valor->username).'');
 		}
@@ -79,7 +79,7 @@ class AdminController extends Controller
 	{
 		$model=new Admin;
 
-		// Uncomment the following line if AJAX validation is needed
+		// Quitar el siguiente comentario si se requiere validación AJAX
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Admin']))
@@ -181,7 +181,7 @@ class AdminController extends Controller
 	public function actionAdmin()
 	{
 		$model=new Admin('search');
-		$model->unsetAttributes();  // clear any default values
+		$model->unsetAttributes();  // Elimina valores por defecto.
 		if(isset($_GET['Admin']))
 			$model->attributes=$_GET['Admin'];
 
