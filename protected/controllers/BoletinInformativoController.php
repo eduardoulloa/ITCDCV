@@ -6,7 +6,7 @@ Yii::import('application.extensions.yii-mail.YiiMailMessage');
 
 class BoletinInformativoController extends Controller
 {
-	 /**
+	/**
 	 * @var string la distribución por defecto para las vistas. Por defecto es '//layouts/column2', lo cual
 	 * significa que se utiliza una distribución de dos columnas. Ver 'protected/views/layouts/column2.php'.
 	 */
@@ -112,7 +112,7 @@ class BoletinInformativoController extends Controller
 		Yii::app()->mail->send($message);
 	}
 	
-	 /**
+	/**
 	 * Envia un e-mail a los exalumnos registrados en el portal, a partir de la forma del boletín informativo.
 	 * @param object $body el cuerpo del mensaje a enviar
 	 * @param string $subject el asunto del mensaje a enviar
@@ -181,7 +181,7 @@ class BoletinInformativoController extends Controller
 		);
 	}
 	 
-	 /**
+	/**
 	 * Especifica las reglas de control de acceso.
 	 * Este método es empleado por el filtro 'accessControl'.
 	 * @return array reglas de control de acceso
@@ -262,8 +262,8 @@ class BoletinInformativoController extends Controller
 	}
 
 	/**
-	 * Displays a particular model.
-	 * @param integer $id the ID of the model to be displayed
+	 * Despliega un modelo en particular.
+	 * @param integer $id el ID del modelo a desplegar
 	 */
 	public function actionView($id)
 	{
@@ -273,25 +273,30 @@ class BoletinInformativoController extends Controller
 	}
 
 	/**
-	 * Creates a new model.
-	 * If creation is successful, an e-mail will be sent to the users registered in the chosen semesters. The browser will then be redirected to the 'view' page.
+	 * Crea un nuevo modelo.
+	 * Si la creación es exitosa un e-mail será enviado a los usuarios que cursan los semestres seleccionados. El navegador será redirigido a la página 'view'.
 	 */
 	public function actionCreate()
 	{
+		// Establece la conexión.
 		$connection=Yii::app()->db;
 		
+		// Crea un nuevo modelo.
 		$model=new BoletinInformativo;
 
-		// Uncomment the following line if AJAX validation is needed
+		// Quitar el comentario de la siguiente línea si se requiere validación AJAX.
 		// $this->performAjaxValidation($model);
 		
-
+		// Valida si se recibió algún modelo vía alguna petición POST.
 		if(isset($_POST['BoletinInformativo']))
 		{
-			
+			// Asigna los atributos al modelo.
 			$model->attributes=$_POST['BoletinInformativo'];
+			
+			// Obtiene el ID de la carrera a cuyos destinatarios se enviará el mensaje.
 			$idcarrera = $model->attributes['idcarrera'];
 			
+			// Variables para seleccionar a los destinatarios (alumnos) por semestre.
 			$sem1 = $model->attributes['semestre1'];
 			$sem2 = $model->attributes['semestre2'];
 			$sem3 = $model->attributes['semestre3'];
@@ -302,18 +307,25 @@ class BoletinInformativoController extends Controller
 			$sem8 = $model->attributes['semestre8'];
 			$sem9 = $model->attributes['semestre9'];
 			
-			//Se valida primero si se seleccionó al menos un grupo de destinatarios.
+			// Primero valida si se seleccionó al menos un grupo de destinatarios.
 			if(($sem1 == 0) && ($sem2 == 0) && ($sem3 == 0) && ($sem4 == 0) && ($sem5 == 0) && ($sem6 == 0) && ($sem7 == 0) && ($sem8 == 0) && ( $sem9 == 0) && ($model->attributes['exatec']==0)){
 				$model->addError($model->attributes['semestre1'],'Debe seleccionar al menos un grupo de destinatarios');
 			}else{
-				//Se valida ahora si el campo del mensaje no está vacío.
+				// Sí se seleccionó al menos un grupo de destinatarios. Ahora valida si el campo del mensaje no está vacío.
 				if('' === $_POST['BoletinInformativo']['mensaje']){
 					$model->addError($model->attributes['mensaje'],'El campo del mensaje no se puede dejar vacío.');
 				}else{
-					//Todo está bien. Se procede con el envío del mensaje.
+					// El campo del mensaje no está vacío. Se procede con el envío del mensaje.
+					
+					// Arreglo para almacenar los números de los semestres que cursan los destinatarios.
 					$arr = array();
-				
+					
+					// Bandera para determinar si los destinatarios son alumnos.
 					$paraAlumno = 0;
+					
+					// Valida si la variable de algún semestre está activada, es decir,
+					// si vale 1. En caso de ser así, se agrega el número del semestre al 
+					// arreglo $arr.
 					
 					if ($sem1 == 1){
 						array_push($arr, 1);
@@ -360,14 +372,19 @@ class BoletinInformativoController extends Controller
 						$paraAlumno = 1;
 					}
 					
+					// Valida si la variable $paraAlumno es 1. En caso de ser así, significa que
+					// los destinatarios son alumnos. Entonces, se manda a llamar al método 'mandarAlumno()'.
 					if ($paraAlumno == 1){
 						$this->mandarAlumno($arr, $model->attributes['mensaje'], $model->attributes['subject'], $idcarrera);
 					}
 					
+					// Valida si el atributo 'exatec' es 1. En caso de ser así, significa que
+					// los destinatarios son exalumnos. Entonces, se manada a llamar al método 'mandarExAlumno()'.
 					if ($model->attributes['exatec']==1){
 						$this->mandarExAlumno($model->attributes['mensaje'], $model->attributes['subject'], $idcarrera);
 					}
 					
+					// Valida si fue posible registrar el modelo en la base de datos.
 					if($model->save())
 						$this->redirect(array('view','id'=>$model->id));
 						
@@ -377,49 +394,56 @@ class BoletinInformativoController extends Controller
 			
 		}
 		
+		// Despliega la forma para crear un nuevo modelo.
 		$this->render('create',array(
 			'model'=>$model,
 		));
-		
 	}
 
 	/**
-	 * Updates a particular model.
-	 * If update is successful, the browser will be redirected to the 'view' page.
-	 * @param integer $id the ID of the model to be updated
+	 * Actualiza un modelo en particular.
+	 * Si la actualización es exitosa, el navegador será redirigido a la página 'view'.
+	 * @param integer $id el ID del modelo a actualizar
 	 */
 	public function actionUpdate($id)
 	{
+		// Carga el modelo.
 		$model=$this->loadModel($id);
 
-		// Uncomment the following line if AJAX validation is needed
+		// Quitar el comentario en la siguiente línea si se requiere validación AJAX.
 		// $this->performAjaxValidation($model);
 
+		// Valida si se recibió algún modelo vía alguna petición POST.
 		if(isset($_POST['BoletinInformativo']))
 		{
+			// Asigna los atributos al modelo.
 			$model->attributes=$_POST['BoletinInformativo'];
+			
+			// Valida si fue posible registrar al modelo en la base de datos.
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
+		// Despliega la forma para actualizar el modelo.
 		$this->render('update',array(
 			'model'=>$model,
 		));
 	}
 
 	/**
-	 * Deletes a particular model.
-	 * If deletion is successful, the browser will be redirected to the 'admin' page.
-	 * @param integer $id the ID of the model to be deleted
+	 * Elimina a un modelo en particular.
+	 * Si la eliminación es exitosa, el navegador será redirigido a la página 'admin'.
+	 * @param integer $id el ID del modelo a eliminar
 	 */
 	public function actionDelete($id)
 	{
 		if(Yii::app()->request->isPostRequest)
 		{
-			// we only allow deletion via POST request
+			// Solo se permite eliminación vía un petición POST.
 			$this->loadModel($id)->delete();
 
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+			// Valida si es una petición AJAX (impulsada por eliminación vía la vista de tabla de admin). En este caso
+			// no se debe redirigir al navegador.
 			if(!isset($_GET['ajax']))
 				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 		}
@@ -428,14 +452,18 @@ class BoletinInformativoController extends Controller
 	}
 
 	/**
-	 * Lists all models.
+	 * Enlista a todos los modelos.
 	 */
 	public function actionIndex()
 	{
-		
+		// Valida si el usuario es un director de carrera.
 		if(Yii::app()->user->rol == 'Director'){
+		
+			// Almacena el nombre de usuario del director de carrera.
 			$nomina = Yii::app()->user->id;
 			
+			// Establece los criterios para enlistar a todos los boletines informativos del
+			// director de carrera.
 			$dataProvider = new CActiveDataProvider('BoletinInformativo', array(
 				'criteria'=>array(
 					'join'=>'JOIN carrera_tiene_empleado AS c ON t.idcarrera = c.idcarrera AND c.nomina = \''.$nomina.'\'',
@@ -448,8 +476,12 @@ class BoletinInformativoController extends Controller
 					'defaultOrder'=>'fechahora DESC'
 					),
 				));
-			
+		
+		// Valida si el usuario es un administrador general.
 		}else if(Yii::app()->user->rol == 'Admin'){
+		
+			// Establece los criterios para enlistar a todos los
+			// boletines informativos registrados en la base de datos.
 			$dataProvider = new CActiveDataProvider('BoletinInformativo', array(
 				'sort'=> array(
 					'attributes'=> array(
@@ -460,20 +492,21 @@ class BoletinInformativoController extends Controller
 			));
 		}
 
+		// Despliega una página con información de
+		// los boletines informativos, enlistados de acuerdo con
+		// los criterios establecidos anteriormente.
 		$this->render('index',array(
 				'dataProvider'=>$dataProvider,
-		));
-		
-		
+		));	
 	}
 
 	/**
-	 * Manages all models.
+	 * Administra a todos los modelos.
 	 */
 	public function actionAdmin()
 	{
 		$model=new BoletinInformativo('search');
-		$model->unsetAttributes();  // clear any default values
+		$model->unsetAttributes();  // Elimina los valores por defecto.
 		if(isset($_GET['BoletinInformativo']))
 			$model->attributes=$_GET['BoletinInformativo'];
 
@@ -483,9 +516,9 @@ class BoletinInformativoController extends Controller
 	}
 
 	/**
-	 * Returns the data model based on the primary key given in the GET variable.
-	 * If the data model is not found, an HTTP exception will be raised.
-	 * @param integer the ID of the model to be loaded
+	 * Devuelve el modelo de datos en base a la llave primaria proporcionada en la variable GET.
+	 * Si el modelo de datos no es encontrado, una excepción de HTTP será lanzada.
+	 * @param integer el ID del modelo a cargar
 	 */
 	public function loadModel($id)
 	{
@@ -496,8 +529,8 @@ class BoletinInformativoController extends Controller
 	}
 
 	/**
-	 * Performs the AJAX validation.
-	 * @param CModel the model to be validated
+	 * Realiza la validación AJAX.
+	 * @param CModel el modelo a validar
 	 */
 	protected function performAjaxValidation($model)
 	{

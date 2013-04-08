@@ -3,121 +3,135 @@
 class EmpleadoController extends Controller
 {
 	/**
-	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
-	 * using two-column layout. See 'protected/views/layouts/column2.php'.
+	 * @var string la distribución por defecto para las vistas. Por defecto es '//layouts/column2', lo cual
+	 * indica que se utilizará una distribución de dos columnas. Ver 'protected/view/layouts/column2.php'.
 	 */
 	public $layout='//layouts/column2';
 
 	/**
-	 * @return array action filters
+	 * @return array filtros de acción
 	 */
 	public function filters()
 	{
 		return array(
-			'accessControl', // perform access control for CRUD operations
+			'accessControl', // Realiza control de acceso para operaciones CRUD.
 		);
 	}
 	
 	/**
-	 * Specifies the access control rules.
-	 * This method is used by the 'accessControl' filter.
-	 * @return array access control rules
+	 * Especifica las reglas de control de acceso.
+	 * Este método es usado por el filtro 'accessControl'.
+	 * @return array reglas de control de acceso
 	 */
 	public function accessRules()
 	{
-	
-		//Condiciones para buscar al super admin
+		// Criterios de búsqueda para obtener los nombres de usuario de
+		// todos los administradores generales.
 		$criteria_super_admin = new CDbCriteria(array(
 								'select'=>'username'));
 		
-		//Query para encontrar al super admin
-		//$consulta_super_admin = Admin::model()->findAllByPk('admin', $criteria_super_admin);
+		// Obtiene todos los modelos de los administradores generales.
 		$consulta_super_admin = Admin::model()->findAll($criteria_super_admin);
 		
+		// Arreglo para almacenar los nombres de usuario de los
+		// administradores generales.
 		$admin = array();
 		
-		$criteria_dire = new CDbCriteria(array(
-								'select'=>'username'));
-		
-		//Query para encontrar al super admin
-		//$consulta_super_admin = Admin::model()->findAllByPk('admin', $criteria_super_admin);
-		$consulta_super_admin = Admin::model()->findAll($criteria_super_admin);
-		
-		$admin = array();
-		
-		//array_push($admin, $consulta_super_admin);
-		
+		// Almacena en el arreglo $admin, los nombres de usuario de los
+		// administradores generales.
 		foreach($consulta_super_admin as &$valor){
 			array_push($admin, ($valor->username).'');
 		}
-		
+					
+		// Criterios de búsqueda para obtener los nombres de usuario de
+		// todos los directores de carrera.
 		$criteria = new CDbCriteria(array(
 						'select'=>'nomina',
 						'condition'=>'puesto = \'Director\'',
 		));
-						
-						
-		//Obtiene a todos los directores de carrera.
+		
+		// Obtiene los modelos de los directores de carrera.
 		$consulta=Empleado::model()->findAll($criteria);
 		
-		//Arreglo con todos los directores de carrera.
+		// Arreglo para almacenar los nombres de usuario de los
+		// directores de carrera.
 		$directores = array();
 		
+		// Almacena en el arreglo $directores los nombres de usuario de
+		// todos los directores de carrera.
 		foreach($consulta as &$valor){
 			array_push($directores, ($valor->nomina).'');
 		}
 		
+		// Criterios de búsqueda para obtener los nombres de usuario de todos
+		// los asistentes y secretarias.
 		$criteria_asistentes = new CDbCriteria(array(
 						'select'=>'nomina',
 						'condition'=>'puesto = \'Asistente\' || puesto = \'Secretaria\'',
 		));
 		
+		// Arreglo para almacenar los nombres de usuario de
+		// los asistentes y secretarias.
 		$asistentes_secretarias = array();
 		
+		// Obtiene los modelos de todos los asistentes y secretarias.
 		$consulta = Empleado::model()->findAll($criteria_asistentes);
 		
+		// Almacena en el arreglo $asistentes_secretarias los nombres de usuario de
+		// todos los asistentes y secretarias.
 		foreach($consulta as &$valor){
 			array_push($asistentes_secretarias, ($valor->nomina).'');
 		}
 	
 		return array(
-			array('allow', 
+			array('allow', // Les permite a los administradores generales realizar
+						   // acciones de 'index', 'view', 'admin', 'delete', 'create' y 'update'.
 				'actions'=>array('index','view','admin','delete','create','update'),
 				'users'=>$admin,
 			),
-			array('allow', 
+			array('allow', // Les permite a los directores de carrera realizar
+						   // acciones de 'index', 'view', 'admin', 'delete', 'create', 'update' y 'actualizar'.
 				'actions'=>array('index','view','admin','delete','create','update','actualizar'),
 				'users'=>$directores,
 			),
-			array('allow',
+			array('allow', // Les permite a los asistentes y secretarias realizar
+						   // operaciones de 'view' y 'update'.
 				'actions'=>array('view', 'update'),
 				'users'=>$asistentes_secretarias,
 			),
-			array('deny',  // deny all users
+			array('deny',  // Niega a todos los usuarios.
 				'users'=>array('*'),
 			),
 		);
 	}
 
 	/**
-	 * Displays a particular model.
-	 * @param integer $id the ID of the model to be displayed
+	 * Despliega un modelo en particular.
+	 * @param integer $id el ID del modelo a desplegar
 	 */
 	public function actionView($id)
 	{
-
-        $consulta_carreras = Empleado::model()->findByPk($id);
-
+		// Obtiene el modelo del empleado.
+        /* $consulta_carreras = Empleado::model()->findByPk($id); */
+		
+		// Obtiene las carreras en las que labora el empleado.
+        /* $carreras = $consulta_carreras->carreras; */
         
-
-        $carreras = $consulta_carreras->carreras;
-        
+		// Arreglo para almacenar las siglas de las carreras en las
+		// que labora el empleado.
         $resultados = array();
-        foreach($carreras as &$carrera){
+		
+		// Almacena en el arreglo $carreras las siglas de las carreras en
+		// las que labora el empleado.
+        /*foreach($carreras as &$carrera){
             $resultados[$carrera['id']] = $carrera['siglas'];
-        }
-            
+        }*/
+           
+		// Almacena en el arreglo $resultados las carreras en las que
+		// labora el empleado
         $resultados = $this->getEmpleadoCarreras($id);
+		
+		
 		$this->render('view',array(
 			'data'=>$this->loadModel($id),
             'carreras'=>$resultados

@@ -3,40 +3,42 @@
 class CarreraController extends Controller
 {
 	/**
-	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
-	 * using two-column layout. See 'protected/views/layouts/column2.php'.
+	 * @var string el valor por defecto para las vistas. Por defecto es '//layouts/column2', lo cual
+	 * indica una distribución de dos columnas. Ver 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='//layouts/column2';
 
 	/**
-	 * @return array action filters
+	 * @return array filtros de acción
 	 */
 	public function filters()
 	{
 		return array(
-			'accessControl', // perform access control for CRUD operations
+			'accessControl', // Realiza control de acceso para operaciones CRUD.
 		);
 	}
 
 	/**
-	 * Specifies the access control rules.
-	 * This method is used by the 'accessControl' filter.
-	 * @return array access control rules
+	 * Especifica las reglas de control de acceso.
+	 * Este método es utilizado por el filtro 'accessControl'.
+	 * @return array reglas de control de acceso
 	 */
 	public function accessRules()
 	{
-	
+		// Criterios de búsqueda para seleccionar los nombres de usuario de los
+		// administradores generales.
 		$adminCriteria = new CDbCriteria(array(
 						'select'=>'username'));
 						
-						
+		// Obtiene los modelos de todos los administradores generales.				
 		$adminConsulta = Admin::model()->findAll($adminCriteria);
 		
-		//arreglo con todos los admins
-		
+		// Arreglo para almacenar los nombres de usuario de todos los
+		// administradores generales.
 		$admins = array();
 		
-		
+		// Almacena en el arreglo $admins los nombres de usuario de los
+		// administradores generales.
 		foreach($adminConsulta as &$valor){
 			array_push($admins, ($valor->username).'');
 		}
@@ -49,19 +51,20 @@ class CarreraController extends Controller
 				'actions'=>array('index','view'),
 				'users'=>array('@'),
 			),*/
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+			array('allow', // Les permite a los administradores generales realizar
+						   // operaciones de 'admin', 'delete', 'create', 'update', 'index' y 'view'.
 				'actions'=>array('admin','delete','create','update','index','view'),
 				'users'=>$admins,
 			),
-			array('deny',  // deny all users
+			array('deny',  // Niega a todos los usuarios.
 				'users'=>array('*'),
 			),
 		);
 	}
 
 	/**
-	 * Displays a particular model.
-	 * @param integer $id the ID of the model to be displayed
+	 * Despliega un modelo en particular.
+	 * @param integer $id el ID del modelo a desplegar
 	 */
 	public function actionView($id)
 	{
@@ -71,65 +74,78 @@ class CarreraController extends Controller
 	}
 
 	/**
-	 * Creates a new model.
-	 * If creation is successful, the browser will be redirected to the 'view' page.
+	 * Crea un nuevo modelo.
+	 * Si la creación es exitosa, el navegador será redirigido a la página 'view'.
 	 */
 	public function actionCreate()
 	{
+		// Variable para almacenar el nuevo modelo
 		$model=new Carrera;
 
-		// Uncomment the following line if AJAX validation is needed
+		// Quitar el comentario en la siguiente línea si se requiere validación AJAX.
 		// $this->performAjaxValidation($model);
 
+		// Valida si se recibió algún modelo vía alguna petición POST.
 		if(isset($_POST['Carrera']))
 		{
+			// Asigna los atributos al modelo.
 			$model->attributes=$_POST['Carrera'];
+			
+			// Valida si fue posible registrar el modelo en la base de datos.
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
+		// Despliega la forma para crear un nuevo modelo.
 		$this->render('create',array(
 			'model'=>$model,
 		));
 	}
 
 	/**
-	 * Updates a particular model.
-	 * If update is successful, the browser will be redirected to the 'view' page.
-	 * @param integer $id the ID of the model to be updated
+	 * Actualiza un modelo en particular.
+	 * Si la actualización es exitosa, el navegador será redirigido a la página 'view'.
+	 * @param integer $id el ID del modelo a actualizar
 	 */
 	public function actionUpdate($id)
 	{
+		// Carga el modelo.
 		$model=$this->loadModel($id);
 
-		// Uncomment the following line if AJAX validation is needed
+		// Quitar el comentario de la siguiente línea si se requiere validación AJAX.
 		// $this->performAjaxValidation($model);
 
+		// Valida si se recibió algún modelo vía alguna petición POST.
 		if(isset($_POST['Carrera']))
 		{
+			// Asigna los atributos al modelo.
 			$model->attributes=$_POST['Carrera'];
+			
+			// Valida si el modelo pudo ser registrado en la base de datos.
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
+		// Despliega la forma para actualizar al modelo existente.
 		$this->render('update',array(
 			'model'=>$model,
 		));
 	}
-
+	 
 	/**
-	 * Deletes a particular model.
-	 * If deletion is successful, the browser will be redirected to the 'admin' page.
-	 * @param integer $id the ID of the model to be deleted
+	 * Elimina un modelo en particular.
+	 * Si la eliminación es exitosa, el navegador será redirigido a la página 'admin'.
+	 * @param integer $id el ID del modelo a eliminar.
 	 */
 	public function actionDelete($id)
 	{
 		if(Yii::app()->request->isPostRequest)
 		{
-			// we only allow deletion via POST request
+			// Solo se permite eliminación vía una petición POST.
 			$this->loadModel($id)->delete();
 
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+			// Valida si es una petición AJAX (impulsada por eliminación vía la vista de tabla de admin). En este
+			// caso, el navegador no debe ser redirigido.
 			if(!isset($_GET['ajax']))
 				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 		}
@@ -138,7 +154,7 @@ class CarreraController extends Controller
 	}
 
 	/**
-	 * Lists all models.
+	 * Enlista a todos los modelos.
 	 */
 	public function actionIndex()
 	{
@@ -149,12 +165,12 @@ class CarreraController extends Controller
 	}
 
 	/**
-	 * Manages all models.
+	 * Administra a todos los modelos.
 	 */
 	public function actionAdmin()
 	{
 		$model=new Carrera('search');
-		$model->unsetAttributes();  // clear any default values
+		$model->unsetAttributes();  // Elimina los valores por defecto.
 		if(isset($_GET['Carrera']))
 			$model->attributes=$_GET['Carrera'];
 
@@ -164,9 +180,9 @@ class CarreraController extends Controller
 	}
 
 	/**
-	 * Returns the data model based on the primary key given in the GET variable.
-	 * If the data model is not found, an HTTP exception will be raised.
-	 * @param integer the ID of the model to be loaded
+	 * Devuelve el modelo de datos en base a la llave primaria proporcionada en la variable GET.
+	 * Si el modelo de datos no es encontrado, una excepción de HTTP será lanzada.
+	 * @param integer el ID del modelo a cargar
 	 */
 	public function loadModel($id)
 	{
@@ -177,8 +193,8 @@ class CarreraController extends Controller
 	}
 
 	/**
-	 * Performs the AJAX validation.
-	 * @param CModel the model to be validated
+	 * Realiza la validación AJAX.
+	 * @param CModel el modelo a validar
 	 */
 	protected function performAjaxValidation($model)
 	{
