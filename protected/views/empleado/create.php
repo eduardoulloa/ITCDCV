@@ -18,7 +18,7 @@ $this->menu=array(
     <?php echo $form->errorSummary($model); ?>
     <div class="row">
 		<label for="nomina" class="required">
-			Nómina o nombre de ususario
+			Nómina o nombre de usuario
 			<span class="required">*</span>
 		</label>
         <?php /*echo $form->label($model,'nomina'); */?>
