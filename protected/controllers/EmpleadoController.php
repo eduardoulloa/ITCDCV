@@ -418,42 +418,57 @@ class EmpleadoController extends Controller
 				}
 			}
 		}
-		// El resto de los casos. El usuario es una secretaria o un asistente.
-		else // es un empleado normal(secretaria o asistente, etc.); ellos solo pueden editarse a sí mismos.
+		// El resto de los casos. El usuario es una secretaria o un asistente. En este
+		// caso el usuario solo puede editar sus propios datos.
+		else
 		{
-		
+			// Valida si el usuario está tratando de editar los datos
+			// de algún otro empleado. En caso de ser así se lanza una
+			// excepción de HTTP.
 			if($id != Yii::app()->user->id){
 				throw new CHttpException(403, 'Usted no se encuentra autorizado para realizar esta acción.');
 			}
 			
+			// Carga el modelo.
 			$model = $this->loadModel(Yii::app()->user->id);
 			
+			// Valida si se recibió el modelo de algún empleado vía alguna petición POST.
 			if(isset($_POST['Empleado'])) {
-		
+				
+				// Valida si se dejó vacío el campo de texto para ingresar la contraseña. En
+				// caso de ser así, se reestablece la contraseña anterior.
 				if ('' === $_POST['Empleado']['password']) {
 					$_POST['Empleado']['password'] = $model->password;
 				}
 				else {
+					// Valida si hubo algún error al ingresar la contraseña actual. En
+					// caso de ser así se lanza una excepción de HTTP.
 					if(md5($_POST['passwordActual']) != $model->password) {
 						throw new CHttpException(400, 'El password actual no es correcto.');
 					}
 					else {
+						// No hubo ningún error al ingresar la contraseña actual. Entonces
+						// se cifra la nueva contraseña en MD5.
 						$_POST['Empleado']['password'] = md5($_POST['Empleado']['password']);
 					}
 				}
+				
+				// Se asignan los atributos al modelo.
 				$model->attributes = $_POST['Empleado'] + $model->attributes;
+				
+				// Valida si el modelo pudo ser registrado en la base de datos.
 				if($model->save()) {
 					$this->redirect(array('view','id'=>$model->nomina));
 				}
 			}
 		
 		}
-
-
+		
+		// Asigna una contraseña vacía (nula) al modelo.
 		$model->password = '';
 		
-		//$this->render('update',array('model'=>$model));
-		
+		// Despliega la forma para actualizar los datos
+		// del empleado.
 		$this->render('update',array(
         'model'=>$model,
         'model_carrera'=>$model_carrera,
@@ -463,6 +478,10 @@ class EmpleadoController extends Controller
 
 	}
 	
+	/**
+	 * Asigna un empleado a otra carrera registrada en el sistema.
+	 * @param model $model el modelo del empleado a asignar a la otra carrera.
+	 */
 	private function addCarrera($model) {
 		
 		if(isset($_POST['Carrera'])) {																	//
