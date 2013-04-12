@@ -2,78 +2,86 @@
 
 class RevalidacionController extends Controller
 {
+
 	/**
-	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
-	 * using two-column layout. See 'protected/views/layouts/column2.php'.
+	 * @var string la distribución por defecto para las vistas. Por defecto es '//layouts/column2', lo cual
+	 * indica una distribución de dos columnas. Ver 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='//layouts/column2';
 
 	/**
-	 * @return array action filters
+	 * @return array filtros de acción
 	 */
 	public function filters()
 	{
 		return array(
-			'accessControl', // perform access control for CRUD operations
+			'accessControl', // Realiza reglas de control de acceso para operaciones CRUD.
 		);
 	}
 
 	/**
-	 * Specifies the access control rules.
-	 * This method is used by the 'accessControl' filter.
-	 * @return array access control rules
+	 * Especifica las reglas de control de acceso.
+	 * Este método es utilizado por el filtro 'accessControl'.
+	 * @return array reglas de control de acceso
 	 */
 	public function accessRules()
 	{
-						
-		//Query que obtiene todos los empleados (directores, asistentes y secretarias)
+		// Obtiene los modelos de todos los empleados.
 		$consulta_empleado = Empleado::model()->findAll();
 		
-		//Arreglo para almacenar a todos los empleados
+		// Arreglo para almacenar los nombres de usuario de todos los
+		// empleados.
 		$empleados = array();
 		
-		//Se agregan todos los directores al arreglo.
+		// Almacena en el arreglo $empleados los nombres de
+		// usuario de todos los empleados.
 		foreach($consulta_empleado as &$valor){
 			array_push($empleados, ($valor->nomina).'');
 		}
 		
-		//Criterio de búsquda para encontrar a todos los admins
+		// Criterios de búsqueda para obtener los nombres de usuario de 
+		// todos los administradores generales
 		$criteria_super_admin = new CDbCriteria(array(
 								'select'=>'username'));
 		
-		//Query que obtiene a todos los admins
+		// Obtiene los modelos de todos los administradores generales.
 		$consulta_super_admin = Admin::model()->findAll($criteria_super_admin);
 		
-		//Arreglo para almacenar a todos los admins
+		// Arreglo para almacenar los nombres de usuario de todos los
+		// administradores generales
 		$admin = array();
 		
-		//Se agregan todos los admins al arreglo.
+		// Almacena en el arreglo $admin los nombres de
+		// usuario de todos los administradores generales.
 		foreach($consulta_super_admin as &$valor){
 			array_push($admin, ($valor->username).'');
 		}
 	
 		return array(
-			array('allow', // allow only authenticated user to perform 'index, 'view'
+			array('allow', // Les permite a los usuarios autenticados realizar acciones de
+						   // 'index' y 'view'
 				'actions'=>array('index', 'view'),
 				'users'=>array('@'),
 			),
-			array('allow', // allow directores de carrera to perform 'update', 'delete' actions
+			array('allow', // Les permite a los empleados realizar acciones de
+				           // 'update', 'admin' y 'delete'
 				'actions'=>array('update', 'admin', 'delete'),
 				'users'=>$empleados,
 			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+			array('allow', // Les permite a los administradores generales realizar acciones de
+			               // 'admin' y 'delete'
 				'actions'=>array('admin','delete'),
 				'users'=>$admin,
 			),
-			array('deny',  // deny all users
+			array('deny',  // Niega a todos los usuarios.
 				'users'=>array('*'),
 			),
 		);
 	}
 
 	/**
-	 * Displays a particular model.
-	 * @param integer $id the ID of the model to be displayed
+	 * Despliega un modelo en particular.
+	 * @param integer $id el ID del modelo a desplegar
 	 */
 	public function actionView($id)
 	{
@@ -84,16 +92,17 @@ class RevalidacionController extends Controller
 	}
 
 	/**
-	 * Creates a new model.
-	 * If creation is successful, the browser will be redirected to the 'view' page.
+	 * Crea un nuevo modelo.
+	 * Si la creación es exitosa, el navegador será redirigido a la página 'view'.
 	 */
 	public function actionCreate()
 	{
 		$model=new Revalidacion;
 
-		// Uncomment the following line if AJAX validation is needed
+		// Quitar el comentario de la siguiente línea si se requiere validación AJAX.
 		// $this->performAjaxValidation($model);
 
+		// Valida si se recibió algún modelo vía alguna petición POST.
 		if(isset($_POST['Revalidacion']))
 		{
 			$model->attributes=$_POST['Revalidacion'];
@@ -101,31 +110,36 @@ class RevalidacionController extends Controller
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
+		// Despliega la forma para crear un nuevo modelo.
 		$this->render('create',array(
 			'model'=>$model,
 		));
 	}
 
 	/**
-	 * Updates a particular model.
-	 * If update is successful, the browser will be redirected to the 'view' page.
-	 * @param integer $id the ID of the model to be updated
+	 * Actualiza un modelo en particular.
+	 * Si la actualización es exitosa, el navegador será redirigido a la página 'view'.
+	 * @param integer $id el ID del modelo a actualizar
 	 */
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
 
-		// Uncomment the following line if AJAX validation is needed
+		// Quitar el comentario de la siguiente línea si se requiere validación AJAX.
 		// $this->performAjaxValidation($model);
 		
-		
+		// Almacena el nombre de usuario del usuario actual.
 		$nomina = Yii::app()->user->id;
-		
-		//Variable que obtiene un objeto de revalidacion. Si no lo obtiene, el objeto no existe o no le corresponde al director.
+
+		// Busca el modelo a actualizar. En caso de no encontrarlo significa que el modelo no existe o no le corresponde al
+		// usuario.
 		$challenge = Revalidacion::model()->findBySql('SELECT id FROM revalidacion JOIN carrera_tiene_empleado ON carrera_tiene_empleado.idcarrera = revalidacion.idcarrera AND carrera_tiene_empleado.nomina =  \'' . $nomina .'\' AND revalidacion.id = '. $id);
 
+		// Valida que no esté vacía la variable $challenge. Es decir, que exista el modelo y que el usuario tenga
+		// autorización para modificarlo.
 		if (!empty($challenge)){
-
+			
+			// Valida si se recibió algún modelo vía alguna petición POST.
 			if(isset($_POST['Revalidacion']))
 			{
 				$model->attributes=$_POST['Revalidacion'];
@@ -133,45 +147,50 @@ class RevalidacionController extends Controller
 					$this->redirect(array('view','id'=>$model->id));
 			}
 
+			// Despliega la forma para actualizar el modelo.
 			$this->render('update',array(
 				'model'=>$model,
 			));
 		}else{
+			// No se encontró el modelo. Se lanza una excepción de HTTP con una
+			// descripción del error.
 			throw new CHttpException(400,'No se encontró la revalidación a editar.');
 		}
 	}
 
 	/**
-	 * Deletes a particular model.
-	 * If deletion is successful, the browser will be redirected to the 'admin' page.
-	 * @param integer $id the ID of the model to be deleted
+	 * Elimina a un modelo en particular.
+	 * Si la eliminación es exitosa el navegador será redirigido a la página 'admin'.
+	 * @param integer $id el ID del modelo a eliminar
 	 */
 	public function actionDelete($id)
 	{
 		if(Yii::app()->request->isPostRequest)
 		{
-			// we only allow deletion via POST request
+			// Solo se permite eliminación vía una petición POST.
 			$this->loadModel($id)->delete();
 
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+			// Si es una petición AJAX (impulsado por eliminación vía la vista de tabla de admin) no se debe
+			// redirigir al navegador.
 			if(!isset($_GET['ajax']))
 				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 		}
 		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+			throw new CHttpException(400,'Petición no válida. Por favor vuelva a repetir esta petición.');
 	}
 
 	/**
-	 * Lists all models.
+	 * Enlista a todos los modelos.
 	 */
 	public function actionIndex()
 	{
-	
+		// Almacena el nombre de usuario del usuario actual.
 		$id = Yii::app()->user->id;
-		
-		/*El caso de ser un director de carrera, asistente, o secretaria. En cualquiera de los anteriores, se obtienen
-		todas las revalidaciones realizadas para todas las carreras en las que el empleado labora.
-		*/
+				
+		/**
+		 * Valida si el usuario es un director de carrera, un asistente o una secretaria. En cualquiera de los casos se
+		 * obtienen todas las revalidaciones registradas en todas las carreras en las que el usuario labora.
+		 */
 		if (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Asistente' || Yii::app()->user->rol == 'Secretaria'){
 			$nomina = $id;
 					

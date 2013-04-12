@@ -439,7 +439,7 @@ class BoletinInformativoController extends Controller
 	{
 		if(Yii::app()->request->isPostRequest)
 		{
-			// Solo se permite eliminación vía un petición POST.
+			// Solo se permite eliminación vía una petición POST.
 			$this->loadModel($id)->delete();
 
 			// Valida si es una petición AJAX (impulsada por eliminación vía la vista de tabla de admin). En este caso
@@ -524,7 +524,7 @@ class BoletinInformativoController extends Controller
 	{
 		$model=BoletinInformativo::model()->findByPk($id);
 		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
+			throw new CHttpException(404,'La página solicitada no existe.');
 		return $model;
 	}
 

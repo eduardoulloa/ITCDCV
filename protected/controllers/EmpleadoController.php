@@ -312,7 +312,7 @@ class EmpleadoController extends Controller
 				// del usuario a actualizar, se trata de un director de carrera que desea actualizar los
 				// datos de alguno de sus empleados.
 				
-				// Obtiene el nombre de usuario del usuario actual.
+				// Almacena el nombre de usuario del usuario actual.
 				$nomina = Yii::app()->user->id;
 			
 				// Criterios para obtener los datos del empleado a actualizar.
@@ -479,35 +479,41 @@ class EmpleadoController extends Controller
 	}
 	
 	/**
-	 * Asigna un empleado a otra carrera registrada en el sistema.
-	 * @param model $model el modelo del empleado a asignar a la otra carrera.
+	 * Asigna un empleado a una carrera adicional, registrada en el sistema.
+	 * @param model $model el modelo del empleado a asignar a la carrera adicional
 	 */
 	private function addCarrera($model) {
 		
-		if(isset($_POST['Carrera'])) {																	//
-			$id_carrera = $_POST['Carrera'];															//
-			if($id_carrera['id'] != 0){																		//
-	        $model_carrera_empleado=new CarreraTieneEmpleado;					//
-	        $model_carrera_empleado->idcarrera = $id_carrera['id'];		//
-	        $model_carrera_empleado->nomina = $model->nomina;					//
-	        $model_carrera_empleado->save();													//
-	    }																															//
-		}																																//
+		// Valida si se recibió el modelo de alguna carrera vía alguna petición POST.
+		if(isset($_POST['Carrera'])) {
+			
+			// Obtiene el ID de la carrera adicional.
+			$id_carrera = $_POST['Carrera'];
+			
+			// Valida si la carrera está registrada en el sistema. En caso de ser así, asigna
+			// al empleado a la carrera y registra la asignación en la base de datos.
+			if($id_carrera['id'] != 0){
+				$model_carrera_empleado=new CarreraTieneEmpleado;
+				$model_carrera_empleado->idcarrera = $id_carrera['id'];
+				$model_carrera_empleado->nomina = $model->nomina;
+				$model_carrera_empleado->save();
+			}
+		}
 	}
 
-    /**
-     * Deletes a particular model.
-     * If deletion is successful, the browser will be redirected to the 'admin' page.
-     * @param integer $id the ID of the model to be deleted
+	/**
+     * Elimina a un modelo en particular.
+     * Si la eliminación es exitosa, el navegador será redirigido a la página 'admin'.
+     * @param integer $id el ID del modelo a eliminar
      */
     public function actionDelete($id)
     {
         if(Yii::app()->request->isPostRequest)
         {
-            // we only allow deletion via POST request
+            // Solo se permite eliminación vía una petición POST.
             $this->loadModel($id)->delete();
 
-            // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+			// Si es una petición AJAX (impulsada por eliminación vía la vista de tabla de admin) no se debe redirigir al navegador.
             if(!isset($_GET['ajax']))
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
         }
@@ -516,42 +522,43 @@ class EmpleadoController extends Controller
     }
 
     /**
-     * Lists all models.
+     * Enlista a todos los modelos.
      */
     public function actionIndex()
     {
-
+		// Valida si el usuario es un director de carrera.
         if(Yii::app()->user->rol == 'Director'){
 			
-			/*
-				Obtiene a todos los empleados que laboran en la carrera donde labora el director.
-			*/
+			
+			// Condiciones para obtener a todos los empleados que laboran en la carrera donde labora el director.
 			$dataProvider = new CActiveDataProvider('Empleado', array(
                     'criteria'=>array(
 						'condition'=>'nomina IN (SELECT nomina FROM carrera_tiene_empleado WHERE idcarrera IN (SELECT idcarrera FROM carrera_tiene_empleado WHERE nomina =  \''.Yii::app()->user->id.'\') GROUP BY nomina)',
 						'group'=>'nomina'
 					),
             ));
-
+		
+		// El resto de los usuarios.
         }else{
-
+			
+			// Condiciones para obtener a todos los empleados registrados en la base de
+			// datos.
             $dataProvider=new CActiveDataProvider('Empleado');
-
         }
 
-
+		// Despliega una página con información de los empleados.
         $this->render('index',array(
             'dataProvider'=>$dataProvider,
         ));
     }
 
     /**
-     * Manages all models.
+     * Administra a los empleados.
      */
     public function actionAdmin()
     {
         $model=new Empleado('search');
-        $model->unsetAttributes();  // clear any default values
+        $model->unsetAttributes();  // Elimina los valores por defecto.
         if(isset($_GET['Empleado']))
             $model->attributes=$_GET['Empleado'];
 
@@ -560,22 +567,22 @@ class EmpleadoController extends Controller
         ));
     }
 
-    /**
-     * Returns the data model based on the primary key given in the GET variable.
-     * If the data model is not found, an HTTP exception will be raised.
-     * @param integer the ID of the model to be loaded
+	/**
+     * Devuelve el modelo de datos en base a la llave primaria proporcionada en la variable GET.
+     * Si el modelo de datos no es encontrado se lanzará una excepción de HTTP.
+     * @param integer el ID del modelo a cargar
      */
     public function loadModel($id)
     {
         $model=Empleado::model()->findByPk($id);
         if($model===null)
-            throw new CHttpException(404,'The requested page does not exist.');
+            throw new CHttpException(404,'La página solicitada no existe');
         return $model;
     }
 
     /**
-     * Performs the AJAX validation.
-     * @param CModel the model to be validated
+     * Realiza validación AJAX.
+     * @param CModel el modelo a validar
      */
     protected function performAjaxValidation($model)
     {
@@ -586,77 +593,124 @@ class EmpleadoController extends Controller
         }
     }
 
+	/**
+	 * Obtiene las siglas de todas las carreras.
+	 * @return array las siglas de todas las carreras
+	 */
     private function getCarreras()
     {
-
+		// Criterios para obtener las siglas de todas las carreras
         $criteria_carreras= new CDbCriteria(array(
             'select'=>'id, siglas'));
 
+		// Obtiene los modelos de todas las carreras.
         $consulta_carreras = Carrera::model()->findAll($criteria_carreras);
 
+		// Arreglo para almacenar las siglas de todas las carreras.
         $carreras = array();
 
+		// Almacena en el arreglo $carreras las siglas de todas las
+		// carreras.
         foreach($consulta_carreras as &$valor){
             $carreras[$valor->id] = $valor->siglas;
         }
 
+		// Devuelve el arreglo $carreras
         return $carreras;
     }
 
+	/**
+	 * Obtiene las carreras en las que labora un empleado.
+	 * @param string $empleado el nombre de usuario del empleado
+	 * @return array las siglas de las carreras en las que labora el empleado
+	 */
     public function getEmpleadoCarreras($empleado)
     {
+		// Sentencia de SQL para obtener las siglas de las carreras en las que
+		// labora el empleado.
         $sql = "SELECT DISTINCT * FROM `carrera_tiene_empleado`,`carrera` 
             WHERE nomina = \"".$empleado."\" and idcarrera = id\n";
 
+		// Ejecuta la sentencia (consulta) de SQL.
         $salida = $this->getQueryResult($sql);
 
+		// Arreglo para almacenar las siglas de las carreras en las que labora el
+		// empleado
         $carreras = array();
 
+		// Almacena en el arreglo $carreras las siglas de las carreras en las que
+		// labora el empleado
         foreach($salida as &$valor){
             $carreras[$valor[ "id" ]] = $valor[ "siglas" ];
 
         }
-								
+		
+		// Devuelve el arreglo $carreras.
         return $carreras;
     }
 
-	/*
-		Obtiene TODAS las carreras en las que NO está registrado un empleado.
-	*/
+	/**
+	 * Obtiene las siglas de las carreras en las que no labora un empleado.
+	 * @param string $empleado el nombre de usuario del empleado
+	 * @return array las siglas de las carreras en las que no labora el empleado
+	 */
     private function getNotEmpleadoCarreras($empleado)
     {
+		// Establece la conexión con la base de datos.
         $connection=Yii::app()->db;
+		
+		// Sentencia de SQL para obtener las siglas de las carreras en las que
+		// no labora el empleado.
         $sql = "SELECT * FROM `carrera` WHERE id NOT IN 
             (select idcarrera from `carrera_tiene_empleado` 
             where nomina = \"".$empleado."\")";
 
+		// Ejecuta la sentencia (consulta) de SQL.
         $salida = $this->getQueryResult($sql);
 
+		// Arreglo para almacenar las siglas de las carreras en las que no
+		// labora el empleado.
         $carreras = array();
 
+		// Deja vacía la primera 'casilla' del arreglo $carreras.
         $carreras[0] = "";
 
+		// Almacena en el arreglo $carreras las siglas de las carreras en las que
+		// no labora el empleado.
         foreach($salida as &$valor){
             $carreras[$valor[ "id" ]] = $valor[ "siglas" ];
 
         }
-
-
+		
+		// Devuelve el arreglo $carreras.
         return $carreras;
     }
 
+	/**
+	 * Obtiene los resultados de alguna sentencia (consulta) de SQL.
+	 * @param string $sql la sentencia de SQL a ejecutar
+	 * @return array los resultados de la sentencia (consulta) de SQL
+	 */
     private function getQueryResult($sql)
     {
+		// Establece la conexión con la base de datos.
         $connection=Yii::app()->db;
+		
+		// Crea la sentencia (consulta) de SQL.
         $command=$connection->createCommand($sql);
+		
+		// Ejecuta la sentencia (consulta) de SQL.
         $dataReader=$command->query();
 
+		// Arreglo para almacenar los resultados de la sentencia (consulta) de SQL
         $salida = array(); 
 
+		// Almacena en el arreglo $salida los resultados de la sentencia (consulta) de
+		// SQL.
         for($i = 0; $i < $dataReader->count(); $i++)
             array_push($salida,$dataReader->read());
 
+		// Devuelve el arreglo $salida.
         return $salida;
-
     }
 }
