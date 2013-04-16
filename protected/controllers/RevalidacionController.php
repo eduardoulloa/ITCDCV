@@ -192,74 +192,100 @@ class RevalidacionController extends Controller
 		 * obtienen todas las revalidaciones registradas en todas las carreras en las que el usuario labora.
 		 */
 		if (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Asistente' || Yii::app()->user->rol == 'Secretaria'){
+			
+			// Almacena el nombre de usuario del usuario actual.
 			$nomina = $id;
 					
-					
-					$criteria = new CDbCriteria(array(
-								'condition'=>'nomina=\''.$nomina.'\''));
-					
-					$carreraTieneEmpleado = CarreraTieneEmpleado::model()->findAll($criteria);
-					
-					//String para el condition del CActiveDataProvider. Se almacenan todos los ids de las carreras a en las que labora el empleado.
-					
-					$ids = "";
-					
-					//El empleado no labora en ninguna carrera.
-					if(sizeof($carreraTieneEmpleado) == 0){
-					
-						$ids = "";
-					//El empleado labora solamente en una carrera.
-					}else if (sizeof($carreraTieneEmpleado) == 1){
-						
-						$ids = $carreraTieneEmpleado[0]->idcarrera;
-					//El empleado labora en más de una carrera.
-					}else{
-					
-						$ids = $carreraTieneEmpleado[0]->idcarrera;
-						
-						$i = 1;
-					
-						while($carreraTieneEmpleado[$i]!= NULL){
-							$ids = $ids . " OR idcarrera = " . $carreraTieneEmpleado[$i]->idcarrera;
-							$i++;
-						}
-					
-					}
-					
-					$dataProvider = new CActiveDataProvider('Revalidacion', array(
-						'criteria'=>array(
-							'condition'=>'idcarrera ='.$ids,
-							),
-						
-						'sort'=> array(
-							'attributes'=> array(
-								'fechahora',
-								),
-							'defaultOrder'=>'fechahora DESC'
-							),
-						));
-		/* 
-		En caso de ser alumno, se obtienen únicamente las revalidaciones realizadas en su carrera.
-		*/				
+			// Criterios para obtener las carreras en las que labora el usuario.
+			$criteria = new CDbCriteria(array(
+						'condition'=>'nomina=\''.$nomina.'\''));
+			
+			// Obtiene los modelos de las carreras en las que labora el
+			// empleado.
+			$carreraTieneEmpleado = CarreraTieneEmpleado::model()->findAll($criteria);
+			
+			// Variable para almacenar los criterios con los que se
+			// buscarán, mediante una sentencia de SQL, las revalidaciones hechas en aquellas carreras en
+			// las que labora el usuario.
+			$ids = "";
+			
+			// La consulta no generó ningún resultado. Esto significa que el 
+			// usuario no labora en ninguna carrera. En este caso se deja
+			// vacía la variable $ids.
+			if(sizeof($carreraTieneEmpleado) == 0){
+				// Se almacena un string vacío en la variable $ids.
+				$ids = "";
+				
+			// Valida si el usuario labora solamente en 1 carrera.
+			}else if (sizeof($carreraTieneEmpleado) == 1){
+				// Almacena el ID de la carrera en la que labora el
+				// usuario.
+				$ids = $carreraTieneEmpleado[0]->idcarrera;
+				
+			// El resto de los casos. Esto significa que el
+			// usuario labora en más de una carrera.
+			}else{
+			
+				// Almacena el id de la primera carrera encontrada,
+				// en la que labora el usuario.
+				$ids = $carreraTieneEmpleado[0]->idcarrera;
+				
+				// Iterador para hacer el amacenamiento de los IDs de
+				// las carreras en las que labora el usuario, en la variable $ids.
+				$i = 1;
+			
+				// Almacena en la variable $ids todos los IDs de las carreras en las
+				// que labora el empleado. Se almacenan los IDs en forma de sentencia
+				// de SQL.
+				while($carreraTieneEmpleado[$i]!= NULL){
+					$ids = $ids . " OR idcarrera = " . $carreraTieneEmpleado[$i]->idcarrera;
+					$i++;
+				}
+			}
+			
+			// Criterios para obtener las revalidaciones hechas en aquellas carreras en las
+			// que labora el usuario.
+			$dataProvider = new CActiveDataProvider('Revalidacion', array(
+				'criteria'=>array(
+					'condition'=>'idcarrera ='.$ids,
+					),
+				
+				'sort'=> array(
+					'attributes'=> array(
+						'fechahora',
+						),
+					'defaultOrder'=>'fechahora DESC'
+					),
+			));
+
+		// Valida si el usuario es un alumno. En este caso se obtienen únicamente las
+		// revalidaciones realizadas en su carrera.
 		}else if (Yii::app()->user->rol == 'Alumno'){
-						//Variable para almacenar el modelo del alumno, para obtener su carrera.
-						$alumno = Alumno::model()->findByPk($id);
-						$dataProvider = new CActiveDataProvider('Revalidacion', array(
-						'criteria'=>array(
-							'condition'=>'idcarrera ='.$alumno->idcarrera,
-							),
-						
-						'sort'=> array(
-							'attributes'=> array(
-								'fechahora',
-								),
-							'defaultOrder'=>'fechahora DESC'
-							),
-						));
-		/*
-		En caso de ser administrador, debe indexar todas las solicitudes de todas las carreras.
-		*/
+		
+			// Almacena el modelo del alumno.
+			$alumno = Alumno::model()->findByPk($id);
+			
+			// Criterios para obtener las revalidaciones realizadas en la
+			// carrera del usuario.
+			$dataProvider = new CActiveDataProvider('Revalidacion', array(
+				'criteria'=>array(
+					'condition'=>'idcarrera ='.$alumno->idcarrera,
+					),
+				
+				'sort'=> array(
+					'attributes'=> array(
+						'fechahora',
+						),
+					'defaultOrder'=>'fechahora DESC'
+					),
+			));
+			
+		// El resto de los casos. Aquí se trata de un administrador. Entonces, se
+		// despliegan todas las revalidaciones hechas en todas las carreras.
 		}else{
+		
+			// Criterios para obtener todas las revalidaciones de
+			// todas las carreras.
 			$dataProvider=new CActiveDataProvider('Revalidacion', array (
 			'sort'=> array(
 						'attributes'=> array(
@@ -270,18 +296,20 @@ class RevalidacionController extends Controller
 			));
 		}
 
+		// Despliega la página con información de
+		// las revalidaciones.
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
 	}
 
 	/**
-	 * Manages all models.
+	 * Administra a todos los modelos.
 	 */
 	public function actionAdmin()
 	{
 		$model=new Revalidacion('search');
-		$model->unsetAttributes();  // clear any default values
+		$model->unsetAttributes();  // Elimina los valores por defecto.
 		if(isset($_GET['Revalidacion']))
 			$model->attributes=$_GET['Revalidacion'];
 
@@ -289,11 +317,11 @@ class RevalidacionController extends Controller
 			'model'=>$model,
 		));
 	}
-
+	 
 	/**
-	 * Returns the data model based on the primary key given in the GET variable.
-	 * If the data model is not found, an HTTP exception will be raised.
-	 * @param integer the ID of the model to be loaded
+	 * Devuelve el modelo de datos en base a la llave primaria proporcionada en la variable GET.
+	 * Si el modelo de datos no es encontrado se lanzará una excepción de HTTP.
+	 * @param integer el ID del modelo a cargar
 	 */
 	public function loadModel($id)
 	{
@@ -304,8 +332,8 @@ class RevalidacionController extends Controller
 	}
 
 	/**
-	 * Performs the AJAX validation.
-	 * @param CModel the model to be validated
+	 * Realiza una validación AJAX.
+	 * @param CModel el modelo a validar
 	 */
 	protected function performAjaxValidation($model)
 	{

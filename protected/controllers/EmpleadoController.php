@@ -581,7 +581,7 @@ class EmpleadoController extends Controller
     }
 
     /**
-     * Realiza validación AJAX.
+     * Realiza una validación AJAX.
      * @param CModel el modelo a validar
      */
     protected function performAjaxValidation($model)
