@@ -3,136 +3,172 @@
 class SolicitudCartaRecomendacionController extends Controller
 {
 	/**
-	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
-	 * using two-column layout. See 'protected/views/layouts/column2.php'.
+	 * @var string la distribución por defecto para las vistas. Por defecto es '//layouts/column2', lo cual
+	 * indica una distribución de dos columnas. Ver 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='//layouts/column2';
 
 	/**
-	 * @return array action filters
+	 * @return array filtros de acción
 	 */
 	public function filters()
 	{
 		return array(
-			'accessControl', // perform access control for CRUD operations
+			'accessControl', // Realiza control de acceso para operaciones CRUD.
 		);
 	}
 
 	/**
 	 * Especifica las reglas de control de acceso.
-	 * This method is used by the 'accessControl' filter.
-	 * @return array access control rules
+	 * Este método es utilizado por el filtro 'accessControl'.
+	 * @return array reglas de control de acceso
 	 */
 	public function accessRules()
 	{
-		//arreglo con las acciones de los directores
+		// Arreglo con las acciones que se les permite realizar a
+		// los directores de carrera
 		$adminActions=array('index','admin','update','delete','view_all','view',
 				'solicitudBajaMateria', 'solicitudBajaSemestre',
 				'solicitudCartaRecomendacion', 
 				'solicitudProblemasInscripcion',
 				'solicitudRevalidacion');
 				
-		
+		// Criterios para obtener los nombres de usuario de
+		// los directores de carrera
 		$criteria = new CDbCriteria(array(
 						'select'=>'nomina',
 						'condition'=>'puesto=\'Director\''));
 		
-		//obtiene todos los directores de carrera
+		// Obtiene los modelos de todos los
+		// directores de carrera.
 		$consulta=Empleado::model()->findAll($criteria);
 		
-		//arreglo con todos los directores de carrera
+		// Arreglo para almacenar los nombres de usuario de
+		// todos los directores de carrera
 		$directores = array();
 		
+		// Almacena en el arreglo $directores los nombres de usuario de
+		// todos los directores de carrera.
 		foreach($consulta as &$valor){
 			array_push($directores, ($valor->nomina).'');
 		}
 		
+		// Criterios para obtener los nombres de usuario de
+		// todos los asistentes y secretarias.
 		$asistente_criteria = new CDbCriteria(array(
 						'select'=>'nomina',
 						'condition'=>'puesto=\'Asistente\' OR puesto = \'Secretaria\''));
 		
-		//Obtiene a todos los asistentes.
+		// Obtiene los modelos de todos los asistentes y 
+		// secretarias.
 		$consulta_asistente = Empleado::model()->findAll($asistente_criteria);
 		
-		//Arreglo con todos los directores de carrera.
+		// Arreglo para almacenar los nombres de
+		// usuario de todos los asistentes y secretarias.
 		$asistentes = array();
 		
+		// Almacena en el arreglo $asistentes los nombres de
+		// usuario de todos los asistentes y secretarias.
 		foreach($consulta_asistente as &$valor){
 			array_push($asistentes, ($valor->nomina).'');
 		}
 		
-		//Condiciones para buscar al super admin
+		// Criterios para obtener los nombres de usuario de
+		// los administradores generales
 		$criteria_super_admin = new CDbCriteria(array(
 								'select'=>'username'));
 		
-		//Query para encontrar al super admin
-		//$consulta_super_admin = Admin::model()->findAllByPk('admin', $criteria_super_admin);
+		// Obtiene los modelos de todos los
+		// administradores generales.
 		$consulta_super_admin = Admin::model()->findAll($criteria_super_admin);
 		
+		// Arreglo para almacenar los nombres de usuario de
+		// todos los administradores generales.
 		$admin = array();
 		
-		
-		//array_push($admin, $consulta_super_admin);
-		
+		// Almacena en el arreglo $admin los nombres de
+		// usuario de todos los administradores generales.
 		foreach($consulta_super_admin as &$valor){
 			array_push($admin, ($valor->username).'');
 		}
 	
 		return array(
-			/*array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-			),*/
-			
-			array('deny',  // Negar acceso a asistentes y secretarias.
+		
+			array('deny',  // Niega el acceso a los asistentes y secretarias.
 				'users'=>$asistentes,
 			),
 			
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+			array('allow',
+						   // Les permite a los usuarios autenticados realizar acciones de
+						   // 'create' y 'update'
 				'actions'=>array('index','create','view'),
 				'users'=>array('@'),
 			),
-			array('allow', // acciones de los directores de carrera
+			
+			array('allow',
+						   // Les permite a los directores de carrera realizar acciones de
+						   // 'index', 'admin', 'update', 'delete', 'view_all', 'view',
+						   // 'solicitudBajaMateria', 'solicitudBajaSemestre',
+						   // 'solicitudCartaRecomendacion', 'solicitudProblemasInscripcion' y
+						   // 'solicitudRevalidacion'
 				'actions'=>$adminActions,
 				'users'=>$directores,
 			),
-			array('allow', // acciones de los directores de carrera
+			
+			array('allow',
+						   // Les permite a los administradores generales realizar acciones de
+						   // 'index', 'create', 'update', 'view' y 'admin'
 				'actions'=>array('index','create','update','view','admin'),
 				'users'=>$admin,
 			),
-			array('deny',  // deny all users
+			
+			array('deny',  // Niega a todos los usuarios.
 				'users'=>array('*'),
 			),
+			
 		);
 	}
 
 	/**
-	 * Displays a particular model.
-	 * @param integer $id the ID of the model to be displayed
+	 * Despliega un modelo en particular.
+	 * @param integer $id el ID del modelo a desplegar
 	 */
 	public function actionView($id)
 	{
-	
+		// Valida si el usuario actual es un alumno.
 		if(Yii::app()->user->rol == 'Alumno'){
+			
+			// Almacena el nombre de usuario (matrícula) del
+			// usuario actual.
 			$mat = Yii::app()->user->id;
+			
+			// Criterios para obtener la solicitud de carta de
+			// recomendación a desplegar.
 			$criteria = new CDbCriteria(array(
 						'condition'=>'matriculaalumno = '.$mat.' AND id = '.$id));
 						
+			// Obtiene el modelo de la solicitud de carta de recomendación a
+			// desplegar.
 			$solicitudes=SolicitudCartaRecomendacion::model()->find($criteria);
 			
+			// Valida si no se encontró la solicitud de carta de recomendación o 
+			// si pertenece a algún otro alumno. En caso de ser así se lanza una
+			// excepción de HTTP, con una descripción del error.
 			if(sizeof($solicitudes) == 0){
 				throw new CHttpException(403,'Usted no está autorizado para realizar esta acción.');
 			}
 		}
 	
+		// Despliega una página con información de
+		// la solicitud de carta de recomendación.
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));
 	}
 
 	/**
-	 * Creates a new model.
-	 * If creation is successful, the browser will be redirected to the 'view' page.
+	 * Crea un nuevo modelo.
+	 * Si la creación es exitosa, el navegador será redirigido a la página 'view'.
 	 */
 	public function actionCreate()
 	{
