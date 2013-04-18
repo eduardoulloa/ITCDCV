@@ -4,29 +4,51 @@ class SolicitudController extends Controller
 
 
 {
-
 	/**
-	 * Enlista todos los modelos, dependiendo del rol del usuario.
-	 *
+	 * Enlista a todos los modelos, dependiendo del rol del usuario.
 	 */
-
 	public function actionIndex(){
-
-		if(Yii::app()->user->rol == 'Alumno'){
 		
+		// Valida si el usuario actual es un alumno.
+		if(Yii::app()->user->rol == 'Alumno'){
+			
+			// Obtiene el nombre de usuario (matrícula) del
+			// usuario actual.
 			$mat = Yii::app()->user->id;
+			
+			// Criterios para obtener todos los
+			// modelos de todas las solicitudes del
+			// usuario actual.
 			$criteria = new CDbCriteria(array(
 					'condition'=>'matriculaalumno ='.$mat));
-					
+			
+			// Obtiene los modelos de las solicitudes de baja de materia del
+			// usuario actual.
 			$solicitud1=SolicitudBajaMateria::model()->findall($criteria);
+			
+			// Obtiene los modelos de las solicitudes de baja de semestre del
+			// usuario actual.
 			$solicitud2=SolicitudBajaSemestre::model()->findall($criteria);
+			
+			// Obtiene los modelos de la solicitudes de carta de recomendación del
+			// usuario actual.
 			$solicitud3=SolicitudCartaRecomendacion::model()->findall($criteria);
+			
+			// Obtiene los modelos de las solicitudes de problemas de inscripción del
+			// usuario actual.
 			$solicitud4=SolicitudProblemasInscripcion::model()->findall($criteria);
+			
+			// Obtiene los modelos de las solicitudes de revalidación de materia del
+			// usuario actual.
 			$solicitud5=SolicitudRevalidacion::model()->findall($criteria);
 		
+			// Arreglo para almacenar en conjunto todos los modelos de todas las
+			// solicitudes del usuario actual.
 			$modelArray = array_merge($solicitud1,$solicitud2,$solicitud3,
 					$solicitud4,$solicitud5);
 
+			// Criterios para ordenar las diferentes solicitudes del
+			// usuario actual, al momento de desplegarlas.
 			$dataProvider= new CArrayDataProvider(
 					$modelArray, array(
 						'sort'=> array(
@@ -38,7 +60,7 @@ class SolicitudController extends Controller
 						));
 			
 			
-						
+		// Valida si el usuario actual es un director de carrera.				
 		}else if (Yii::app()->user->rol == 'Director'){
 			
 			$nomina = Yii::app()->user->id;

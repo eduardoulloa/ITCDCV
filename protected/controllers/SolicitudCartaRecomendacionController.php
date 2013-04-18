@@ -172,146 +172,251 @@ class SolicitudCartaRecomendacionController extends Controller
 	 */
 	public function actionCreate()
 	{
+		// Crea un nuevo modelo.
 		$model=new SolicitudCartaRecomendacion;
 
-		// Uncomment the following line if AJAX validation is needed
+		// Quitar el comentario de la siguiente línea si se requiere validación AJAX.
 		// $this->performAjaxValidation($model);
 
+		// Valida si se recibió algún modelo vía alguna petición POST.
 		if(isset($_POST['SolicitudCartaRecomendacion']))
 		{
+			// Asigna los atributos al modelo.
 			$model->attributes=$_POST['SolicitudCartaRecomendacion'];
+			
+			// Almacena el nombre de usuario del usuario actual.
 			$mat = Yii::app()->user->id;
+			
+			// Asigna al modelo la matrícula del alumno.
 			$model->setAttribute('matriculaalumno',$mat);
+			
+			// Valida si el modelo pudo ser registrado en la
+			// base de datos.
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
-
+		
+		// Despliega la forma para
+		// crear una nueva solicitud de
+		// carta de recomendación.
 		$this->render('create',array(
 			'model'=>$model,
 		));
 	}
 
 	/**
-	 * Updates a particular model.
-	 * If update is successful, the browser will be redirected to the 'view' page.
-	 * @param integer $id the ID of the model to be updated
+	 * Actualiza un modelo en particular.
+	 * Si la actualización es exitosa el navegador será redirigido a la página 'view'.
+	 * @param integer $id el ID del modelo a actualizar
 	 */
 	public function actionUpdate($id)
 	{
+		// Carga el modelo.
 		$model=$this->loadModel($id);
 
-		// Uncomment the following line if AJAX validation is needed
+		// Quitar el comentario de la siguiente línea si se requiere validación AJAX.
 		// $this->performAjaxValidation($model);
 
+		// Valida si se recibió algún modelo vía alguna petición POST.
 		if(isset($_POST['SolicitudCartaRecomendacion']))
 		{
+		
+			// Asigna los atributos al modelo.
 			$model->attributes=$_POST['SolicitudCartaRecomendacion'];
 			
+			// Valida si el usuario actual es un alumno.
 			if(Yii::app()->user->rol == 'Alumno'){
 				
+				// Valida si el usuario actual es el creador de la solicitud de
+				// carta de recomendación.
 				if($model->matriculaalumno == Yii::app()->user->id){
 				
+					// Valida si se pudieron registrar los cambios en la solicitud, en
+					// la base de datos.
 					if($model->save()) {
+					
+						// Valida si se pudo cambiar el estatus de la solicitud de
+						// carta de recomendación a 'Terminada'. En caso de ser así, 
+						// se envía un e-mail al alumno que creó la solicitud, informándole
+						// sobre el cambio.
 						if($this->needsToSendMail($model)) {
 							EMailSender::sendEmail($this->createEmailBody($model), $this->createSubject($model), 
 															getEmailAddress($model->matriculaalumno));
 
 						}
 					
-						
 						$this->redirect(array('view','id'=>$model->id));
 
 					}
 				
+				// El usuario actual no es el creador de la solicitud de carta de
+				// recomendación. En este caso se lanza una excepción de HTTP, con
+				// una descripción del error.
 				}else{
 					throw new CHttpException(400,'No es posible acceder a la solicitud con el identificador proporcionado.');
 				}
 				
-			
+			// Valida si el usuario actual es un director de carrera.
 			}else if (Yii::app()->user->rol == 'Director'){
 			
+				// Almacena la matrícula del alumno que
+				// creó la solicitud.
 				$matricula = $model->matriculaalumno;
+				
+				// Almacena el nombre de usuario (nómina) del
+				// usuario actual.
 				$nomina = Yii::app()->user->id;
+				
+				// Valida que la solicitud de carta de recomendación corresponda a
+				// alguno de los alumnos del director de carrera. Obtiene un registro de
+				// la base de datos, mediante una sentencia JOIN de SQL, comprobando que
+				// la condición se cumple.
 				$challenge = Empleado::model()->findBySql('SELECT matricula FROM carrera_tiene_empleado JOIN alumno ON alumno.idcarrera = carrera_tiene_empleado.idcarrera AND carrera_tiene_empleado.nomina = \''.$nomina.'\' AND alumno.matricula =\''.$matricula.'\'');
 			
+				// Valida que la variable $challenge no esté vacía. Es decir, que
+				// la solicitud de carta de recomendación corresponda a alguno de los
+				// alumnos del director de carrera.
 				if(!empty($challenge)){
 				
-				
-			
+					// Valida si se pudieron grabar los cambios en el modelo, en
+					// la base de datos.
 					if($model->save()) {
+					
+						// Valida si se pudo cambiar el estatus de la solicitud de
+						// carta de recomendación a 'Terminada'. En caso de ser así,
+						// se envía un e-mail al alumno que creó la solicitud, informándole
+						// sobre el cambio.
 						if($this->needsToSendMail($model)) {
 							EMailSender::sendEmail($this->createEmailBody($model), $this->createSubject($model), 
 															getEmailAddress($model->matriculaalumno));
 
 						}
 					
-						
-							$this->redirect(array('view','id'=>$model->id));
+						$this->redirect(array('view','id'=>$model->id));
 
 					}
 				
+				// La solicitud de carta de recomendación no existe o no corresponde a
+				// ningún alumno del director de carrera. En este caso se lanza una
+				// excepción de HTTP, con una descripción del error.
 				}else{
 					throw new CHttpException(400,'No se encontró la solicitud a editar.');
 				}
 			
+			// El resto de los casos, que corresponde a los administradores generales.
 			}else{
+				
+				// Valida si se pudieron registrar los cambios en el modelo, en
+				// la base de datos.
 				if($model->save()) {
+				
+					// Valida si se pudo cambiar el estatus de la solicitud de carta de
+					// recomendación a 'Terminada'. En caso de ser así, se envía un
+					// e-mail al alumno que creó la solicitud, informándole sobre el
+					// cambio.
 					if($this->needsToSendMail($model)) {
 						EMailSender::sendEmail($this->createEmailBody($model), $this->createSubject($model), 
 														getEmailAddress($model->matriculaalumno));
 
 					}
 				
-					
-						$this->redirect(array('view','id'=>$model->id));
+					$this->redirect(array('view','id'=>$model->id));
 
 				}
+				
 			}
 			
-		
 		}
 
+		// Valida si el usuario actual es un alumno.
 		if(Yii::app()->user->rol == 'Alumno'){
-
+			
+			// Valida si el usuario actual es el creador de
+			// la solicitud de carta de recomendación. En caso de
+			// ser así, despliega la forma para actualizar la solicitud.
 			if(Yii::app()->user->id == $model->matriculaalumno){
+				
+				// Despliega la forma para actualizar la solicitud de
+				// carta de recomendación.
 				$this->render('update',array(
 				'model'=>$model,
 				));
+				
+			// El usuario actual no es el creador de la solicitud de
+			// carta de recomendación. Se lanza una excepción de HTTP, con
+			// una descripción del error.
 			}else{
 				throw new CHttpException(400,'No es posible acceder a la solicitud con el identificador proporcionado.');
 			}
-
+		
+		// Valida si el usuario actual es un director de carrera.
 		}else if (Yii::app()->user->rol == 'Director'){
 			
+			// Almacena la matrícula del alumno que creó la
+			// solicitud de carta de recomendación.
 			$matricula = $model->matriculaalumno;
+			
+			// Almacena el nombre de usuario (nómina) del
+			// usuario actual.
 			$nomina = Yii::app()->user->id;
+			
+			// Valida si la solicitud de carta de recomendación corresponde a
+			// algún alumno del director de carrera. Obtiene un registro de la
+			// base de datos en base a una sentencia JOIN de SQL, comprobando que
+			// la condición se cumple.
 			$challenge = Empleado::model()->findBySql('SELECT matricula FROM carrera_tiene_empleado JOIN alumno ON alumno.idcarrera = carrera_tiene_empleado.idcarrera AND carrera_tiene_empleado.nomina = \''.$nomina.'\' AND alumno.matricula =\''.$matricula.'\'');
 		
+			// Valida si la variable $challenge no está vacía. Es decir,
+			// si la solicitud de carta de recomendación corresponde a algún
+			// alumno del director de carrera.
 			if(!empty($challenge)){
-			
+				
+				// Se despliega la forma para actualizar la
+				// solicitud de carta de recomendación.
 				$this->render('update',array(
 					'model'=>$model,
 				));
 		
-			
+			// La solicitud de carta de recomendación no existe o no
+			// corresponde a ningún alumno del director de carrera. En este
+			// caso se lanza una excepción de HTTP, con una descripción del
+			// error.
 			}else{
 				throw new CHttpException(400,'No se encontro la solicitud a editar.');
 			}
-			
+		
+		// El resto de los casos, que corresponde a los administradores generales.
 		}else{
 		
+			// Se despliega la forma para actualizar la
+			// solicitud de carta de recomendación.
 			$this->render('update',array(
 				'model'=>$model,
 			));
 			
 		}
+		
 	}
 	
+	/**
+	 * Cambia el estatus de una solicitud de carta de
+	 * recomendación a 'Terminada'.
+	 * @param CModel el modelo cuyo estatus se modificará
+	 * @return CModel el modelo con el estatus cambiado a 'Terminada'
+	 */
 	public function needsToSendMail($model)
 	{
 		return $model->attributes['status'] == 'terminada';
 	}
 	
+	/**
+	 * Crea el cuerpo del e-mail que se enviará al alumno que
+	 * creó la solicitud de carta de recomendación.
+	 * En el cuerpo del mensaje se especifican el tipo y
+	 * el formato de la carta de recomendación.
+	 * @param CModel el modelo a partir del cual se enviará el e-mail
+	 * @return string el cuerpo del e-mail
+	 */
 	public function createEmailBody($model) 
 	{
 		$body = "";
@@ -321,6 +426,13 @@ class SolicitudCartaRecomendacionController extends Controller
 		return $body;
 	}
 	
+	/**
+	 * Crea el asunto del e-mail que se enviará al alumno que
+	 * creó la solicitud de carta de recomendación.
+	 * En el asunto se especifica el ID de la solicitud.
+	 * @param CModel el modelo a partir del cual se enviará el e-mail
+	 * @return string el asunto del e-mail
+	 */
 	public function createSubject($model)
 	{
 		$subject = "Solicitud de Carta de Recomendacion con ID: ".$model->id;
@@ -328,39 +440,49 @@ class SolicitudCartaRecomendacionController extends Controller
 	}
 
 	/**
-	 * Deletes a particular model.
-	 * If deletion is successful, the browser will be redirected to the 'admin' page.
-	 * @param integer $id the ID of the model to be deleted
+	 * Elimina un modelo en particular.
+	 * Si la eliminación es exitosa, el navegador será redirigido a la página 'admin'.
+	 * @param integer $id el ID del modelo a eliminar
 	 */
 	public function actionDelete($id)
 	{
 		if(Yii::app()->request->isPostRequest)
 		{
-			// we only allow deletion via POST request
+			// Solo se permite eliminación vía una petición POST.
 			$this->loadModel($id)->delete();
 
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+			// Si es una petición AJAX (impulsada por eliminación vía la vista de tabla de admin) no se
+			// debe redirigir al navegador.
 			if(!isset($_GET['ajax']))
 				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 		}
 		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+			throw new CHttpException(400,'Petición no valida. Por favor no repita esta petición.');
 	}
 
 	/**
-	 * Enlista todos los models, dependiendo del rol del usuario.
+	 * Enlista a todos los modelos, dependiendo del rol del usuario.
 	 */
 	public function actionIndex()
 	{
-
+		// Valida si el usuario actual es un alumno.
 		if(Yii::app()->user->rol == 'Alumno'){
 		
+			// Obtiene el nombre de usuario (matrícula) del
+			// usuario actual.
 			$mat = Yii::app()->user->id;
+			
+			// Criterios para obtener las solicitudes de
+			// carta de recomendación del usuario actual.
 			$criteria = new CDbCriteria(array(
 					'condition'=>'matriculaalumno ='.$mat));
 					
+			// Obtiene las solicitudes de carta de recomendación del
+			// usuario actual.
 			$solicitudes=SolicitudCartaRecomendacion::model()->findall($criteria);
 			
+			// Criterios para ordenar las solicitudes de
+			// carta de recomendación al momento de desplegarlas.
 			$dataProvider= new CArrayDataProvider(
 					$solicitudes, array(
 						'sort'=> array(
@@ -369,21 +491,29 @@ class SolicitudCartaRecomendacionController extends Controller
 								),
 							'defaultOrder'=>'fechahora DESC'
 							),
-						));
-						
+					));
+		
+		// Valida si el usuario actual es un director de carrera.
 		}else if (Yii::app()->user->rol == 'Director'){
 			
+			// Obtiene el nombre de usuario (nómina) del
+			// usuario actual.
 			$nomina = Yii::app()->user->id;
 		
-			
+			// Criterios para obtener las solicitudes de carta de
+			// recomendación de aquellos alumnos del director de carrera.
 			$criteria_directores = new CDbCriteria(array(
 					'join'=>'JOIN alumno AS a ON t.matriculaalumno = a.matricula
 					JOIN carrera_tiene_empleado AS c ON a.idcarrera = c.idcarrera AND c.nomina = \''.$nomina.'\'',
 					'condition'=>'status != \'Terminada\'',
 					));
-
+			
+			// Obtiene los modelos de las solicitudes de carta de 
+			// recomendación de aquellos alumnos del director de carrera.
 			$solicitudes_para_directores = SolicitudCartaRecomendacion::model()->findall($criteria_directores);
 			
+			// Criterios para ordenar las solicitudes de carta de
+			// recomendación al momento de desplegarlas.
 			$dataProvider = new CArrayDataProvider ($solicitudes_para_directores, array(
 					'sort'=> array(
 							'attributes'=> array(
@@ -393,7 +523,12 @@ class SolicitudCartaRecomendacionController extends Controller
 							),
 						));
 	
+		// Valida si el usuario actual es un administrador general.
 		}else if(Yii::app()->user->rol == 'Admin'){
+			
+			// Criterios para ordenar las solicitudes de
+			// carta de recomendación al momento de
+			// desplegarlas.
 			$dataProvider = new CActiveDataProvider('SolicitudCartaRecomendacion', array(
 					'sort'=>array(
 							'attributes'=>array(
@@ -401,25 +536,26 @@ class SolicitudCartaRecomendacionController extends Controller
 								),
 							'defaultOrder'=>'fechahora DESC'
 							),
-				)
+					)
 			);
-			
-			
 			
 		}
 		
+		// Despliega una página con información de
+		// las solicitudes de carta de recomendación.
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
+		
 	}
 
 	/**
-	 * Manages all models.
+	 * Administra a todos los modelos.
 	 */
 	public function actionAdmin()
 	{
 		$model=new SolicitudCartaRecomendacion('search');
-		$model->unsetAttributes();  // clear any default values
+		$model->unsetAttributes();  // Elimina los valores por default.
 		if(isset($_GET['SolicitudCartaRecomendacion']))
 			$model->attributes=$_GET['SolicitudCartaRecomendacion'];
 
@@ -429,9 +565,9 @@ class SolicitudCartaRecomendacionController extends Controller
 	}
 
 	/**
-	 * Returns the data model based on the primary key given in the GET variable.
-	 * If the data model is not found, an HTTP exception will be raised.
-	 * @param integer the ID of the model to be loaded
+	 * Devuelve el modelo de datos en base a la llave primaria proporcionada en la variable GET.
+	 * Si el modelo de datos no es encontrado, se lanzará una excepción HTTP.
+	 * @param integer el ID del modelo a cargar
 	 */
 	public function loadModel($id)
 	{
@@ -442,8 +578,8 @@ class SolicitudCartaRecomendacionController extends Controller
 	}
 
 	/**
-	 * Performs the AJAX validation.
-	 * @param CModel the model to be validated
+	 * Realiza una validación AJAX.
+	 * @param CModel el modelo a validar
 	 */
 	protected function performAjaxValidation($model)
 	{
