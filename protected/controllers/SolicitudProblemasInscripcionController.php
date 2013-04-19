@@ -1,111 +1,138 @@
 <?php
 
 class SolicitudProblemasInscripcionController extends Controller
-{
+{	 
 	/**
-	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
-	 * using two-column layout. See 'protected/views/layouts/column2.php'.
+	 * @var string la distribución por defecto para las vistas. Por defecto es '//layouts/column2', lo cual
+	 * indica una distribución de dos columnas. Ver 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='//layouts/column2';
 
 	/**
-	 * @return array action filters
+	 * @return array filtros de acción
 	 */
 	public function filters()
 	{
 		return array(
-			'accessControl', // perform access control for CRUD operations
+			'accessControl', // Realiza control de acceso para operaciones CRUD.
 		);
 	}
 
 	/**
 	 * Especifica las reglas de control de acceso.
-	 * This method is used by the 'accessControl' filter.
-	 * @return array access control rules
+	 * Este método es utilizado por el filtro 'accessControl'.
+	 * @return array reglas de control de acceso
 	 */
 	public function accessRules()
 	
-	
 	{
 	
-		//arreglo con las acciones de los directores
+		// Arreglo con las acciones de los directores de
+		// carrera
 		$adminActions=array('index','admin','update','delete','view_all','view',
 				'solicitudBajaMateria', 'solicitudBajaSemestre',
 				'solicitudCartaRecomendacion', 
 				'solicitudProblemasInscripcion',
 				'solicitudRevalidacion');
 				
-		
+		// Criterios para obtener los nombres de usuario (nóminas) de
+		// los directores de carrera
 		$criteria = new CDbCriteria(array(
 						'select'=>'nomina',
 						'condition'=>'puesto=\'Director\''));
 		
-		//obtiene todos los directores de carrera
+		// Obtiene los modelos de los directores de carrera.
 		$consulta=Empleado::model()->findAll($criteria);
 		
-		//arreglo con todos los directores de carrera
+		// Arreglo para almacenar los nombres de usuario (nóminas) de
+		// los directores de carrera
 		$directores = array();
 		
+		// Almacena en el arreglo $directores los nombres de usuario (nóminas) de
+		// los directores de carrera.
 		foreach($consulta as &$valor){
 			array_push($directores, ($valor->nomina).'');
 		}
 		
+		// Criterios para obtener los nombres de usuario de
+		// los asistentes y secretarias
 		$asistente_criteria = new CDbCriteria(array(
 						'select'=>'nomina',
 						'condition'=>'puesto=\'Asistente\' OR puesto=\'Secretaria\''));
 		
-		//Obtiene a todos los asistentes.
+		// Obtiene los modelos de los asistentes y secretarias.
 		$consulta_asistente = Empleado::model()->findAll($asistente_criteria);
 		
-		//Arreglo con todos los directores de carrera.
+		// Arreglo para almacenar los nombres de usuario de
+		// los asistentes y secretarias
 		$asistentes = array();
 		
+		// Almacena en el arreglo $asistentes los nombres de
+		// usuario de los asistentes y secretarias.
 		foreach($consulta_asistente as &$valor){
 			array_push($asistentes, ($valor->nomina).'');
 		}
 		
-		//Acciones del admin.
+		// Arreglo con las acciones de los administradores generales
 		$admin_acciones = array('index','create','update','view','admin','delete');
 		
-		//Condiciones para buscar al super admin
+		// Criterios para obtener los nombres de usuario de los
+		// administradores generales
 		$criteria_super_admin = new CDbCriteria(array(
 								'select'=>'username'));
 		
-		//Query para encontrar al super admin
-		//$consulta_super_admin = Admin::model()->findAllByPk('admin', $criteria_super_admin);
+		// Obtiene los modelos de los administradores generales.
 		$consulta_super_admin = Admin::model()->findAll($criteria_super_admin);
 		
+		// Arreglo para almacenar los nombres de usuario de
+		// los administradores generales
 		$admin = array();
 		
-		
+		// Almacena en el arreglo $admin los nombres de
+		// usuario de los administradores generales.
 		foreach($consulta_super_admin as &$valor){
 			array_push($admin, ($valor->username).'');
 		}
 		
-		
 		return array(
-			/*array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-			),*/
 			
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+			// Les permite a los usuarios autenticados realizar
+			// acciones de 'create' y 'perform'.
+			array('allow',
 				'actions'=>array('index','create','view'),
 				'users'=>array('@'),
 			),
-			array('allow', // acciones de los directores de carrera
+			
+			// Les permite a los directores de carrera realizar
+			// acciones de 'index', 'admin', 'update', 'delete', 'view_all',
+			// 'view', 'solicitudBajaMateria', 'solicitudBajaSemestre',
+			// 'solicitudCartaRecomendacion', 'solicitudProblemasInscripcion' y
+			// 'solicitudRevalidacion'
+			array('allow',
 				'actions'=>$adminActions,
 				'users'=>$directores,
 			),
-			array('allow', // Acciones de los admins.
+			
+			// Les permite a los administradores generales realizar
+			// acciones de 'index', 'create', 'update', 'view', 'admin', y
+			// 'delete'.
+			array('allow',
 				'actions'=>$admin_acciones,
 				'users'=>$admin,
 			),
-			array('allow', // acciones de los asistentes de docencia
+			
+			// Les permite a los asistentes realizar
+			// acciones de 'index', 'admin', 'update', 'delete', 'view_all',
+			// 'view', 'solicitudBajaMateria', 'solicitudBajaSemestre',
+			// 'solicitudCartaRecomendacion', 'solicitudProblemasInscripcion' y
+			// 'solicitudRevalidacion'
+			array('allow',
 				'actions'=>$adminActions,
 				'users'=>$asistentes,
 			),
-			array('deny',  // deny all users
+			
+			// Niega a todos los usuarios.
+			array('deny',
 				'users'=>array('*'),
 			),
 		);
