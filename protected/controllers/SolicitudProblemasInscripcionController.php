@@ -139,140 +139,235 @@ class SolicitudProblemasInscripcionController extends Controller
 	}
 
 	/**
-	 * Displays a particular model.
-	 * @param integer $id the ID of the model to be displayed
+	 * Despliega un modelo en particular.
+	 * @param integer $id el ID del modelo a desplegar
 	 */
 	public function actionView($id)
 	{
-	
+		// Valida si el usuario actual es un alumno.
 		if(Yii::app()->user->rol == 'Alumno'){
+			
+			// Almacena el nombre de usuario (matrícula) del
+			// usuario actual.
 			$mat = Yii::app()->user->id;
+			
+			// Criterios para encontrar el modelo de la solicitud de 
+			// problemas de inscripción.
 			$criteria = new CDbCriteria(array(
 						'condition'=>'matriculaalumno = '.$mat.' AND id = '.$id));
-						
+			
+			// Obtiene el modelo de la solicitud de
+			// problemas de inscripción.
 			$solicitudes=SolicitudProblemasInscripcion::model()->find($criteria);
 			
+			// El modelo de la solicitud de problemas de
+			// inscripción no existe o no fue creada por el
+			// usuario actual. En este caso se lanza una
+			// excepción de HTTP, con una descripción del error.
 			if(sizeof($solicitudes) == 0){
 				throw new CHttpException(403,'Usted no está autorizado para realizar esta acción.');
 			}
 		}
-	
+		
+		// Despliega una página con información de
+		// la solicitud de problemas de inscripción.
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));
 	}
 
 	/**
-	 * Creates a new model.
-	 * If creation is successful, the browser will be redirected to the 'view' page.
+	 * Crea un nuevo modelo.
+	 * Si la creación es exitosa, el navegador será redirigido a la página 'view'.
 	 */
 	public function actionCreate()
 	{
+		// Crea un nuevo modelo.
 		$model=new SolicitudProblemasInscripcion;
 
-		// Uncomment the following line if AJAX validation is needed
+		// Quitar el comentario de la siguiente línea si se requiere validación AJAX.
 		// $this->performAjaxValidation($model);
 
+		// Valida si se recibió algún modelo vía alguna petición POST.
 		if(isset($_POST['SolicitudProblemasInscripcion']))
 		{
+			// Asigna los atributos al modelo.
 			$model->attributes=$_POST['SolicitudProblemasInscripcion'];
+			
+			// Almacena el nombre de usuario del usuario actual.
 			$mat = Yii::app()->user->id;
+			
+			// Asigna el nombre de usuario (matrícula) del
+			// usuario actual al modelo.
 			$model->setAttribute('matriculaalumno',$mat);
+			
+			// Asigna el año actual al modelo.
 			$model->setAttribute('anio',date('Y'));
 			
+			// Valida si se pudo registrar el modelo en
+			// la base de datos.
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
+		// Despliega una forma para
+		// crear el nuevo modelo.
 		$this->render('create',array(
 			'model'=>$model,
 		));
 	}
 
 	/**
-	 * Updates a particular model.
-	 * If update is successful, the browser will be redirected to the 'view' page.
-	 * @param integer $id the ID of the model to be updated
+	 * Actualiza un modelo en particular.
+	 * Si la actualización es exitosa, el navegador será redirigido a la página 'view'.
+	 * @param integer $id el ID del modelo a actualizar
 	 */
 	public function actionUpdate($id)
 	{
+		// Carga el modelo.
 		$model=$this->loadModel($id);
 
-		// Uncomment the following line if AJAX validation is needed
+		// Quitar el comentario de la siguiente línea si se requiere validación AJAX.
 		// $this->performAjaxValidation($model);
 
+		// Valida si se recibió algún modelo vía alguna petición POST.
 		if(isset($_POST['SolicitudProblemasInscripcion']))
 		{
+			// Asigna los atributos modificados al modelo.
 			$model->attributes=$_POST['SolicitudProblemasInscripcion'];
 			
+			// Valida si el usuario actual es un alumno.
 			if(Yii::app()->user->rol == 'Alumno'){
 				
+				// Valida si el usuario actual es el creador de
+				// la solicitud de problemas de inscripción.
 				if($model->matriculaalumno == Yii::app()->user->id){
 				
+					// Valida si fue posible registrar los cambios hechos al
+					// modelo, en la base de datos.
 					if($model->save()) {
+					
+						// Valida si fue posible cambiar el
+						// estatus de la solicitud de problemas de
+						// inscripción a 'Terminada'.
 						if($this->needsToSendMail($model)) {
+						
+							// Envía un e-mail al creador de la solicitud, informándole sobre
+							// el cambio de estatus.
 							EMailSender::sendEmail($this->createEmailBody($model), $this->createSubject($model), 
 															getEmailAddress($model->matriculaalumno));
 
 						}
 					
-						
 						$this->redirect(array('view','id'=>$model->id));
 
 					}
 				
 				}else{
+					
+					// El usuario actual no es el creador de
+					// la solicitud de problemas de inscripción. En este
+					// caso se lanza una excepción de HTTP, con una
+					// descripción del error.
 					throw new CHttpException(400,'No es posible acceder a la solicitud con el identificador proporcionado.');
 				}
-				
+			
+			// Valida si el usuario actual es un director de carrera, un
+			// asistente o una secretaria.
 			}else if (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Asistente' || Yii::app()->user->rol == 'Secretaria' ){
 			
+				// Almacena la matrícula del alumno que creó la solicitud.
 				$matricula = $model->matriculaalumno;
+				
+				// Almacena el nombre de usuario (nómina) del
+				// usuario actual.
 				$nomina = Yii::app()->user->id;
+				
+				// Valida si el alumno que creó la solicitud es
+				// un alumno de la carrera o carreras en las que
+				// labora el usuario.
 				$challenge = Empleado::model()->findBySql('SELECT matricula FROM carrera_tiene_empleado JOIN alumno ON alumno.idcarrera = carrera_tiene_empleado.idcarrera AND carrera_tiene_empleado.nomina = \''.$nomina.'\' AND alumno.matricula =\''.$matricula.'\'');
 			
+				// Valida si la variable $challenge no
+				// está vacía. Si no está vacía significa que
+				// el modelo corresponde a uno de los alumnos de
+				// las carreras en las que labora el empleado.
 				if(!empty($challenge)){
 				
-				
-			
+					// Valida si fue posible registrar los
+					// cambios hechos al modelo, en la
+					// base de datos.
 					if($model->save()) {
+					
+						// Valida si fue posible cambiar el estatus de
+						// la solicitud a 'Terminada'.
 						if($this->needsToSendMail($model)) {
+							
+							// Envía un e-mail al alumno que creó la
+							// solicitud de problemas de inscripción. En el
+							// e-mail se informa sobre el cambio de estatus de
+							// la solicitud.
 							EMailSender::sendEmail($this->createEmailBody($model), $this->createSubject($model), 
 															getEmailAddress($model->matriculaalumno));
 
 						}
 					
-						
-							$this->redirect(array('view','id'=>$model->id));
+						$this->redirect(array('view','id'=>$model->id));
 
 					}
 				
+				// La solicitud no existe o no fue creada por algún alumno de
+				// las carreras en las que labora el empleado. En este caso se
+				// lanza una excepción de HTTP, con una descripción del error.
 				}else{
 					throw new CHttpException(400,'No se encontró la solicitud a editar.');
 				}
 			
+			// El resto de los casos, que corresponde a los administradores generales.
 			}else{
+			
+				// Valida si los cambios hechos al
+				// modelo pudieron ser registrados en
+				// la base de datos.
 				if($model->save()) {
+				
+					// Valida si se pudo cambiar el
+					// estatus de la solicitud a 'Terminada'.
 					if($this->needsToSendMail($model)) {
+					
+						// Envía un e-mail al alumno que creó la solicitud. En el
+						// e-mail se informa sobre el cambio de estatus.
 						EMailSender::sendEmail($this->createEmailBody($model), $this->createSubject($model), 
 														getEmailAddress($model->matriculaalumno));
 
 					}
 				
 					
-						$this->redirect(array('view','id'=>$model->id));
+					$this->redirect(array('view','id'=>$model->id));
 
 				}
 			}
 			
 		}
 
+		// Valida si el usuario actual es un alumno.
 		if(Yii::app()->user->rol == 'Alumno'){
 
+			// Valida si la solicitud de problemas de
+			// inscripción fue creada por el usuario actual.
 			if(Yii::app()->user->id == $model->matriculaalumno){
+				
+				// Se despliega una forma para
+				// actualizar a la solicitud de
+				// problemas de inscripción.
 				$this->render('update',array(
 				'model'=>$model,
 				));
+			
+			// La solicitud de problemas de inscripción no fue
+			// creada por el usuario actual. En este caso se
+			// lanza una excepción de HTTP, con una descripción del
+			// error.
 			}else{
 				throw new CHttpException(400,'No es posible acceder a la solicitud con el identificador proporcionado.');
 			}
