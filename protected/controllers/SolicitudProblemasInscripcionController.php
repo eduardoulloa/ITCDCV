@@ -371,24 +371,48 @@ class SolicitudProblemasInscripcionController extends Controller
 			}else{
 				throw new CHttpException(400,'No es posible acceder a la solicitud con el identificador proporcionado.');
 			}
-		
+		// Valida si el usuario actual es un director, un asistente o una secretaria.
 		}else if(Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Asistente' || Yii::app()->user->rol == 'Secretaria' ){
+			
+			// Almacena la matrícula del alumno que creó la
+			// solicitud de problemas de inscripción.
 			$matricula = $model->matriculaalumno;
+			
+			// Almacena el nombre de usuario del
+			// usuario actual.
 			$nomina = Yii::app()->user->id;
+			
+			// Valida si el alumno que creó la
+			// solicitud de problemas de inscripción es
+			// de alguna de las carreras en las que
+			// labora el usuario actual.
 			$challenge = Empleado::model()->findBySql('SELECT matricula FROM carrera_tiene_empleado JOIN alumno ON alumno.idcarrera = carrera_tiene_empleado.idcarrera AND carrera_tiene_empleado.nomina = \''.$nomina.'\' AND alumno.matricula =\''.$matricula.'\'');
 		
+			// Valida si la variable $challenge no está vacía. Si
+			// no está vacía significa que el alumno que creó la
+			// solicitud es de alguna de las carreras en las que
+			// labora el usuario actual.
 			if(!empty($challenge)){
 			
+				// Se despliega una forma para actualizar la
+				// solicitud de problemas de inscripción.
 				$this->render('update',array(
 					'model'=>$model,
 				));
 		
-			
+			// La solicitud de problemas de inscripción no existe o
+			// no fue creada por ningún alumno de las carreras en las que
+			// labora el usuario actual.
 			}else{
 				throw new CHttpException(400,'No se encontro la solicitud a editar.');
 			}
+			
+		// El resto de los casos, que corresponde a los
+		// administradores generales.
 		}else{
 		
+			// Se despliega una forma para actualizar la
+			// solicitud de problemas de inscripción.
 			$this->render('update',array(
 				'model'=>$model,
 			));
@@ -396,11 +420,26 @@ class SolicitudProblemasInscripcionController extends Controller
 		}
 	}
 	
+	/**
+	 * Cambia el estatus de una solicitud a
+	 * 'Terminada'.
+	 * @param CModel el modelo cuyo estatus se modificará
+	 * @return CModel el modelo con el estatus cambiado a 'Terminada'
+	 */
 	public function needsToSendMail($model)
 	{
 		return $model->attributes['status'] == 'terminada';
 	}
 	
+	/**
+	 * Crea el cuerpo del e-mail que se enviará al
+	 * alumno que creó la solicitud de problemas de
+	 * inscripción. En el cuerpo del mensaje se incluyen
+	 * los comentarios que el alumno ingresó al momento de
+	 * crear la solicitud.
+	 * @param CModel el modelo a partir del cual se enviará el e-mail
+	 * @return string el cuerpo del e-mail
+	 */
 	public function createEmailBody($model) 
 	{
 		$body = "";
@@ -408,6 +447,14 @@ class SolicitudProblemasInscripcionController extends Controller
 		return $body;
 	}
 	
+	/**
+	 * Crea el asunto del e-mail que se enviará al
+	 * alumno que creó la solicitud de problemas de
+	 * inscripción. En el asunto se incluye el ID de
+	 * la solicitud.
+	 * @param CModel el modelo a partir del cual se enviará el e-mail
+	 * @return string el asunto del e-mail
+	 */
 	public function createSubject($model)
 	{
 		$subject = "Reporte de Problema de Inscripcion con ID: ".$model->id;
@@ -415,18 +462,18 @@ class SolicitudProblemasInscripcionController extends Controller
 	}
 
 	/**
-	 * Deletes a particular model.
-	 * If deletion is successful, the browser will be redirected to the 'admin' page.
-	 * @param integer $id the ID of the model to be deleted
+	 * Elimina un modelo en particular.
+	 * Si la eliminación es exitosa, el navegador será redirigido a la página de 'admin'.
+	 * @param integer $id el ID del modelo a eliminar
 	 */
 	public function actionDelete($id)
 	{
 		if(Yii::app()->request->isPostRequest)
 		{
-			// we only allow deletion via POST request
+			// Solo se permite eliminación vía una petición POST.
 			$this->loadModel($id)->delete();
 
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+			// Si es una petición AJAX (impulsada por la vista de tabla de admin) no se debe redirigir al navegador.
 			if(!isset($_GET['ajax']))
 				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 		}
@@ -435,47 +482,30 @@ class SolicitudProblemasInscripcionController extends Controller
 	}
 
 	/**
-	 * Enlista todos los modelos, dependiendo del rol del usuario.
+	 * Enlista a todos los modelos, dependiendo del rol del usuario.
 	 */
 	public function actionIndex()
 	{
-		/*$criteria = NULL;
-	
-		if (Yii::app()->user->rol == 'Alumno'){ //el usuario es un alumno
-		$mat = Yii::app()->user->id;
-			$criteria = new CDbCriteria(array(
-					'condition'=>'status!=\'Terminada\' AND matriculaalumno ='.$mat));
-		}else if(Yii::app()->user->rol == 'Director'){ //el usuario es un director
-			$criteria = new CDbCriteria(array(
-					'condition'=>'status!=\'Terminada\''));
-		}
 		
-		$solicitudes=array();
-		
-		$solicitudes=SolicitudProblemasInscripcion::model()->findall($criteria);
-		
-		$dataProvider= new CArrayDataProvider(
-				$solicitudes, array(
-					'sort'=> array(
-						'attributes'=> array(
-							'fechahora',
-							),
-						'defaultOrder'=>'fechahora'
-						),
-					'pagination'=> array(
-						'pageSize'=>100,
-						),
-					));*/
-	
-		
+		// Valida si el usuario actual es un alumno.
 		if(Yii::app()->user->rol == 'Alumno'){
 		
+			// Almacena el nombre de usuario (matrícula) del
+			// usuario actual.
 			$mat = Yii::app()->user->id;
+			
+			// Criterios para obtener las solicitudes de
+			// problemas de inscripción del usuario actual.
 			$criteria = new CDbCriteria(array(
 					'condition'=>'matriculaalumno ='.$mat));
-					
+			
+			// Obtiene los modelos de las solicitudes de
+			// problemas de inscripción del usuario actual.
 			$solicitudes=SolicitudProblemasInscripcion::model()->findall($criteria);
 			
+			// Criterios para ordenar las solicitudes de
+			// problemas de inscripción al momento de
+			// desplegarlas.
 			$dataProvider= new CArrayDataProvider(
 					$solicitudes, array(
 						'sort'=> array(
@@ -485,20 +515,31 @@ class SolicitudProblemasInscripcionController extends Controller
 							'defaultOrder'=>'fechahora DESC'
 							),
 						));
-						
+		
+		// Valida si el usuario actual es un director, un asistente o una secretaria.
 		}else if (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Asistente' || Yii::app()->user->rol == 'Secretaria'){
 			
+			// Almacena el nombre de usuario (nómina) del
+			// usuario actual.
 			$nomina = Yii::app()->user->id;
 		
-			
+			// Criterios para obtener las solicitudes de problemas de
+			// inscripción de los alumnos inscritos en aquellas carreras en
+			// las que labora el usuario actual
 			$criteria_directores = new CDbCriteria(array(
 					'join'=>'JOIN alumno AS a ON t.matriculaalumno = a.matricula
 					JOIN carrera_tiene_empleado AS c ON a.idcarrera = c.idcarrera AND c.nomina = \''.$nomina.'\'',
 					'condition'=>'status != \'Terminada\'',
 					));
 
+			// Obtiene las solicitudes de problemas de inscripción de los
+			// alumnos inscritos en aquellas carreras en las que
+			// labora el usuario actual.
 			$solicitudes_para_directores = SolicitudProblemasInscripcion::model()->findall($criteria_directores);
 			
+			// Criterios para ordenar las solicitudes de
+			// problemas de inscripción al momento de
+			// desplegarlas
 			$dataProvider = new CArrayDataProvider ($solicitudes_para_directores, array(
 					'sort'=> array(
 							'attributes'=> array(
@@ -507,9 +548,13 @@ class SolicitudProblemasInscripcionController extends Controller
 							'defaultOrder'=>'fechahora DESC'
 							),
 						));
-	
+						
+		// Valida si el usuario actual es un administrador general.
 		}else if(Yii::app()->user->rol == 'Admin'){
 		
+			// Criterios para ordenar las
+			// solicitudes de problemas de inscripción al
+			// momento de desplegarlas.
 			$dataProvider = new CActiveDataProvider('SolicitudProblemasInscripcion', array(
 					'sort'=>array(
 							'attributes'=>array(
@@ -520,21 +565,22 @@ class SolicitudProblemasInscripcionController extends Controller
 				)
 			);
 			
-			
 		}
 		
+		// Despliega una página con información de
+		// las solicitudes de problemas de inscripción.
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
 	}
 
 	/**
-	 * Manages all models.
+	 * Administra a todos los modelos.
 	 */
 	public function actionAdmin()
 	{
 		$model=new SolicitudProblemasInscripcion('search');
-		$model->unsetAttributes();  // clear any default values
+		$model->unsetAttributes();  // Elimina los valores por default.
 		if(isset($_GET['SolicitudProblemasInscripcion']))
 			$model->attributes=$_GET['SolicitudProblemasInscripcion'];
 
@@ -544,9 +590,9 @@ class SolicitudProblemasInscripcionController extends Controller
 	}
 
 	/**
-	 * Returns the data model based on the primary key given in the GET variable.
-	 * If the data model is not found, an HTTP exception will be raised.
-	 * @param integer the ID of the model to be loaded
+	 * Devuelve el modelo de datos en base a la llave primaria proporcionada en la variable GET.
+	 * Si no se encuentra el modelo de datos, se lanzará una excepción de HTTP.
+	 * @param integer el ID del modelo a cargar
 	 */
 	public function loadModel($id)
 	{
@@ -557,8 +603,8 @@ class SolicitudProblemasInscripcionController extends Controller
 	}
 
 	/**
-	 * Performs the AJAX validation.
-	 * @param CModel the model to be validated
+	 * Realiza una validación AJAX.
+	 * @param CModel el modelo a validar
 	 */
 	protected function performAjaxValidation($model)
 	{
