@@ -1,9 +1,9 @@
 <?php
-
 /**
- * ContactForm class.
- * ContactForm is the data structure for keeping
- * contact form data. It is used by the 'contact' action of 'SiteController'.
+ * Clase ContactForm.
+ * ContactForm es la estructura de datos para almacenar
+ * datos de una forma de contacto. Es utilizada por la acción 'contact' de
+ * 'SiteController'.
  */
 class ContactForm extends CFormModel
 {
@@ -14,24 +14,24 @@ class ContactForm extends CFormModel
 	public $verifyCode;
 
 	/**
-	 * Declares the validation rules.
+	 * Declara las reglas de validación.
 	 */
 	public function rules()
 	{
 		return array(
-			// name, email, subject and body are required
+			// El nombre, dirección de e-mail, asunto y cuerpo son requeridos.
 			array('name, email, subject, body', 'required'),
-			// email has to be a valid email address
+			// El e-mail tiene que ser una dirección de e-mail válida.
 			array('email', 'email'),
-			// verifyCode needs to be entered correctly
+			// El 'verifyCode' debe ser ingresado correctamente.
 			array('verifyCode', 'captcha', 'allowEmpty'=>!CCaptcha::checkRequirements()),
 		);
 	}
 
 	/**
-	 * Declares customized attribute labels.
-	 * If not declared here, an attribute would have a label that is
-	 * the same as its name with the first letter in upper case.
+	 * Declara etiquetas de atributos personalizadas.
+	 * Si no se declara aquí, un atributo tendrá una etiqueta que sería
+	 * igual a su nombre, con la primera letra en mayúscula.
 	 */
 	public function attributeLabels()
 	{

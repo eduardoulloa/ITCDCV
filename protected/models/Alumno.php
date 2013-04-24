@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This is the model class for table "alumno".
+ * Esta es la clase modelo para la tabla "alumno".
  *
- * The followings are the available columns in table 'alumno':
+ * A continuación se muestran las columnas disponibles en la tabla 'alumno':
  * @property string $matricula
  * @property string $nombre
  * @property string $apellido_paterno
@@ -15,7 +15,7 @@
  * @property integer $idcarrera
  * @property string $email
  *
- * The followings are the available model relations:
+ * A continuación se indican las relaciones disponibles para el modelo:
  * @property Carrera $idcarrera0
  * @property SolicitudBajaMateria[] $solicitudBajaMaterias
  * @property SolicitudBajaSemestre[] $solicitudBajaSemestres
@@ -27,8 +27,8 @@
 class Alumno extends CActiveRecord
 {
 	/**
-	 * Returns the static model of the specified AR class.
-	 * @return Alumno the static model class
+	 * Devuelve el modelo estático de la clase de AR especificada.
+	 * @return Alumno la clase del modelo estático
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -36,7 +36,7 @@ class Alumno extends CActiveRecord
 	}
 	
 	/**
-	 * @return string the associated database table name
+	 * @return string el nombre asociado a la tabla en la base de datos
 	 */
 	public function tableName()
 	{
@@ -44,12 +44,12 @@ class Alumno extends CActiveRecord
 	}
 
 	/**
-	 * @return array validation rules for model attributes.
+	 * @return array reglas de validación para los atributos del modelo
 	 */
 	public function rules()
 	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
+		// NOTA: usted solo debe definir reglas para aquellos atributos que 
+		// serán ingresados por usuarios.
 		return array(
 			array('matricula, nombre, apellido_paterno, plan, semestre, password, idcarrera, email', 'required'),
 			array('semestre, idcarrera', 'numerical', 'integerOnly'=>true),
@@ -58,19 +58,19 @@ class Alumno extends CActiveRecord
 			array('plan', 'length', 'max'=>10),
 			array('password, email', 'length', 'max'=>45),
 			array('anio_graduado', 'length', 'max'=>4),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
+			// La siguiente regla es empleada por search().
+			// Por favor remueva aquellos atributos que no deben ser buscados.
 			array('matricula, nombre, apellido_paterno, apellido_materno, plan, semestre, password, anio_graduado, idcarrera, email', 'safe', 'on'=>'search'),
 		);
 	}
 
 	/**
-	 * @return array relational rules.
+	 * @return array reglas relacionales
 	 */
 	public function relations()
 	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
+		// NOTA: posiblemente requerirá ajustar el nombre de la relación y el nombre de clase
+		// relacionada para las relaciones generadas automáticamente a continuación.
 		return array(
 			'idcarrera0' => array(self::BELONGS_TO, 'Carrera', 'idcarrera'),
 			'solicitudBajaMaterias' => array(self::HAS_MANY, 'SolicitudBajaMateria', 'matriculaalumno'),
@@ -83,7 +83,7 @@ class Alumno extends CActiveRecord
 	}
 
 	/**
-	 * @return array customized attribute labels (name=>label)
+	 * @return array etiquetas de atributos personalizadas (nombre=>etiqueta)
 	 */
 	public function attributeLabels()
 	{
@@ -102,25 +102,28 @@ class Alumno extends CActiveRecord
 	}
 
 	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 * Obtiene una lista de los modelos en base a las condiciones actuales de búsqueda/filtro.
+	 * @return CActiveDataProvider el proveedor de datos (data provider) que puede devolver modelos en base a las
+	 * condiciones de búsqueda/filtro
 	 */
 	public function search()
 	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
+		// Advertencia: Por favor modifique el siguiente código para remover aquellos
+		// atributos que no deben ser buscados.
 
 		$criteria=new CDbCriteria;
 		
 		$rol = Yii::app()->user->rol;
 		$nombre_de_usuario = Yii::app()->user->id;
 		
-		/*
-			Modifico el query para que los directores puedan buscar únicamente a los alumnos inscritos en sus carreras.
-		*/
+		// Valida si el usuario actual es un director de carrera.
 		if($rol == 'Director'){
+			
+			// Criterios para que los directores puedan buscar únicamente a los
+			// alumnos inscritos en sus carreras.
 			$criteria->join = 'JOIN carrera_tiene_empleado AS c ON t.idcarrera = c.idcarrera AND
 			c.nomina = \''.$nombre_de_usuario.'\'';
+			
 		}
 
 		$criteria->compare('matricula',$this->matricula,true);

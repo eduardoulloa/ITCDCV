@@ -1,9 +1,8 @@
 <?php
-
 /**
- * This is the model class for table "empleado".
+ * Esta es la clase modelo para la tabla "empleado".
  *
- * The followings are the available columns in table 'empleado':
+ * A continuación se indican las columnas disponibles en la tabla 'empleado':
  * @property string $nomina
  * @property string $nombre
  * @property string $apellido_paterno
@@ -11,14 +10,14 @@
  * @property string $password
  * @property string $puesto
  *
- * The followings are the available model relations:
+ * A continuación se indican las relaciones disponibles para el modelo:
  * @property Carrera[] $carreras
  */
 class Empleado extends CActiveRecord
 {
 	/**
-	 * Returns the static model of the specified AR class.
-	 * @return Empleado the static model class
+	 * Devuelve el modelo estático para la clase de AR especificada.
+	 * @return Empleado la clase del modelo estático
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -26,7 +25,7 @@ class Empleado extends CActiveRecord
 	}
 
 	/**
-	 * @return string the associated database table name
+	 * @return string el nombre asociado a la tabla en la base de datos
 	 */
 	public function tableName()
 	{
@@ -34,38 +33,38 @@ class Empleado extends CActiveRecord
 	}
 
 	/**
-	 * @return array validation rules for model attributes.
+	 * @return array reglas de validación para los atributos del modelo
 	 */
 	public function rules()
 	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
+		// NOTA: usted solo debe definir reglas para aquellos atributos que
+		// serán ingresados por usuarios.
 		return array(
 			array('nomina, nombre, apellido_paterno, password, puesto', 'required'),
 			array('nomina', 'length', 'max'=>9),
 			array('nombre, apellido_paterno, apellido_materno', 'length', 'max'=>60),
 			array('password', 'length', 'max'=>45),
 			array('puesto', 'length', 'max'=>11),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
+			// La siguiente regla es empleada por search().
+			// Por favor remueva aquellos atributos que no deben ser buscados.
 			array('nomina, nombre, apellido_paterno, apellido_materno, password, puesto', 'safe', 'on'=>'search'),
 		);
 	}
 
 	/**
-	 * @return array relational rules.
+	 * @return array reglas relacionales
 	 */
 	public function relations()
 	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
+		// NOTA: posiblemente usted tendrá que ajustar el nombre y el nombre de la
+		// clase relacionada para las siguientes relaciones que se generan automáticamente:
 		return array(
 			'carreras' => array(self::MANY_MANY, 'Carrera', 'carrera_tiene_empleado(nomina, idcarrera)'),
 		);
 	}
 
 	/**
-	 * @return array customized attribute labels (name=>label)
+	 * @return array etiquetas de atributos personalizadas (nombre=>etiqueta)
 	 */
 	public function attributeLabels()
 	{
@@ -80,20 +79,29 @@ class Empleado extends CActiveRecord
 	}
 
 	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 * Obtiene una lista de modelos en base a las condiciones actuales de búsqueda/filtro.
+	 * @return CActiveDataProvider el proveedor de datos (data provider) que puede devolver modelos en base a las
+	 * condiciones de de búsqueda/filtro
 	 */
 	public function search()
-	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
-
+	{		
+		// Advertencia: Por favor modifique el siguiente código para remover aquellos atributos que
+		// no deben ser buscados.
+	
+		// Crea un nuevo modelo de CDbCriteria.
 		$criteria=new CDbCriteria;
+		
+		// Almacena el rol del usuario actual.
 		$rol = Yii::app()->user->rol;
+		
+		// Almacena el nombre de usuario del usuario actual.
 		$nombre_de_usuario = Yii::app()->user->id;
 		
+		// Valida si el usuario actual es un director de carrera.
 		if($rol == 'Director'){
-		
+			
+			// Criterios para que los directores de carrera puedan buscar únicamente a los empleados
+			// que laboran en las carreras donde los directores laboran.
 			$criteria->condition = 'nomina IN (SELECT nomina FROM carrera_tiene_empleado WHERE idcarrera IN (SELECT idcarrera FROM carrera_tiene_empleado WHERE nomina =  \''.$nombre_de_usuario.'\') GROUP BY nomina)';
 			$criteria->group = 'nomina';
 

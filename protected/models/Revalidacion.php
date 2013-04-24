@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This is the model class for table "revalidacion".
+ * Esta es la clase modelo para la tabla "revalidación".
  *
- * The followings are the available columns in table 'revalidacion':
+ * A continuación se indican las columnas disponibles en la tabla 'revalidacion':
  * @property integer $id
  * @property string $fechahora
  * @property string $universidad
@@ -15,14 +15,14 @@
  * @property string $anio_de_revalidacion
  * @property integer $idcarrera
  *
- * The followings are the available model relations:
+ * A continuación se indican las relaciones disponibles para el modelo:
  * @property Carrera $idcarrera0
  */
 class Revalidacion extends CActiveRecord
 {
 	/**
-	 * Returns the static model of the specified AR class.
-	 * @return Revalidacion the static model class
+	 * Devuelve el modelo estático de la clase de AR especificada.
+	 * @return Revalidacion la clase del modelo estático
 	 */
 	public static function model($className=__CLASS__)
 	{

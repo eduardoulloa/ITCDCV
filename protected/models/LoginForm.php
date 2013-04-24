@@ -1,9 +1,10 @@
 <?php
 
 /**
- * LoginForm class.
- * LoginForm is the data structure for keeping
- * user login form data. It is used by the 'login' action of 'SiteController'.
+ * Clase LoginForm.
+ * LoginForm es la estructura de datos para almacenar
+ * la información de 'login' de un usuario, a partir de una forma. Es utilizada por
+ * la acción 'login' de 'SiteController'.
  */
 class LoginForm extends CFormModel
 {
@@ -14,24 +15,24 @@ class LoginForm extends CFormModel
 	private $_identity;
 
 	/**
-	 * Declares the validation rules.
-	 * The rules state that username and password are required,
-	 * and password needs to be authenticated.
+	 * Declara las reglas de validación.
+	 * Las reglas indican que el nombre de usuario y la contraseña son
+	 * requeridos, y que la contraseña debe ser autenticada.
 	 */
 	public function rules()
 	{
 		return array(
-			// username and password are required
+			// El nombre de usuario y la contraseña son requeridos.
 			array('username, password', 'required'),
-			// rememberMe needs to be a boolean
+			// rememberMe debe ser de tipo boolean.
 			array('rememberMe', 'boolean'),
-			// password needs to be authenticated
+			// La contraseña debe ser autenticada.
 			array('password', 'authenticate'),
 		);
 	}
 
 	/**
-	 * Declares attribute labels.
+	 * Declara las etiquetas de los atributos.
 	 */
 	public function attributeLabels()
 	{
@@ -43,8 +44,8 @@ class LoginForm extends CFormModel
 	}
 
 	/**
-	 * Authenticates the password.
-	 * This is the 'authenticate' validator as declared in rules().
+	 * Autentifica la contraseña.
+	 * Este es el validador 'authenticate', declarado en rules().
 	 */
 	public function authenticate($attribute,$params)
 	{
@@ -68,8 +69,9 @@ class LoginForm extends CFormModel
 	}
 
 	/**
-	 * Logs in the user using the given username and password in the model.
-	 * @return boolean whether login is successful
+	 * Inicia la sesión del usuario utilizando el nombre de usuario y la contraseña proporcionados en
+	 * el modelo.
+	 * @return boolean un valor booleano, indicando si el inicio de sesión fue exitoso
 	 */
 	public function login()
 	{
@@ -80,7 +82,7 @@ class LoginForm extends CFormModel
 		}
 		if($this->_identity->errorCode===UserIdentity::ERROR_NONE)
 		{
-			$duration=$this->rememberMe ? 3600*24*30 : 0; // 30 days
+			$duration=$this->rememberMe ? 3600*24*30 : 0; // 30 días
 			Yii::app()->user->login($this->_identity,$duration);
 			return true;
 		}

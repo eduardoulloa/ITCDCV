@@ -148,128 +148,223 @@ class SugerenciaController extends Controller
 			$criteria = new CDbCriteria(array(
 						'condition'=>'matriculaalumno = '.$mat.' AND id = '.$id));
 						
+			// Obtiene el modelo de la sugerencia.
 			$sugerencias=Sugerencia::model()->find($criteria);
 			
+			// Valida si el arreglo $sugerencias está
+			// vacío. Si está vacío significa que la sugerencia no
+			// existe o no fue creada por el usuario actual. En este
+			// caso se lanza una excepción de HTTP, con una descripción del
+			// error.
 			if(sizeof($sugerencias) == 0){
 				throw new CHttpException(403,'Usted no está autorizado para realizar esta acción.');
 			}
 		}
 		
+		// Despliega una página con información de
+		// la sugerencia.
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));
 	}
 
 	/**
-	 * Creates a new model.
-	 * If creation is successful, the browser will be redirected to the 'view' page.
+	 * Crea un nuevo modelo.
+	 * Si la creación es exitosa, el navegador será redirigido a la página 'view'.
 	 */
 	public function actionCreate()
 	{
+		// Crea un nuevo modelo.
 		$model=new Sugerencia;
 
-		// Uncomment the following line if AJAX validation is needed
+		// Quitar el comentario de la siguiente línea si se requiere validación AJAX.
 		// $this->performAjaxValidation($model);
 
+		// Valida si se recibió algún modelo vía alguna petición POST.
 		if(isset($_POST['Sugerencia']))
 		{
+			// Asigna los atributos al modelo.
 			$model->attributes=$_POST['Sugerencia'];
+			
+			// Almacena el nombre de usuario (matrícula) del
+			// usuario actual.
 			$mat = Yii::app()->user->id;
+			
+			// Asigna la matrícula del alumno al modelo.
 			$model->setAttribute('matriculaalumno',$mat);
+			
+			// Valida si se pudo registrar el modelo en
+			// la base de datos.
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
+		// Despliega una forma para crear la
+		// nueva sugerencia.
 		$this->render('create',array(
 			'model'=>$model,
 		));
 	}
 
 	/**
-	 * Updates a particular model.
-	 * If update is successful, the browser will be redirected to the 'view' page.
-	 * @param integer $id the ID of the model to be updated
+	 * Actualiza un modelo en particular.
+	 * Si la actualización es exitosa, el navegador será redirigido a la página 'view'.
+	 * @param integer $id el ID del modelo a actualizar
 	 */
 	public function actionUpdate($id)
 	{
-		
+		// Carga el modelo.
 		$model=$this->loadModel($id);
 		
-		// Uncomment the following line if AJAX validation is needed
+		// Quitar el comentario de la siguiente línea si se requiere validación AJAX.
 		// $this->performAjaxValidation($model);
 
+		// Valida si se recibió algún modelo vía alguna petición POST.
 		if(isset($_POST['Sugerencia']))
 		{
-		
+			// Asigna los atributos al modelo.
 			$model->attributes=$_POST['Sugerencia'];
 		
+			// Valida si el usuario actual es un director o un asistente.
 			if(Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Asistente' ){
 			
+				// Almacena la matrícula del alumno que creó la
+				// sugerencia.
 				$matricula = $model->matriculaalumno;
+				
+				// Almacena el nombre de usuario del usuario actual.
 				$nomina = Yii::app()->user->id;
+				
+				// Valida que el alumno que creó la sugerencia esté
+				// inscrito en alguna de las carreras en las que labora
+				// el usuario actual.
 				$challenge = Empleado::model()->findBySql('SELECT matricula FROM carrera_tiene_empleado JOIN alumno ON alumno.idcarrera = carrera_tiene_empleado.idcarrera AND carrera_tiene_empleado.nomina = \''.$nomina.'\' AND alumno.matricula =\''.$matricula.'\'');
 			
+				// Valida que la variable $challenge no esté vacía; es decir,
+				// que el alumno que creó la sugerencia esté inscrito en alguna
+				// de las carreras en las que labora el usuario actual.
 				if(!empty($challenge)){
 				
-				
-			
+					// Valida si los cambios hechos en el modelo pudieron
+					// ser registrados en la base de datos.
 					if($model->save()) {
+					
+						// Valida si el estatus de la sugerencia pudo ser cambiado a
+						// 'Terminada'.
 						if($this->needsToSendMail($model)) {
+							
+							// Envía un e-mail al usuario que creó la sugerencia. En
+							// el e-mail se le informa al alumno sobre el cambio hecho en
+							// el estatus de la sugerencia.
 							EMailSender::sendEmail($this->createEmailBody($model), $this->createSubject($model), 
 															getEmailAddress($model->matriculaalumno));
 
 						}
 					
-						
-							$this->redirect(array('view','id'=>$model->id));
+						$this->redirect(array('view','id'=>$model->id));
 
 					}
 				
+				// La sugerencia no existe o no fue creada por ningún
+				// alumno registrado en las carreras en las que
+				// labora el usuario actual. En este caso se lanza una
+				// excepción de HTTP, con una descripción del error.
 				}else{
-					throw new CHttpException(400,'No se encontro la solicitud a editar.');
+				
+					throw new CHttpException(400,'No se encontró la solicitud a editar.');
+					
 				}
+				
+			// El resto de los casos, que corresponde a los administradores generales
 			}else{
 				
+				// Valida si los cambios hechos en el modelo pudieron
+				// ser registrados en la base de datos.
 				if($model->save())
 				{
+					// Valida si el estatus de la sugerencia se pudo cambiar a
+					// 'Terminada'.
 					if($this->needsToSendMail($model)) {
+						
+						// Envía un e-mail al alumno que creó la sugerencia. En el
+						// e-mail se le informa al alumno sobre el cambio en el
+						// estatus de la sugerencia.
 						EMailSender::sendEmail($this->createEmailBody($model), $this->createSubject($model), 
 														getEmailAddress($model->matriculaalumno));
+														
 					}
+					
 					$this->redirect(array('view','id'=>$model->id));
 				}
+				
 			}
+			
 		}
+		
+		// Valida si el usuario actual es un director de carrera o un asistente.
 		if(Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Asistente' ){
 			
+			// Almacena la matrícula del alumno que creó la sugerencia.
 			$matricula = $model->matriculaalumno;
+			
+			// Almacena el nombre de usuario del usuario actual.
 			$nomina = Yii::app()->user->id;
+			
+			// Valida que el alumno que creó la sugerencia esté
+			// inscrito en alguna de las carreras en las que
+			// labora el usuario actual.
 			$challenge = Empleado::model()->findBySql('SELECT matricula FROM carrera_tiene_empleado JOIN alumno ON alumno.idcarrera = carrera_tiene_empleado.idcarrera AND carrera_tiene_empleado.nomina = \''.$nomina.'\' AND alumno.matricula =\''.$matricula.'\'');
 		
+			// Valida si la variable $challenge no está vacía; es decir,
+			// si el alumno que creó la solicitud está inscrito en
+			// alguna de las carreras en las que labora el usuario actual.
 			if(!empty($challenge)){
-			
+				
+				// Despliega una forma para actualizar la
+				// sugerencia.
 				$this->render('update',array(
 					'model'=>$model,
 				));
-		
 			
+			// El alumno que creó la solicitud no está inscrito en ninguna de
+			// las carreras en las que labora el usuario actual.
 			}else{
 				throw new CHttpException(400,'No se encontro la solicitud a editar.');
 			}
 			
-			
+		// El resto de los casos, que corresponde a los administradores generales
 		}else{
+			
+			// Despliega una forma para actualizar la
+			// sugerencia.
 			$this->render('update',array(
 				'model'=>$model,
 			));
-		}		
+			
+		}
+		
 	}
 	
+	/**
+	 * Cambia el estatus de una sugerencia a
+	 * 'Terminada'.
+	 * @param CModel el modelo cuyo estatus se modificará
+	 * @return CModel el modelo con el estatus cambiado a 'Terminada'
+	 */
 	public function needsToSendMail($model)
 	{
 		return $model->attributes['status'] == 'terminada';
 	}
 	
+	/**
+	 * Crea el cuerpo del e-mail que será enviado al
+	 * alumno que creó la sugerencia. El cuerpo del
+	 * mensaje contiene los detalles de la sugerencia
+	 * elaborada por el alumno y la respuesta del
+	 * director o asistente.
+	 * @param CModel el modelo a partir del cual se enviará el e-mail
+	 * @return string el cuerpo del e-mail
+	 */
 	public function createEmailBody($model) 
 	{
 		$body = "";
@@ -278,6 +373,13 @@ class SugerenciaController extends Controller
 		return $body;
 	}
 	
+	/**
+	 * Crea el asunto del e-mail que será enviado al
+	 * alumno que creó la sugerencia. En el asunto se
+	 * indica el ID de la sugerencia.
+	 * @param CModel el modelo a partir del cual se enviará el e-mail
+	 * @return string el asunto del e-mail
+	 */
 	public function createSubject($model)
 	{
 		$subject = "Sugerencia con ID: ".$model->id;
@@ -285,63 +387,82 @@ class SugerenciaController extends Controller
 	}
 
 	/**
-	 * Deletes a particular model.
-	 * If deletion is successful, the browser will be redirected to the 'admin' page.
-	 * @param integer $id the ID of the model to be deleted
+	 * Elimina un modelo en particular.
+	 * Si la eliminación es exitosa, el navegador será redirigido a la página 'admin'.
+	 * @param integer $id el ID del modelo a eliminar
 	 */
 	public function actionDelete($id)
 	{
 		if(Yii::app()->request->isPostRequest)
 		{
-			// we only allow deletion via POST request
+			// Solo se permite eliminación vía una petición POST.
 			$this->loadModel($id)->delete();
 
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+			// Si es una petición AJAX (impulsada por eliminación vía la vista de tabla de admin) no se debe
+			// redirigir al navegador.
 			if(!isset($_GET['ajax']))
 				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 		}
 		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+			throw new CHttpException(400,'Petición no válida. Por favor no repita esta petición.');
 	}
 
 	/**
-	 * Enlista todos los modelos, dependiendo del rol del usuario.
+	 * Enlista a todos los modelos, dependiendo del rol del usuario.
 	 */
 	public function actionIndex()
 	{
-		
-		
+		// Valida si el usuario actual es un alumno.
 		if(Yii::app()->user->rol == 'Alumno'){
-		
+			
+			// Almacena el nombre de usuario (matrícula) del
+			// alumno actual.
 			$mat = Yii::app()->user->id;
+			
+			// Criterios para obtener las sugerencias del
+			// alumno
 			$criteria = new CDbCriteria(array(
 					'condition'=>'matriculaalumno ='.$mat));
-					
+			
+			// Obtiene los modelos de las sugerencias creadas por el
+			// alumno.
 			$solicitudes=Sugerencia::model()->findall($criteria);
 			
+			// Criterios para ordenar las sugerencias al
+			// momento de desplegarlas.
 			$dataProvider= new CArrayDataProvider(
-					$solicitudes, array(
-						'sort'=> array(
-							'attributes'=> array(
-								'fechahora',
-								),
-							'defaultOrder'=>'fechahora DESC'
+				$solicitudes, array(
+					'sort'=> array(
+						'attributes'=> array(
+							'fechahora',
 							),
-						));
-						
+						'defaultOrder'=>'fechahora DESC'
+						),
+					));
+		
+		// Valida si el usuario es un director de carrera, un asistente, o una secretaria.
 		}else if (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Asistente' ||  Yii::app()->user->rol == 'Secretaria'){
 			
+			// Almacena el nombre de usuario (nómina) del
+			// usuario actual.
 			$nomina = Yii::app()->user->id;
 		
-			
+			// Criterios para obtener las sugerencias de los
+			// alumnos que están inscritos en las carreras en las que
+			// labora el usuario actual.
 			$criteria_directores = new CDbCriteria(array(
 					'join'=>'JOIN alumno AS a ON t.matriculaalumno = a.matricula
 					JOIN carrera_tiene_empleado AS c ON a.idcarrera = c.idcarrera AND c.nomina = \''.$nomina.'\'',
 					'condition'=>'status != \'Terminada\'',
 					));
-
+			
+			// Obtiene los modelos de las sugerencias de los
+			// alumnos que están inscritos en las carreras en las que
+			// labora el usuario actual.
 			$solicitudes_para_directores = Sugerencia::model()->findall($criteria_directores);
 			
+			// Criterios para ordenar las sugerencias al
+			// momento de desplegarlas
 			$dataProvider = new CArrayDataProvider ($solicitudes_para_directores, array(
 					'sort'=> array(
 							'attributes'=> array(
@@ -351,32 +472,38 @@ class SugerenciaController extends Controller
 							),
 						));
 	
-		
+		// Valida si el usuario actual es un administrador general.
 		}else if (Yii::app()->user->rol == 'Admin'){
+			
+			// Criterios para ordenar las sugerencias al
+			// momento de desplegarlas
 			$dataProvider = new CActiveDataProvider('Sugerencia', array(
-					'sort'=>array(
-							'attributes'=>array(
-								'fechahora',
-								),
-							'defaultOrder'=>'fechahora DESC'
+				'sort'=>array(
+						'attributes'=>array(
+							'fechahora',
 							),
-				)
+						'defaultOrder'=>'fechahora DESC'
+						),
+					)
 			);
+			
 		}
 		
-		
+		// Despliega una página con información de las
+		// sugerencias.
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
+		
 	}
 
 	/**
-	 * Manages all models.
+	 * Administra a todos los modelos.
 	 */
 	public function actionAdmin()
 	{
 		$model=new Sugerencia('search');
-		$model->unsetAttributes();  // clear any default values
+		$model->unsetAttributes();  // Elimina los valores por defecto.
 		if(isset($_GET['Sugerencia']))
 			$model->attributes=$_GET['Sugerencia'];
 
@@ -386,21 +513,21 @@ class SugerenciaController extends Controller
 	}
 
 	/**
-	 * Returns the data model based on the primary key given in the GET variable.
-	 * If the data model is not found, an HTTP exception will be raised.
-	 * @param integer the ID of the model to be loaded
+	 * Devuelve el modelo de datos en base a la llave primaria proporcionada en la variable GET.
+	 * Si el modelo de datos no es encontrado, se lanzará una excepción de HTTP.
+	 * @param integer el ID del modelo a cargar
 	 */
 	public function loadModel($id)
 	{
 		$model=Sugerencia::model()->findByPk($id);
 		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
+			throw new CHttpException(404,'La página solicitada no existe.');
 		return $model;
 	}
 
 	/**
-	 * Performs the AJAX validation.
-	 * @param CModel the model to be validated
+	 * Realiza una validación AJAX.
+	 * @param CModel el modelo a validar
 	 */
 	protected function performAjaxValidation($model)
 	{

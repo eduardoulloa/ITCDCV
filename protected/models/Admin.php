@@ -1,17 +1,17 @@
 <?php
 
-/**
- * This is the model class for table "admin".
+ /**
+ * Esta es la clase modelo para la tabla "admin".
  *
- * The followings are the available columns in table 'admin':
+ * A continuación se indican las columnas disponibles en la tabla 'admin':
  * @property string $username
  * @property string $password
  */
 class Admin extends CActiveRecord
 {
 	/**
-	 * Returns the static model of the specified AR class.
-	 * @return Admin the static model class
+	 * Devuelve el modelo estático de la clase de AR especificada.
+	 * @return Admin la clase del modelo estático
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -19,7 +19,7 @@ class Admin extends CActiveRecord
 	}
 
 	/**
-	 * @return string the associated database table name
+	 * @return string el nombre asociado a la tabla en la base de datos
 	 */
 	public function tableName()
 	{
@@ -27,34 +27,35 @@ class Admin extends CActiveRecord
 	}
 
 	/**
-	 * @return array validation rules for model attributes.
+	 * @return array reglas de validación para los atributos del modelo
 	 */
 	public function rules()
 	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
+		// NOTA: usted solo debe definir reglas para aquellos atributos que
+		// serán ingresados por usuarios.
 		return array(
 			array('username', 'length', 'max'=>20),
 			array('password', 'length', 'max'=>60),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
+			// La siguiente regla es empleada por search().
+			// Por favor remueva aquellos atributos que no deberán ser buscados.
 			array('username, password', 'safe', 'on'=>'search'),
 		);
 	}
 
 	/**
-	 * @return array relational rules.
+	 * @return array reglas relacionales
 	 */
 	public function relations()
 	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
+		// NOTA: posiblemente se deba ajustar el nombre de la relación y el
+		// nombre de clase relacionada para las relaciones que se generan
+		// automáticamente a continuación.
 		return array(
 		);
 	}
 
 	/**
-	 * @return array customized attribute labels (name=>label)
+	 * @return array etiquetas de atributos personalizadas (nombre=>etiqueta)
 	 */
 	public function attributeLabels()
 	{
@@ -65,13 +66,14 @@ class Admin extends CActiveRecord
 	}
 
 	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 * Obtiene una lista de modelos en base a las condiciones actuales de búsqueda/filtro.
+	 * @return CActiveDataProvider el proveedor de datos (data provider) que puede devolver modelos en base a las
+	 * condiciones de búsqueda/filtro.
 	 */
 	public function search()
 	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
+		// Advertencia: Por favor modifique el siguiente código para remover los atributos que
+		// no deben ser buscados.
 
 		$criteria=new CDbCriteria;
 

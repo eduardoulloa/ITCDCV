@@ -1,14 +1,14 @@
 <?php
 
-/**
- * This is the model class for table "carrera".
+ /**
+ * Esta es la clase modelo para la tabla "carrera".
  *
- * The followings are the available columns in table 'carrera':
+ * A continuación se indican las columnas disponibles en la tabla 'carrera':
  * @property integer $id
  * @property string $siglas
  * @property string $nombre
  *
- * The followings are the available model relations:
+ * A continuación se indican las relaciones disponibles para el modelo:
  * @property Alumno[] $alumnos
  * @property BoletinInformativo[] $boletinInformativos
  * @property Empleado[] $empleados
@@ -16,8 +16,8 @@
 class Carrera extends CActiveRecord
 {
 	/**
-	 * Returns the static model of the specified AR class.
-	 * @return Carrera the static model class
+	 * Devuelve el modelo estático de la clase de AR especificada.
+	 * @return Carrera la clase del modelo estático
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -25,7 +25,7 @@ class Carrera extends CActiveRecord
 	}
 
 	/**
-	 * @return string the associated database table name
+	 * @return string el nombre asociado a la tabla en la base de datos
 	 */
 	public function tableName()
 	{
@@ -33,29 +33,29 @@ class Carrera extends CActiveRecord
 	}
 
 	/**
-	 * @return array validation rules for model attributes.
+	 * @return array reglas de validación para los atributos del modelo
 	 */
 	public function rules()
 	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
+		// NOTA: usted solo debe definir reglas para aquellos atributos que
+		// serán ingresados por usuarios.
 		return array(
 			array('siglas, nombre', 'required'),
 			array('siglas', 'length', 'max'=>5),
 			array('nombre', 'length', 'max'=>80),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
+			// La siguiente regla es empleada por search().
+			// Por favor remueva aquellos atributos que no deberán ser buscados.
 			array('id, siglas, nombre', 'safe', 'on'=>'search'),
 		);
 	}
 
 	/**
-	 * @return array relational rules.
+	 * @return array reglas relacionales
 	 */
 	public function relations()
 	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
+		// NOTA: posiblemente usted deberá ajustar el nombre de la relación y de la
+		// clase relacionada para las siguientes relaciones que se generan automáticamente.
 		return array(
 			'alumnos' => array(self::HAS_MANY, 'Alumno', 'idcarrera'),
 			'boletinInformativos' => array(self::HAS_MANY, 'BoletinInformativo', 'idcarrera'),
@@ -64,7 +64,7 @@ class Carrera extends CActiveRecord
 	}
 
 	/**
-	 * @return array customized attribute labels (name=>label)
+	 * @return array etiquetas de atributos personalizadas (nombre=>etiqueta)
 	 */
 	public function attributeLabels()
 	{
@@ -76,13 +76,14 @@ class Carrera extends CActiveRecord
 	}
 
 	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 * Obtiene una lista de modelos en base a las condiciones actuales de búsqueda/filtro.
+	 * @return CActiveDataProvider el proveedor de datos (data provider) que puede devolver modelos en base a las
+	 * condiciones de búsqueda/filtro
 	 */
 	public function search()
-	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
+	{		
+		// Advertencia: Por favor modifique el siguiente código para remover atributos que
+		// no deben ser buscados.
 
 		$criteria=new CDbCriteria;
 
