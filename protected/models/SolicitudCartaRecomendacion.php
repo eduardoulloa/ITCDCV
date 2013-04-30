@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This is the model class for table "solicitud_carta_recomendacion".
+ * Esta es la clase modelo para la tabla "solicitud_carta_recomendacion".
  *
- * The followings are the available columns in table 'solicitud_carta_recomendacion':
+ * A continuación se indican las columnas disponibles para la tabla 'solicitud_carta_recomendacion':
  * @property integer $id
  * @property string $fechahora
  * @property string $status
@@ -12,14 +12,15 @@
  * @property string $comentarios
  * @property string $matriculaalumno
  *
- * The followings are the available model relations:
+ * A continuación se indican las relaciones disponibles para el modelo:
  * @property Alumno $matriculaalumno0
  */
 class SolicitudCartaRecomendacion extends CActiveRecord
 {
+
 	/**
-	 * Returns the static model of the specified AR class.
-	 * @return SolicitudCartaRecomendacion the static model class
+	 * Devuelve el modelo estático para la clase de AR especificada.
+	 * @return SolicitudCartaRecomendacion la clase del modelo estático
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -27,7 +28,7 @@ class SolicitudCartaRecomendacion extends CActiveRecord
 	}
 
 	/**
-	 * @return string the associated database table name
+	 * @return string el nombre asociado a la tabla en la base de datos
 	 */
 	public function tableName()
 	{
@@ -35,12 +36,12 @@ class SolicitudCartaRecomendacion extends CActiveRecord
 	}
 
 	/**
-	 * @return array validation rules for model attributes.
+	 * @return array reglas de validación para los atributos del modelo
 	 */
 	public function rules()
 	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
+		// NOTA: usted solo debe defnir reglas para aquellos atributos que
+		// serán ingresados por usuarios.
 		return array(
 			array('tipo','required'),
 			array('id', 'numerical', 'integerOnly'=>true),
@@ -48,26 +49,26 @@ class SolicitudCartaRecomendacion extends CActiveRecord
 			array('formato', 'length', 'max'=>30),
 			array('comentarios', 'length', 'max'=>500),
 			array('tipo','length','max'=>50),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
+			// La siguiente regla es empleada por search().
+			// Por favor remueva aquellos atributos que no deben ser buscados.
 			array('id, fechahora, status, tipo, formato, comentarios, matriculaalumno', 'safe', 'on'=>'search'),
 		);
 	}
 
 	/**
-	 * @return array relational rules.
+	 * @return array reglas relacionales
 	 */
 	public function relations()
 	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
+		// NOTA: posiblemente tendrá que ajustar el nombre de la relación y de la
+		// clase relacionada para las siguientes relaciones, generadas automáticamente.
 		return array(
 			'matriculaalumno0' => array(self::BELONGS_TO, 'Alumno', 'matriculaalumno'),
 		);
 	}
 
 	/**
-	 * @return array customized attribute labels (name=>label)
+	 * @return array etiquetas de atributos (nombre=>etiqueta)
 	 */
 	public function attributeLabels()
 	{
@@ -83,13 +84,14 @@ class SolicitudCartaRecomendacion extends CActiveRecord
 	}
 
 	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 * Obtiene una lista de modelos en base a las condiciones actuales de búsqueda/filtro.
+	 * @return CActiveDataProvider el proveedor de datos que puede devolver los modelos en base a las
+	 * condiciones de búsqueda/filtro.
 	 */
 	public function search()
 	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
+		// Advertencia: Por favor modifique el siguiente código para remover los atributos que
+		// no deben ser buscados.
 
 		$criteria=new CDbCriteria;
 		
