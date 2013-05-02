@@ -93,15 +93,21 @@ class SolicitudCartaRecomendacion extends CActiveRecord
 		// Advertencia: Por favor modifique el siguiente código para remover los atributos que
 		// no deben ser buscados.
 
+		// Crea un nuevo modelo de CDbCriteria.
 		$criteria=new CDbCriteria;
-		
-		/*Modifico el query para que directores de carrera, asistentes y secretarias de alguna dirección solo puedan
-		buscar sus solicitudes correspondientes*/
-		
+				
+		// Almacena el rol del usuario actual.
 		$rol = Yii::app()->user->rol;
+		
+		// Almacena el nombre de usuario del usuario actual.
 		$nombre_de_usuario = Yii::app()->user->id;
 		
+		// Valida si el usuario actual es un director de carrera, un asistente o una secretaria.
 		if($rol == 'Director' || $rol == 'Asistente'|| $rol == 'Secretaria'){
+			
+			// Criterios para que el usuario actual solo pueda buscar las
+			// solicitudes de carta de recomendación hechas en las
+			// carreras en las que labora
 			$criteria->join = 'JOIN alumno AS a ON t.matriculaalumno = a.matricula
 					JOIN carrera_tiene_empleado AS c ON a.idcarrera = c.idcarrera AND c.nomina = \''.$nombre_de_usuario.'\'';
 		}

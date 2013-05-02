@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This is the model class for table "sugerencia".
+ * Esta es la clase modelo para la tabla "sugerencia".
  *
- * The followings are the available columns in table 'sugerencia':
+ * A continuación se indican las columnas disponibles en la tabla 'sugerencia':
  * @property integer $id
  * @property string $fechahora
  * @property string $status
@@ -11,14 +11,14 @@
  * @property string $respuesta
  * @property string $matriculaalumno
  *
- * The followings are the available model relations:
+ * A continuación se indican las relaciones disponibles para el modelo:
  * @property Alumno $matriculaalumno0
  */
 class Sugerencia extends CActiveRecord
 {
 	/**
-	 * Returns the static model of the specified AR class.
-	 * @return Sugerencia the static model class
+	 * Devuelve el modelo estático para la clase de AR especificada.
+	 * @return Sugerencia la clase del modelo estático
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -26,7 +26,7 @@ class Sugerencia extends CActiveRecord
 	}
 
 	/**
-	 * @return string the associated database table name
+	 * @return string el nombre asociado a la tabla en la base de datos
 	 */
 	public function tableName()
 	{
@@ -34,37 +34,37 @@ class Sugerencia extends CActiveRecord
 	}
 
 	/**
-	 * @return array validation rules for model attributes.
+	 * @return array reglas de validación para los atributos del modelo
 	 */
 	public function rules()
 	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
+		// NOTA: usted solo debe definir reglas para aquellos atributos que
+		// serán ingresados por usuarios.
 		return array(
 			array('sugerencia', 'required'),
 			array('id', 'numerical', 'integerOnly'=>true),
 			array('status, matriculaalumno', 'length', 'max'=>9),
 			array('sugerencia, respuesta', 'length', 'max'=>500),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
+			// La siguiente regla es empleada por search().
+			// Por favor remueva aquellos atributos que no deben ser buscados.
 			array('id, fechahora, status, sugerencia, respuesta, matriculaalumno', 'safe', 'on'=>'search'),
 		);
 	}
 
 	/**
-	 * @return array relational rules.
+	 * @return array reglas relacionales
 	 */
 	public function relations()
 	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
+		// NOTA: usted posiblemente tendrá que ajustar el nombre de la relación y de la
+		// clase relacionada para las siguientes relaciones que se generan automáticamente.
 		return array(
 			'matriculaalumno0' => array(self::BELONGS_TO, 'Alumno', 'matriculaalumno'),
 		);
 	}
 
 	/**
-	 * @return array customized attribute labels (name=>label)
+	 * @return array etiquetas personalizadas para los atributos (nombre=>etiqueta)
 	 */
 	public function attributeLabels()
 	{
@@ -79,19 +79,19 @@ class Sugerencia extends CActiveRecord
 	}
 
 	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 * Obtiene una lista de modelos en base a las condiciones actuales de búsqueda/filtro.
+	 * @return CActiveDataProvider el proveedor de datos (data provider) que puede devolver los modelos en base a las
+	 * condiciones de búsqueda/filtro.
 	 */
 	public function search()
 	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
+		// Advertencia: Por favor modifique el siguiente código para remover atributos que
+		// no deben ser buscados.
 
+		// Crea un nuevo modelo de CDbCriteria.
 		$criteria=new CDbCriteria;
 		
-		/*Modifico el query para que directores de carrera, asistentes y secretarias de alguna dirección solo puedan
-		buscar sus solicitudes correspondientes*/
-		
+		// Almacena el nombre de usuario del usuario actual.
 		$rol = Yii::app()->user->rol;
 		$nombre_de_usuario = Yii::app()->user->id;
 		
