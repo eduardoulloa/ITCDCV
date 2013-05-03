@@ -10,8 +10,12 @@
 	<?php echo $form->errorSummary($model); ?>
 	
 	<?php
-		//if(esAdmin() || $model->isNewRecord) {
+		// Valida si el usuario actual es un administrador general.
 		if(Yii::app()->user->rol == 'Admin'){
+			
+			// Valida si el modelo no es nuevo. En este caso se
+			// despliega la forma apropiada para actualizar los datos del
+			// empleado.
 			if(!$model->isNewRecord){
 	?>
 			<div class="row">
@@ -65,8 +69,9 @@
   <?php
 	}
 	}
+		// Valida si el usuario actual es un director de carrera, tratando de
+		// actualizar los datos de algún otro empleado.
 		else if(esDirector() && Yii::app()->user->id != $model->nomina) {
-			//un director tratando de editar a alguien de su carrera
 	?>
 		<div class="row">
 			<?php echo $form->labelEx($model,'nombre'); ?>
@@ -90,17 +95,22 @@
 		<div class="row">
 		<?php echo $form->label($model_carrera,'Carreras:'); 
 	  
-		/*
-			Se realiza una consulta para obtener a todas las carreras en las que labora el director.
-		*/
+		// Criterios para obtener las carreras en las que labora el
+		// director de carrera
 		$criteria = new CDbCriteria(array(
 				'join'=>'JOIN carrera_tiene_empleado as c on t.id = c.idcarrera AND c.nomina =\''.$model->nomina.'\'',
 				));
-						
+		
+		// Obtiene los modelos de todas las carreras en las que
+		// labora el director de carrera.
 		$carreras = Carrera::model()->findAll($criteria);
 				
+		// Enlista las siglas de las carreras en las que labora el
+		// director de carrera, con los respectivos IDs de las carreras.
 		$opciones = CHtml::listData($carreras, 'id', 'siglas');
 		
+		// Despliega un menú tipo 'drop-down', con las siglas de las
+		// carreras en las que labora el director.
 		echo $form->dropDownList($model_carrera,'id', $opciones);
 		?>
 	  
@@ -113,8 +123,10 @@
 	  
 	<?php 
 		}
+		
+		// El resto de los casos, que corresponde a cualquier empleado registrado en la
+		// base de datos, tratando de editar sus propios datos.
 		else {
-		//cualquier empleado tratando de editarse a si mismo
 	?>
 	
 		<div class="row">
@@ -144,7 +156,6 @@
 		</div>
 	
 		<div class="row">
-		<?php /*echo $form->labelEx($model,'password');*/ ?>
 		<label for="password" class="required">
 				Contraseña nueva
 				<span class="required">*</span>
@@ -153,7 +164,6 @@
 		<?php echo $form->error($model,'password'); ?>
 		</div>
 
-	
 	<?php
 		}
 	?>

@@ -9,7 +9,12 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<?php if($model->isNewRecord){
+	<?php
+	
+	// Valida si el modelo es nuevo. En caso de ser así, se
+	// despliega un campo de texto para para ingresar el nombre de
+	// usuario.
+	if($model->isNewRecord){
 	echo("<div class=\"row\">");
 		echo $form->labelEx($model,'username');
 		echo $form->textField($model,'username',array('size'=>25,'maxlength'=>25));
@@ -19,6 +24,8 @@
 	?>
 	
 	<?php
+	// Valida si el modelo no es nuevo. En caso de ser así, se
+	// despliega un campo de texto para ingresar la contraseña actual.
 	if(!$model->isNewRecord) {
 	?>
 	<div class="row">
@@ -37,7 +44,6 @@
 			Contraseña nueva
 			<span class="required">*</span>
 		</label>
-		<?php /*echo $form->labelEx($model,'password');*/ ?>
 		<?php echo $form->passwordField($model,'password',array('size'=>45,'maxlength'=>45)); ?>
 		<?php echo $form->error($model,'password'); ?>
 	</div>

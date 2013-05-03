@@ -1,23 +1,5 @@
 <div class="form">
 
-<SCRIPT LANGUAGE="JavaScript" type="text/javascript">
-
-/*function checkAll()
-{
-//for (i = 0; i < field.length; i++){
-	//field[i].checked = true ;
-	for (var i = 0; i<document.forms[0].elements.length; i++){
-	var e=document.forms[0].elements[i];
-		if (e.type=='textbox')
-		{
-			e.value = "";
-		}
-}
-	
-}*/
-
-</SCRIPT>
-
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'alumno-form',
 	'enableAjaxValidation'=>false,
@@ -28,11 +10,14 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<?php
-		//va a hacer un update y es director o admin
-		// o va a registrar un nuevo exalumno
+		
+		// Valida si el usuario actual no es un alumno ni un usuario autenticado. En este
+		// caso se trata de una actualización. Un administrador general o un director de
+		// carrera realizará la actualización de datos de algún alumno actual o bien,
+		// registrará a un nuevo exalumno. En este caso se despliega el contenido de los
+		// archivos '_alumno_actual.php' y '_exalumno.php'.
 		if(!esAlumno() || !userTieneRolAsignado()) {
 			
-		
 	?>
 	
 	<?php echo $this->renderPartial('_alumno_actual', array('model'=>$model, 'form'=>$form)); ?>
@@ -43,7 +28,10 @@
 	</div>
 	
 	<?php
-		//Si es un alumno, solo debe poder modificar su password e e-mail.
+
+		// El resto de los casos, que corresponde a los alumnos. En este caso
+		// solo se despliegan campos de texto para ingresar la contraseña y la
+		// dirección de correo electrónico.
 		} else  {
 	?>
 	
@@ -56,10 +44,9 @@
 	</div>
 	
 	<div class="row">
-	<?php /*echo $form->labelEx($model,'password');*/ ?>
 	<label for="password" class="required">
-				Contraseña nueva
-				<span class="required">*</span>
+			Contraseña nueva
+			<span class="required">*</span>
 	</label>
 	<?php echo $form->passwordField($model,'password',array('size'=>45,'maxlength'=>45)); ?>
 	<?php echo $form->error($model,'password'); ?>
@@ -86,4 +73,3 @@
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
-

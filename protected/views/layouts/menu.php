@@ -3,12 +3,18 @@ $menu = array(
         array("url" => array( "route" => "site/index"), "label" => "Inicio"),
     );
 
+// Dependiendo del rol del usuario se agregan opciones la menú horizontal.
+
+// Valida si el usuario no está autenticado. En este caso se
+// agregan al menú las opciones correspondientes.
 if(!isset(Yii::app()->user->rol)){
     array_push($menu,
         array("url"=> array( "route" => "site/page?view=about"), "label"=>"Acerca de DCV"),
         array("url"=>array( "route" => "site/crearexalumno"), "label"=>"Registar exalumno")
     );
 }
+
+// Valida si el usuario actual es un director de carrera.
 else if(Yii::app()->user->rol == 'Director') {
 
     array_push($menu,
@@ -38,6 +44,7 @@ else if(Yii::app()->user->rol == 'Director') {
     );
 }
 
+// Valida si el usuario actual es un administrador general.
 else if(Yii::app()->user->rol == 'Admin') {
 
     array_push($menu,
@@ -67,6 +74,7 @@ else if(Yii::app()->user->rol == 'Admin') {
     );
 }
 
+// Valida si el usuario actual es un asistente o una secretaria.
 else if(Yii::app()->user->rol == 'Asistente' || Yii::app()->user->rol == 'Secretaria'){
     array_push($menu,
         array("url"=> array(), "label"=>"General",
@@ -85,6 +93,7 @@ else if(Yii::app()->user->rol == 'Asistente' || Yii::app()->user->rol == 'Secret
     );
 }
 
+// Valida si el usuario actual es un alumno.
 else if(Yii::app()->user->rol == 'Alumno'){
     array_push($menu,
         array("url"=> array(), "label"=>"General",
@@ -115,9 +124,12 @@ else if(Yii::app()->user->rol == 'Alumno'){
     );
 }
     
+// Valida si el usuario actual está autenticado y si es un administrador general. En este caso,
+// se agregan ligas para registrar una nueva carrera y para ver las carreras registradas en la
+// base de datos.
 if(isset(Yii::app()->user->rol) && Yii::app()->user->rol == 'Admin') {
 
-    // Es 3 porque esa es la posición de la categoría escolar
+	// Es 3, de acuerdo con la posición de la categoría de "Escolar" en el arreglo.
     array_push($menu[3],
 		array("url" => array( "route" => "carrera/create"), "label" => "Registar carrera"),
         array("url" => array( "route" => "carrera/index"), "label" => "Ver carreras registradas")
@@ -126,6 +138,7 @@ if(isset(Yii::app()->user->rol) && Yii::app()->user->rol == 'Admin') {
 
 }
 
+// Se agregan ligas para iniciar y cerrar la sesión de algún usuario autenticado.
 array_push($menu,
     array('label'=>'Entrar', 'url'=>array("route" => '/site/login'), 'visible'=>Yii::app()->user->isGuest),
     array('label'=>'Salir ('.Yii::app()->user->name.')', 'url'=>array( "route" => '/site/logout'), 'visible'=>!Yii::app()->user->isGuest)

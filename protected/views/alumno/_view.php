@@ -2,26 +2,6 @@
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('matricula')); ?>:</b>
 	<?php echo CHtml::link(CHtml::encode($data->matricula), array('view', 'id'=>$data->matricula)); ?>
-	<?php
-		
-		/*
-		$uname = '';
-		$serv = '';
-		
-		$arreglo = explode('@', $data->matricula);
-		if(count($arreglo)>1){
-			$uname = $arreglo[0];
-			$arreglo2 = explode('.', $arreglo[1]);
-			if(!empty($arreglo2)){
-				$serv = $arreglo2[0];
-			}
-		}
-		
-		if((!empty($uname)) && (!empty($serv))){
-			echo($uname." ".$serv);
-		}*/
-		
-	?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('nombre')); ?>:</b>
@@ -44,8 +24,10 @@
 	<?php echo CHtml::encode($data->semestre); ?>
 	<br />
 
-	<!-- Si el usuario es un administrador, se muestra la contraseña -->
 	<?php
+	
+	// Valida si el usuario actual es un administrador general. En este
+	// caso se despliega la contraseña del alumno o exalumno.
 	if (Yii::app()->user->rol == 'Admin'){
 		echo "<b>Contraseña: </b>";
 		echo CHtml::encode($data->password);
@@ -54,9 +36,13 @@
 	?>
 	
 	<?php
-		if(Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin'){
-			echo CHtml::link('Editar', array('update', 'id'=>$data->matricula));
-		}
+	
+	// Valida si el usuario actual es un director de carrera o un administrador general. En este
+	// caso se despliega una liga a la acción 'update', para editar los datos del alumno o
+	// exalumno.
+	if(Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin'){
+		echo CHtml::link('Editar', array('update', 'id'=>$data->matricula));
+	}
 	?>
 
 	<?php /*
@@ -72,6 +58,6 @@
 	<?php echo CHtml::encode($data->email); ?>
 	<br />
 
-	*/ ?>
+	*/?>
 
 </div>

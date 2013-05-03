@@ -85,17 +85,23 @@ class Sugerencia extends CActiveRecord
 	 */
 	public function search()
 	{
-		// Advertencia: Por favor modifique el siguiente código para remover atributos que
+		// Advertencia: Por favor modifique el siguiente código para remover los atributos que
 		// no deben ser buscados.
 
 		// Crea un nuevo modelo de CDbCriteria.
 		$criteria=new CDbCriteria;
 		
-		// Almacena el nombre de usuario del usuario actual.
+		// Almacena el rol del usuario actual.
 		$rol = Yii::app()->user->rol;
+		
+		// Almacena el nombre de usuario del usuario actual.
 		$nombre_de_usuario = Yii::app()->user->id;
 		
+		// Valida si el usuario actual es un director, un asistente o una secretaria.
 		if($rol == 'Director' || $rol == 'Asistente'|| $rol == 'Secretaria'){
+			
+			// Criterios para que el usuario actual solo pueda buscar las
+			// sugerencias hechas en las carreras en las que labora
 			$criteria->join = 'JOIN alumno AS a ON t.matriculaalumno = a.matricula
 					JOIN carrera_tiene_empleado AS c ON a.idcarrera = c.idcarrera AND c.nomina = \''.$nombre_de_usuario.'\'';
 		}

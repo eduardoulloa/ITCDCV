@@ -21,7 +21,6 @@ $this->menu=array(
 			Nómina o nombre de usuario
 			<span class="required">*</span>
 		</label>
-        <?php /*echo $form->label($model,'nomina'); */?>
         <?php echo $form->textField($model,'nomina') ?>
     </div>
  
@@ -31,17 +30,14 @@ $this->menu=array(
 			Nombre
 			<span class="required">*</span>
 		</label>
-	
-        
         <?php echo $form->textField($model,'nombre') ?>
     </div>
-    <div class="row">
 	
+    <div class="row">
 		<label for="apellido_paterno" class="required">
 			Apellido paterno
 			<span class="required">*</span>
 		</label>
-        
         <?php echo $form->textField($model,'apellido_paterno') ?>
     </div>
 
@@ -59,12 +55,10 @@ $this->menu=array(
     </div>
  
     <div class="row">
-        
 		<label for="puesto" class="required">
 			Puesto
 			<span class="required">*</span>
 		</label>
-		
         <?php echo $form->textField($model,'puesto') ?>
     </div>
 
@@ -72,35 +66,57 @@ $this->menu=array(
 		<label for="id" class="required">
 			Carrera
 			<span class="required">*</span>
-        <?php /*echo $form->label($model_carrera,'carrera');*/ ?>
 		</label>
 		<?php
-		//Si es un director, se enlistan unicamente las carreras en las que él labora.
+
+		// Valida si el usuario actual es un director de carrera. En este caso,
+		// se enlistan únicamente las carreras en las que él labora.
 		if (Yii::app()->user->rol == 'Director'){
+			
+			// Criterios para obtener las carreras en las que labora el
+			// director
 			$criteria = new CDbCriteria(array(
 			'join'=>'JOIN carrera_tiene_empleado as c on t.id = c.idcarrera AND c.nomina =\''.Yii::app()->user->id.'\'',
 			));
-		
+			
+			// Obtiene los modelos de las carreras en las que
+			// labora el director de carrera.
 			$carreras = Carrera::model()->findAll($criteria);
 					
+			// Enlista las siglas de las carreras en las que labora el
+			// director, con los respectivos IDs de las carreras.
 			$opciones = CHtml::listData($carreras, 'id', 'siglas');
 			
+			// Despliega un menú tipo 'drop-down', con las siglas de las
+			// carreras en las que labora el director.
 			echo $form->dropDownList($model_carrera,'id', $opciones);
 			
-		//Si es un admin, se enlistan todas las carreras registradas en el DCV.
+		// Valida si el usuario actual es un administrador general. En este
+		// caso se despliegan todas las carreras registradas en la base de datos.
 		}else if (Yii::app()->user->rol == 'Admin'){
-		
+			
+			// Criterios para obtener las siglas de
+			// todas las carreras registradas en la
+			// base de datos.
 			$criteria_carreras= new CDbCriteria(array(
             'select'=>'id, siglas'));
-
+			
+			// Obtiene los modelos de todas las carreras registradas en la
+			// base de datos.
 			$consulta_carreras = Carrera::model()->findAll($criteria_carreras);
-
+			
+			// Arreglo para almacenar las siglas de todas las carreras registradas en la
+			// base de datos.
 			$carreras = array();
-
+			
+			// Almacena en el arreglo $carreras las siglas de todas las
+			// carreras registradas en la base de datos.
 			foreach($consulta_carreras as &$valor){
 				$carreras[$valor->id] = $valor->siglas;
 			}
 			
+			// Despliega un menú tipo 'drop-down', con las siglas de
+			// todas las carreras registradas en la base de datos.
 			echo $form->dropDownList($model_carrera,'id', $carreras); 
 		}
 		?>

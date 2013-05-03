@@ -16,8 +16,10 @@
 	<?php echo CHtml::encode($data->apellido_materno); ?>
 	<br />
 
-	<!-- Si el usuario es un administrador, se muestra la contraseña -->
 	<?php
+	
+	// Valida si el usuario actual es un administrador general. En este caso,
+	// se despliega la contraseña del empleado.
 	if (Yii::app()->user->rol == 'Admin'){
 		echo "<b>Contraseña: </b>";
 		echo CHtml::encode($data->password);
@@ -28,25 +30,32 @@
 	<b><?php echo CHtml::encode($data->getAttributeLabel('puesto')); ?>:</b>
 	<?php echo CHtml::encode($data->puesto); ?>
 	<br />
-
-    <?php if(!isset($carreras)) { 
-
+	
+    <?php 
+	
+	// Valida si no se recibió el arreglo con las carreras en las que
+	// labora el empleado.
+	if(!isset($carreras)) {
+	
+		// Almacena las carreras en las que labora el empleado, en
+		// base a su nombre de usuario.
         $carreras = $this->getEmpleadoCarreras($data->nomina);
 
     } ?>
 
 	    <b><?php echo CHtml::encode("Carreras"); ?>:</b>
-        <?php foreach($carreras as $carr){
+        <?php 
+		
+		// Despliega las siglas de cada carrera en la que
+		// labora el empleado.
+		foreach($carreras as $carr){
             echo CHtml::encode($carr)." ";
         }?>
 	<br />
 
-	<?php echo CHtml::link('Editar', array('update', 'id'=>$data->nomina)); ?>
+	<?php 
+	// Despliega una liga para editar los datos del empleado.
+	echo CHtml::link('Editar', array('update', 'id'=>$data->nomina)); ?>
 	<br />
-
-
-
-
-
 
 </div>

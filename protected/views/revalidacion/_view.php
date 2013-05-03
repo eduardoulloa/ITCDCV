@@ -29,6 +29,8 @@
 	<br />
 	
 	<?php
+	// Valida si el usuario actual es un director, un asistente o una secretaria. En este caso, se
+	// despliegan las siglas de las carreras en las que el usuario labora.
 	if(Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Asistente' || Yii::app()->user->rol == 'Secretaria'){
 		$carrera = Carrera::model()->findByPk($data->idcarrera);
 		echo "<b>Carrera: </b>";
@@ -37,7 +39,10 @@
 	}
 	?>
 	
-	<?php if(Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Secretaria' || Yii::app()->user->rol == 'Asistente'){
+	<?php 
+	// Valida si el usuario actual es un director, una secretaria o un asistente. En este caso, se
+	// despliega una liga para actualizar los datos de la revalidación.
+	if(Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Secretaria' || Yii::app()->user->rol == 'Asistente'){
 		echo CHtml::link('Editar', array('update', 'id'=>$data->id));
 	}
 	?>

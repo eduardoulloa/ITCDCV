@@ -7,7 +7,7 @@
     <!-- blueprint CSS framework -->
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/screen.css" media="screen, projection" />
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/print.css" media="print" />
-    <!--[if lt IE 8]>
+    <!--[si es lt IE 8]>
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
     <![endif]-->
 
@@ -40,7 +40,11 @@
     <?php endif*/?>
 
     <?php echo $content; ?>
-
+	
+	<!--
+		El footer presente en todas las páginas del DCV. Despliega el año actual, el
+		propietario (ITESM) y datos del framework con el que fue desarrollado.
+	-->
     <div id="footer">
         &copy; DCV <?php echo date('Y'); ?> por la Direcci&oacute;n de ITC, ITESM<br/>
         Derechos Reservados.<br/>

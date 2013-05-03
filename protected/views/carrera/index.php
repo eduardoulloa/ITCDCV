@@ -12,7 +12,9 @@ $this->menu=array(
 <h1>Carreras</h1>
 
 <?php
-//Si el usuario es un admin, se le da la opción de administrar las carreras.
+// Valida si el usuario actual es un administrador general. En este caso
+// se despliega una liga para administrar las carreras registradas en la
+// base de datos.
 if(Yii::app()->user->rol == 'Admin'){
 	echo CHtml::link("Administrar carreras", array('carrera/admin'));
 }

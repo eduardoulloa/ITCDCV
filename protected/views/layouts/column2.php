@@ -7,6 +7,8 @@
 		</div><!-- content -->
 	</div>
 	<?php
+	
+		// Valida si el usuario está autenticado.
 		if(isset(Yii::app()->user->rol)) {
 	?>
 	<div class="span-5 last">
@@ -15,13 +17,11 @@
 			$this->beginWidget('zii.widgets.CPortlet', array(
 				'title'=>'Opciones',
 			));
+						
+			// Dependiendo del rol del usuario actual, se agregan las opciones correspondientes en el
+			// menú lateral derecho.
 			
-			//Arreglo vacio, para las opciones del menu
-			$menu_alumno = array();
-			
-			//Dependiendo de su rol, el menu se llena con las opciones del usuario
-			
-			//Si es alumno
+			// Valida si el usuario actual es un alumno.
 			if (Yii::app()->user->rol == 'Alumno'){
 				$menu = array(
 						array('label'=>'General'),
@@ -46,7 +46,7 @@
 						array('label'=>'Ver sugerencias', 'url'=>array('sugerencia/index')),
 					);
 				
-			//Si es empleado
+			// Valida si el usuario actual es un administrador general.
 			}else if (Yii::app()->user->rol == 'Admin'){
 			
 				$menu = array(
@@ -77,6 +77,8 @@
 					array('label'=>'Ver empleados registrados', 'url'=>array('empleado/index')),
 					array('label'=>'Ver carreras registradas', 'url'=>array('carrera/index')),
 					);
+			
+			// Valida si el usuario actual es un director de carrera.
 			}else if (Yii::app()->user->rol == 'Director'){
 				$menu = array(
 					array('label'=>'General'),
@@ -115,6 +117,8 @@
 					array('label'=>'Ver alumnos', 'url'=>array('alumno/index')),
 					array('label'=>'Ver empleados', 'url'=>array('empleado/index')),
 					);
+					
+			// Valida si el usuario actual es un asistente o una secretaria.
 			}else if(Yii::app()->user->rol == 'Asistente' || Yii::app()->user->rol == 'Secretaria'){
 				$menu = array(
 					
@@ -140,7 +144,6 @@
 			
 			$this->widget('zii.widgets.CMenu', array(
 				'items'=> $menu
-				//'htmlOptions'=>array('class'=>'operations'),
 			));
 			$this->endWidget();
 		?>

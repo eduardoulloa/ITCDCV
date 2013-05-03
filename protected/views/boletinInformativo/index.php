@@ -16,7 +16,10 @@ $this->menu=array(
 <h1>Boletines Informativos</h1>
 
 <?php 
-//Si el usuario es un administrador general o un director de carrera, se agrega una liga para administrar los boletines informativos.
+
+// Valida si el usuario actual es un director de carrera. En este caso, se
+// despliega una liga para administrar los boletines informativos elaborados por
+// el director.
 if(Yii::app()->user->rol == 'Director'){
 	echo CHtml::link("Administrar boletines informativos", array('boletinInformativo/admin'));
 }

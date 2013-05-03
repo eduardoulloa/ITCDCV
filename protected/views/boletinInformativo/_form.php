@@ -16,18 +16,23 @@
 		<span class="required">*</span>
 	</label>
 	
-	<?php
-		/*
-			Query para obtener todas las carreras en las que labora el empleado.
-		*/
+	<?php		
+		// Criterios para obtener las carreras en las que labora el
+		// director de carrera.
 		$criteria = new CDbCriteria(array(
 			'join'=>'JOIN carrera_tiene_empleado as c on t.id = c.idcarrera AND c.nomina =\''.Yii::app()->user->id.'\'',
 			));
-						
+					
+		// Obtiene los modelos de las carreras en las que
+		// labora el director de carrera.
 		$carreras = Carrera::model()->findAll($criteria);
 				
+		// Enlista las carreras en las que labora el director de
+		// carrera.
 		$opciones = CHtml::listData($carreras, 'id', 'siglas');
 		
+		// Despliega un menú de tipo "drop-down", con las siglas de las
+		// carreras en las que labora el director de carrera.
 		echo $form->dropDownList($model,'idcarrera', $opciones); 
 	?>
 	<?php echo $form->error($model,'idcarrera'); ?>
@@ -99,8 +104,13 @@
 	
 	<br />
 	
+	<!-- Despliega un botón para seleccionar todas las casillas de
+	verificación de los destinatarios del boletín -->
 	<input type="button" name="CheckAll" value="Seleccionar todos"
 	onClick="checkAll()">
+	
+	<!-- Despliega un botón para deseleccionar todas las casillas de
+	verificación de los destinatarios del boletín -->
 	<input type="button" name="UnCheckAll" value="Borrar selecci&oacute;n"
 	onClick="uncheckAll()">
 	<br />
@@ -141,8 +151,7 @@
 <!-- Begin
 function checkAll()
 {
-//for (i = 0; i < field.length; i++){
-	//field[i].checked = true ;
+
 	for (var i = 0; i<document.forms[0].elements.length; i++){
 	var e=document.forms[0].elements[i];
 		if (e.type=='checkbox')
@@ -166,10 +175,7 @@ function uncheckAll(field)
 }
 
 }
-/*for (i = 0; i < field.length; i++)
-	field[i].checked = false ;
-}*/
-//  End -->
+
 </script>
 
 </div><!-- form -->

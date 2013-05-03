@@ -8,7 +8,7 @@ $this->menu=array(
 	array('label'=>'List Carrera', 'url'=>array('index')),
 	array('label'=>'Create Carrera', 'url'=>array('create')),
 	array('label'=>'Update Carrera', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Carrera', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Delete Carrera', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'¿Seguro que desea eliminar este elemento?')),
 	array('label'=>'Manage Carrera', 'url'=>array('admin')),
 );
 ?>
