@@ -8,7 +8,7 @@ $this->menu=array(
 	array('label'=>'List Revalidacion', 'url'=>array('index')),
 	array('label'=>'Create Revalidacion', 'url'=>array('create')),
 	array('label'=>'Update Revalidacion', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Revalidacion', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Delete Revalidacion', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'¿Seguro que desea eliminar este elemento?')),
 	array('label'=>'Manage Revalidacion', 'url'=>array('admin')),
 );
 ?>

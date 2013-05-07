@@ -11,13 +11,15 @@
 
 	<?php
 	
-	if (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin'){ //si el usuario es director de carrera debe ver tambien la matricula del alumno
+	// Valida si el usuario actual es un director de carrera o un administrador general. En caso de ser así, se
+	// despliega la matrícula del alumno que creó la solicitud.
+	if (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin'){
 		echo "<b>";
 		echo "Matrícula";
 		echo ": </b>";
 		echo CHtml::encode($data->matriculaalumno);
 		echo "<br />";
-		} 
+	} 
 		
 		?>
 
@@ -26,7 +28,7 @@
 	<br />
 
 	<b><?php echo CHtml::encode('Tipo')?>:</b>
-	<?php /*echo CHtml::encode(get_class($data));*/
+	<?php
 		$claseDeSolicitud = get_class($data);
 		$label = "";
 		switch($claseDeSolicitud){
@@ -41,29 +43,13 @@
 	
 	<br />
 	
-	<!-- fue modificada la condicion para que los alumnos no puedan hacer updates de sus solicitudes.
-	a continuacion se muestra como originalmente estaba la solicitud-->
-	<?php /*if(Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin' || Yii::app()->user->rol == 'Alumno'){
-		echo CHtml::link(CHtml::encode('Editar'), array('/'.get_class($data)
-				.'/update', 'id'=>$data->id));
-	}*/
-	?>
-	
-	<?php if(Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin'){
+	<?php 
+	// Valida si el usuario actual es un director de carrera o un administrador general. En caso de
+	// ser así se despliega una liga para editar la solicitud.
+	if(Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin'){
 		echo CHtml::link(CHtml::encode('Editar'), array('/'.get_class($data)
 				.'/update', 'id'=>$data->id));
 	}
 	?>
 	
-	<?php
-	
-	/*if (Yii::app()->user->rol == 'Alumno'){
-		echo(" ");
-		echo CHtml::link(CHtml::encode('Eliminar'), array('/'.get_class($data)
-				.'/delete', 'id'=>$data->id));
-		
-		} */
-		
-		?>
-
 </div>

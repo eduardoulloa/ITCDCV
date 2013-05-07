@@ -12,7 +12,8 @@ $this->menu=array(
 <h1>Sugerencias</h1>
 
 <?php
-//Si el usuario no es un alumno, se le da la opción de administrar las sugerencias.
+// Valida si el usuario actual no es un alumno. En este caso se despliega una
+// liga para administrar las sugerencias.
 if(Yii::app()->user->rol != 'Alumno'){
 	echo CHtml::link("Administrar sugerencias", array('sugerencia/admin'));
 }

@@ -21,8 +21,6 @@ $this->menu=array(
 			<?php echo $form->errorSummary($model); ?>
 
 			<?php echo $this->renderPartial('_exalumno', array('model'=>$model, 'form'=>$form)); ?>
-			<?php /*echo $this->renderPartial('_form', array('model'=>$model, 'form'=>$form));*/ ?>
-			
 
 			<div class="row buttons">
 				<?php echo CHtml::submitButton($model->isNewRecord ? 'Registrar' : 'Guardar'); ?>

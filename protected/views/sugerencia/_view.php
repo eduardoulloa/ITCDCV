@@ -9,18 +9,16 @@
 	<br />
 	
 	<?php
-	if (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin' || Yii::app()->user->rol == 'Asistente'){ //si el usuario es director de carrera debe ver tambien la matricula del alumno
+	// Valida si el usuario actual es un director de carrera, un administrador general o un asistente. En este
+	// caso se despliega la matrícula del alumno que creó la sugerencia.
+	if (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin' || Yii::app()->user->rol == 'Asistente'){
 		echo "<b>";
 		echo "Matrícula"; 
 		echo ": </b>";
 		echo CHtml::encode($data->matriculaalumno);
-		echo "<br />";
-		
-		
-		
-		} 
-		
-		?>
+		echo "<br />";	
+	} 	
+	?>
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('status')); ?>:</b>
 	<?php echo CHtml::encode($data->status); ?>
@@ -34,8 +32,10 @@
 	<?php echo CHtml::encode($data->respuesta); ?>
 	<br />
 	
-	
-	<?php if(Yii::app()->user->rol != 'Alumno' && Yii::app()->user->rol != 'Secretaria'){
+	<?php 
+	// Valida si el usuario actual no es un alumno ni una secretaria. En este caso
+	// se despliega una liga para editar la sugerencia.
+	if(Yii::app()->user->rol != 'Alumno' && Yii::app()->user->rol != 'Secretaria'){
 		echo CHtml::link('Editar', array('update', 'id'=>$data->id));
 	}
 	?>
@@ -45,6 +45,4 @@
 	<?php echo CHtml::encode($data->matriculaalumno); ?>
 	<br />
 	*/ ?>
-
-
 </div>

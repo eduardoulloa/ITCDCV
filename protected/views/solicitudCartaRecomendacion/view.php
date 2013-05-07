@@ -8,7 +8,7 @@ $this->menu=array(
 	array('label'=>'List SolicitudCartaRecomendacion', 'url'=>array('index')),
 	array('label'=>'Create SolicitudCartaRecomendacion', 'url'=>array('create')),
 	array('label'=>'Update SolicitudCartaRecomendacion', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete SolicitudCartaRecomendacion', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Delete SolicitudCartaRecomendacion', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'¿Seguro que desea eliminar este elemento?')),
 	array('label'=>'Manage SolicitudCartaRecomendacion', 'url'=>array('admin')),
 );
 ?>

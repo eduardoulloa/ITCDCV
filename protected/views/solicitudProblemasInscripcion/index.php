@@ -12,7 +12,8 @@ $this->menu=array(
 <h1>Reportes de Problemas de Inscripción</h1>
 
 <?php
-//Si el usuario no es alumno, se le da la opción de administrar las solicitudes de carta de problemas de inscripción.
+// Valida si el usuario actual no es un alumno. En este caso se despliega una
+// liga para administrar las solicitudes.
 if(Yii::app()->user->rol != 'Alumno'){
 	echo CHtml::link("Administrar reportes de problemas de inscripción", array('solicitudProblemasInscripcion/admin'));
 }

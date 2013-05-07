@@ -12,7 +12,8 @@ $this->menu=array(
 <h1>Solicitudes de Revalidación de Materia</h1>
 
 <?php
-//Si el usuario no es alumno, se le da la opción de administrar las solicitudes de revalidación de materia.
+// Valida si el usuario actual no es un alumno. En este caso se
+// despliega una liga para administrar las solicitudes.
 if(Yii::app()->user->rol != 'Alumno'){
 	echo CHtml::link("Administrar solicitudes de revalidación de materia", array('solicitudRevalidacion/admin'));
 }

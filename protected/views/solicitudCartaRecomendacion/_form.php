@@ -10,10 +10,11 @@
 	<?php echo $form->errorSummary($model); ?>
 	
 	<?php 
-	//Se trata de un alumno colocando una nueva solicitud.
-	if($model->isNewRecord) { 
+	// Valida si el modelo es nuevo. En este caso se
+	// trata de un alumno creando una nueva solicitud. Se despliega una
+	// forma para crear la nueva solicitud.
+	if($model->isNewRecord) {
 	?>
-
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'tipo'); ?>
@@ -41,13 +42,17 @@
 		<?php echo $form->error($model,'comentarios'); ?>
 	</div>
 
-	<?php 
+	<?php
+	// Valida si el usuario actual es un director de carrera o un administrador general y además si está
+	// editando una solicitud existente.
 	}else if(!$model->isNewRecord && (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin')){
-		//Se trata de un director respondiendo a la solicitud.
 		echo "<label for=\"status\" class=\"required\"> Estatus <span class=\"required\">*</span></label>";
 		echo $form->dropDownList($model,'status',array('recibida'=>'Recibida', 'pendiente'=>'Pendiente'
 														, 'terminada'=>'Terminada'));
 		echo $form->error($model,'status');
+	
+	// Valida si el usuario actual es un alumno y está editando una
+	// solicitud existente.
 	}else if(!$model->isNewRecord && Yii::app()->user->rol == 'Alumno'){
 		echo $form->labelEx($model, 'comentarios');
 		echo $form->textArea($model,'comentarios',array('rows'=>8,'cols'=>50));

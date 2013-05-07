@@ -8,7 +8,7 @@ $this->menu=array(
 	array('label'=>'List SolicitudProblemasInscripcion', 'url'=>array('index')),
 	array('label'=>'Create SolicitudProblemasInscripcion', 'url'=>array('create')),
 	array('label'=>'Update SolicitudProblemasInscripcion', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete SolicitudProblemasInscripcion', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Delete SolicitudProblemasInscripcion', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'¿Seguro que desea eliminar este elemento?')),
 	array('label'=>'Manage SolicitudProblemasInscripcion', 'url'=>array('admin')),
 );
 ?>

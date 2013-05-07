@@ -8,7 +8,7 @@ $this->menu=array(
 	array('label'=>'List Sugerencia', 'url'=>array('index')),
 	array('label'=>'Create Sugerencia', 'url'=>array('create')),
 	array('label'=>'Update Sugerencia', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Sugerencia', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Delete Sugerencia', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'¿Seguro que desea eliminar este elemento?')),
 	array('label'=>'Manage Sugerencia', 'url'=>array('admin')),
 );
 ?>

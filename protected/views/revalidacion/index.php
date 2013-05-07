@@ -12,7 +12,8 @@ $this->menu=array(
 <h1>Historial de revalidaciones</h1>
 
 <?php
-//Si el usuario no es alumno, se le da la opción de administrar las revalidaciones.
+// Valida si el usuario no es un alumno. En este caso, se despliega una
+// liga para administrar las revalidaciones.
 if(Yii::app()->user->rol != 'Alumno'){
 	echo CHtml::link("Administrar revalidaciones", array('revalidacion/admin'));
 }

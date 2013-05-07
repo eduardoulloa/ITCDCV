@@ -8,7 +8,7 @@ $this->menu=array(
 	array('label'=>'List SolicitudBajaSemestre', 'url'=>array('index')),
 	array('label'=>'Create SolicitudBajaSemestre', 'url'=>array('create')),
 	array('label'=>'Update SolicitudBajaSemestre', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete SolicitudBajaSemestre', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Delete SolicitudBajaSemestre', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'¿Seguro que desea eliminar este elemento?')),
 	array('label'=>'Manage SolicitudBajaSemestre', 'url'=>array('admin')),
 );
 ?>

@@ -11,15 +11,17 @@
 	
 	<?php
 	
-	if (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin'){ //si el usuario es director de carrera debe ver tambien la matricula del alumno
+	// Valida si el usuario actual es un director de carrera o un administrador general. En este
+	// caso se despliega la matrícula del alumno que creó la solicitud.
+	if (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin'){
 		echo "<b>";
 		echo "Matrícula";
 		echo ": </b>";
 		echo CHtml::encode($data->matriculaalumno);
 		echo "<br />";
-		} 
+	} 
 		
-		?>
+	?>
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('status')); ?>:</b>
 	<?php echo CHtml::encode($data->status); ?>
@@ -46,7 +48,6 @@
 	}
 	?>
 	
-
 	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('grupo')); ?>:</b>
 	<?php echo CHtml::encode($data->grupo); ?>

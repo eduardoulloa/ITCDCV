@@ -10,10 +10,11 @@
 	<?php echo $form->errorSummary($model); ?>
 	
 	<?php 
-		//Se trata de un alumno colocando una nueva solicitud.
-		if($model->isNewRecord) { 
+		// Valida si el modelo es nuevo. En este caso, se trata de
+		// un alumno creando una nueva solicitud. Se despliegan los
+		// campos necesarios para crear la solicitud.
+		if($model->isNewRecord) {
 		?>
-
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'motivo'); ?>
@@ -61,18 +62,23 @@
 		<?php echo $form->error($model,'periodo'); ?>
 	</div>
 
-	<?php 
+	<?php
+	// El modelo no es nuevo.
 	}else{
-	
-		if (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin'){
 		
-			//Se trata de un director respondiendo a la solicitud.
+		// Valida si el usuario actual es un director de carrera o un administrador general. En este caso,
+		// se trata de algún usuario editando la solicitud.
+		if (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin'){
 			
+			// Despliega un menú tipo drop-down con opciones para modificar el
+			// estatus de la solicitud.
 			echo "<label for=\"status\" class=\"required\"> Estatus <span class=\"required\">*</span></label>";
 			echo $form->dropDownList($model,'status',array('recibida'=>'Recibida', 'pendiente'=>'Pendiente'
 															, 'terminada'=>'Terminada'));
 			echo $form->error($model,'status');
-			
+		
+		// Valida si el usuario actual es un alumno. En este caso se despliega un
+		// área de texto para editar el motivo de la solicitud.
 		}else if (Yii::app()->user->rol == 'Alumno'){
 			
 			echo("<div class=\"row\">");
@@ -82,7 +88,6 @@
 			echo("</div>");
 			
 		}
-		
 	}
 	?>
 

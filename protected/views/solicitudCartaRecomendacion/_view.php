@@ -9,7 +9,9 @@
 	<br />
 	
 	<?php
-	if (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin'){ //si el usuario es director de carrera debe ver tambien la matricula del alumno
+	// Valida si el usuario actual es un director de carrera o un administrador general. En este
+	// caso se despliega la matrícula del alumno que creó la solicitud.
+	if (Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin'){
 		echo "<b>";
 		echo "Matrícula";
 		echo ": </b>";
@@ -34,7 +36,10 @@
 	<?php echo CHtml::encode($data->comentarios); ?>
 	<br />
 	
-	<?php if(Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin' || Yii::app()->user->rol == 'Secretaria' || Yii::app()->user->rol == 'Asistente'){
+	<?php 
+	// Valida si el usuario actual es un director de carrera, un administrador general, una secretaria o un asistente. En este
+	// caso se despliega una liga para editar la solicitud.
+	if(Yii::app()->user->rol == 'Director' || Yii::app()->user->rol == 'Admin' || Yii::app()->user->rol == 'Secretaria' || Yii::app()->user->rol == 'Asistente'){
 		echo CHtml::link('Editar', array('update', 'id'=>$data->id));
 	}
 	?>
@@ -44,7 +49,5 @@
 	<?php echo CHtml::encode($data->matriculaalumno); ?>
 	<br />
 	*/?>
-	
-
 
 </div>

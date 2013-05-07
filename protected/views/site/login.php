@@ -21,13 +21,11 @@ $this->breadcrumbs=array(
 
 	<p class="note">Los campos con<span class="required">*</span> son requeridos.</p>
 
-	
 	<div class="row">
 		<label for="username" class="required">
 				Nombre de usuario
 				<span class="required">*</span>
 		</label>
-		<?php /*echo $form->labelEx($model,'username');*/ ?>
 		<?php echo $form->textField($model,'username'); ?>
 		<?php echo $form->error($model,'username'); ?>
 	</div>
@@ -38,7 +36,6 @@ $this->breadcrumbs=array(
 				Contraseña
 				<span class="required">*</span>
 		</label>
-		<?php /*echo $form->labelEx($model,'password');*/ ?>
 		<?php echo $form->passwordField($model,'password'); ?>
 		<?php echo $form->error($model,'password'); ?>
 		
@@ -55,11 +52,8 @@ $this->breadcrumbs=array(
 		<?php echo $form->checkBox($model,'rememberMe'); ?>
 		
 		<label for="rememberMe">
-				Recordarme la próxima vez que inicie mi sesión
-				
+				Recordarme la próxima vez que inicie mi sesión		
 		</label>
-		
-		<?php /*echo $form->label($model,'rememberMe');*/ ?>
 		<?php echo $form->error($model,'rememberMe'); ?>
 	</div>
 
