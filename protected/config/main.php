@@ -3,8 +3,8 @@
 // uncomment the following to define a path alias
 // Yii::setPathOfAlƒias('local','path/to/local-folder');
 
-// This is the main Web application configuration. Any writable
-// CWebApplication properties can be configured here.
+// Esta es la principal configuración para la aplicación Web. Todas las propiedades
+// de CWebApplication que se puedan escribir se pueden configurar aquí.
 
 require_once( dirname(__FILE__) . '/../components/helpers.php');
 
@@ -15,7 +15,7 @@ return array(
 	*/
 	'name'=>'Dirección de Carrera Virtual',
 	/*
-		El lenguaje del sistema
+		El lenguaje del sistema (español)
 	*/
 	'language'=>'es',
 
@@ -28,12 +28,14 @@ return array(
 		'application.components.*',
 	),
 
+	// Módulos
 	'modules'=>array(
-		// uncomment the following to enable the Gii tool
+		// Quitar el siguiente comentario para habilitar la herramienta Gii.
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
 			'password'=>'memo',
 		 	// If removed, Gii defaults to localhost only. Edit carefully to taste.
+			// Si lo siguiente se remueve, Gii por defecto dirige a localhost únicamente. Editar con cuidado, de acuerdo con sus preferencias.
 			'ipFilters'=>array('127.0.0.1','::1'),
 		),
 	),
@@ -50,6 +52,7 @@ return array(
 			'rules'=>array(
 				//'sugerencia/update/<id>'=>'sugerencia/update',				
 				//'<controller:\w+>/<id:\d+>'=>'<controller>/view',
+				
 				/*
 					Expresiones regulares para acceder vía URLs a las vistas
 					y a las acciones de los controladores.
@@ -72,7 +75,7 @@ return array(
 			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
 		),
 		*/
-		// uncomment the following to use a MySQL database
+		// Quitar el siguiente comentario para utilizar una base de datos MySQL.
 		'db'=>array(
 			'connectionString' => 'mysql:host=localhost;dbname=dcv',
 			'emulatePrepare' => true,
@@ -81,7 +84,8 @@ return array(
 			'charset' => 'utf8',
 		),
 		'errorHandler'=>array(
-			// use 'site/error' action to display errors
+
+			// Usar la acción 'site/error' para desplegar errores.
             'errorAction'=>'site/error',
         ),
 		'log'=>array(
@@ -105,8 +109,11 @@ return array(
 	// using Yii::app()->params['paramName']
 	'params'=>array(
 		// this is used in contact page
+		
 		/*
-			Dirección de correo electrónico del remitente en la Dirección de Carrera Virtual
+			Dirección de correo electrónico del remitente de la Dirección de Carrera Virtual.
+			Este es el remitente de los e-mails que le notifican a los usuarios sobre
+			los cambios de estatus en las solicitudes y sugerencias.
 		*/
 		'adminEmail'=>'dcv@itesm.mx',
 	),

@@ -7,7 +7,7 @@ return CMap::mergeArray(
 			'fixture'=>array(
 				'class'=>'system.test.CDbFixtureManager',
 			),
-			/* uncomment the following to provide test database connection
+			/* Quitar el siguiente comentario para proporcionar una conexión de base de datos de prueba.
 			'db'=>array(
 				'connectionString'=>'DSN for test database',
 			),
