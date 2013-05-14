@@ -1,25 +1,25 @@
 <html>
 <body>
-<link rel="stylesheet" type="text/css" href="../dcv8/DCV/css/screen.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../dcv8/DCV/css/print.css" media="print" />
+<link rel="stylesheet" type="text/css" href="../css/screen.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../css/print.css" media="print" />
 <!--[if lt IE 8]>
-    <link rel="stylesheet" type="text/css" href="../dcv8/DCV/css/ie.css" media="screen, projection" />
+    <link rel="stylesheet" type="text/css" href="../css/ie.css" media="screen, projection" />
 <![endif]-->
-<link rel="stylesheet" type="text/css" href="../dcv8/DCV/css/main.css" />
-<link rel="stylesheet" type="text/css" href="../dcv8/DCV/css/form.css" />
+<link rel="stylesheet" type="text/css" href="../css/main.css" />
+<link rel="stylesheet" type="text/css" href="../css/form.css" />
 
 
 <div class="container" id="page">
 
     <div id="header">
-        <div id="logo"><a href="../dcv8/DCV/index.php">Director de Carrera Virtual</a></div>
+        <div id="logo"><a href="../index.php">Direcci&oacute;n de Carrera Virtual</a></div>
     </div><!-- header -->
 	
 	<br />
 	
 	<h1>Revalidaciones registradas </h1> <br />
 	
-	<p><a href="../dcv8/DCV/index.php">Volver al Director de Carrera Virtual</a></p>
+	<p><a href="../index.php">Volver a la Direcci&oacute;n de Carrera Virtual</a></p>
 	
 <?php
 
@@ -194,7 +194,7 @@
 ?>
 
 	<div id="footer">
-			&copy; DCV <?php echo date('Y'); ?> by Direcci&oacute;n de ITC, ITESM<br/>
+			&copy; DCV <?php echo date('Y'); ?> por la Direcci&oacute;n de ITC, ITESM<br/>
 			Derechos Reservados.<br/>
 	</div><!-- footer -->
 	

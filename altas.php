@@ -1,26 +1,26 @@
 <html>
 <body>
-<link rel="stylesheet" type="text/css" href="../dcv8/DCV/css/screen.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../dcv8/DCV/css/print.css" media="print" />
+<link rel="stylesheet" type="text/css" href="../css/screen.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../css/print.css" media="print" />
 <!--[if lt IE 8]>
-    <link rel="stylesheet" type="text/css" href="../dcv8/DCV/css/ie.css" media="screen, projection" />
+    <link rel="stylesheet" type="text/css" href="../css/ie.css" media="screen, projection" />
 <![endif]-->
-<link rel="stylesheet" type="text/css" href="../dcv8/DCV/css/main.css" />
-<link rel="stylesheet" type="text/css" href="../dcv8/DCV/css/form.css" />
+<link rel="stylesheet" type="text/css" href="../css/main.css" />
+<link rel="stylesheet" type="text/css" href="../css/form.css" />
 
 
 <div class="container" id="page">
 
 
     <div id="header">
-        <div id="logo"><a href="../dcv8/DCV/index.php">Director de Carrera Virtual</a></div>
+        <div id="logo"><a href="../index.php">Direcci&oacute;n de Carrera Virtual</a></div>
     </div><!-- header -->
 	
 	<br />
 	
-	<h1>Historial de revalidación de materias </h1> <br />
+	<h1>Registro de alumnos </h1> <br />
 	
-	<p><a href="../dcv8/DCV/index.php">Volver al Director de Carrera Virtual</a></p>
+	<p><a href="../index.php">Volver a la Direcci&oacute;n de Carrera Virtual</a></p>
 	
 <?php
 	
@@ -91,7 +91,8 @@
 	// Bandera para determinar si es el primer dato a insertar en la base de datos
 	$primero = true;
 	
-	// Variable para almacenar las matrículas de los alumnos que están registrados actualmente en la carrera
+	// Variable para almacenar las matrículas de los alumnos que aparecen en el documento (hoja de cálculo) de
+	// Google Drive.
 	$todos = "";
 	
 	// Bandera para determinar si algún alumno no pudo ser agregado
@@ -280,7 +281,7 @@
 ?>
 
 	<div id="footer">
-		&copy; DCV <?php echo date('Y'); ?> by Direcci&oacute;n de ITC, ITESM<br/>
+		&copy; DCV <?php echo date('Y'); ?> por la Direcci&oacute;n de ITC, ITESM<br/>
 		Derechos Reservados.<br/>
 	</div><!-- footer -->
 	
