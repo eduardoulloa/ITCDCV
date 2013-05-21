@@ -80,7 +80,7 @@ return array(
 			'connectionString' => 'mysql:host=localhost;dbname=dcv',
 			'emulatePrepare' => true,
 			'username' => 'root',
-			'password' => '',
+			'password' => 'baca.lao',
 			'charset' => 'utf8',
 		),
 		'errorHandler'=>array(

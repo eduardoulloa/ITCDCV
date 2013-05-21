@@ -1,0 +1,65 @@
+<html>
+<body>
+<link rel="stylesheet" type="text/css" href="../dcv8/DCV/css/screen.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../dcv8/DCV/css/print.css" media="print" />
+<!--[if lt IE 8]>
+    <link rel="stylesheet" type="text/css" href="../dcv8/DCV/css/ie.css" media="screen, projection" />
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="../dcv8/DCV/css/main.css" />
+<link rel="stylesheet" type="text/css" href="../dcv8/DCV/css/form.css" />
+
+
+<div class="container" id="page">
+
+
+    <div id="header">
+        <div id="logo">Director de Carrera Virtual</div>
+    </div><!-- header -->
+
+<!-- Aquí hay que poner el menú
+<div id="mainmenu">
+</div>
+-->
+
+<?php
+     /*require_once("menu.php");*/
+	
+?>
+
+<?php
+	session_start();
+	if(isset($_SESSION['username'])){
+		echo "hola ".$_SESSION['username'];
+	}
+?>
+
+    <br />
+    <!--Aquí se ponen breadcrumbs -->
+	
+	<!--Aquí inicia el contenido -->
+	
+	<h1>Registro de alumnos </h1> <br />
+	
+	<form action="readColumnos.php" method="POST">
+	<label for="googleaccount">Cuenta de Google:</label> <input type="text" name="googleaccount" />
+	<br />
+	<label for="googlepass">Password Google:</label> <input type="password" name="googlepass" />
+	<br />
+	<label for="documento">Liga al documento (URL):</label> <input type="text" size="50px" name="documento" />
+	<input type="submit" />
+	</form>
+
+    <div id="footer">
+        &copy; DCV <?php /*echo date('Y'); */?> by Direcci&oacute;n de ITC, ITESM<br/>
+        Derechos Reservados.<br/>
+        <?php /*echo Yii::powered(); */?>
+    </div><!-- footer -->
+
+
+</div><!-- page -->
+
+
+
+</body>
+
+</html>
