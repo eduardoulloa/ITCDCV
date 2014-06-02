@@ -3,7 +3,8 @@ $menu = array(
         array("url" => array( "route" => "site/index"), "label" => "Inicio"),
     );
 
-// Dependiendo del rol del usuario se agregan opciones la menú horizontal.
+// Dependiendo del rol del usuario (administrador, director de carrera, asistente de carrera, secretaria o
+// alumno se agregan opciones la menú horizontal.
 
 // Valida si el usuario no está autenticado. En este caso se
 // agregan al menú las opciones correspondientes.

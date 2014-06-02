@@ -131,7 +131,7 @@
 		}
 		
 		//obtengo el id de la carrera, a partir de las siglas de la carrera
-		mysql_connect("localhost", "root", "") or die(msyqsl_error());
+		mysql_connect("localhost", "root", "baca.lao") or die(msyqsl_error());
 		mysql_select_db("dcv") or die(mysql_error());
 	
 		$result = mysql_query("SELECT id FROM carrera WHERE siglas LIKE '".$carrera."'");

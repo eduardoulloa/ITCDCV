@@ -51,7 +51,7 @@
 	
 	$hostname = "localhost";
 	$username = "root";
-	$password = "";
+	$password = "baca.lao";
 	$dbname = "dcv";
 	
 	try{

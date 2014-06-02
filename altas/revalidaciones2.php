@@ -15,7 +15,7 @@
 	}
 		
 	// Establece la conexión con el servidor.
-	mysql_connect("localhost", "root", "") or die(mysql_error());
+	mysql_connect("localhost", "root", "baca.lao") or die(mysql_error());
 	
 	// Selecciona la base de datos del servidor.
 	mysql_select_db("dcv") or die(mysql_error());
